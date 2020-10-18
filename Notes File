@@ -1,0 +1,18 @@
+This file is for notes/updates only only 
+If you update any code, please list the change below with the date
+
+9/28/20:
+Created Firebase site 
+
+10/7/20
+Code for background image
+
+body {
+  background-image: url('https://cpb-us-w2.wpmucdn.com/sites.udel.edu/dist/6/1259/files/2014/04/lairdbridge-1fnbmm1.jpg');
+  background-repeat: no-repeat ;
+  background-size: 100% 300%;
+  }
+
+10/10/20
+Code for favicon image
+<link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico">
