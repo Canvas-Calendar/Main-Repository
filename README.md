@@ -5,7 +5,7 @@ Our goal is to design a app/firebase website that utilizes that Canvas API to in
 ## Utilizing GitHub
 - **If you are new to GitHub or need to learn more about it, follow the link below and take 10 minutes.**
 - Make sure to utilize branches when editing and testing code ***before*** merging it to the main branch.
-- There is direct integration between VS Code and GitHub using the GitHub desktop app (link below), it is strongly recommended to use it.
+- There is direct integration between VS Code and GitHub using the GitHub desktop app (link below), it is strongly recommended to use it. ASDF
 
 ## Links
 - [Team Resoures](https://sites.google.com/udel.edu/canvascalendar/team-resources)
