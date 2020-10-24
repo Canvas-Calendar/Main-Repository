@@ -1,0 +1,160 @@
+<!--
+    Title: ECE Senior Design Project Code - create account
+    Description: This file is used for the create account page of our website
+    Authors: Chris Varriano
+             Will Van Luven
+             Sean McNamara
+             Arai Singleton
+    Date created: 10/4/20
+-->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canvas Calendar - Create Account</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
+<style>
+    
+  .button {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: #1ea6f4;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 300px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 50px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button_center{
+  text-align: center;
+}  
+
+input {
+    width:4in;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+
+#message h1 { color: rgb(6, 47, 184); font-weight: bold; font-size: 60px; text-align: center; margin: 16px 0 12px; margin-top: 1in;}
+#message h2 { color: rgb(0, 0, 0); font-weight: bold; font-size: 25px; text-align: center; margin: 16px 0 12px; margin-top: .5in;}
+#message p {color: rgb(0, 0, 0); font-weight: normal; font-size: 20px; text-align: center; margin: 16px 0 12px; margin-top: .25in;}
+
+</style>
+  </head>
+  <body>
+    <div id="message">
+      <h1>Create your account for Canvas Calendar</h1>
+      <div id="user-message"></div>
+      <div class="login">
+        <div class="login-triangle"></div>
+       
+        <h2 class="register-header">Please enter an email and password to create your account</h2> 
+  
+        <form class="register-container" id="registerForm">
+          <p><input id="registerEmail" type="email" placeholder="Email" style="color: black;" ></p>
+          <p><input id="registerPassword" type="password" placeholder="Password" style="color: black;"></p>
+          <p><button class="button" id="registerbtn" style="vertical-align:middle"><span>Register </span></button></p>
+        </form>
+ 
+      </div>
+    </div>
+      
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyAWlmVBGiPNaZ8q6wIW8qj4MHhRCdEnzfw",
+      authDomain: "canvas-calendar-4ea54.firebaseapp.com",
+      databaseURL: "https://canvas-calendar-4ea54.firebaseio.com",
+      projectId: "canvas-calendar-4ea54",
+      storageBucket: "canvas-calendar-4ea54.appspot.com",
+      messagingSenderId: "967496995343",
+      appId: "1:967496995343:web:87bdb9b3571033cfce897a",
+      measurementId: "G-2GBWCBTD5W"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+
+    //sign up code ______________________________________________________
+
+      $(document).ready(function () {
+        $("#registerbtn").on("click", function () {
+          event.preventDefault();
+          var email = $("#registerEmail").val();
+          var password = $("#registerPassword").val();
+          firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(function (user) {
+              firebase.database().ref().child("users/" + user.user.uid).set({
+                email: user.user.email,
+                role: "user"
+              })
+              alert("Account successfuly created")
+              window.location.href = 'https://canvas-calendar-4ea54.web.app/login.html'//put url here
+            })
+            .catch(function (err) {
+              console.log(err);
+              alert(err);
+            });
+        });
+
+      });
+    </script>
+  </body>
+</html>

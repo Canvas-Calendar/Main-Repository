@@ -1,0 +1,54 @@
+This file is for notes/updates only only 
+If you update any code, please list the change below with the date
+
+9/28/20:
+Created Firebase site 
+
+10/7/20
+Code for background image
+
+body {
+  background-image: url('https://cpb-us-w2.wpmucdn.com/sites.udel.edu/dist/6/1259/files/2014/04/lairdbridge-1fnbmm1.jpg');
+  background-repeat: no-repeat ;
+  background-size: 100% 300%;
+  }
+
+
+10/10/20
+Code for favicon image
+<link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico">
+
+10/16/20
+Old gmail code
+ function onSignIn(googleUser) { //Sign In Function
+      console.log('User is ' + JSON.stringify(googleUser.getBasicProfile()))
+
+      var element = document.querySelector('#content')
+      element.innerText = profile.getName();
+
+      var element = document.createElement('img')
+      image.setAttriute('src', profile.getImageUrl())
+      element.append(image)
+    }
+
+    function signOut() { //Sign Out Function
+      gapi.auth2.getAuthInstance().signOut().then(function() {
+          console.log('User signed out')
+      })
+    }
+
+10/22/20
+Testing compare strings 
+
+var string1 = "Hello";
+      var string2 = "Hello";
+      $(document).ready(function () {
+      $("#testbtn").on("click", function () {
+        if(string1==string2){
+          alert("Strings are equal")
+        }
+        else{
+          alert("strings are not equal")
+        }
+      });
+    })
