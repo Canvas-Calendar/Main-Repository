@@ -15,3 +15,4 @@ Our goal is to design a app/firebase website that utilizes that Canvas API to in
 - [GitHub Font/Formatting](https://docs.github.com/en/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax)
 - [GitHub Tutorial](https://guides.github.com/activities/hello-world/)
 - [GitHub Desktop Download](https://desktop.github.com/)
+- [Usable GitHub Commands in VSCode](https://www.youtube.com/watch?v=9cMWR-EGFuY)
