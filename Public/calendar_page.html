@@ -1,0 +1,211 @@
+ <!--
+    Title: ECE Senior Design Project Code - calendar page
+    Description: This is the default calendar page that each user will get
+    Authors: Chris Varriano
+             Will Van Luven
+             Sean McNamara
+             Arai Singleton
+    Date created: 10/6/20
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canvas Calendar</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
+    
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
+
+<style>
+/* Logout button code */
+.buttonTestInput {
+      background-color: #4CAF50;
+      /* Green */
+      border: none;
+      /*color: white;*/
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+.button {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: #1ea6f4;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 300px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 50px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button_center{
+  text-align: center;
+}        
+#message h1 { color: rgb(6, 47, 184); font-weight: bold; font-size: 60px; text-align: center; margin: 16px 0 12px; margin-top: 1in; font-family: "Harabara Bold"}
+#message h2 { color: rgb(0, 0, 0); font-weight: bold; font-size: 25px; text-align: center; margin: 16px 0 12px; margin-top: .5in}
+#message p {color: rgb(0, 0, 0); font-weight: normal; font-size: 20px; text-align: center; margin: 16px 0 12px; margin-top: .25in;}
+
+</style>
+  </head>
+  <body>
+    <div id="message">
+      <div id="user-message"></div>
+      <h1>Welcome</h1>
+      <h2 >Calendar page for Canvas Calendar!</h2>
+      <div class= "button_center">
+        <button class="button" id="logoutbtn" style="vertical-align:middle"><span>Logout </span></button>
+        <div id="test-input"></div>
+     </div>
+
+     <form class="test_input" id="testInput">
+      <label for="fname">First name:</label>
+      <input type="text" id="fname" name="fname"><br><br>
+      <label for="lname">Last name:</label>
+      <input type="text" id="lname" name="lname"><br><br>
+      <button class="button submitbtn" id="submitbtn">Submit</button>
+    </form> 
+
+    </div>
+       <script>
+         
+
+       // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyAWlmVBGiPNaZ8q6wIW8qj4MHhRCdEnzfw",
+      authDomain: "canvas-calendar-4ea54.firebaseapp.com",
+      databaseURL: "https://canvas-calendar-4ea54.firebaseio.com",
+      projectId: "canvas-calendar-4ea54",
+      storageBucket: "canvas-calendar-4ea54.appspot.com",
+      messagingSenderId: "967496995343",
+      appId: "1:967496995343:web:87bdb9b3571033cfce897a",
+      measurementId: "G-2GBWCBTD5W"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+
+    //Login code ______________________________________________________
+
+    var accountType = sessionStorage.getItem("accountType");
+    //alert(accountType);
+
+    $(document).ready(function () {
+      $("#logoutbtn").on("click", function () {
+        if(accountType == "gmail"){
+          signOut();
+        }
+        else{
+          firebase.auth().signOut().then(function () {
+            alert("Goodbye!");
+            location.reload();
+            window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
+          })
+          .catch(function (error) {
+            console.log(err);
+            alert(err);
+          });
+        }
+        });
+      $("#submitbtn").on("click", function () {
+        var firstName = $("#fname").val();
+        var lastName = $("#lname").val();
+        document.getElementById("test-input").innerHTML = "First Name:" + firstName + "Last Name:" + lastName;
+      });
+      
+
+
+      function signOut(){
+          gapi.auth2.getAuthInstance().signOut().then(function() {
+          console.log('User signed out')
+          window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
+          })
+      }
+
+      firebase.auth().onAuthStateChanged(function (user) {
+          if (user) {
+            console.log(user);
+            var email = user.email;
+            document.getElementById("user-message").innerHTML = "Logged in as " + user.email;
+          } else {
+            console.log("No user");
+          }
+        });
+      });
+
+
+      function signOut() { //Sign Out Function
+      gapi.auth2.getAuthInstance().signOut().then(function() {
+          console.log('User signed out')
+          window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
+      })
+      }
+
+      function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+      }
+
+
+
+    </script>
+  </body>
+</html>
