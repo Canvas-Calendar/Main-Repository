@@ -1,0 +1,14 @@
+{
+    //"extensions.ignoreRecommendations": true,
+    //"files.autoSave": "off",
+    //"extensions.ignoreRecommendations": true,
+    //"files.autoSave": "off",
+    "extensions.ignoreRecommendations": true,
+    "files.autoSave": "off",
+    "editor.fontFamily": "'Fira Code', 'Noto Mono', 'Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
+    "editor.fontLigatures": true,
+    // "editor.fontWeight": "300", // Light
+    // "editor.fontWeight": "400", // Regular
+    // "editor.fontWeight": "500", // Medium
+    // "editor.fontWeight": "600" // Bold
+}
