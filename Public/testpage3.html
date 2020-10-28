@@ -1,0 +1,73 @@
+<!--
+    Title: ECE Senior Design Project Code - blank page
+    Description: This file is used for copying and pasting purposes only when we are creating a new page and want
+    to start from a blank page
+    Authors: Chris Varriano
+             Will Van Luven
+             Sean McNamara
+             Arai Singleton
+    Date created: 9/28/20
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+    
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <style>
+        .colorBlock {
+      width: 100px;
+      height: 100px;
+    }
+    #Black {
+      background-color: #000;
+    }
+    #Blue {
+      background-color: #00f;
+    }
+    #Red {
+      background-color: #f00;
+    }
+    #Green {
+      background-color: #0f0;
+    }
+
+      
+    </style>
+  </head>
+  <body>
+    <div id="message">
+      <h2>Welcome</h2>
+      <h1>Blank page for Canvas Calendar!</h1>
+      <div class="colorBlock" id="Black"></div>
+      <div class="colorBlock" id="Blue"></div>
+      <div class="colorBlock" id="Red"></div>
+      <div class="colorBlock" id="Green"></div>    
+    </div>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    $(".colorBlock").click(function() {
+      //Get the background color of the clicked color block by using the this object
+      var $backgroundColor = $(this).css("background-color");
+      //Set the body's background-color to the received background-color
+      $("body").css("background-color", $backgroundColor);
+    });
+    </script>
+  </body>
+</html>
