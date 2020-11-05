@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Canvas Calendar</title>
@@ -111,11 +112,9 @@
       <div class= "button_center">
         <button class="button" id="logoutbtn" style="vertical-align:middle"><span>Logout </span></button>
         <div id="test-input"></div>
-        <form class="userInputForm" id="userform">
-          <p><input id="fname" placeholder="First Name" style="color: black;"></p>
-          <p><input id="registerPassword"  placeholder="Last Name" style="color: black;"></p>
-          <button class="button" id="userinputbtn" style="vertical-align:middle" type="button"><span>Submit </span></button>
-          <div id="user-input"></div>
+        <form class="printCanvasCourse" id="printCC">
+          <p><input id="apiToken"  placeholder="Enter API Token" style="color: black;" ></p>
+          <p><button class="button" id="userinputbtn" style="vertical-align:middle" type="button"><span>Submit </span></button></p>
         </form>
      </div>
        <script>
@@ -131,23 +130,27 @@
       appId: "1:967496995343:web:87bdb9b3571033cfce897a",
       measurementId: "G-2GBWCBTD5W"
     };
-    // Initialize Firebase
+    // Initialize Firebase/Canvas API
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
-
-
-    //Login code ______________________________________________________
 
     var accountType = sessionStorage.getItem("accountType");
     //alert(accountType);
     //alert(googleUser.getBasicProfile().getName());
+    var token = $("#apiToken").val();
+    API_KEY = token;
+    API_URL = 'https://canvas.instructure.com/';
 
     $(document).ready(function () {
       $("#userinputbtn").on("click", function () {
-        var firstName = $("#fname").val();
-        var lastName = $("#lname").val();
-        document.getElementById("user-input").innerHTML = "First Name: "+ firstName + ", Last Name: " + lastName;
+        canvas = Canvas(API_URL, API_KEY)
+        courses = canvas.get_courses()
+        for(course in courses){
+            //print(course);
+            document.getElementById("test-input").innerHTML = course;
+        }
       });
+      //Login code ______________________________________________________
       $("#logoutbtn").on("click", function () {
         if(accountType == "gmail"){
           signOut();
