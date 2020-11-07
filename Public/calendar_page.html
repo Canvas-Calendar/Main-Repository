@@ -117,6 +117,9 @@
           <p><button class="button" id="userinputbtn" style="vertical-align:middle" type="button"><span>Submit </span></button></p>
         </form>
      </div>
+     <div>
+       
+     </div>
        <script>
        // Your web app's Firebase configuration
       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -137,19 +140,18 @@
     var accountType = sessionStorage.getItem("accountType");
     //alert(accountType);
     //alert(googleUser.getBasicProfile().getName());
-    var token = $("#apiToken").val();
-    API_KEY = token;
-    API_URL = 'https://canvas.instructure.com/';
-
+  
     $(document).ready(function () {
       $("#userinputbtn").on("click", function () {
-        canvas = Canvas(API_URL, API_KEY)
-        courses = canvas.get_courses()
-        for(course in courses){
-            //print(course);
-            document.getElementById("test-input").innerHTML = course;
-        }
-      });
+        //read text file:
+        fetch('\coursesFound.html')
+          .then(response => response.text())
+          .then(text => console.log(text))
+          .then(text => alert(text))
+  // outputs the content of the text file, hopefuly
+        
+      })
+    })
       //Login code ______________________________________________________
       $("#logoutbtn").on("click", function () {
         if(accountType == "gmail"){
@@ -194,7 +196,6 @@
             console.log("No user");
           }
         });
-      });
 
 
       function signOut() { //Sign Out Function
