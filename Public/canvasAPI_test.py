@@ -18,8 +18,7 @@ courses = canvas.get_courses()
 # -- format: <course_code> <course_name> <enrollment_state> <course_id>
 
 
-#Generate HTML file with courses
-
+#Generate HTML file with list of courses
 print("Now Opening File:")
 f=open("coursesFound.html","w+")
 f.close
@@ -36,35 +35,4 @@ for course in courses:
 print("Printing Text File:")
 t=open("coursesFound.html","r")
 print(t.read())
-
-
-
-
-
-
-
-#for course in courses:    
-  #  print(course)
-    #Generate File
-  #  print("Now Generating File")
-  #  f=open("coursesFound.html", "a")
-    #for i in range(500):
-  #  f.write(str(course))
-  #  f.write("\n")
-  #  f.close
- #   print("Text File:")
- #   t=open("coursesFound.html", "r")
- #   print(t.read())
-#course="Test Text"
-#Generate File
-   # print("Now Generating File")
-  #  f=open("coursesFound.txt", "w+")
-#for i in range(500):
-   # f.write(course)
-  #  f.close
-#print("Text File:")
-#t=open("coursesFound.txt", "r")
-#print(t.read())
-
-
 
