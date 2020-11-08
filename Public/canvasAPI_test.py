@@ -27,6 +27,8 @@ f.close
 print("Now generating file:")
 for course in courses:
     f=open("coursesFound.html","a+")
+    print("Course is:")
+    print(str(course))
     f.write(str(course))
     f.write("\n")
     f.close
