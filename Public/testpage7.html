@@ -111,7 +111,7 @@
     <div id="message">
       <div id="user-message"></div>
       <h1>Welcome</h1>
-      <h2 >Calendar page for Canvas Calendar!</h2>
+      <h2 >Calendar page for Canvas Calendarzzzz!</h2>
       <div class= "button_center">
         <button class="button" id="logoutbtn" style="vertical-align:middle"><span>Logout </span></button>
         <div id="test-input"></div>
@@ -121,7 +121,9 @@
         </form>
      </div>
      <div>
-       
+     
+
+
      </div>
        <script>
        // Your web app's Firebase configuration
@@ -143,6 +145,11 @@
     var accountType = sessionStorage.getItem("accountType");
     //alert(accountType);
     //alert(googleUser.getBasicProfile().getName());
+
+    var y = udcanvas.getCourses();
+
+
+
   
     $(document).ready(function () {
       $("#userinputbtn").on("click", function () {
@@ -151,6 +158,7 @@
         document.getElementById("test-input").innerHTML = "Your Courses :" + courses;
       })
     })
+
       //Login code ______________________________________________________
       $("#logoutbtn").on("click", function () {
         if(accountType == "gmail"){
