@@ -32,9 +32,8 @@
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
 
-    <style>
+<style>
       .card {
-      width: 500px;
       float: right;
       clear: both;
       }
@@ -45,16 +44,197 @@
       clear: both;
       }
 
-      #message h2 {color: rgb(0, 0, 0); font-weight: bold; font-size: 20px; margin: 16px 0 12px; margin-top: 1in; margin-left: 200px;} 
-    </style>
+      .upcoming-page{
+        margin-top: 1in;
+        margin-left: .50in;
+      }
+
+      .courses-page{
+        float: left;
+        margin-top: .5in;
+        margin-left: .50in;
+        clear:left;
+      }
+
+      .Calendar-page{
+        float: right;
+        margin-top: .50in;
+        margin-right: -2.5in;
+        display: inline;
+      }
+
+      table {
+      table-layout: fixed;
+      }
+      
+      th {
+      width: 125px;
+      height: 50px;
+      }
+
+      td {
+      width: 125px;
+      height: 100px;
+      }
+     
+      #message h4 {color: rgb(0, 0, 0); font-weight: bold; font-size: 20px; margin: 16px 0 12px; margin-top: 1in; margin-left: 200px;} 
+
+      a {
+      color: #000;
+      }
+
+/* header */
+
+.header {
+  background-color: #acb0b0;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #acb0b0;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+}
+</style>
   </head>
   <body>
+
+    <header class="header">
+      <a href="" class="logo">Welcome Back!</a>
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+      <ul class="menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#careers">Profile</a></li>
+        <li><a href="#contact">Logout</a></li>
+      </ul>
+    </header>
+
+
 <div class="top-page">
  <div class="Calendar" style="vertical-align:middle" >
-  <div class="Calendar-page" style="float: right;" >
+  <div class="Calendar-page" style="float: right;">
     <div class="container col-sm-4 col-md-7 col-lg-4 mt-5">
-      <div class="card"> 
-          <h3 class="card-header" id="monthAndYear"></h3>
+      <div class="card" style="width: 1052px;">
+          <h3 class="card-header" id="monthAndYear" style="width: 1050px;"></h3>
           <table class="table table-bordered table-responsive-sm" id="calendar">
               <thead>
               <tr>
@@ -78,6 +258,9 @@
               <button class="btn btn-outline-primary col-sm-6" id="previous" onclick="previous()">Previous Month</button>
   
               <button class="btn btn-outline-primary col-sm-6" id="next" onclick="next()">Next Month</button>
+              
+              <button class="btn btn-outline-primary col-sm-6" id="addEvent" onclick="addEvent()">Add New Event</button>
+
           </div>
           <br/>
           <form class="form-inline">
@@ -126,9 +309,41 @@
     </div>
    </div>
   </div>
-  <div class="Calendar" style="vertical-align:middle" style="padding: 1in;">
-    <h2>Upcoming Today:</h2>
+  <div class="Calendar" style="vertical-align:middle">
+  <div class="upcoming-page" style="float: left;">
+    <div class="card" style="width: 302px;"> 
+     <div class="card-header" style="width: 300px;">
+      <h4>Upcoming Today</h4> 
+     </div>
+     <ul class="list-group list-group-flush">
+      <li class="list-group-item">CPEG 494 - Practical 5</li>
+      <li class="list-group-item">CISC 361 - Lab 6 Phase 3</li>
+      <li class="list-group-item">CPEG 496 - Mini Practical</li>
+      <li class="list-group-item">CPEG 419 - HW 4a</li>
+      <li class="list-group-item">CPEG 498 - Final Presentation</li>
+    </ul>
+     </div>
+   </div>
+  
+   <div class="courses-page" style="float: left;">
+   <div class="card" style="width: 302px;"> 
+    <div class="card-header" style="width: 300px;">
+     <h4>Current Courses</h4> 
+    </div>
+    <ul class="list-group list-group-flush">
+     <li class="list-group-item">CISC 361</li>
+     <li class="list-group-item">CPEG 419</li>
+     <li class="list-group-item">CPEG 494</li>
+     <li class="list-group-item">CPEG 496</li>
+     <li class="list-group-item">CPEG 498</li>
+   </ul>
+    </div>
   </div>
+ </div>
+</div>
+
+  </div>
+ </div>
 </div>  
 
 
@@ -146,8 +361,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
+
     <script>
-      
     </script>
   </body>
 </html>
+
+      

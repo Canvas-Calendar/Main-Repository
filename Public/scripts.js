@@ -22,6 +22,10 @@ function previous() {
     showCalendar(currentMonth, currentYear);
 }
 
+//function addEvent() {
+    //add code here
+//}
+
 function jump() {
     currentYear = parseInt(selectYear.value);
     currentMonth = parseInt(selectMonth.value);

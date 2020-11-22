@@ -168,13 +168,7 @@
           });
         }
         });
-      
-      function signOut(){
-          gapi.auth2.getAuthInstance().signOut().then(function() {
-          console.log('User signed out')
-          window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
-          })
-      }
+    
       /*
       Code to display user when logged in - neither seem to be working 
 
@@ -213,7 +207,6 @@
         gapi.auth2.init();
       });
       }
-
 
 
     </script>
