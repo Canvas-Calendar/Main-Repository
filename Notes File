@@ -1,22 +1,26 @@
 This file is for notes/updates only only 
 If you update any code, please list the change below with the date
 
-9/28/20:
-Created Firebase site 
+11/23/20
+Need to do by end of semester:
+- Have Canvas API tests working if not in our website 
+- Fix google login/signout bug requirng page refresh
 
-10/7/20
-Code for background image
+10/22/20
+Testing compare strings 
 
-body {
-  background-image: url('https://cpb-us-w2.wpmucdn.com/sites.udel.edu/dist/6/1259/files/2014/04/lairdbridge-1fnbmm1.jpg');
-  background-repeat: no-repeat ;
-  background-size: 100% 300%;
-  }
-
-
-10/10/20
-Code for favicon image
-<link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico">
+var string1 = "Hello";
+      var string2 = "Hello";
+      $(document).ready(function () {
+      $("#testbtn").on("click", function () {
+        if(string1==string2){
+          alert("Strings are equal")
+        }
+        else{
+          alert("strings are not equal")
+        }
+      });
+    })
 
 10/16/20
 Old gmail code
@@ -37,18 +41,19 @@ Old gmail code
       })
     }
 
-10/22/20
-Testing compare strings 
+10/10/20
+Code for favicon image
+<link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico">
 
-var string1 = "Hello";
-      var string2 = "Hello";
-      $(document).ready(function () {
-      $("#testbtn").on("click", function () {
-        if(string1==string2){
-          alert("Strings are equal")
-        }
-        else{
-          alert("strings are not equal")
-        }
-      });
-    })
+10/7/20
+Code for background image
+
+body {
+  background-image: url('https://cpb-us-w2.wpmucdn.com/sites.udel.edu/dist/6/1259/files/2014/04/lairdbridge-1fnbmm1.jpg');
+  background-repeat: no-repeat ;
+  background-size: 100% 300%;
+  }
+
+9/28/20:
+Created Firebase site 
+

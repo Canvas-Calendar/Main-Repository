@@ -14,6 +14,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to Canvas Calendar</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -39,6 +43,12 @@
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
 
     <style>
+
+* {
+    padding:0;
+    margin:0;
+}
+
 
   .button {
   display: inline-block;
@@ -84,14 +94,8 @@
   text-align: center;
 }
 
-#message h2 { color: rgb(6, 47, 184); font-weight: bold; font-size: 60px; text-align: center; margin: 16px 0 12px; margin-top: 1in}
+#message h2 { color: rgb(6, 47, 184); font-weight: bold; font-size: 60px; text-align: center; margin: 16px 0 12px;}
 #message p {color: rgb(0, 0, 0); font-weight: normal; font-size: 20px; text-align: center; margin: 16px 0 12px; margin-top: 1in; margin-left: 3in; margin-right: 3in}
-
-body {
-  margin: 0;
-  font-family: Helvetica, sans-serif;
-  background-color: #f4f4f4;
-}
 
 a {
   color: #000;
@@ -228,25 +232,39 @@ a {
   }
 }
 
+.message{
+  padding-top: 1in;
+  text-align: center;
+}
+
+.messageTop{
+  font-size: 30px;
+}
+
+.paragraph{
+  margin-left: 3in;
+  margin-right: 3in;
+  margin-top: 1in;
+  font-size: 25px;
+}
 
     </style>
   </head>
   <body>
 
-    <header class="header">
-      <a href="" class="logo">Welcome Back!</a>
+  <header class="header">
+      <a href="" class="logo">Canvas Calendar</a>
       <input class="menu-btn" type="checkbox" id="menu-btn" />
       <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
       <ul class="menu">
         <li><a href="#about">About</a></li>
-        <li><a href="#careers">Profile</a></li>
-        <li><a href="#contact">Logout</a></li>
+        <li><a href="#contact">Login</a></li>
       </ul>
-    </header>
+  </header>
 
-
-    <div id="message">
-      <h2>Welcome to Canvas Calendar</h2>
+<div class="top-page">
+    <div class="message">
+      <h2 class="messageTop">Welcome to Canvas Calendar</h2>
       <p class="paragraph">As engineering students, managing assignments as well as other day to day tasks can be the most important aspect of achieving 
         good grades in college. Our goal for creating Canvas Calendar is help students better understand when their assignments are due 
         not just by day, but by week or month to help students better manage their time. Features such as automatically importing due 
@@ -256,7 +274,7 @@ a {
          <button class="button" id="create_account_btn" style="vertical-align:middle"><span>Create Account</span></button>
       </div>
     </div>
-
+  </div>
     <script>
       // Your web app's Firebase configuration
       // For Firebase JS SDK v7.20.0 and later, measurementId is optional

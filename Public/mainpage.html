@@ -14,10 +14,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Test page 7</title>
-
+    <title>Canvas Calendar</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
+
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
@@ -31,6 +35,13 @@
     <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
+
 
 <style>
       .card {
@@ -224,7 +235,7 @@
       <ul class="menu">
         <li><a href="#about">About</a></li>
         <li><a href="#careers">Profile</a></li>
-        <li><a href="#contact">Logout</a></li>
+        <li><a href="#contact" onclick="logoutFunction()">Logout</a></li>
       </ul>
     </header>
 
@@ -363,6 +374,22 @@
         crossorigin="anonymous"></script>
 
     <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyAWlmVBGiPNaZ8q6wIW8qj4MHhRCdEnzfw",
+      authDomain: "canvas-calendar-4ea54.firebaseapp.com",
+      databaseURL: "https://canvas-calendar-4ea54.firebaseio.com",
+      projectId: "canvas-calendar-4ea54",
+      storageBucket: "canvas-calendar-4ea54.appspot.com",
+      messagingSenderId: "967496995343",
+      appId: "1:967496995343:web:87bdb9b3571033cfce897a",
+      measurementId: "G-2GBWCBTD5W"
+    };
+    // Initialize Firebase/Canvas API
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
     </script>
   </body>
 </html>

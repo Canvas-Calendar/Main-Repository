@@ -15,6 +15,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Canvas Calendar - Create Account</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
@@ -37,6 +41,12 @@
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
 <style>
+
+* {
+    padding:0;
+    margin:0;
+}
+
     
   .button {
   display: inline-block;
@@ -89,15 +99,12 @@ input {
     font-size: 20px;
 }
 
-.regForm{
-  margin-top: 1in;
-  vertical-align: middle;
-}
-
-
-#message h1 { color: rgb(6, 47, 184); font-weight: bold; font-size: 60px; text-align: center; margin: 16px 0 12px; margin-top: 1in;}
 #message h2 { color: rgb(0, 0, 0); font-weight: bold; font-size: 25px; text-align: center; margin: 16px 0 12px; margin-top: .5in;}
 #message p {color: rgb(0, 0, 0); font-weight: normal; font-size: 20px; text-align: center; margin: 16px 0 12px; margin-top: .25in;}
+
+a {
+  color: #000;
+}
 
 /* header */
 
@@ -230,31 +237,44 @@ input {
   }
 }
 
+.regForm{
+  padding-top: 1in;
+  text-align: center;
+}
+
+.top-text{
+  padding-top: .50in;
+}
+
+.register-container{
+  margin-top: 1in;
+}
+
 </style>
   </head>
   <body>
 
     <header class="header">
-      <a href="" class="logo">Welcome Back!</a>
+      <a href="" class="logo">Create Your Account</a>
       <input class="menu-btn" type="checkbox" id="menu-btn" />
       <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
       <ul class="menu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#careers">Profile</a></li>
-        <li><a href="#contact">Logout</a></li>
+        <li><a href="#about">Home</a></li>
+        <li><a href="#careers">About</a></li>
+        <li><a href="#contact">Login</a></li>
       </ul>
     </header>
 
-    <div class="regForm" style="vertical-align: middle;">
-   
-        <h2 class="register-header">Please enter an email and password to create your account</h2> 
-  
+<div class="top-page">
+  <div class="regForm">
+        <h2 class="top-text">Please enter an email and password to create your account</h2> 
         <form class="register-container" id="registerForm">
           <p><input id="registerEmail" type="email" placeholder="Email" style="color: black;" ></p>
           <p><input id="registerPassword" type="password" placeholder="Password" style="color: black;"></p>
           <p><button class="button" id="registerbtn" style="vertical-align:middle"><span>Register </span></button></p>
         </form>
-    </div>
+  </div>
+</div>
       
     <script>
       // Your web app's Firebase configuration

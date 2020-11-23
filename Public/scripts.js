@@ -83,3 +83,35 @@ function showCalendar(month, year) {
     }
 
 }
+
+var accountType = sessionStorage.getItem("accountType");
+
+function logoutFunction(){
+    if(accountType == "gmail"){
+        signOut();
+      }
+      else{
+        firebase.auth().signOut().then(function () {
+          location.reload();
+          window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
+        })
+        .catch(function (error) {
+          console.log(err);
+          alert(err);
+        });
+      }
+}
+
+function signOut() { //Sign Out Function
+    gapi.auth2.getAuthInstance().signOut().then(function() {
+        console.log('User signed out')
+        window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
+    })
+}
+
+function onLoad() {
+    gapi.load('auth2', function() {
+      gapi.auth2.init();
+    });
+}
+
