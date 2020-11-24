@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Canvas Calendar</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
@@ -224,6 +224,68 @@
     display: none;
   }
 }
+
+/* pop up window */
+
+/* Popup container - can be anything you want */
+.popup{
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 500px;
+  height: 500px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+
 </style>
   </head>
   <body>
@@ -233,8 +295,8 @@
       <input class="menu-btn" type="checkbox" id="menu-btn" />
       <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
       <ul class="menu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#careers">Profile</a></li>
+        <li><a href='https://canvas-calendar-4ea54.web.app/aboutpage.html'>About</a></li>
+        <li><a href='https://canvas-calendar-4ea54.web.app/profilepage.html'>Profile</a></li>
         <li><a href="#contact" onclick="logoutFunction()">Logout</a></li>
       </ul>
     </header>
@@ -270,7 +332,13 @@
   
               <button class="btn btn-outline-primary col-sm-6" id="next" onclick="next()">Next Month</button>
               
-              <button class="btn btn-outline-primary col-sm-6" id="addEvent" onclick="addEvent()">Add New Event</button>
+              <div class="popup btn btn-outline-primary col-sm-6" onclick="addEvent()">Add New Event
+                <span class="popuptext" id="myPopup">Add New Event</span>
+              </div>
+
+              <div class="popup btn btn-outline-primary col-sm-6" onclick="viewSelectedEvent()">View Event
+                <span class="popuptext" id="myPopup">(Date Displayed Here)</span>
+              </div>
 
           </div>
           <br/>
@@ -352,6 +420,8 @@
   </div>
  </div>
 </div>
+
+
 
   </div>
  </div>

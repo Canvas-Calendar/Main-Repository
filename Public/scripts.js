@@ -22,9 +22,10 @@ function previous() {
     showCalendar(currentMonth, currentYear);
 }
 
-//function addEvent() {
-    //add code here
-//}
+function addEvent() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
 
 function jump() {
     currentYear = parseInt(selectYear.value);
@@ -113,5 +114,10 @@ function onLoad() {
     gapi.load('auth2', function() {
       gapi.auth2.init();
     });
+}
+
+function viewSelectedEvent(){
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
 }
 
