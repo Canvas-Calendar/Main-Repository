@@ -23,7 +23,7 @@ function previous() {
 }
 
 function addEvent() {
-  var popup = document.getElementById("myPopup");
+  var popup = document.getElementById("myPopup1");
   popup.classList.toggle("show");
 }
 
@@ -117,7 +117,8 @@ function onLoad() {
 }
 
 function viewSelectedEvent(){
-    var popup = document.getElementById("myPopup");
+    var popup = document.getElementById("myPopup2");
     popup.classList.toggle("show");
+    document.getElementById("myPopup2").innerHTML = today;
 }
 
