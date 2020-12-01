@@ -191,6 +191,59 @@ font-size: 20px;
     margin-left: 3in;
 }
 
+h3{
+  white-space: pre;
+  font-size: 20px;
+}
+
+h4{
+  white-space: pre;
+  font-size: 20px;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: #1ea6f4;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 600px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 50px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button_center{
+  text-align: center;
+}
     </style>
   </head>
   <body>
@@ -208,18 +261,24 @@ font-size: 20px;
     <div class="message">
         <h1>Canvas Calendar</h1>
         <h2>Created By</h2>
-        <pre class="tab">Arai Singleton     Chris Varriano      Sean McNamara       Will Van Luven</pre>
-        <pre class="tab"><a href="mailto:akahilis@udel.edu">akahilis@udel.edu</a>     <a href="mailto:cvarrian@udel.edu">cvarrian@udel.edu</a>     <a href="mailto:skmcnama@udel.edu">skmcnama@udel.edu</a>     <a href="mailto:wvluven@udel.edu">wvluven@udel.edu</a></p>
-        
+        <h3>Arai Singleton               Chris Varriano                Sean McNamara                Will Van Luven</h3>
+        <h4><a href="mailto:akahilis@udel.edu">akahilis@udel.edu</a>       <a href="mailto:cvarrian@udel.edu">cvarrian@udel.edu</a>       <a href="mailto:skmcnama@udel.edu">skmcnama@udel.edu</a>       <a href="mailto:wvluven@udel.edu">wvluven@udel.edu</a></h4>
         <h2>Our Goal</h2>
-        <p class="paragraph">As engineering students, managing assignments as well as other day to day tasks can be the most important aspect of achieving 
-            good grades in college. Our goal for creating Canvas Calendar is help students better understand when their assignments are due 
-            not just by day, but by week or month to help students better manage their time. Features such as automatically importing due 
-            dates from canvas to our assignment start date recommendation system are some of the many ways canvas calendar can help students!</p>
+        <p class="paragraph">Canvas Calendar is a website designed to be for college students, currently focusing on students that utilize Canvas through their college 
+          or university. I am sure we all know how critically important it is for college students to manage their time balancing academics, participating in campus life, 
+          and possibly working. Maybe not as much hanging out with friends as before due to our current situation. It can be difficult for students to manage all of their tasks and activities. 
+          Our team’s goal is to provide one location that makes it easier. We aim to develop a website that has the ability to import both academic tasks as well as personal calendar 
+          appointments for better overall management. In addition, our goal is to have the website also be able to make recommendations on when homework assignments and the-like should be worked on. 
+          These recommendations will be based off of the user’s preferences, for example if a user refuses to do homework past 10:00 PM our website will recommend a time accounting for that pre-defined boundary. 
+          Assignment characteristics can also be used, like tagging an assignment that is quick and easy to complete or another like studying for an upcoming exam that is prioritized higher. </p>
+        <button class="button" id="website_btn" style="vertical-align:middle"><span>Click Here To Go To Our Project Website</span></button>
 
     </div>
 
     <script>
+      document.getElementById("website_btn").onclick=function(){
+        window.location.href = 'https://sites.google.com/udel.edu/canvascalendar/home?authuser=1'//put url here
+      }
     </script>
   </body>
 </html>
