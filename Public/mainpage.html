@@ -91,13 +91,13 @@
       #message h4 {color: rgb(0, 0, 0); font-weight: bold; font-size: 20px; margin: 16px 0 12px; margin-top: 1in; margin-left: 200px;} 
 
       a {
-      color: #000;
+      color: #f4f4f4;
       }
 
 /* header */
 
 .header {
-  background-color: #acb0b0;
+  background-color: #00539f;
   box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
   position: fixed;
   width: 100%;
@@ -109,7 +109,7 @@
   padding: 0;
   list-style: none;
   overflow: hidden;
-  background-color: #acb0b0;
+  background-color: #00539f;
 }
 
 .header li a {
@@ -289,13 +289,17 @@
  width: fit-content;
 }
 
+.box-border{
+  border: 20px solid red;
+}
+
 
 </style>
   </head>
   <body>
 
     <header class="header">
-      <a href="" class="logo">Welcome Back!</a>
+      <a style="color: white;" href="" class="logo" id="headerlogo">Welcome Back!</a>
       <input class="menu-btn" type="checkbox" id="menu-btn" />
       <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
       <ul class="menu">
@@ -498,6 +502,73 @@
     // Initialize Firebase/Canvas API
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
+
+    $(document).ready(function () {
+        $("#registerForm").on("submit", function (event) {
+          event.preventDefault();
+          var fname = $("#registerFirstName").val();
+          var lname = $("#registerLastName").val();
+          var email = $("#registerEmail").val();
+          var password = $("#registerPassword").val();
+          firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(function (user) {
+              firebase.database().ref().child("users/" + user.user.uid).set({
+                firstname: fname,
+                lastname: lname,
+                email: user.user.email,
+                role: "user"
+              })
+              alert("Account successfuly created")
+            })
+            .catch(function (err) {
+              console.log(err);
+              alert(err);
+            });
+        });
+
+
+        $("#loginForm").on("submit", function (event) {
+          event.preventDefault();
+          var email = $("#loginEmail").val();
+          var password = $("#loginPassword").val();
+          firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(function (user) {
+              console.log(user);
+              location.reload();
+              alert("Welcome Back!")
+            })
+            .catch(function (err) {
+              console.log(err);
+              alert(err);
+            });
+        });
+
+        $("#logoutbtn").on("click", function () {
+          firebase.auth().signOut().then(function () {
+            alert("Goodbye!");
+            location.reload();
+          })
+          .catch(function (error) {
+            console.log(err);
+            alert(err);
+          });
+        });
+
+        firebase.auth().onAuthStateChanged(function (user) {
+          if (user) {
+            console.log(user);
+            var email = user.email;
+            document.getElementById("headerlogo").innerHTML = "Welcome Back " + user.email;
+            //alert("Welcome " + email);
+          } else {
+            // No user is signed in.
+            console.log("No user");
+            //alert("Currently logged out");
+          }
+        });
+
+
+      });
 
     </script>
   </body>

@@ -62,7 +62,7 @@
 .button {
   display: inline-block;
   border-radius: 10px;
-  background-color: #1ea6f4;
+  background-color: #00539f;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -116,18 +116,18 @@ input {
 }
 
 
-#message h2 { color: rgb(0, 0, 0); font-weight: normal; font-size: 30px; text-align: center; margin: 16px 0 12px; margin-top: .5in}
-#message h3 { color: rgb(0, 0, 0); font-weight: normal; font-size: 20px; text-align: center; margin: 16px 0 12px; }
+#message h2 { color: rgb(0, 0, 0); font-weight: normal; font-size: 30px; text-align: center; margin: 16px 0 12px; padding: .25in;}
+#message h3 { color: rgb(0, 0, 0); font-weight: normal; font-size: 20px; text-align: center; margin: 16px 0 12px; padding: .25in;}
 #message p {color: rgb(0, 0, 0); font-weight: normal; font-size: 20px; text-align: center; margin: 16px 0 12px; margin-top: .25in;}
 
 a {
-  color: #000;
+  color: #f4f4f4;
 }
 
 /* header */
 
 .header {
-  background-color: #acb0b0;
+  background-color: #00539f;
   box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
   position: fixed;
   width: 100%;
@@ -139,7 +139,7 @@ a {
   padding: 0;
   list-style: none;
   overflow: hidden;
-  background-color: #acb0b0;
+  background-color: #00539f;
 }
 
 .header li a {
@@ -260,7 +260,7 @@ a {
   <body>
 
     <header class="header">
-      <a href="" class="logo">Login to Your Account</a>
+      <a style="color: white;" href="" class="logo">Login to Your Account</a>
       <input class="menu-btn" type="checkbox" id="menu-btn" />
       <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
       <ul class="menu">
@@ -320,8 +320,8 @@ a {
               console.log(user);
               location.reload();
               alert("Welcome Back!")
-              var accountType = "defaultEmail";
-              sessionStorage.setItem("accountType", "defaultEmail");
+              var accountType = "CanvasCalendar";
+              sessionStorage.setItem("accountType", "CanvasCalendar");
               window.location.href = 'https://canvas-calendar-4ea54.web.app/mainpage.html'//put url here
             })
             .catch(function (err) {
@@ -333,8 +333,8 @@ a {
     //google login code 2
     function onSuccess(googleUser) {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-      var accountType = "gmail";
-      sessionStorage.setItem("accountType", "gmail");
+      var accountType = "Google";
+      sessionStorage.setItem("accountType", "Google");
       window.location.href = 'https://canvas-calendar-4ea54.web.app/mainpage.html'//put url here
     }
     function onFailure(error) {

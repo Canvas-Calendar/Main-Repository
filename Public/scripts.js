@@ -70,7 +70,8 @@ function showCalendar(month, year) {
                 let cell = document.createElement("td");
                 let cellText = document.createTextNode(date);
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
-                    cell.classList.add("bg-info");
+                    //cell.classList.add("bg-info");
+                    cell.classList.add("bg-danger")
                 } // color today's date
                 cell.appendChild(cellText);
                 row.appendChild(cell);
@@ -88,7 +89,7 @@ function showCalendar(month, year) {
 var accountType = sessionStorage.getItem("accountType");
 
 function logoutFunction(){
-    if(accountType == "gmail"){
+    if(accountType == "Google"){
         signOut();
       }
       else{
@@ -121,4 +122,6 @@ function viewSelectedEvent(){
     popup.classList.toggle("show");
     document.getElementById("myPopup2").innerHTML = today;
 }
+
+
 

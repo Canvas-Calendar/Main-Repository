@@ -33,19 +33,20 @@
 
     <style>
 
+a {
+  color: rgb(255, 255, 255);
+}
+
     * {
     padding:0;
     margin:0;
     }
 
-    a {
-  color: #000;
-}
 
 /* header */
 
 .header {
-  background-color: #acb0b0;
+  background-color: #00539f;
   box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
   position: fixed;
   width: 100%;
@@ -57,7 +58,7 @@
   padding: 0;
   list-style: none;
   overflow: hidden;
-  background-color: #acb0b0;
+  background-color: #00539f;
 }
 
 .header li a {
@@ -176,6 +177,7 @@
 .message{
   padding-top: 1in;
   text-align: center;
+  color: black;
 }
 
 h2 {
@@ -199,12 +201,13 @@ h3{
 h4{
   white-space: pre;
   font-size: 20px;
+  color: black;
 }
 
 .button {
   display: inline-block;
   border-radius: 10px;
-  background-color: #1ea6f4;
+  background-color: #00539f;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -244,12 +247,16 @@ h4{
 .button_center{
   text-align: center;
 }
+
+.emailLink{
+  color: black;
+}
     </style>
   </head>
   <body>
 
     <header class="header">
-        <a href="" class="logo">About Canvas Calendar</a>
+        <a style="color: white;" href="" class="logo">About Canvas Calendar</a>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <ul class="menu">
@@ -262,7 +269,7 @@ h4{
         <h1>Canvas Calendar</h1>
         <h2>Created By</h2>
         <h3>Arai Singleton               Chris Varriano                Sean McNamara                Will Van Luven</h3>
-        <h4><a href="mailto:akahilis@udel.edu">akahilis@udel.edu</a>       <a href="mailto:cvarrian@udel.edu">cvarrian@udel.edu</a>       <a href="mailto:skmcnama@udel.edu">skmcnama@udel.edu</a>       <a href="mailto:wvluven@udel.edu">wvluven@udel.edu</a></h4>
+        <h4><a style="color: black;" href="mailto:akahilis@udel.edu">akahilis@udel.edu</a>       <a style="color: black;" href="mailto:cvarrian@udel.edu">cvarrian@udel.edu</a>       <a style="color: black;" href="mailto:skmcnama@udel.edu">skmcnama@udel.edu</a>       <a style="color: black;" href="mailto:wvluven@udel.edu">wvluven@udel.edu</a></h4>
         <h2>Our Goal</h2>
         <p class="paragraph">Canvas Calendar is a website designed to be for college students, currently focusing on students that utilize Canvas through their college 
           or university. I am sure we all know how critically important it is for college students to manage their time balancing academics, participating in campus life, 
