@@ -12,10 +12,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Canvas Calendar</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $( function() {
+        $( "#datepicker" ).datepicker();
+      } );
+      </script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
@@ -89,7 +97,7 @@
       }
      
       #message h4 {color: rgb(0, 0, 0); font-weight: bold; font-size: 20px; margin: 16px 0 12px; margin-top: 1in; margin-left: 200px;} 
-
+      #message h1 {color: rgb(253, 250, 250)} 
       a {
       color: #f4f4f4;
       }
@@ -293,6 +301,66 @@
   border: 20px solid red;
 }
 
+/* Test for new popup*/
+/*___________________________________________________________*/
+/* The popup form - hidden by default */
+.form-popup {
+  border-radius: 25px;
+  display: none;
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  width: 300px;
+  height: 300px;
+  z-index: 9;
+  right: 50;
+
+}
+
+/* Add styles to the form container */
+.form-container {
+  border-radius: 25px;
+  max-width: 300px;
+  padding: 10px;
+  background-color:#00539f;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
 
 </style>
   </head>
@@ -340,9 +408,21 @@
   
               <button class="btn btn-outline-primary col-sm-6" id="next" onclick="next()">Next Month</button>
               
-              <div class="popup btn btn-outline-primary col-sm-6" onclick="addEvent()">Add New Event
-                <span class="popuptext" id="myPopup1">Add New Event</span>
-              </div>
+              <button class="popup btn btn-outline-primary col-sm-6" onclick="openForm()">Add New Event</button>
+                <div class="form-popup" id="myForm">
+                  <form action="/action_page.php" class="form-container">
+                    <h1>Add Event</h1>
+                
+                    <p>Date: <input type="text" class="date-popup" id="datepicker"></p>
+
+                    <p>Description: <input type="text"></p>
+                
+                
+                    <button type="button" class="btn btn" onclick="closeForm()">Add Event</button>
+                    <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+                  </form>
+                </div>
+   
 
               <div class="popup btn btn-outline-primary col-sm-6" onclick="viewSelectedEvent()">View Event
                 <span class="popuptext" id="myPopup2"></span>
@@ -476,9 +556,7 @@
 
 <!-- Optional JavaScript for bootstrap -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
         crossorigin="anonymous"></script>
@@ -502,6 +580,7 @@
     // Initialize Firebase/Canvas API
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
+
 
     $(document).ready(function () {
         $("#registerForm").on("submit", function (event) {

@@ -24,6 +24,7 @@ function previous() {
 
 function addEvent() {
   var popup = document.getElementById("myPopup1");
+  var popup = document.getElementById("myPopup11");
   popup.classList.toggle("show");
 }
 
@@ -122,6 +123,12 @@ function viewSelectedEvent(){
     popup.classList.toggle("show");
     document.getElementById("myPopup2").innerHTML = today;
 }
-
-
+//new form stuff below _________________________
+function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
+  
+function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
 

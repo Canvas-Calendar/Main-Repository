@@ -1,6 +1,11 @@
 This file is for notes/updates only only 
 If you update any code, please list the change below with the date
 
+2/22/21
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
 12/7/20:
 
 background-image: url('https://5gtours.eu/wp-content/uploads/2020/06/Continuous-Online-Learning-11.8.18.jpg');

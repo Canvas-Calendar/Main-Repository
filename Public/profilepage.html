@@ -13,7 +13,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>About Canvas Calendar</title>
+    <title>Canvas Calendar Profile</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
     integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -188,6 +188,15 @@ a {
 .message{
   padding-top: 1in;
   text-align: center;
+  padding-left: 2in;
+  float: left;
+}
+
+.link-account{
+  padding-top: 1in;
+  text-align: center;
+  padding-right: 2in;
+  float: right;
 }
 
 h1{
@@ -197,13 +206,55 @@ h1{
 h2{
   padding: .25in;
 }
+.button {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: #00539f;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 15px;
+  width: 400px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 50px;
+}
 
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button_center{
+  text-align: center;
+}
     </style>
   </head>
   <body>
 
     <header class="header">
-        <a style="color: white;" href="" class="logo">Profile</a>
+        <a style="color: white;" href="" class="logo">Your Profile</a>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <ul class="menu">
@@ -214,10 +265,27 @@ h2{
 
     <div class="message">
         <h1>Profile</h1>
+        <h2>Picture:</h2>
         <h2>Email:</h2>
         <div id="user-message1"></div>
         <h2>Account Type:</h2>
         <div id="user-message2"></div>
+    </div>
+
+    <div class="link-account">
+      <h1>How To Link Your Canvas Account</h1>
+      <h2>Step 1: Retrieve your canvas access token</h2>
+      <p>1.1: In Global Navigation, click the Account, then click the Settings.</p>
+      <p>1.2: To manually add an access token, click the Add New Access Token button.</p>
+      <p>1.3: Enter a description for your access token in the Purpose field.</p> 
+      <p>1.4: You can also select an expiration date by clicking the Calendar icon. </p>
+      <p>1.5: To generate a token with no expiration, leave the Expires field empty.</p>
+      <p>1.6: To generate a new access token, click the Generate Token button.</p>
+      <h2>Step 2: Input your token below</h2>
+      <form class="login-container" id="loginForm">
+        <p><input id="accessToken" type="text" placeholder="Your access token" style="color: black;" ></p>
+      </form>
+      <button class="button" id="website_btn" style="vertical-align:middle"><span>Submit Acces Token</span></button>
     </div>
 
     <script>
