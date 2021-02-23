@@ -70,11 +70,13 @@ function showCalendar(month, year) {
             else {
                 let cell = document.createElement("td");
                 let cellText = document.createTextNode(date);
+                let testText = document.createTextNode("\nteeeeeeeeeeeeest");
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
                     //cell.classList.add("bg-info");
                     cell.classList.add("bg-danger")
                 } // color today's date
                 cell.appendChild(cellText);
+                cell.appendChild(testText);
                 row.appendChild(cell);
                 date++;
             }
@@ -131,4 +133,6 @@ function openForm() {
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
   }
+
+
 
