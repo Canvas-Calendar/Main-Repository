@@ -1,5 +1,5 @@
- <!--
-    Title: ECE Senior Design Project Code - Test page
+<!--
+    Title: ECE Senior Design Project Code - blank page
     Description: This file is used for copying and pasting purposes only when we are creating a new page and want
     to start from a blank page
     Authors: Chris Varriano
@@ -12,25 +12,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Canvas Calendar</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-      $( function() {
-        $( "#datepicker" ).datepicker();
-      } );
-      </script>
+    <title>Welcome to Firebase Hosting</title>
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
 
     <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
 
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-    
+
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
@@ -43,71 +36,74 @@
     <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.css' rel='stylesheet' />
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel='stylesheet' /> 
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.js'></script>
+    <script src='https://raw.githubusercontent.com/sydcanem/bootstrap-contextmenu/master/bootstrap-contextmenu.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script> 
+
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
+    
+    <style>
+
+* {
+    padding:0;
+    margin:0;
+}
+
+.fc-event {
+  padding:1em 0.5em !important;
+}
+.fc-day-grid-event .fc-content {
+  white-space:normal !important;
+}
+.strikeout * {
+  text-decoration: line-through !important;
+}
+
+.courses-page{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    float: right;
+    margin-right: 7in;
+}
+
+.upcoming-page{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    float: left;
+    padding-left: 50px;
+}
+
+.topSection{
+    margin-top: 1in;
+    padding-left: 50px;
+    padding-right: 50px;
+}
 
 
-<style>
-      .card {
-      float: right;
-      clear: both;
-      }
+/* header _________________________________________*/
 
-      .card input {
-      width: 100%;
-      float: right;
-      clear: both;
-      }
-
-      .upcoming-page{
-        margin-top: 1in;
-        margin-left: .50in;
-      }
-
-      .courses-page{
-        float: left;
-        margin-top: .5in;
-        margin-left: .50in;
-        clear:left;
-      }
-
-      .Calendar-page{
-        float: right;
-        margin-top: .50in;
-        margin-right: -2.5in;
-        display: inline;
-      }
-
-      table {
-      table-layout: fixed;
-      }
-      
-      th {
-      width: 125px;
-      height: 50px;
-      }
-
-      td {
-      width: 125px;
-      height: 100px;
-      }
-     
-      #message h4 {color: rgb(0, 0, 0); font-weight: bold; font-size: 20px; margin: 16px 0 12px; margin-top: 1in; margin-left: 200px;} 
-      #message h1 {color: rgb(253, 250, 250)} 
-      a {
-      color: #f4f4f4;
-      }
-
-/* header */
+a {
+  color: rgb(255, 255, 255);
+}
 
 .header {
   background-color: #00539f;
   box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
   position: fixed;
+  left:0;
+  right:0;
+  top:0;
   width: 100%;
   z-index: 3;
 }
@@ -233,286 +229,37 @@
   }
 }
 
-/* pop up window */
-
-/* Popup container - can be anything you want */
-.popup{
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* The actual popup */
-.popup .popuptext {
-  visibility: hidden;
-  width: 500px;
-  height: 500px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -250px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-/* Toggle this class - hide and show the popup */
-.popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn .5s;
-  animation: fadeIn .5s;
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
-}
-
-.form-control{
- width: fit-content;
-}
-
-.box-border{
-  border: 20px solid red;
-}
-
-/* Test for new popup*/
-/*___________________________________________________________*/
-/* The popup form - hidden by default */
-.form-popup {
-  border-radius: 25px;
-  display: none;
-  position: absolute;
-  top: 200px;
-  left: 100px;
-  width: 300px;
-  height: 300px;
-  z-index: 9;
-  right: 50;
-
-}
-
-/* Add styles to the form container */
-.form-container {
-  border-radius: 25px;
-  max-width: 300px;
-  padding: 10px;
-  background-color:#00539f;
-}
-
-/* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for the submit/login button */
-.form-container .btn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: red;
-}
-
-/* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
-}
-
-</style>
+    </style>
   </head>
   <body>
-
-    <header class="header">
-      <a style="color: white;" href="" class="logo" id="headerlogo">Welcome Back!!</a>
-      <input class="menu-btn" type="checkbox" id="menu-btn" />
-      <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-      <ul class="menu">
+<header class="header">
+    <a style="color: white;" href="" class="logo" id="headerlogo">Welcome Back!!</a>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <ul class="menu">
         <li><a href='https://canvas-calendar-4ea54.web.app/aboutpage.html'>About</a></li>
         <li><a href='https://canvas-calendar-4ea54.web.app/profilepage.html'>Profile</a></li>
         <li><a href="#contact" onclick="logoutFunction()">Logout</a></li>
-      </ul>
-    </header>
+    </ul>
+</header>
 
+<div class="topSection">
+    <div id='calendar'></div>
+</div>
 
-<div class="top-page">
- <div class="Calendar" style="vertical-align:middle" >
-  <div class="Calendar-page" style="float: right;">
-    <div class="container col-sm-4 col-md-7 col-lg-4 mt-5">
-      <div class="card" style="width: 1052px;">
-          <h3 class="card-header" id="monthAndYear" style="width: 1050px;"></h3>
-          <table class="table table-bordered table-responsive-sm" id="calendar">
-              <thead>
-              <tr>
-                  <th>Sun</th>
-                  <th>Mon</th>
-                  <th>Tue</th>
-                  <th>Wed</th>
-                  <th>Thu</th>
-                  <th>Fri</th>
-                  <th>Sat</th>
-              </tr>
-              </thead>
-  
-              <tbody id="calendar-body">
-  
-              </tbody>
-          </table>
-  
-          <div class="form-inline">
-  
-              <button class="btn btn-outline-primary col-sm-6" id="previous" onclick="previous()">Previous Month</button>
-  
-              <button class="btn btn-outline-primary col-sm-6" id="next" onclick="next()">Next Month</button>
-              
-              <button class="popup btn btn-outline-primary col-sm-6" onclick="openForm()">Add New Event</button>
-                <div class="form-popup" id="myForm">
-                  <form action="/action_page.php" class="form-container">
-                    <h1>Add Event</h1>
-                
-                    <p>Date: <input type="text" class="date-popup" id="datepicker"></p>
+<!-- Your custom menu with dropdown-menu as default styling -->
+<div id="context-menu">
+  <ul class="dropdown-menu" role="menu">
+    <li><a tabindex="-1">Action</a></li>
+     <li><a tabindex="-1">Another action</a></li>
+     <li><a tabindex="-1">Something else here</a></li>
+     <li class="divider"></li>
+     <li><a tabindex="-1">Separated link</a></li>
+  </ul>
+</div>
 
-                    <p>Description: <input type="text"></p>
-                
-                
-                    <button type="button" class="btn btn" onclick="closeForm()">Add Event</button>
-                    <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
-                  </form>
-                </div>
-   
-
-              <div class="popup btn btn-outline-primary col-sm-6" onclick="viewSelectedEvent()">View Event
-                <span class="popuptext" id="myPopup2"></span>
-              </div>
-
-          </div>
-          <br/>
-          <form class="form-inline">
-              <label class="lead mr-2 ml-2" for="month">Jump To: </label>
-              <select class="form-control col-sm-3" name="month" id="month" onchange="jump()">
-                  <option value=0>January</option>
-                  <option value=1>Febuary</option>
-                  <option value=2>March</option>
-                  <option value=3>April</option>
-                  <option value=4>May</option>
-                  <option value=5>June</option>
-                  <option value=6>July</option>
-                  <option value=7>August</option>
-                  <option value=8>September</option>
-                  <option value=9>October</option>
-                  <option value=10>November</option>
-                  <option value=11>December</option>
-              </select>
-
-              <label for="day"></label><select class="form-control col-sm-3" name="day" id="day" onchange="jump()">
-
-                <option value=1>1</option>
-                <option value=2>2</option>
-                <option value=3>3</option>
-                <option value=4>4</option>
-                <option value=5>5</option>
-                <option value=6>6</option>
-                <option value=7>7</option>
-                <option value=8>8</option>
-                <option value=9>9</option>
-                <option value=10>10</option>
-                <option value=11>11</option>
-                <option value=12>12</option>
-                <option value=13>13</option>
-                <option value=14>14</option>
-                <option value=15>15</option>
-                <option value=16>16</option>
-                <option value=17>17</option>
-                <option value=18>18</option>
-                <option value=19>19</option>
-                <option value=20>20</option>
-                <option value=21>21</option>
-                <option value=22>22</option>
-                <option value=23>23</option>
-                <option value=24>24</option>
-                <option value=25>25</option>
-                <option value=26>26</option>
-                <option value=27>27</option>
-                <option value=28>28</option>
-                <option value=29>29</option>
-                <option value=30>30</option>
-                <option value=31>31</option>
-                              
-              </select>
-              
-              <label for="year"></label><select class="form-control col-sm-3" name="year" id="year" onchange="jump()">
-              
-              <option value=2010>2010</option>
-              <option value=2011>2011</option>
-              <option value=2012>2012</option>
-              <option value=2013>2013</option>
-              <option value=2014>2014</option>
-              <option value=2015>2015</option>
-              <option value=2016>2016</option>
-              <option value=2017>2017</option>
-              <option value=2018>2018</option>
-              <option value=2019>2019</option>
-              <option value=2020>2020</option>
-              <option value=2021>2021</option>
-              <option value=2022>2022</option>
-              <option value=2023>2023</option>
-              <option value=2024>2024</option>
-              <option value=2025>2025</option>
-              <option value=2026>2026</option>
-              <option value=2027>2027</option>
-              <option value=2028>2028</option>
-              <option value=2029>2029</option>
-              <option value=2030>2030</option>
-          </select></form>
-      </div>
-    </div>
-   </div>
-  </div>
-  <div class="Calendar" style="vertical-align:middle">
-  <div class="upcoming-page" style="float: left;">
+<div class="bottomSection">
+<div class="upcoming-page" style="float: left;">
     <div class="card" style="width: 302px;"> 
      <div class="card-header" style="width: 300px;">
       <h4>Upcoming Today</h4> 
@@ -526,48 +273,28 @@
     </ul>
      </div>
    </div>
-  
-   <div class="courses-page" style="float: left;">
-   <div class="card" style="width: 302px;"> 
-    <div class="card-header" style="width: 300px;">
-     <h4>Current Courses</h4> 
-    </div>
-    <ul class="list-group list-group-flush">
-     <li class="list-group-item">CISC 361</li>
-     <li class="list-group-item">CPEG 419</li>
-     <li class="list-group-item">CPEG 494</li>
-     <li class="list-group-item">CPEG 496</li>
-     <li class="list-group-item">CPEG 498</li>
-   </ul>
-    </div>
+
+   <div class="courses-page" style="float: right;">
+    <div class="card" style="width: 302px;"> 
+     <div class="card-header" style="width: 300px;">
+      <h4>Current Courses</h4> 
+     </div>
+     <ul class="list-group list-group-flush">
+      <li class="list-group-item">CISC 361</li>
+      <li class="list-group-item">CPEG 419</li>
+      <li class="list-group-item">CPEG 494</li>
+      <li class="list-group-item">CPEG 496</li>
+      <li class="list-group-item">CPEG 498</li>
+    </ul>
+     </div>
+   </div>
   </div>
- </div>
 </div>
 
-
-
-  </div>
- </div>
-</div>  
-
-
-<!-- Try looking into making the items into a list using ol and li -->
-<script src="scripts.js"></script>
-
-<!-- Optional JavaScript for bootstrap -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
-        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
-        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-        crossorigin="anonymous"></script>
-
-    <script>
-      // Your web app's Firebase configuration
+<script>
+ // Your web app's Firebase configuration
       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
+      var firebaseConfig = {
       apiKey: "AIzaSyAWlmVBGiPNaZ8q6wIW8qj4MHhRCdEnzfw",
       authDomain: "canvas-calendar-4ea54.firebaseapp.com",
       databaseURL: "https://canvas-calendar-4ea54.firebaseio.com",
@@ -577,10 +304,11 @@
       appId: "1:967496995343:web:87bdb9b3571033cfce897a",
       measurementId: "G-2GBWCBTD5W"
     };
-    // Initialize Firebase/Canvas API
+    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
 
+    // Logout Code _________________________________________________
 
     $(document).ready(function () {
         $("#registerForm").on("submit", function (event) {
@@ -645,12 +373,104 @@
             //alert("Currently logged out");
           }
         });
-
-
       });
 
+var accountType = sessionStorage.getItem("accountType");
+
+function logoutFunction(){
+    if(accountType == "Google"){
+        signOut();
+      }
+      else{
+        firebase.auth().signOut().then(function () {
+          location.reload();
+          window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
+        })
+        .catch(function (error) {
+          console.log(err);
+          alert(err);
+        });
+      }
+}
+
+function signOut() { //Sign Out Function
+    gapi.auth2.getAuthInstance().signOut().then(function() {
+        console.log('User signed out')
+        window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
+    })
+}
+
+function onLoad() {
+    gapi.load('auth2', function() {
+      gapi.auth2.init();
+    });
+}
+
+// calendar Code ________________________________________________________________________
+
+    
+$('#calendar').fullCalendar({
+header: {
+  left: 'prev,next today',
+  center: 'title',
+  right: 'month,agendaWeek,agendaDay'
+},
+//defaultDate: '2015-02-12',
+selectable: true,
+selectHelper: true,
+  
+eventRender: function(event, element) {
+ console.log(event);
+  
+  var html = '<a data-event-id="' + event.id + '" class="' + ((event.strikeout) ? 'strikeout' : '') + ' fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable">';
+  html += '<div class="fc-content">';
+  html += ' <label><input type="checkbox" ' + ((event.strikeout) ? 'checked' : '') + '> <span class="fc-time">' + event.start.format('ha') + '</span> ';
+  html += ' <span class="fc-title">' + event.title + '</span>';
+  html += '</label></div></a>';
+  
+  var $event = $(html);
+  
+  addRightClickMenu($event);
+  
+  return $event;
+  
+},
+  
+select: function(start, end) {
+  var title = prompt('Event Title:');
+  if (title) {
+    $('#calendar').fullCalendar('renderEvent', {
+      title: title, start: start, end: end
+    }, true);
+  }
+  $('#calendar').fullCalendar('unselect');
+},
+editable: true,
+//events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
+});
+
+function addRightClickMenu($event){
+  $event.contextmenu({
+    target: '#context-menu',
+    onItem: function (context, e) {
+      console.log(context);
+
+      var event = $("#calendar").fullCalendar( 'clientEvents', [context.data('event-id')])[0];
+
+      alert($(e.target).text() + ' for event "' + event.title + '"');
+    }
+  });
+}
+
+
+$('#calendar').on('change', ':checkbox', function(){
+ 
+  var event = $("#calendar").fullCalendar( 'clientEvents', [$(this).parents('.fc-event:first').data('event-id')])[0];
+  
+  event.strikeout = $(this).is(':checked');
+      $("#calendar").fullCalendar('renderEvent', event, true);
+  
+});
     </script>
   </body>
 </html>
-
-      
