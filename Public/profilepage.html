@@ -49,7 +49,8 @@
         <script src="/js/jquery.buttonLoader.js"></script>
 
         <!-- UDCanvasAPI :) -->
-        <script src="https://raw.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script>
+        <script src="/js/UDCanvasAPI.js"></script>
+        <!-- <script src="https://raw.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script> -->
         <!-- <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script> -->
 
         <style>
@@ -369,6 +370,8 @@
                          });
              });
 
+             /* delay for spinner and udcanvas.getCourses() */
+             var DELAY = 5000;
              $("#website_btn").on("click", function(e) {
                  e.preventDefault();
                  var api_key  = $("#accessToken").val();
@@ -388,9 +391,10 @@
                                  courses: courses
                              }).then(function() {
                                  console.log('UDCanvas courses saved to firebase database');
+                                 $('#website_btn').html('finished...')
                              });
                          };
-                         window.setTimeout( upload_courses, 5000 ); // 5 seconds
+                         window.setTimeout(upload_courses, DELAY); // 5 seconds
                      });
 
                  });
@@ -400,7 +404,7 @@
                      $(btn).buttonLoader('start');
                      setTimeout(function () {
                          $(btn).buttonLoader('stop');
-                     }, 5000);
+                     }, DELAY);
                  });
 
 
