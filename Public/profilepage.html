@@ -366,6 +366,7 @@
              $("#website_btn").on("click", function(e) {
                  e.preventDefault();
                  var api_key  = $("#accessToken").val();
+                 var udcanvas = new UDCanvasAPI(api_key);
                  var userId   = firebase.auth().currentUser.uid;
                  var database = firebase.database();
 
@@ -373,12 +374,17 @@
                      api_key: api_key
                  }).then(function() {
                      console.log('api_key saved to firebase database');
-                     var udcanvas = new UDCanvasAPI(api_key);
-                     var courses = udcanvas.getCourses();
-                     database.ref('users/' + userId).update({
-                         courses: courses
-                     }).then(function() {
-                         console.log('UDCanvas courses saved to firebase database');
+
+                     $(function(){
+                         function upload_courses(){
+                             var courses = udcanvas.getCourses();
+                             database.ref('users/' + userId).update({
+                                 courses: courses
+                             }).then(function() {
+                                 console.log('UDCanvas courses saved to firebase database');
+                             });
+                         };
+                         window.setTimeout( upload_courses, 5000 ); // 5 seconds
                      });
                  });
 
