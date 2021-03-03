@@ -18,12 +18,16 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
               integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
+        <!-- CSS Styles for Spinner Loader -->
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link href="buttonLoader.css" rel="stylesheet" type="text/css">
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
 
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-        
+
         <!-- update the version number as needed -->
         <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
         <!-- include only the Firebase features as you need -->
@@ -42,6 +46,9 @@
              https://firebase.google.com/docs/web/setup#available-libraries -->
         <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
+
+        <!-- Button Loader Plugin -->
+        <script src="jquery.buttonLoader.js"></script>
 
         <!-- UDCanvasAPI :) -->
         <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script>
@@ -288,7 +295,7 @@
             <form class="login-container" id="loginForm">
                 <p><input id="accessToken" type="text" placeholder="Your access token" style="color: black;" ></p>
             </form>
-            <button class="button" id="website_btn" style="vertical-align:middle"><span>Submit Acces Token</span></button>
+            <button class="button has-spinner" id="website_btn" style="vertical-align:middle"><span>Submit Acces Token</span></button>
         </div>
 
         <script>
@@ -375,17 +382,34 @@
                  }).then(function() {
                      console.log('api_key saved to firebase database');
 
-                     $(function(){
-                         function upload_courses(){
-                             var courses = udcanvas.getCourses();
-                             database.ref('users/' + userId).update({
-                                 courses: courses
-                             }).then(function() {
-                                 console.log('UDCanvas courses saved to firebase database');
-                             });
-                         };
-                         window.setTimeout( upload_courses, 5000 ); // 5 seconds
-                     });
+                     var btn = $(this);
+                     $(btn).buttonLoader('start');
+                     setTimeout(function () {
+                         var courses = udcanvas.getCourses();
+                         database.ref('users/' + userId).update({
+                             courses: courses
+                         }).then(function() {
+                             console.log('UDCanvas courses saved to firebase database');
+                         });
+                         $(btn).buttonLoader('stop');
+                     }, 5000);
+
+
+
+
+                     /* $(function(){
+                      *     function upload_courses(){
+                      *         var courses = udcanvas.getCourses();
+                      *         database.ref('users/' + userId).update({
+                      *             courses: courses
+                      *         }).then(function() {
+                      *             console.log('UDCanvas courses saved to firebase database');
+                      *         });
+                      *     };
+                      *     window.setTimeout( upload_courses, 5000 ); // 5 seconds
+                      * });
+                      */
+
                  });
 
                  /*
