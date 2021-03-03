@@ -59,11 +59,14 @@
     padding:0;
     margin:0;
 }
-
+:root {
+    --eventColor:rgb(204, 0, 0);
+}
 .fc-event {
   padding:1em 0.5em !important;
-  background-color: blue;
+  background-color: var(--eventColor);
 }
+
 .fc-day-grid-event .fc-content {
   white-space:normal !important;
 }
@@ -441,8 +444,14 @@ eventRender: function(event, element) {
   return $event;
   
 },
-  
+
+
 select: function(start, end) {
+  var eventType = prompt('Event Type:');
+  if (eventType == "Holiday") {
+    alert("it worked")
+    document.body.style.setProperty('--eventColor',"#000000")
+  }
   var title = prompt('Event Title:');
   if (title) {
     $('#calendar').fullCalendar('renderEvent', {
