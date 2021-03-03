@@ -1,12 +1,10 @@
-<!--
-     Title: ECE Senior Design Project Code - About Page
+<!-- Title: ECE Senior Design Project Code - About Page
      Description: About page - will display info about our project and its authors
      Authors: Chris Varriano
      Will Van Luven
      Sean McNamara
      Arai Singleton
-     Date created: 11/23/20
--->
+     Date created: 11/23/20 -->
 
 <!DOCTYPE html>
 <html>
@@ -19,8 +17,8 @@
               integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
         <!-- CSS Styles for Spinner Loader -->
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <link href="buttonLoader.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" crossorigin="anonymous">
+        <link href="css/buttonLoader.css" rel="stylesheet" type="text/css">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
@@ -48,10 +46,11 @@
         <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
 
         <!-- Button Loader Plugin -->
-        <script src="jquery.buttonLoader.js"></script>
+        <script src="js/jquery.buttonLoader.js"></script>
 
         <!-- UDCanvasAPI :) -->
-        <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script>
+        <script src="https://raw.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script>
+        <!-- <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script> -->
 
         <style>
 
@@ -382,35 +381,28 @@
                  }).then(function() {
                      console.log('api_key saved to firebase database');
 
+                     $(function(){
+                         function upload_courses(){
+                             var courses = udcanvas.getCourses();
+                             database.ref('users/' + userId).update({
+                                 courses: courses
+                             }).then(function() {
+                                 console.log('UDCanvas courses saved to firebase database');
+                             });
+                         };
+                         window.setTimeout( upload_courses, 5000 ); // 5 seconds
+                     });
+
+                 });
+
+                 $('.has-spinner').click(function () {
                      var btn = $(this);
                      $(btn).buttonLoader('start');
                      setTimeout(function () {
-                         var courses = udcanvas.getCourses();
-                         database.ref('users/' + userId).update({
-                             courses: courses
-                         }).then(function() {
-                             console.log('UDCanvas courses saved to firebase database');
-                         });
                          $(btn).buttonLoader('stop');
                      }, 5000);
-
-
-
-
-                     /* $(function(){
-                      *     function upload_courses(){
-                      *         var courses = udcanvas.getCourses();
-                      *         database.ref('users/' + userId).update({
-                      *             courses: courses
-                      *         }).then(function() {
-                      *             console.log('UDCanvas courses saved to firebase database');
-                      *         });
-                      *     };
-                      *     window.setTimeout( upload_courses, 5000 ); // 5 seconds
-                      * });
-                      */
-
                  });
+
 
                  /*
                     database.ref('users/' + userId).set({
