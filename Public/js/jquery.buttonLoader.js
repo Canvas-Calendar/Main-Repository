@@ -1,4 +1,6 @@
-/*A jQuery plugin which add loading indicators into buttons
+/*
+* Source: "https://github.com/Minoli/button-loader""
+* A jQuery plugin which add loading indicators into buttons
 * By Minoli Perera
 * MIT Licensed.
 */
