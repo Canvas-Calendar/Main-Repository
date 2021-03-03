@@ -43,6 +43,9 @@
         <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
 
+        <!-- UDCanvasAPI :) -->
+        <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script>
+
         <style>
 
          * {
@@ -368,6 +371,15 @@
 
                  database.ref('users/' + userId).update({
                      api_key: api_key
+                 }).then(function() {
+                     console.log('api_key saved to firebase database');
+                     var udcanvas = new UDCanvasAPI(api_key);
+                     var courses = udcanvas.getCourses();
+                     database.ref('users/' + userId).update({
+                         courses: courses
+                     }).then(function() {
+                         console.log('UDCanvas courses saved to firebase database');
+                     });
                  });
 
                  /*
