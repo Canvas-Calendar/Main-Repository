@@ -1,6 +1,6 @@
 # Canvas Calendar
 ## Project at a Glance
-Our goal is to design a app/firebase website that utilizes that Canvas API to input assignments and due dates automatically. User can also input their course schedule/personal dates to display on their calendar as well. Calendar will also give recommendations on when to start the assignments based off the amount of assignments the user has that week/ upcoming. Once an assignment is submitted, the calendar will check off/remove assignment.
+Our goal is to design a firebase website that utilizes that Canvas API to input assignments and due dates automatically. User can also input their course schedule/personal dates to display on their calendar as well. Calendar will also give recommendations on when to start the assignments based off the amount of assignments the user has that week/ upcoming. Once an assignment is submitted, the calendar will check off/remove assignment.
 
 ## Utilizing GitHub
 - **If you are new to GitHub or need to learn more about it, follow the link below and take 10 minutes.**

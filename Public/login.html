@@ -17,6 +17,10 @@
     <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
     
     <title>Canvas Calendar - Login</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
@@ -41,6 +45,12 @@
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
 
 <style>
+
+* {
+    padding:0;
+    margin:0;
+}
+
 .g-signin2{
   width: 100%;
 }
@@ -52,7 +62,7 @@
 .button {
   display: inline-block;
   border-radius: 10px;
-  background-color: #1ea6f4;
+  background-color: #00539f;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -100,17 +110,168 @@ input {
     font-size: 20px;
 }
 
+.login{
+  padding-top: .50in;
+  text-align: center;
+}
 
-#message h1 { color: rgb(6, 47, 184); font-weight: bold; font-size: 60px; text-align: center; margin: 16px 0 12px; margin-top: 1in}
-#message h2 { color: rgb(0, 0, 0); font-weight: bold; font-size: 30px; text-align: center; margin: 16px 0 12px; margin-top: .5in}
-#message h3 { color: rgb(0, 0, 0); font-weight: bold; font-size: 20px; text-align: center; margin: 16px 0 12px; }
+
+#message h2 { color: rgb(0, 0, 0); font-weight: normal; font-size: 30px; text-align: center; margin: 16px 0 12px; padding: .25in;}
+#message h3 { color: rgb(0, 0, 0); font-weight: normal; font-size: 20px; text-align: center; margin: 16px 0 12px; padding: .25in;}
 #message p {color: rgb(0, 0, 0); font-weight: normal; font-size: 20px; text-align: center; margin: 16px 0 12px; margin-top: .25in;}
+
+a {
+  color: #f4f4f4;
+}
+
+/* header */
+
+.header {
+  background-color: #00539f;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #00539f;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+}
 
 </style>
   </head>
   <body>
+
+    <header class="header">
+      <a style="color: white;" href="" class="logo">Login to Your Account</a>
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+      <ul class="menu">
+        <li><a href="javascript:history.go(-1)">Back</a></li>
+        <li><a href='https://canvas-calendar-4ea54.web.app/aboutpage.html'>About</a></li>
+        <li><a href='https://canvas-calendar-4ea54.web.app/create_account.html'>Create an Account</a></li>
+      </ul>
+    </header>
+
+  <div class="login">
     <div id="message">
-      <h1>Login to Canvas Calendar</h1>
       <div id="user-message"></div>
       <div class="login">
         <div class="login-triangle"></div>
@@ -127,6 +288,7 @@ input {
           <div class="g-signin2" id="my-signin2"></div>
         </div>
       </div>
+  </div> 
       
     <script>
       // Your web app's Firebase configuration
@@ -158,9 +320,9 @@ input {
               console.log(user);
               location.reload();
               alert("Welcome Back!")
-              var accountType = "defaultEmail";
-              sessionStorage.setItem("accountType", "defaultEmail");
-              window.location.href = 'https://canvas-calendar-4ea54.web.app/calendar_page.html'//put url here
+              var accountType = "CanvasCalendar";
+              sessionStorage.setItem("accountType", "CanvasCalendar");
+              window.location.href = 'https://canvas-calendar-4ea54.web.app/mainpage.html'//put url here
             })
             .catch(function (err) {
               console.log(err);
@@ -171,9 +333,9 @@ input {
     //google login code 2
     function onSuccess(googleUser) {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-      var accountType = "gmail";
-      sessionStorage.setItem("accountType", "gmail");
-      window.location.href = 'https://canvas-calendar-4ea54.web.app/calendar_page.html'//put url here
+      var accountType = "Google";
+      sessionStorage.setItem("accountType", "Google");
+      window.location.href = 'https://canvas-calendar-4ea54.web.app/mainpage.html'//put url here
     }
     function onFailure(error) {
       console.log(error);
