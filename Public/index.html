@@ -13,7 +13,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Canvas Calendar</title>
+    <title>Welcome to Canvas Calendar!</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -40,10 +44,23 @@
 
     <style>
 
+body {
+  background-image: url('school_image2.jpg');
+  background-repeat: no-repeat ;
+  background-attachment: fixed;  
+  background-size: cover;
+  }
+
+* {
+    padding:0;
+    margin:0;
+}
+
+
   .button {
   display: inline-block;
   border-radius: 10px;
-  background-color: #1ea6f4;
+  background-color: #00539f;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -82,26 +99,190 @@
 
 .button_center{
   text-align: center;
+  margin-top: 6in;
 }
 
-#message h2 { color: rgb(6, 47, 184); font-weight: bold; font-size: 60px; text-align: center; margin: 16px 0 12px; margin-top: 1in}
+#message h2 { color: rgb(255, 255, 255); font-weight: bold; font-size: 60px; text-align: center; margin: 16px 0 12px;}
 #message p {color: rgb(0, 0, 0); font-weight: normal; font-size: 20px; text-align: center; margin: 16px 0 12px; margin-top: 1in; margin-left: 3in; margin-right: 3in}
+
+a {
+  color: rgb(255, 255, 255);
+}
+
+/* header */
+
+.header {
+  background-color: #00539f;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #00539f;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+}
+
+.message{
+  padding-top: 1in;
+  text-align: center;
+}
+
+.messageTop{
+  font-size: 30px;
+}
+
+.paragraph{
+  margin-left: 3in;
+  margin-right: 3in;
+  margin-top: 1in;
+  font-size: 25px;
+}
+
+h2{
+  color: #FFFFFF;
+  font-weight: bolder;
+}
 
     </style>
   </head>
   <body>
-    <div id="message">
-      <h2>Welcome to Canvas Calendar</h2>
-      <p class="paragraph">As engineering students, managing assignments as well as other day to day tasks can be the most important aspect of achieving 
-        good grades in college. Our goal for creating Canvas Calendar is help students better understand when their assignments are due 
-        not just by day, but by week or month to help students better manage their time. Features such as automatically importing due 
-        dates from canvas to our assignment start date recommendation system are some of the many ways canvas calendar can help students!</p>
+
+  <header class="header">
+      <a style="color: white;" href="" class="logo">Welcome to Canvas Calendar</a>
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+      <ul class="menu">
+        <li><a href = 'https://canvas-calendar-4ea54.web.app/aboutpage.html'>About</a></li>
+        <li><a href='https://canvas-calendar-4ea54.web.app/login.html'>Login</a></li>
+      </ul>
+  </header>
+
+<div class="top-page">
+    <div class="message">
       <div class= "button_center">
          <button class="button" id="login_btn" style="vertical-align:middle"><span>Login </span></button>
          <button class="button" id="create_account_btn" style="vertical-align:middle"><span>Create Account</span></button>
       </div>
     </div>
-
+  </div>
     <script>
       // Your web app's Firebase configuration
       // For Firebase JS SDK v7.20.0 and later, measurementId is optional

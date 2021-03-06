@@ -1,27 +1,29 @@
 <!--
-    Title: ECE Senior Design Project Code - create account
-    Description: This file is used for the create account page of our website
+    Title: ECE Senior Design Project Code - About Page
+    Description: About page - will display info about our project and its authors
     Authors: Chris Varriano
              Will Van Luven
              Sean McNamara
              Arai Singleton
-    Date created: 10/4/20
+    Date created: 11/23/20
 -->
-
 
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Canvas Calendar - Create Account</title>
+    <title>Canvas Calendar Profile</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
     integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
 
-
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
@@ -36,71 +38,17 @@
     <script defer src="/__/firebase/init.js"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
-    <!-- TODO: Add SDKs for Firebase products that you want to use
+      <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
-<style>
+     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
 
-* {
+    <style>
+
+    * {
     padding:0;
     margin:0;
-}
-
-    
-  .button {
-  display: inline-block;
-  border-radius: 10px;
-  background-color: #00539f;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 28px;
-  padding: 20px;
-  width: 300px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 50px;
-}
-
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.button:hover span {
-  padding-right: 25px;
-}
-
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
-.button_center{
-  text-align: center;
-}  
-
-input {
-    width:4in;
-    height: 35px;
-    border-radius: 10px;
-    font-size: 20px;
-}
-
-#message h2 { color: rgb(0, 0, 0); font-weight: bold; font-size: 25px; text-align: center; margin: 16px 0 12px; margin-top: .5in;}
-#message p {color: rgb(0, 0, 0); font-weight: normal; font-size: 20px; text-align: center; margin: 16px 0 12px; margin-top: .25in;}
+    }
 
 a {
   color: #f4f4f4;
@@ -237,49 +185,111 @@ a {
   }
 }
 
-.regForm{
+.message{
   padding-top: 1in;
   text-align: center;
+  padding-left: 2in;
+  float: left;
 }
 
-.top-text{
-  padding-top: .50in;
+.link-account{
+  padding-top: 1in;
+  text-align: center;
+  padding-right: 2in;
+  float: right;
 }
 
-.register-container{
-  margin-top: 1in;
+h1{
+  margin-top: .25in;
 }
 
-</style>
+h2{
+  padding: .25in;
+}
+.button {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: #00539f;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 15px;
+  width: 400px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 50px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button_center{
+  text-align: center;
+}
+    </style>
   </head>
   <body>
 
     <header class="header">
-      <a style="color: white;" href="" class="logo">Create Your Account</a>
-      <input class="menu-btn" type="checkbox" id="menu-btn" />
-      <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-      <ul class="menu">
-        <li><a href="javascript:history.go(-1)">Back</a></li>
-        <li><a href='https://canvas-calendar-4ea54.web.app/aboutpage.html'>About</a></li>
-        <li><a href='https://canvas-calendar-4ea54.web.app/login.html'>Login</a></li>
-      </ul>
+        <a style="color: white;" href="" class="logo">Your Profile</a>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu">
+          <li><a href="javascript:history.go(-1)">Back</a></li>
+        </ul>
     </header>
 
-<div class="top-page">
-  <div class="regForm">
-        <h2 class="top-text">Please enter an email and password to create your account</h2> 
-        <form class="register-container" id="registerForm">
-          <p><input id="registerFirstName" type="text" placeholder="First Name" style="color: black;"></p>
-          <p><input id="registerLastName" type="text" placeholder="Last Name" style="color: black;"></p>
-          <p><input id="registerEmail" type="email" placeholder="Email" style="color: black;" ></p>
-          <p><input id="registerPassword" type="password" placeholder="Password" style="color: black;"></p>
-          <p><button class="button" id="registerbtn" style="vertical-align:middle"><span>Register </span></button></p>
-        </form>
-  </div>
-</div>
-      
+
+    <div class="message">
+        <h1>Profile</h1>
+        <h2>Picture:</h2>
+        <h2>Email:</h2>
+        <div id="user-message1"></div>
+        <h2>Account Type:</h2>
+        <div id="user-message2"></div>
+    </div>
+
+    <div class="link-account">
+      <h1>How To Link Your Canvas Account</h1>
+      <h2>Step 1: Retrieve your canvas access token</h2>
+      <p>1.1: In Global Navigation, click the Account, then click the Settings.</p>
+      <p>1.2: To manually add an access token, click the Add New Access Token button.</p>
+      <p>1.3: Enter a description for your access token in the Purpose field.</p> 
+      <p>1.4: You can also select an expiration date by clicking the Calendar icon. </p>
+      <p>1.5: To generate a token with no expiration, leave the Expires field empty.</p>
+      <p>1.6: To generate a new access token, click the Generate Token button.</p>
+      <h2>Step 2: Input your token below</h2>
+      <form class="login-container" id="loginForm">
+        <p><input id="accessToken" type="text" placeholder="Your access token" style="color: black;" ></p>
+      </form>
+      <button class="button" id="website_btn" style="vertical-align:middle"><span>Submit Acces Token</span></button>
+    </div>
+
     <script>
-      // Your web app's Firebase configuration
+       // Your web app's Firebase configuration
       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     var firebaseConfig = {
       apiKey: "AIzaSyAWlmVBGiPNaZ8q6wIW8qj4MHhRCdEnzfw",
@@ -291,15 +301,16 @@ a {
       appId: "1:967496995343:web:87bdb9b3571033cfce897a",
       measurementId: "G-2GBWCBTD5W"
     };
-    // Initialize Firebase
+    // Initialize Firebase/Canvas API
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
 
 
-    //sign up code ______________________________________________________
+    var accountType = sessionStorage.getItem("accountType");
+    document.getElementById("user-message2").innerHTML = accountType;
 
-      $(document).ready(function () {
-        $("#registerbtn").on("click", function () {
+    $(document).ready(function () {
+        $("#registerForm").on("submit", function (event) {
           event.preventDefault();
           var fname = $("#registerFirstName").val();
           var lname = $("#registerLastName").val();
@@ -314,19 +325,47 @@ a {
                 role: "user"
               })
               alert("Account successfuly created")
-              //window.location.href = 'https://canvas-calendar-4ea54.web.app/login.html'//put url here
             })
             .catch(function (err) {
               console.log(err);
               alert(err);
             });
         });
-       
+
+
+        $("#loginForm").on("submit", function (event) {
+          event.preventDefault();
+          var email = $("#loginEmail").val();
+          var password = $("#loginPassword").val();
+          firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(function (user) {
+              console.log(user);
+              location.reload();
+              alert("Welcome Back!")
+            })
+            .catch(function (err) {
+              console.log(err);
+              alert(err);
+            });
+        });
+
+        $("#logoutbtn").on("click", function () {
+          firebase.auth().signOut().then(function () {
+            alert("Goodbye!");
+            location.reload();
+          })
+          .catch(function (error) {
+            console.log(err);
+            alert(err);
+          });
+        });
+
         firebase.auth().onAuthStateChanged(function (user) {
           if (user) {
             console.log(user);
             var email = user.email;
-            document.getElementById("user-message").innerHTML = "Logged in as " + user.email;
+            //var firstName = user.firstname
+            document.getElementById("user-message1").innerHTML = user.email;
             //alert("Welcome " + email);
           } else {
             // No user is signed in.
@@ -334,8 +373,8 @@ a {
             //alert("Currently logged out");
           }
         });
-
       });
+    
     </script>
   </body>
 </html>

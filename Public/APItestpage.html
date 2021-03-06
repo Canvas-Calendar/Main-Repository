@@ -1,0 +1,137 @@
+<!--
+    Title: ECE Senior Design Project Code - API test page
+    Description: This file is used to test the Canvas API
+    Authors: Chris Varriano
+             Will Van Luven
+             Sean McNamara
+             Arai Singleton
+    Date created: 12/7/20
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>API Test</title>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        var access_token="25~LDtz4FPmgvVumQULtrkjOUrdQvKnniad2r56u33mCOqZHNjnnB2wIkScp8c56F8E";
+    </script>
+    <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script>
+    
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <style>
+
+  .button {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: #00539f;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 300px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 50px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button_center{
+  text-align: center;
+}
+    </style>
+  </head>
+  <body>
+    <h1>Canvas API Test Page</h1> 
+    <div class= "button_center">
+        <button class="button" id="courses_button" style="vertical-align:middle"><span>Get Courses </span></button>
+        <button class="button" id="assignments_button" style="vertical-align:middle"><span>Get Assignments</span></button>
+    </div>
+    <div id="results" style="width:1200px;margin: 0 auto;display: block;">
+        <table class="blueTable">
+            <thead>
+                <tr><th>course_id</th><th>start_at</th><th>name</th><th>course_code</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="results" style="width:1200px;margin: 0 auto;display: block;">
+        <table class="blueTable">
+            <thead>
+                <tr><th>assignment_id</th><th>due_at</th><th>grading_type</th><th>name</th><th>html_url</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+             $("#courses_button").on("click", function() {
+                 var courses = udcanvas.getCourses();
+                 console.table(courses, ["course_id", "start_at", "name", "course_code"]);
+                 $.each(courses, function(index, course) {
+                     var course_id   = course['course_id'];
+                     var start_at    = course['start_at'];
+                     var name        = course['name'];
+                     var course_code = course['course_code'];
+                     $("tbody").append(`<tr><td>${course_id}</td> <td>${start_at}</td> <td>${name}</td> <td>${course_code}</td></tr>`)
+                 });
+             });
+             $("#assignments_button").on("click", function() {
+                 var assignments = udcanvas.getAssignments(course_id = 1375937);
+                 console.table(assignments, ['assignment_id', 'due_at', 'grading_type', 'name', 'html_url']);
+                 $.each(assignments, function(index, assignment) {
+                     var assignment_id   = assignment['assignment_id'];
+                     var due_at          = assignment['due_at'];
+                     var grading_type    = assignment['grading_type'];
+                     var name            = assignment['name'];
+                     var html_url        = assignment['html_url'];
+                     $("tbody").append(`<tr><td>${assignment_id}</td> <td>${due_at}</td> <td>${grading_type}</td> <td>${name}</td> <td>${html_url}</td></tr>`)
+                 });
+             });
+         });
+    </script>
+  </body>
+</html>
