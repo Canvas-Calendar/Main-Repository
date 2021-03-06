@@ -11,14 +11,17 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!--Canvas API-->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Canvas Calendar</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
-    
+
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <script src="UDCanvasAPI.js"></script>
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
@@ -114,7 +117,7 @@
         <div id="test-input"></div>
         <form class="printCanvasCourse" id="printCC">
           <p><input id="apiToken"  placeholder="Enter API Token" style="color: black;" ></p>
-          <p><button class="button" id="userinputbtn" style="vertical-align:middle" type="button"><span>Submit </span></button></p>
+          <p><button class="button" id="userinputbtn" style="vertical-align:middle" type="button"><span>Test Canvas API </span></button></p>
         </form>
      </div>
      <div>
@@ -143,13 +146,9 @@
   
     $(document).ready(function () {
       $("#userinputbtn").on("click", function () {
-        //read text file:
-        fetch('\coursesFound.html')
-          .then(response => response.text())
-          .then(text => console.log(text))
-          .then(text => alert(text))
-  // outputs the content of the text file, hopefuly
-        
+        var courses = udcanvas.getCourses();
+        console.table(courses, ['course_id', 'start_at', 'name', 'course_code']);
+        document.getElementById("test-input").innerHTML = "Your Courses :" + courses;
       })
     })
       //Login code ______________________________________________________
@@ -169,14 +168,11 @@
           });
         }
         });
-      
-      function signOut(){
-          gapi.auth2.getAuthInstance().signOut().then(function() {
-          console.log('User signed out')
-          window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
-          })
-      }
-      
+    
+      /*
+      Code to display user when logged in - neither seem to be working 
+
+
       gapi.auth2.getBasicProfile(function (googleUser){
         if(googleUser){
           console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
@@ -186,6 +182,7 @@
           console.log("No gmail user")
         }
       })
+      
 
       firebase.auth().onAuthStateChanged(function (user) {
           if (user) {
@@ -196,7 +193,7 @@
             console.log("No user");
           }
         });
-
+        */
 
       function signOut() { //Sign Out Function
       gapi.auth2.getAuthInstance().signOut().then(function() {
@@ -210,7 +207,6 @@
         gapi.auth2.init();
       });
       }
-
 
 
     </script>

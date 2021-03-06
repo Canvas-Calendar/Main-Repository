@@ -1,0 +1,291 @@
+<!--
+    Title: ECE Senior Design Project Code - About Page
+    Description: About page - will display info about our project and its authors
+    Authors: Chris Varriano
+             Will Van Luven
+             Sean McNamara
+             Arai Singleton
+    Date created: 11/23/20
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About Canvas Calendar</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <style>
+
+a {
+  color: rgb(255, 255, 255);
+}
+
+    * {
+    padding:0;
+    margin:0;
+    }
+
+
+/* header */
+
+.header {
+  background-color: #00539f;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #00539f;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+}
+
+.message{
+  padding-top: 1in;
+  text-align: center;
+  color: black;
+}
+
+h2 {
+  padding: .25in;
+}
+
+.tab{
+font-size: 20px;
+}
+
+.paragraph{
+    margin-right: 3in;
+    margin-left: 3in;
+}
+
+h3{
+  white-space: pre;
+  font-size: 20px;
+}
+
+h4{
+  white-space: pre;
+  font-size: 20px;
+  color: black;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: #00539f;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 600px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 50px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button_center{
+  text-align: center;
+}
+
+.emailLink{
+  color: black;
+}
+    </style>
+  </head>
+  <body>
+
+    <header class="header">
+        <a style="color: white;" href="" class="logo">About Canvas Calendar</a>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu">
+          <li><a href="javascript:history.go(-1)">Back</a></li>
+        </ul>
+    </header>
+
+
+    <div class="message">
+        <h1>Canvas Calendar</h1>
+        <h2>Created By</h2>
+        <h3>Arai Singleton               Chris Varriano                Sean McNamara                Will Van Luven</h3>
+        <h4><a style="color: black;" href="mailto:akahilis@udel.edu">akahilis@udel.edu</a>       <a style="color: black;" href="mailto:cvarrian@udel.edu">cvarrian@udel.edu</a>       <a style="color: black;" href="mailto:skmcnama@udel.edu">skmcnama@udel.edu</a>       <a style="color: black;" href="mailto:wvluven@udel.edu">wvluven@udel.edu</a></h4>
+        <h2>Our Goal</h2>
+        <p class="paragraph">Canvas Calendar is a website designed to be for college students, currently focusing on students that utilize Canvas through their college 
+          or university. I am sure we all know how critically important it is for college students to manage their time balancing academics, participating in campus life, 
+          and possibly working. Maybe not as much hanging out with friends as before due to our current situation. It can be difficult for students to manage all of their tasks and activities. 
+          Our team’s goal is to provide one location that makes it easier. We aim to develop a website that has the ability to import both academic tasks as well as personal calendar 
+          appointments for better overall management. In addition, our goal is to have the website also be able to make recommendations on when homework assignments and the-like should be worked on. 
+          These recommendations will be based off of the user’s preferences, for example if a user refuses to do homework past 10:00 PM our website will recommend a time accounting for that pre-defined boundary. 
+          Assignment characteristics can also be used, like tagging an assignment that is quick and easy to complete or another like studying for an upcoming exam that is prioritized higher. </p>
+        <button class="button" id="website_btn" style="vertical-align:middle"><span>Click Here To Go To Our Project Website</span></button>
+
+    </div>
+
+    <script>
+      document.getElementById("website_btn").onclick=function(){
+        window.location.href = 'https://sites.google.com/udel.edu/canvascalendar/home?authuser=1'//put url here
+      }
+    </script>
+  </body>
+</html>
