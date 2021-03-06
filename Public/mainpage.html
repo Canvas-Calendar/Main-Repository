@@ -41,8 +41,25 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.js'></script>
-    <script src='https://raw.githubusercontent.com/sydcanem/bootstrap-contextmenu/master/bootstrap-contextmenu.js'></script>
-    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script> 
+
+
+    <!-- Be Very Careful When Sourcing Raw Files From Github!
+         Even though it is the raw file, the content-type is sent as "text/plain" and not "application/javascript" so sourcing from github will load a text file and not javascript.
+         However, you can paste the "raw.github" link at "https://raw.githack.com/" and that website will host the raw file for you and send the file with the correct type.
+
+         Example : To do a quick check to see a file's content-type in web transit, run a "curl -I {}" request
+
+         $ curl -sI "https://raw.githubusercontent.com/sydcanem/bootstrap-contextmenu/master/bootstrap-contextmenu.js" | grep -i "content-type:"
+         response : content-type: text/plain; charset=utf-8
+
+         $curl -sI "https://rawcdn.githack.com/sydcanem/bootstrap-contextmenu/ac9f6a035b97dbe8958f8f2925fe4bdaa8a192c2/bootstrap-contextmenu.js" | grep -i "content-type:"
+         response : content-type: application/javascript; charset=utf-8 -->
+
+    <!-- <script src='https://raw.githubusercontent.com/sydcanem/bootstrap-contextmenu/master/bootstrap-contextmenu.js'></script> -->
+    <script src='https://rawcdn.githack.com/sydcanem/bootstrap-contextmenu/ac9f6a035b97dbe8958f8f2925fe4bdaa8a192c2/bootstrap-contextmenu.js'></script>
+
+
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
 
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
