@@ -1,0 +1,82 @@
+<!--
+    Title: ECE Senior Design Project Code - blank page
+    Description: This file is used for copying and pasting purposes only when we are creating a new page and want
+    to start from a blank page
+    Authors: Chris Varriano
+             Will Van Luven
+             Sean McNamara
+             Arai Singleton
+    Date created: 9/28/20
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.css' rel='stylesheet' />
+  
+  
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel='stylesheet' /> 
+  
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.js'></script>
+
+  
+  <script src='https://raw.githubusercontent.com/sydcanem/bootstrap-contextmenu/master/bootstrap-contextmenu.js'></script>
+  
+ <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script> 
+  
+</head>
+<body>
+
+	<div id='calendar'></div>
+
+<!-- Your custom menu with dropdown-menu as default styling -->
+<div id="context-menu">
+  <ul class="dropdown-menu" role="menu">
+    <li><a tabindex="-1">Action</a></li>
+     <li><a tabindex="-1">Another action</a></li>
+     <li><a tabindex="-1">Something else here</a></li>
+     <li class="divider"></li>
+     <li><a tabindex="-1">Separated link</a></li>
+  </ul>
+</div>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <style>
+    
+    </style>
+  </head>
+  <body>
+    <h4>Upcoming Today</h4> 
+<script>
+  //import firebase from "firebase/app";
+  //import "firebase/database";
+
+  function getReference() {
+  // [START rtdb_get_reference]
+  var database = firebase.database();
+  // [END rtdb_get_reference]
+}
+  var testReadAssignment = database.ref('users/' + '1xvJDpjdRnQPY7f5fzkDMoWsBUY2' + '/courses'+ '0');
+  testReadAssignment.on('value', (snapshot) => {
+  const data = snapshot.val();
+  updateStarCount(postElement, data);
+  });
+  </script>
+  </body>
+</html>
