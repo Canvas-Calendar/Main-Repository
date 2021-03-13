@@ -20,6 +20,9 @@
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
 
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
 
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
@@ -251,6 +254,21 @@ a {
   }
 }
 
+/*Button*/
+.refresh-btn {
+  background-color: #00539f;
+  border: none;
+  color: white;
+  padding: 15px 15px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.refresh-btn:hover {
+  color: rgb(30, 192, 30);
+}
+
     </style>
   </head>
   <body>
@@ -262,6 +280,7 @@ a {
         <li><a href='https://canvas-calendar-4ea54.web.app/aboutpage.html'>About</a></li>
         <li><a href='https://canvas-calendar-4ea54.web.app/profilepage.html'>Profile</a></li>
         <li><a href="#contact" onclick="logoutFunction()">Logout</a></li>
+        <li><button class="refresh-btn" id="refresh-btn"><i class="fa fa-refresh"></i></button></li>
     </ul>
 </header>
 
@@ -302,10 +321,10 @@ a {
       <h4>Current Courses</h4> 
      </div>
      <ul class="list-group list-group-flush">
-      <li class="list-group-item"><a href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li>
-      <li class="list-group-item"><a href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li>
-      <li class="list-group-item"><a href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li>
-      <li class="list-group-item"><a href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li>
+      <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li>
+      <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li>
+      <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li>
+      <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li>
       <li class="list-group-item"></li>
     </ul>
      </div>
