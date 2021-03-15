@@ -552,6 +552,16 @@ $('#calendar').on('change', ':checkbox', function(){
   
 });
 
+//Refresh Button ________________________________________
+$("#refresh-btn").on("click", function () {
+  firebase.auth().onAuthStateChanged(function (user) {
+  if (user) {
+    var canvasAccessToken = users.
+    alert(canvasAccessToken);
+  }
+});
+});
+
     </script>
   </body>
 </html>

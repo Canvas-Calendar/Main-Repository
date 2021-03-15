@@ -40,7 +40,7 @@
     <style>
 
 a {
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
     * {
@@ -257,6 +257,14 @@ h4{
 .emailLink{
   color: black;
 }
+.topMessage{
+  font-size: 40px;
+  padding: 20px;
+  font-weight: bold;
+}
+a:link {
+  color: rgb(0, 0, 0); 
+}
     </style>
   </head>
 
@@ -268,43 +276,85 @@ h4{
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <ul class="menu">
-          <li><a href="javascript:history.go(-1)">Back</a></li>
+          <li><a style="color: white;" href="javascript:history.go(-1)">Back</a></li>
         </ul>
     </header>
 
 
     <div class="message">
-        <h1>Assignments for: ELEG 491</h1>
-        <div class= "button_center">
-          <button class="button" id="assignments_button" style="vertical-align:middle"><span>Get Assignments</span></button>
-      </div>
-        <div id="results" style="width:1200px;margin: 0 auto;display: block;">
+        <div class="topMessage" id="topMessage"></div>
+        <div id="results" style="width:1200px;margin: 0 auto; display: none;">
           <table class="blueTable">
               <thead>
-                  <tr><th>assignment_id</th><th>due_at</th><th>grading_type</th><th>name</th><th>html_url</th></tr>
+                  <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th><th>Time to Finish</th></tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                <tr>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    <select id="timeForm" name="timeToFinish" required>
+                      <option value=""  selected="selected" ></option>
+                      <option value="oneHour"  >1 Hour</option>
+                      <option value="twoHours"  >2 Hours</option>
+                      <option value="threeHours"  >3 Hours</option>
+                      <option value="fourHours"  >4 Hours</option>
+                      <option value="fiveHours"  >5 Hours</option>
+                      <option value="sixHours"  >6 Hours</option>
+                      <option value="sevenHours"  >7 Hours</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
           </table>
       </div>
+      <div id="timeForm" style="display: none;">
+      <select id="timeForm" name="timeToFinish" required>
+        <option value=""  selected="selected" ></option>
+        <option value="oneHour"  >1 Hour</option>
+        <option value="twoHours"  >2 Hours</option>
+        <option value="threeHours"  >3 Hours</option>
+        <option value="fourHours"  >4 Hours</option>
+        <option value="fiveHours"  >5 Hours</option>
+        <option value="sixHours"  >6 Hours</option>
+        <option value="sevenHours"  >7 Hours</option>
+      </select>
     </div>
+    </div>
+      
 
     <script>
-      
-      $(document).ready(function () {
-             $("#assignments_button").on("click", function() {
-                 var assignments = udcanvas.getAssignments(course_id = 1375937);
-                 console.table(assignments, ['assignment_id', 'due_at', 'grading_type', 'name', 'html_url']);
-                 $.each(assignments, function(index, assignment) {
-                     var assignment_id   = assignment['assignment_id'];
-                     var due_at          = assignment['due_at'];
-                     var grading_type    = assignment['grading_type'];
-                     var name            = assignment['name'];
-                     var html_url        = assignment['html_url'];
-                     $("tbody").append(`<tr><td>${assignment_id}</td> <td>${due_at}</td> <td>${grading_type}</td> <td>${name}</td> <td>${html_url}</td></tr>`)
-                 });
-             });
-            });
-
+    document.getElementById("topMessage").innerHTML = "Loading Assignment Information...";
+    setTimeout(function() { showCourses(); }, 5000);
+    function showCourses(){
+      document.getElementById("topMessage").innerHTML = "Assignments for: ELEG 491";
+      document.getElementById("results").style.display="block"
+      var dropDownMenu = document.getElementById("timeForm").style.display="block";
+      var assignments = udcanvas.getAssignments(course_id = 1565469);
+      console.table(assignments, ['assignment_id', 'due_at', 'grading_type', 'name', 'html_url']);
+      $.each(assignments, function(index, assignment) {
+        var assignment_id   = assignment['assignment_id'];
+        var due_at          = assignment['due_at'];
+        var grading_type    = assignment['grading_type'];
+        var name            = assignment['name'];
+        var html_url        = assignment['html_url'];
+        var newLink = html_url.link(html_url);
+        $("tbody").append(`<tr><td>${assignment_id}</td> <td>${due_at}</td> <td>${grading_type}</td> <td>${name}</td> <td>${newLink}</td><td>${dropDownMenu}</td></tr>`)
+    });
+  }
     </script>
   </body>
 </html>
