@@ -282,6 +282,24 @@
             width: 150px;
             height: 150px;
         }
+
+        .message:after {
+            content: "";
+            background-color: #000;
+            position: absolute;
+            width: 2px;
+            height: 700px;
+            top: 100px;
+            padding-top: 50px;
+            left: 37.5%;
+            display: block;
+        }
+
+        .user-message3{
+            content: "\2713";
+            color: chartreuse;
+        }
+
         </style>
     </head>
     <body>
@@ -298,7 +316,6 @@
 
         <div class="message">
             <h1>Profile</h1>
-            <h2>Picture:</h2>
             <image id="profileImage" src="blankprofile.jpg"/>
             <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
             <h2>Email:</h2>
@@ -434,6 +451,7 @@
                                  console.log('UDCanvas courses saved to firebase database');
                                  $(spinner).buttonLoader('stop')
                                  $('#website_btn').html('finished...')
+                                 $('#website_btn').html('Account Linked');
                              });
                          };
                          window.setTimeout(upload_courses, DELAY); // 5 seconds
