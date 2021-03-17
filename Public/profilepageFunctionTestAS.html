@@ -399,10 +399,10 @@
                          };
                          window.setTimeout(upload_courses, DELAY); // 5 seconds
                          //AS ADDED CODE
-                         var getAssignment0 = firebase.database().ref('users/' + userId + '/courses/0/assignments/0/name');
+                         var getAssignment0 = firebase.database().ref('users/' + '1xvJDpjdRnQPY7f5fzkDMoWsBUY2/courses/0/assignments/0');
                          getAssignment0.on('name', (snapshot) => {
                              const data = snapshot.val();
-                             
+                                                          
                          })
                          //AS ADDED CODE END
 
