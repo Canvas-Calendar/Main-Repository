@@ -1,6 +1,10 @@
 This file is for notes/updates only only 
 If you update any code, please list the change below with the date
 
+3/1/21
+
+html += ' <label><input type="checkbox" ' + ((event.strikeout) ? 'checked' : '') + '> <span class="fc-time">' + event.start.format('ha') + '</span> ';
+
 2/22/21
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
