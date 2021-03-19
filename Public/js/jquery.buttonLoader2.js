@@ -9,24 +9,22 @@
     $.fn.buttonLoader = function (action) {
         var self = $(this);
         if (action == 'start') {
-            if ($(self).attr("disabled") == "disabled") {
-                return false;
-            }
+            /* Disable <button> element  */
             $('.has-spinner').attr("disabled", true);
-            $(self).attr('data-btn-text', $(self).text());
+
+            /* Save innerHTML as embedded element attribute */
+            $(self).attr('data-btn-html', $(self).html());
+
+            /* Insert spinner element and set to active */
             var text = 'syncing...';
-            console.log($(self).attr('data-load-text'));
-            if($(self).attr('data-load-text') != undefined && $(self).attr('data-load-text') != ""){
-                text = $(self).attr('data-load-text');
-            }
             $(self).html('<span class="spinner"><i class="fa fa-spinner fa-spin" title="button-loader"></i></span> '+text);
             $(self).addClass('active');
         }
         if (action == 'stop') {
-            // $('.has-spinner').html('<button class="refresh-btn has-spinner" id="refresh-btn"><i class="fa fa-refresh"></i></button>');
-            // $(self).html($(self).attr('data-btn-text'));
-            // $(self).removeClass('active');
-            // $('.has-spinner').attr("disabled", false);
+            $(self).html($(self).attr('data-btn-html'));
+            $(self).removeClass('active');
+            $('.has-spinner').attr("disabled", false);
+            $('.has-spinner').removeAttr("data-btn-html");
         }
     }
 })(jQuery);
