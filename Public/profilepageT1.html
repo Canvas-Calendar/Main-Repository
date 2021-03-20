@@ -1,0 +1,490 @@
+<!-- Title: ECE Senior Design Project Code - About Page
+     Description: About page - will display info about our project and its authors
+     Authors: Chris Varriano
+     Will Van Luven
+     Sean McNamara
+     Arai Singleton
+     Date created: 11/23/20 -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Canvas Calendar Profile</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+        <!-- CSS Styles for Spinner Loader -->
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" crossorigin="anonymous">
+        <link href="/css/buttonLoader.css" rel="stylesheet" type="text/css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
+
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+        <!-- update the version number as needed -->
+        <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
+        <!-- include only the Firebase features as you need -->
+        <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-database.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-messaging.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-storage.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-analytics.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-remote-config.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
+        <!-- initialize the SDK after all desired features are loaded -->
+        <script defer src="/__/firebase/init.js"></script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
+
+        <!-- Button Loader Plugin -->
+        <script src="/js/jquery.buttonLoader.js"></script>
+
+        <!-- UDCanvasAPI :) -->
+        <script src="/js/UDCanvasAPI.js"></script>
+        <!-- <script src="https://raw.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script> -->
+        <!-- <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script> -->
+
+        <style>
+
+         * {
+             padding:0;
+             margin:0;
+         }
+
+         a {
+             color: #fffbfb;
+         }
+
+         /* header */
+
+         .header {
+             background-color: #00539f;
+             box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+             position: fixed;
+             width: 100%;
+             z-index: 3;
+         }
+
+         .header ul {
+             margin: 0;
+             padding: 0;
+             list-style: none;
+             overflow: hidden;
+             background-color: #00539f;
+         }
+
+         .header li a {
+             display: block;
+             padding: 20px 20px;
+             border-right: 1px solid #f4f4f4;
+             text-decoration: none;
+         }
+
+         .header li a:hover,
+         .header .menu-btn:hover {
+             background-color: #f4f4f4;
+         }
+
+         .header .logo {
+             display: block;
+             float: left;
+             font-size: 2em;
+             padding: 10px 20px;
+             text-decoration: none;
+         }
+
+         /* menu */
+
+         .header .menu {
+             clear: both;
+             max-height: 0;
+             transition: max-height .2s ease-out;
+         }
+
+         /* menu icon */
+
+         .header .menu-icon {
+             cursor: pointer;
+             display: inline-block;
+             float: right;
+             padding: 28px 20px;
+             position: relative;
+             user-select: none;
+         }
+
+         .header .menu-icon .navicon {
+             background: #333;
+             display: block;
+             height: 2px;
+             position: relative;
+             transition: background .2s ease-out;
+             width: 18px;
+         }
+
+         .header .menu-icon .navicon:before,
+         .header .menu-icon .navicon:after {
+             background: #333;
+             content: '';
+             display: block;
+             height: 100%;
+             position: absolute;
+             transition: all .2s ease-out;
+             width: 100%;
+         }
+
+         .header .menu-icon .navicon:before {
+             top: 5px;
+         }
+
+         .header .menu-icon .navicon:after {
+             top: -5px;
+         }
+
+         /* menu btn */
+
+         .header .menu-btn {
+             display: none;
+         }
+
+         .header .menu-btn:checked ~ .menu {
+             max-height: 240px;
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon {
+             background: transparent;
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon:before {
+             transform: rotate(-45deg);
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon:after {
+             transform: rotate(45deg);
+         }
+
+         .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+         .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+             top: 0;
+         }
+
+         /* 48em = 768px */
+
+         @media (min-width: 48em) {
+             .header li {
+                 float: left;
+             }
+             .header li a {
+                 padding: 20px 30px;
+             }
+             .header .menu {
+                 clear: none;
+                 float: right;
+                 max-height: none;
+             }
+             .header .menu-icon {
+                 display: none;
+             }
+         }
+
+         .message{
+             padding-top: 1in;
+             text-align: center;
+             padding-left: 2in;
+             float: left;
+         }
+
+         .link-account{
+             padding-top: 1in;
+             text-align: center;
+             padding-right: 2in;
+             float: right;
+         }
+
+         h1{
+             margin-top: .25in;
+         }
+
+         h2{
+             padding: .25in;
+         }
+         .button {
+             display: inline-block;
+             border-radius: 10px;
+             background-color: #00539f;
+             border: none;
+             color: #FFFFFF;
+             text-align: center;
+             font-size: 28px;
+             padding: 15px;
+             width: 400px;
+             transition: all 0.5s;
+             cursor: pointer;
+             margin: 50px;
+         }
+
+         .button span {
+             cursor: pointer;
+             display: inline-block;
+             position: relative;
+             transition: 0.5s;
+         }
+
+         .button span:after {
+             content: '\00bb';
+             position: absolute;
+             opacity: 0;
+             top: 0;
+             right: -20px;
+             transition: 0.5s;
+         }
+
+         .button:hover span {
+             padding-right: 25px;
+         }
+
+         .button:hover span:after {
+             opacity: 1;
+             right: 0;
+         }
+
+         .button_center{
+             text-align: center;
+         }
+         /*Profile Upload*/
+         #imageUpload
+        {
+            display: none;
+        }
+
+        #profileImage
+        {
+            cursor: pointer;
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        #profile-container img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .message:after {
+            content: "";
+            background-color: #000;
+            position: absolute;
+            width: 2px;
+            height: 700px;
+            top: 100px;
+            padding-top: 50px;
+            left: 37.5%;
+            display: block;
+        }
+
+        .user-message3{
+            content: "\2713";
+            color: chartreuse;
+        }
+
+        </style>
+    </head>
+    <body>
+
+        <header class="header">
+            <a style="color: white;" href="" class="logo">Your Profile</a>
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+            <ul class="menu">
+                <li><a href="javascript:history.go(-1)">Back</a></li>
+            </ul>
+        </header>
+
+
+        <div class="message">
+            <h1>Profile</h1>
+            <image id="profileImage" src="blankprofile.jpg"/>
+            <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
+            <h2>Email:</h2>
+            <div id="user-message1"></div>
+            <h2>Account Type:</h2>
+            <div id="user-message2"></div>
+        </div>
+
+        <div class="link-account">
+            <h1>How To Link Your Canvas Account</h1>
+            <h2>Step 1: Retrieve your canvas access token</h2>
+            <p>1.1: In Global Navigation, click the Account, then click the Settings.</p>
+            <p>1.2: To manually add an access token, click the Add New Access Token button.</p>
+            <p>1.3: Enter a description for your access token in the Purpose field.</p> 
+            <p>1.4: You can also select an expiration date by clicking the Calendar icon. </p>
+            <p>1.5: To generate a token with no expiration, leave the Expires field empty.</p>
+            <p>1.6: To generate a new access token, click the Generate Token button.</p>
+            <h2>Step 2: Input your token below</h2>
+            <form class="login-container" id="loginForm">
+                <p><input id="accessToken" type="text" placeholder="Your access token" style="color: black;" ></p>
+            </form>
+            <button class="button has-spinner" id="website_btn" style="vertical-align:middle"><span>Submit Acces Token</span></button>
+        </div>
+        <!--PreferencesTEST-->
+        <div>
+        
+        </div>
+        <!--PreferncesTEST END-->
+
+        <script>
+         // Your web app's Firebase configuration
+         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+         var firebaseConfig = {
+             apiKey: "AIzaSyAWlmVBGiPNaZ8q6wIW8qj4MHhRCdEnzfw",
+             authDomain: "canvas-calendar-4ea54.firebaseapp.com",
+             databaseURL: "https://canvas-calendar-4ea54.firebaseio.com",
+             projectId: "canvas-calendar-4ea54",
+             storageBucket: "canvas-calendar-4ea54.appspot.com",
+             messagingSenderId: "967496995343",
+             appId: "1:967496995343:web:87bdb9b3571033cfce897a",
+             measurementId: "G-2GBWCBTD5W"
+         };
+         // Initialize Firebase/Canvas API
+         firebase.initializeApp(firebaseConfig);
+         firebase.analytics();
+
+         //Profile Image_____________________________________
+         $("#profileImage").click(function(e) {
+            $("#imageUpload").click();
+         });
+
+        function fasterPreview( uploader ) {
+            if ( uploader.files && uploader.files[0] ){
+                $('#profileImage').attr('src', 
+                    window.URL.createObjectURL(uploader.files[0]) );
+            }
+        }
+        $("#imageUpload").change(function(){
+            fasterPreview( this );
+        });
+        //Login ___________________________________________________________
+         var accountType = sessionStorage.getItem("accountType");
+         document.getElementById("user-message2").innerHTML = accountType;
+
+         $(document).ready(function () {
+             $("#registerForm").on("submit", function (event) {
+                 event.preventDefault();
+                 var fname = $("#registerFirstName").val();
+                 var lname = $("#registerLastName").val();
+                 var email = $("#registerEmail").val();
+                 var password = $("#registerPassword").val();
+                 firebase.auth().createUserWithEmailAndPassword(email, password)
+                         .then(function (user) {
+                             firebase.database().ref().child("users/" + user.user.uid).set({
+                                 firstname: fname,
+                                 lastname: lname,
+                                 email: user.user.email,
+                                 role: "user"
+                             })
+                             alert("Account successfuly created")
+                         })
+                         .catch(function (err) {
+                             console.log(err);
+                             alert(err);
+                         });
+             });
+
+
+             $("#loginForm").on("submit", function (event) {
+                 event.preventDefault();
+                 var email = $("#loginEmail").val();
+                 var password = $("#loginPassword").val();
+                 firebase.auth().signInWithEmailAndPassword(email, password)
+                         .then(function (user) {
+                             console.log(user);
+                             location.reload();
+                             alert("Welcome Back!")
+                         })
+                         .catch(function (err) {
+                             console.log(err);
+                             alert(err);
+                         });
+             });
+
+             $("#logoutbtn").on("click", function () {
+                 firebase.auth().signOut().then(function () {
+                     alert("Goodbye!");
+                     location.reload();
+                 })
+                         .catch(function (error) {
+                             console.log(err);
+                             alert(err);
+                         });
+             });
+
+             /* delay for spinner and udcanvas.getCourses() */
+             var DELAY = 5000;
+             $("#website_btn").on("click", function(e) {
+                 e.preventDefault();
+                 var spinner  = $(this);
+                 var api_key  = $("#accessToken").val();
+                 var udcanvas = new UDCanvasAPI(api_key);
+                 var userId   = firebase.auth().currentUser.uid;
+                 var database = firebase.database();
+
+                 $(spinner).buttonLoader('start')
+                 database.ref('users/' + userId).update({
+                     api_key: api_key
+                 }).then(function() {
+                     console.log('api_key saved to firebase database');
+
+                     $(function(){
+                         function upload_courses(){
+                             var courses = udcanvas.getCourses();
+                             database.ref('users/' + userId).update({
+                                 courses: courses
+                             }).then(function() {
+                                 console.log('UDCanvas courses saved to firebase database');
+                                 $(spinner).buttonLoader('stop')
+                                 $('#website_btn').html('finished...')
+                                 $('#website_btn').html('Account Linked');
+                             });
+                         };
+                         window.setTimeout(upload_courses, DELAY); // 5 seconds
+                     });
+
+                 });
+                 /*
+                    database.ref('users/' + userId).set({
+                    email: "katayama@udel.xn--edu-4s5a7848w",
+                    role: "user"
+                    });
+                  */
+             });
+
+             firebase.auth().onAuthStateChanged(function (user) {
+                 if (user) {
+                     console.log(user);
+                     var email = user.email;
+                     //var firstName = user.firstname
+                     document.getElementById("user-message1").innerHTML = user.email;
+                     //alert("Welcome " + email);
+                 } else {
+                     // No user is signed in.
+                     console.log("No user");
+                     //alert("Currently logged out");
+                 }
+             });
+         });
+        </script>
+    </body>
+</html>
