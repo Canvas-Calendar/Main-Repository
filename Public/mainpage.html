@@ -84,8 +84,8 @@
         <!-- + adding locally sourced UDCanvasAPI here... -->
         <script src="/js/jquery.buttonLoader2.js"></script>
         <script src="/js/UDCanvasAPI.js"></script>
-        <script src="/js/parseCourses.js"></script>
-        <script src="/js/getTerm.js"></script>
+        <!-- <script src="/js/parseAllCourses.js"></script> -->
+        <!-- <script src="/js/getTerm.js"></script> -->
         <script src="/js/testFile.js"></script>
 
     </head>
@@ -130,6 +130,16 @@
                         <!-- <li class="list-group-item">CPEG 496 - Mini Practical</li> -->
                         <!-- <li class="list-group-item">CPEG 419 - HW 4a</li> -->
                         <!-- <li class="list-group-item">CPEG 498 - Final Presentation</li> -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="courses-page" style="float: left;">
+                <div class="card" style="width: 302px;"> 
+                    <div class="card-header" style="width: 300px;">
+                        <h4>All Courses</h4> 
+                    </div>
+                    <ul id="all_courses" class="list-group list-group-flush">
                     </ul>
                 </div>
             </div>
@@ -252,9 +262,10 @@
                          while(!user_data.hasOwnProperty("api_key")) // define the condition as you like
                              await new Promise(resolve => setTimeout(resolve, 1000));
                          console.log("variable is defined");
-                         testFunction();
+                         /* testFunction(); */
                          console.log(getTerm(Date.now()));
-                         parseCourses(user_data);
+                         parseAllCourses(user_data);
+                         parseActiveCourses(user_data);
                      })();
                  } else {
                      // No user is signed in.
@@ -391,6 +402,117 @@
              event.strikeout = $(this).is(':checked');
              $("#calendar").fullCalendar('renderEvent', event, true);
          });
+
+
+
+
+
+
+
+
+
+         function getTerm(datetime) {
+             /* Determine the academic term using the courses datetime.
+              *
+              *  Args:
+              *      Required - datetime (str) - the datetime string when the course started
+              *  Returns:
+              *      JSON Object - {term: "21F", year: 2021}
+              */
+             var d = new Date(datetime);
+             var y = d.getFullYear();
+             var yy = JSON.stringify(d.getFullYear()).slice(2,4);
+             var term;
+
+             if ((d.getMonth() > 0) && (d.getMonth() < 6)) {
+                 term = yy+"S";
+             } else {
+                 term = yy+"F";
+             }
+             var data = {
+                 term: term,
+                 year: y,
+                 month: d.getMonth(),
+                 day: d.getDay()
+             };
+             return data;
+         }
+
+         function parseAllCourses(user_data) {
+             var all_courses = $("#all_courses");
+
+             $.each(user_data["courses"], function (i, e) {
+                 var course_term = getTerm(e["start_at"]);
+                 var course_name = e["name"];
+                 var course_url = "https://udel.instructure.com/courses/"+e["course_id"];
+
+                 console.log(course_name);
+                 var li = document.createElement('li');
+                 var a = document.createElement('a');
+                 li.setAttribute("class", "list-group-item");
+                 a.setAttribute("style", "color: rgb(0, 0, 0);");
+                 a.setAttribute("href", course_url);
+                 a.innerHTML = course_name;
+
+                 li.appendChild(a);
+                 all_courses.append(li);
+             });
+         }
+
+         function parseActiveCourses(user_data) {
+             var active_courses = $("#active_courses");
+             var today = getTerm(Date.now());
+
+             $.each(user_data["courses"], function (i, course) {
+                 var course_term = getTerm(course["start_at"]);
+                 var course_name = course["name"];
+                 var course_url = "https://udel.instructure.com/courses/"+course["course_id"];
+
+                 console.log(course_term["year"], today["year"])
+
+                 if ((today["year"] === course_term["year"]) || (course_name.includes(today["term"]))) {
+                     console.log(course_name);
+                     var li = document.createElement('li');
+                     var a = document.createElement('a');
+                     li.setAttribute("class", "list-group-item");
+                     a.setAttribute("style", "color: rgb(0, 0, 0);");
+                     a.setAttribute("href", course_url);
+                     a.innerHTML = course_name;
+
+                     li.appendChild(a);
+                     active_courses.append(li);
+
+                     if (course["assignments"]) {
+                         parseAssignments(course["assignments"]);
+                     }
+                 }
+             });
+         }
+
+         function parseAssignments(assignments) {
+             var assignments_div = $("#assignments");
+
+             $.each(assignments, function(i, assignment) {
+                 var assignment_name = assignment["name"];
+                 var assignment_url = assignment["html_url"];
+
+                 console.log(assignment);
+
+                 var li = document.createElement('li');
+                 var a = document.createElement('a');
+
+                 li.setAttribute("class", "list-group-item");
+                 a.setAttribute("style", "color: rgb(0, 0, 0);");
+                 a.setAttribute("href", assignment_url);
+                 a.innerHTML = assignment_name;
+
+                 li.appendChild(a);
+                 assignments_div.append(li);
+             });
+         }
+
+
+
 
 
         </script>

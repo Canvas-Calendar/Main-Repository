@@ -5,7 +5,7 @@
  * 2. Parse courses and embed data into html elements
  */
 
-function parseCourses(user_data) {
+function parseAllCourses(user_data) {
     var active_courses = $("#active_courses");
 
     console.log("parsing Course Data...");
@@ -17,15 +17,16 @@ function parseCourses(user_data) {
 
         console.log(course_name);
 
-        // let li = document.createElement('li');
-        // let a = document.createElement('a');
-        // li.setAttribute("class", "list-group-item");
-        // a.setAttribute("style", "color: rgb(0, 0, 0);");
-        // a.setAttribute("href", course_url);
-        // a.innerTEXT = course_name;
+        var li = document.createElement('li');
+        var a = document.createElement('a');
 
-        // li.appendChild(a);
-        // active_courses.append(li);
+        li.setAttribute("class", "list-group-item");
+        a.setAttribute("style", "color: rgb(0, 0, 0);");
+        a.setAttribute("href", course_url);
+        a.innerHTML = e["name"];
+
+        li.appendChild(a);
+        active_courses.append(li);
     });
 }
 
