@@ -84,6 +84,9 @@
         <!-- + adding locally sourced UDCanvasAPI here... -->
         <script src="/js/jquery.buttonLoader2.js"></script>
         <script src="/js/UDCanvasAPI.js"></script>
+        <script src="/js/parseCourses.js"></script>
+        <script src="/js/getTerm.js"></script>
+        <script src="/js/testFile.js"></script>
 
     </head>
     <body>
@@ -114,18 +117,19 @@
             </ul>
         </div>
 
+
         <div class="bottomSection">
             <div class="upcoming-page" style="float: left;">
                 <div class="card" style="width: 302px;"> 
                     <div class="card-header" style="width: 300px;">
-                        <h4>Upcoming Today</h4> 
+                        <h4>Today's Schedule</h4> 
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">CPEG 494 - Practical 5</li>
-                        <li class="list-group-item">CISC 361 - Lab 6 Phase 3</li>
-                        <li class="list-group-item">CPEG 496 - Mini Practical</li>
-                        <li class="list-group-item">CPEG 419 - HW 4a</li>
-                        <li class="list-group-item">CPEG 498 - Final Presentation</li>
+                    <ul id="today_schedule" class="list-group list-group-flush">
+                        <!-- <li class="list-group-item">CPEG 494 - Practical 5</li> -->
+                        <!-- <li class="list-group-item">CISC 361 - Lab 6 Phase 3</li> -->
+                        <!-- <li class="list-group-item">CPEG 496 - Mini Practical</li> -->
+                        <!-- <li class="list-group-item">CPEG 419 - HW 4a</li> -->
+                        <!-- <li class="list-group-item">CPEG 498 - Final Presentation</li> -->
                     </ul>
                 </div>
             </div>
@@ -133,34 +137,33 @@
             <div class="courses-page" style="float: left;">
                 <div class="card" style="width: 302px;"> 
                     <div class="card-header" style="width: 300px;">
-                        <h4>Current Courses</h4> 
+                        <h4>Active Courses</h4> 
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li>
-                        <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li>
-                        <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li>
-                        <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li>
-                        <li class="list-group-item"></li>
+                    <ul id="active_courses" class="list-group list-group-flush">
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li> -->
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li> -->
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li> -->
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li> -->
+                        <!-- <li class="list-group-item"></li> -->
                     </ul>
                 </div>
             </div>
 
-            <div class="reccomendation-page" style="float: right;">
+            <div class="reccomendation-page" style="float: left;">
                 <div class="card" style="width: 302px;"> 
                     <div class="card-header" style="width: 300px;">
-                        <h4>Current Courses</h4> 
+                        <h4>Assignments</h4> 
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li>
-                        <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li>
-                        <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li>
-                        <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li>
-                        <li class="list-group-item"></li>
+                    <ul id="assignments" class="list-group list-group-flush">
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li> -->
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li> -->
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li> -->
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li> -->
+                        <!-- <li class="list-group-item"></li> -->
                     </ul>
                 </div>
 
             </div>
-        </div>
         </div>
 
         <script>
@@ -242,8 +245,17 @@
                      document.getElementById("headerlogo").innerHTML = "Welcome Back " + user.email;
                      /* alert("Welcome " + email); */
 
-                     user_data = getUserData();    /*   After verifying user is logged in, add the user's firebase data    */
-
+                     /* TEDDY EDIT - After verifying user is logged in, add the user's firebase data */
+                     user_data = getUserData();
+                     (async() => {
+                         console.log("waiting for variable");
+                         while(!user_data.hasOwnProperty("api_key")) // define the condition as you like
+                             await new Promise(resolve => setTimeout(resolve, 1000));
+                         console.log("variable is defined");
+                         testFunction();
+                         console.log(getTerm(Date.now()));
+                         parseCourses(user_data);
+                     })();
                  } else {
                      // No user is signed in.
                      console.log("No user");
