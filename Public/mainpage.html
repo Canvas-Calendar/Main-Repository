@@ -14,21 +14,34 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome Back!</title>
+    <title>Welcome to Canvas Calendar</title>
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
-
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- TEDDY EDIT - mainpage stylesheet -->
+    <link rel="stylesheet" href="/css/mainpage.css">
 
     <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
 
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 
+    <!-- TEDDY EDIT - Multiple firebase init() and declarations?? -->
+    <!-- initialize the SDK after all desired features are loaded -->
+    <!-- <script defer src="/__/firebase/init.js"></script> -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
+
+
     <!-- update the version number as needed -->
-    <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
+    <!-- <script defer src="/__/firebase/7.21.1/firebase-app.js"></script> -->
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
     <script defer src="/__/firebase/7.21.1/firebase-database.js"></script>
@@ -38,7 +51,7 @@
     <script defer src="/__/firebase/7.21.1/firebase-remote-config.js"></script>
     <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
+    <!-- <script defer src="/__/firebase/init.js"></script> -->
     <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.css' rel='stylesheet' />
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel='stylesheet' /> 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js'></script>
@@ -64,532 +77,452 @@
 
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
 
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
-    
-    <style>
-
-* {
-    padding:0;
-    margin:0;
-}
-
-:root{
-  --eventColor:rgb(204,0,0);
-}
-
-.fc-event {
-  padding:1em 0.5em !important;
-  background-color: var(--eventColor);
-}
-
-.fc-day-grid-event .fc-content {
-  white-space:normal !important;
-}
-.strikeout * {
-  text-decoration: line-through !important;
-}
-
-.fc-title{
-  color: #f4f4f4;
-}
-
-.courses-page{
-    padding-top: 50px;
-    padding-bottom: 50px;
-    float: left;
-    margin-right: 7in;
-}
-
-.reccomendation-page{
-    padding-top: 50px;
-    padding-bottom: 50px;
-    float: right;
-    margin-right: 7in;
-}
-
-.upcoming-page{
-    padding-top: 50px;
-    padding-bottom: 50px;
-    float: left;
-    padding-left: 50px;
-}
-
-.topSection{
-    margin-top: 1in;
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
-
-/* header _________________________________________*/
-
-a {
-  color: rgb(255, 255, 255);
-}
-
-.header {
-  background-color: #00539f;
-  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
-  position: fixed;
-  left:0;
-  right:0;
-  top:0;
-  width: 100%;
-  z-index: 3;
-}
-
-.header ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  overflow: hidden;
-  background-color: #00539f;
-}
-
-.header li a {
-  display: block;
-  padding: 20px 20px;
-  border-right: 1px solid #f4f4f4;
-  text-decoration: none;
-}
-
-.header li a:hover,
-.header .menu-btn:hover {
-  background-color: #f4f4f4;
-}
-
-.header .logo {
-  display: block;
-  float: left;
-  font-size: 2em;
-  padding: 10px 20px;
-  text-decoration: none;
-}
-
-/* menu */
-
-.header .menu {
-  clear: both;
-  max-height: 0;
-  transition: max-height .2s ease-out;
-}
-
-/* menu icon */
-
-.header .menu-icon {
-  cursor: pointer;
-  display: inline-block;
-  float: right;
-  padding: 28px 20px;
-  position: relative;
-  user-select: none;
-}
-
-.header .menu-icon .navicon {
-  background: #333;
-  display: block;
-  height: 2px;
-  position: relative;
-  transition: background .2s ease-out;
-  width: 18px;
-}
-
-.header .menu-icon .navicon:before,
-.header .menu-icon .navicon:after {
-  background: #333;
-  content: '';
-  display: block;
-  height: 100%;
-  position: absolute;
-  transition: all .2s ease-out;
-  width: 100%;
-}
-
-.header .menu-icon .navicon:before {
-  top: 5px;
-}
-
-.header .menu-icon .navicon:after {
-  top: -5px;
-}
-
-/* menu btn */
-
-.header .menu-btn {
-  display: none;
-}
-
-.header .menu-btn:checked ~ .menu {
-  max-height: 240px;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon {
-  background: transparent;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:before {
-  transform: rotate(-45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:after {
-  transform: rotate(45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-  top: 0;
-}
-
-/* 48em = 768px */
-
-@media (min-width: 48em) {
-  .header li {
-    float: left;
-  }
-  .header li a {
-    padding: 20px 30px;
-  }
-  .header .menu {
-    clear: none;
-    float: right;
-    max-height: none;
-  }
-  .header .menu-icon {
-    display: none;
-  }
-}
-
-/*Button*/
-.refresh-btn {
-  background-color: #00539f;
-  border: none;
-  color: white;
-  padding: 15px 15px;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-/* Darker background on mouse-over */
-.refresh-btn:hover {
-  color: rgb(30, 192, 30);
-}
-
-    </style>
-  </head>
-  <body>
-<header class="header">
-    <a style="color: white;" href="" class="logo" id="headerlogo">Welcome Back!!</a>
-    <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-    <ul class="menu">
-        <li><a href='https://canvas-calendar-4ea54.web.app/aboutpage.html'>About</a></li>
-        <li><a href='https://canvas-calendar-4ea54.web.app/profilepage.html'>Profile</a></li>
-        <li><a href="#contact" onclick="logoutFunction()">Logout</a></li>
-        <li><button class="refresh-btn" id="refresh-btn"><i class="fa fa-refresh"></i></button></li>
-    </ul>
-</header>
-
-<div class="topSection">
-    <div id='calendar'></div>
-</div>
-
-<!-- Your custom menu with dropdown-menu as default styling -->
-<div id="context-menu">
-  <ul class="dropdown-menu" role="menu">
-    <li><a tabindex="-1">Action</a></li>
-     <li><a tabindex="-1">Another action</a></li>
-     <li><a tabindex="-1">Something else here</a></li>
-     <li class="divider"></li>
-     <li><a tabindex="-1">Separated link</a></li>
-  </ul>
-</div>
-
-<div class="bottomSection">
-<div class="upcoming-page" style="float: left;">
-    <div class="card" style="width: 302px;"> 
-     <div class="card-header" style="width: 300px;">
-      <h4>Upcoming Today</h4> 
-     </div>
-     <ul class="list-group list-group-flush">
-      <li class="list-group-item">CPEG 494 - Practical 5</li>
-      <li class="list-group-item">CISC 361 - Lab 6 Phase 3</li>
-      <li class="list-group-item">CPEG 496 - Mini Practical</li>
-      <li class="list-group-item">CPEG 419 - HW 4a</li>
-      <li class="list-group-item">CPEG 498 - Final Presentation</li>
-    </ul>
-     </div>
-   </div>
-
-   <div class="courses-page" style="float: left;">
-    <div class="card" style="width: 302px;"> 
-     <div class="card-header" style="width: 300px;">
-      <h4>Current Courses</h4> 
-     </div>
-     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li>
-      <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li>
-      <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li>
-      <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li>
-      <li class="list-group-item"></li>
-    </ul>
-     </div>
-   </div>
-
-   <div class="reccomendation-page" style="float: right;">
-    <div class="card" style="width: 302px;"> 
-     <div class="card-header" style="width: 300px;">
-      <h4>Current Courses</h4> 
-     </div>
-     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li>
-      <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li>
-      <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li>
-      <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li>
-      <li class="list-group-item"></li>
-    </ul>
-     </div>
-
-   </div>
-  </div>
-</div>
-
-<script>
-
- // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-      var firebaseConfig = {
-      apiKey: "AIzaSyAWlmVBGiPNaZ8q6wIW8qj4MHhRCdEnzfw",
-      authDomain: "canvas-calendar-4ea54.firebaseapp.com",
-      databaseURL: "https://canvas-calendar-4ea54.firebaseio.com",
-      projectId: "canvas-calendar-4ea54",
-      storageBucket: "canvas-calendar-4ea54.appspot.com",
-      messagingSenderId: "967496995343",
-      appId: "1:967496995343:web:87bdb9b3571033cfce897a",
-      measurementId: "G-2GBWCBTD5W"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-
-    // Logout Code _________________________________________________
-
-    $(document).ready(function () {
-        $("#registerForm").on("submit", function (event) {
-          event.preventDefault();
-          var fname = $("#registerFirstName").val();
-          var lname = $("#registerLastName").val();
-          var email = $("#registerEmail").val();
-          var password = $("#registerPassword").val();
-          firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(function (user) {
-              firebase.database().ref().child("users/" + user.user.uid).set({
-                firstname: fname,
-                lastname: lname,
-                email: user.user.email,
-                role: "user"
-              })
-              alert("Account successfuly created")
-            })
-            .catch(function (err) {
-              console.log(err);
-              alert(err);
-            });
-        });
-
-
-        $("#loginForm").on("submit", function (event) {
-          event.preventDefault();
-          var email = $("#loginEmail").val();
-          var password = $("#loginPassword").val();
-          firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(function (user) {
-              console.log(user);
-              location.reload();
-              alert("Welcome Back!")
-            })
-            .catch(function (err) {
-              console.log(err);
-              alert(err);
-            });
-        });
-
-        $("#logoutbtn").on("click", function () {
-          firebase.auth().signOut().then(function () {
-            alert("Goodbye!");
-            location.reload();
-          })
-          .catch(function (error) {
-            console.log(err);
-            alert(err);
-          });
-        });
-
-        firebase.auth().onAuthStateChanged(function (user) {
-          if (user) {
-            console.log(user);
-            var email = user.email;
-            document.getElementById("headerlogo").innerHTML = "Welcome Back " + user.email;
-            //alert("Welcome " + email);
-          } else {
-            // No user is signed in.
-            console.log("No user");
-            //alert("Currently logged out");
-          }
-        });
-      });
-
-var accountType = sessionStorage.getItem("accountType");
-
-function logoutFunction(){
-    if(accountType == "Google"){
-        signOut();
-      }
-      else{
-        firebase.auth().signOut().then(function () {
-          location.reload();
-          window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
-        })
-        .catch(function (error) {
-          console.log(err);
-          alert(err);
-        });
-      }
-}
-
-function signOut() { //Sign Out Function
-    gapi.auth2.getAuthInstance().signOut().then(function() {
-        console.log('User signed out')
-        window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
-    })
-}
-
-function onLoad() {
-    gapi.load('auth2', function() {
-      gapi.auth2.init();
-    });
-}
-
-// calendar Code ________________________________________________________________________
-
-    
-$('#calendar').fullCalendar({
-header: {
-  left: 'prev,next today',
-  center: 'title',
-  right: 'month,agendaWeek,agendaDay'
-},
-//defaultDate: '2015-02-12',
-selectable: true,
-selectHelper: true,
-  
-eventRender: function(event, element) {
- console.log(event);
-  
-  var html = '<a data-event-id="' + event.id + '" class="' + ((event.strikeout) ? 'strikeout' : '') + ' fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable">';
-  html += '<div class="fc-content">';
-  html += ' <label><input type="checkbox" ' + ((event.strikeout) ? 'checked' : '') + '> <span class="fc-time">'  + '</span> ';
-  html += ' <span class="fc-title">' + event.title + '</span>';
-  html += '</label></div></a>';
-  
-  var $event = $(html);
-  
-  addRightClickMenu($event);
-  
-  return $event;
-  
-},
-
-//Teddy!!!! This is part of the event type color code
-//_________________________________________________________________________________________
-select: function(start, end) {
-  var eventType = prompt('Event Type:');
-  if (eventType == "Holiday") {
-    alert("it worked holiday")
-    document.body.style.setProperty('--eventColor',"#ff5733")
-  }
-  else if (eventType == "Work") {
-    alert("it worked work")
-    document.body.style.setProperty('--eventColor',"#33ff42")
-  }
-  else if (eventType == "Home") {
-    alert("it worked home")
-    document.body.style.setProperty('--eventColor',"#33fff6")
-  }
-  else if (eventType == "School") {
-    alert("it worked school")
-    document.body.style.setProperty('--eventColor',"#ffff33")
-  }
-  else{
-    alert("it worked other")
-    document.body.style.setProperty('--eventColor',"#000000")
-  }
-  var title = prompt('Event Title:');
-  if (title) {
-    $('#calendar').fullCalendar('renderEvent', {
-      title: title, start: start, end: end
-    }, true);
-  }
-  $('#calendar').fullCalendar('unselect');
-},
-editable: true,
-//events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
-});
-
-
-/*
-select: function(start, end) {
-  var title = prompt('Event Title:');
-  if (title) {
-    $('#calendar').fullCalendar('renderEvent', {
-      title: title, start: start, end: end
-    }, true);
-  }
-  $('#calendar').fullCalendar('unselect');
-},
-editable: true,*/
-//events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
-
-
-function addRightClickMenu($event){
-  $event.contextmenu({
-    target: '#context-menu',
-    onItem: function (context, e) {
-      console.log(context);
-
-      var event = $("#calendar").fullCalendar( 'clientEvents', [context.data('event-id')])[0];
-
-      alert($(e.target).text() + ' for event "' + event.title + '"');
-    }
-  });
-}
-
-
-$('#calendar').on('change', ':checkbox', function(){
- 
-  var event = $("#calendar").fullCalendar( 'clientEvents', [$(this).parents('.fc-event:first').data('event-id')])[0];
-  
-  event.strikeout = $(this).is(':checked');
-      $("#calendar").fullCalendar('renderEvent', event, true);
-  
-});
-
-//Refresh Button ________________________________________
-$("#refresh-btn").on("click", function () {
-  firebase.auth().onAuthStateChanged(function (user) {
-  if (user) {
-    var canvasAccessToken = users.
-    alert(canvasAccessToken);
-  }
-});
-});
+
+
+    <!-- TEDDY EDIT  -->
+    <!-- + Button Loader Plugin -->
+    <!-- + adding locally sourced UDCanvasAPI here... -->
+    <script src="/js/jquery.buttonLoader2.js"></script>
+    <script src="/js/UDCanvasAPI.js"></script>
+    <!-- <script src="/js/parseAllCourses.js"></script> -->
+    <!-- <script src="/js/getTerm.js"></script> -->
+    <script src="/js/testFile.js"></script>
+
+</head>
+<body>
+    <header class="header">
+        <a style="color: white;" href="" class="logo" id="headerlogo">Welcome Back!!</a>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu">
+            <li><a href='https://canvas-calendar-4ea54.web.app/aboutpage.html'>About</a></li>
+            <li><a href='https://canvas-calendar-4ea54.web.app/profilepage.html'>Profile</a></li>
+            <li><a href="#contact" onclick="logoutFunction()">Logout</a></li>
+            <li><button id="refresh-btn" class="refresh-btn has-spinner"><i class="fa fa-refresh"></i></button></li>
+        </ul>
+    </header>
+
+    <div class="topSection">
+        <div id='calendar'></div>
+    </div>
+
+    <!-- Your custom menu with dropdown-menu as default styling -->
+    <div id="context-menu">
+        <ul class="dropdown-menu" role="menu">
+            <li><a tabindex="-1">Action</a></li>
+            <li><a tabindex="-1">Another action</a></li>
+            <li><a tabindex="-1">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1">Separated link</a></li>
+        </ul>
+    </div>
+
+
+    <div class="bottomSection">
+        <div class="upcoming-page" style="float: left;">
+            <div class="card" style="width: 302px;"> 
+                <div class="card-header" style="width: 300px;">
+                    <h4>Today's Schedule</h4> 
+                </div>
+                <ul id="today_schedule" class="list-group list-group-flush">
+                    <!-- <li class="list-group-item">CPEG 494 - Practical 5</li> -->
+                    <!-- <li class="list-group-item">CISC 361 - Lab 6 Phase 3</li> -->
+                    <!-- <li class="list-group-item">CPEG 496 - Mini Practical</li> -->
+                    <!-- <li class="list-group-item">CPEG 419 - HW 4a</li> -->
+                    <!-- <li class="list-group-item">CPEG 498 - Final Presentation</li> -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="courses-page" style="float: left;">
+            <div class="card" style="width: 302px;"> 
+                <div class="card-header" style="width: 300px;">
+                    <h4>All Courses</h4> 
+                </div>
+                <ul id="all_courses" class="list-group list-group-flush">
+                </ul>
+            </div>
+        </div>
+
+        <div class="courses-page" style="float: left;">
+            <div class="card" style="width: 302px;"> 
+                <div class="card-header" style="width: 300px;">
+                    <h4>Active Courses</h4> 
+                </div>
+                <ul id="active_courses" class="list-group list-group-flush">
+                    <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li> -->
+                    <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li> -->
+                    <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li> -->
+                    <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li> -->
+                    <!-- <li class="list-group-item"></li> -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="reccomendation-page" style="float: left;">
+            <div class="card" style="width: 302px;"> 
+                <div class="card-header" style="width: 300px;">
+                    <h4>Assignments</h4> 
+                </div>
+                <ul id="assignments" class="list-group list-group-flush">
+                    <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li> -->
+                    <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li> -->
+                    <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li> -->
+                    <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li> -->
+                    <!-- <li class="list-group-item"></li> -->
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+     // Your web app's Firebase configuration
+     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+     var firebaseConfig = {
+         apiKey: "AIzaSyAWlmVBGiPNaZ8q6wIW8qj4MHhRCdEnzfw",
+         authDomain: "canvas-calendar-4ea54.firebaseapp.com",
+         databaseURL: "https://canvas-calendar-4ea54.firebaseio.com",
+         projectId: "canvas-calendar-4ea54",
+         storageBucket: "canvas-calendar-4ea54.appspot.com",
+         messagingSenderId: "967496995343",
+         appId: "1:967496995343:web:87bdb9b3571033cfce897a",
+         measurementId: "G-2GBWCBTD5W"
+     };
+     // Initialize Firebase
+     firebase.initializeApp(firebaseConfig);
+     firebase.analytics();
+
+     // Logout Code _________________________________________________
+
+
+     $(document).ready(function () {
+         $("#registerForm").on("submit", function (event) {
+             event.preventDefault();
+             var fname = $("#registerFirstName").val();
+             var lname = $("#registerLastName").val();
+             var email = $("#registerEmail").val();
+             var password = $("#registerPassword").val();
+             firebase.auth().createUserWithEmailAndPassword(email, password)
+                     .then(function (user) {
+                         firebase.database().ref().child("users/" + user.user.uid).set({
+                             firstname: fname,
+                             lastname: lname,
+                             email: user.user.email,
+                             role: "user"
+                         })
+                         alert("Account successfuly created")
+                     })
+                     .catch(function (err) {
+                         console.log(err);
+                         alert(err);
+                     });
+         });
+
+
+         $("#loginForm").on("submit", function (event) {
+             event.preventDefault();
+             var email = $("#loginEmail").val();
+             var password = $("#loginPassword").val();
+             firebase.auth().signInWithEmailAndPassword(email, password)
+                     .then(function (user) {
+                         console.log(user);
+                         location.reload();
+                         alert("Welcome Back!")
+                     })
+                     .catch(function (err) {
+                         console.log(err);
+                         alert(err);
+                     });
+         });
+
+         $("#logoutbtn").on("click", function () {
+             firebase.auth().signOut().then(function () {
+                 alert("Goodbye!");
+                 location.reload();
+             })
+                     .catch(function (error) {
+                         console.log(err);
+                         alert(err);
+                     });
+         });
+
+         firebase.auth().onAuthStateChanged(function (user) {
+             if (user) {
+                 console.log(user);
+                 var email = user.email;
+                 document.getElementById("headerlogo").innerHTML = "Welcome Back " + user.email;
+                 /* alert("Welcome " + email); */
+
+                 /* TEDDY EDIT - After verifying user is logged in, add the user's firebase data */
+                 user_data = getUserData();
+                 (async() => {
+                     console.log("waiting for variable");
+                     while(!user_data.hasOwnProperty("api_key")) // define the condition as you like
+                         await new Promise(resolve => setTimeout(resolve, 1000));
+                     console.log("variable is defined");
+                     /* testFunction(); */
+                     console.log(getTerm(Date.now()));
+                     parseAllCourses(user_data);
+                     parseActiveCourses(user_data);
+                 })();
+             } else {
+                 // No user is signed in.
+                 console.log("No user");
+                 //alert("Currently logged out");
+             }
+         });
+     });
+
+     var accountType = sessionStorage.getItem("accountType");
+
+     function logoutFunction(){
+         if(accountType == "Google"){
+             signOut();
+         }
+         else{
+             firebase.auth().signOut().then(function () {
+                 location.reload();
+                 window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
+             })
+                     .catch(function (error) {
+                         console.log(err);
+                         alert(err);
+                     });
+         }
+     }
+
+     function signOut() { //Sign Out Function
+         gapi.auth2.getAuthInstance().signOut().then(function() {
+             console.log('User signed out')
+             window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
+         })
+     }
+
+     function onLoad() {
+         gapi.load('auth2', function() {
+             gapi.auth2.init();
+         });
+     }
+
+     // calendar Code ________________________________________________________________________
+     $('#calendar').fullCalendar({
+         header: {
+             left: 'prev,next today',
+             center: 'title',
+             right: 'month,agendaWeek,agendaDay'
+         },
+         //defaultDate: '2015-02-12',
+         selectable: true,
+         selectHelper: true,
+         eventRender: function(event, element) {
+             console.log(event);
+
+             var html = '<a data-event-id="' + event.id + '" class="' + ((event.strikeout) ? 'strikeout' : '') + ' fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable">';
+             html += '<div class="fc-content">';
+             html += ' <label><input type="checkbox" ' + ((event.strikeout) ? 'checked' : '') + '> <span class="fc-time">'  + '</span> ';
+             html += ' <span class="fc-title">' + event.title + '</span>';
+             html += '</label></div></a>';
+
+             var $event = $(html);
+
+             addRightClickMenu($event);
+
+             return $event;
+         },
+
+         //Teddy!!!! This is part of the event type color code
+         //_________________________________________________________________________________________
+         select: function(start, end) {
+             var eventType = prompt('Event Type:');
+             if (eventType == "Holiday") {
+                 alert("it worked holiday")
+                 document.body.style.setProperty('--eventColor',"#ff5733")
+             }
+             else if (eventType == "Work") {
+                 alert("it worked work")
+                 document.body.style.setProperty('--eventColor',"#33ff42")
+             }
+             else if (eventType == "Home") {
+                 alert("it worked home")
+                 document.body.style.setProperty('--eventColor',"#33fff6")
+             }
+             else if (eventType == "School") {
+                 alert("it worked school")
+                 document.body.style.setProperty('--eventColor',"#ffff33")
+             }
+             else{
+                 alert("it worked other")
+                 document.body.style.setProperty('--eventColor',"#000000")
+             }
+             var title = prompt('Event Title:');
+             if (title) {
+                 $('#calendar').fullCalendar('renderEvent', {
+                     title: title, start: start, end: end
+                 }, true);
+             }
+             $('#calendar').fullCalendar('unselect');
+         },
+         editable: true,
+         //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
+     });
+
+
+     /*
+        select: function(start, end) {
+        var title = prompt('Event Title:');
+        if (title) {
+        $('#calendar').fullCalendar('renderEvent', {
+        title: title, start: start, end: end
+        }, true);
+        }
+        $('#calendar').fullCalendar('unselect');
+        },
+        editable: true,*/
+     //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
+
+
+     function addRightClickMenu($event){
+         $event.contextmenu({
+             target: '#context-menu',
+             onItem: function (context, e) {
+                 console.log(context);
+
+                 var event = $("#calendar").fullCalendar( 'clientEvents', [context.data('event-id')])[0];
+
+                 alert($(e.target).text() + ' for event "' + event.title + '"');
+             }
+         });
+     }
+
+
+     $('#calendar').on('change', ':checkbox', function(){
+         var event = $("#calendar").fullCalendar( 'clientEvents', [$(this).parents('.fc-event:first').data('event-id')])[0];
+         event.strikeout = $(this).is(':checked');
+         $("#calendar").fullCalendar('renderEvent', event, true);
+     });
+
+
+
+
+
+
+
+
+
+     function getTerm(datetime) {
+         /* Determine the academic term using the courses datetime.
+          *
+          *  Args:
+          *      Required - datetime (str) - the datetime string when the course started
+          *  Returns:
+          *      JSON Object - {term: "21F", year: 2021}
+          */
+         var d = new Date(datetime);
+         var y = d.getFullYear();
+         var yy = JSON.stringify(d.getFullYear()).slice(2,4);
+         var term;
+
+         if ((d.getMonth() > 0) && (d.getMonth() < 6)) {
+             term = yy+"S";
+         } else {
+             term = yy+"F";
+         }
+         var data = {
+             term: term,
+             year: y,
+             month: d.getMonth(),
+             day: d.getDay()
+         };
+         return data;
+     }
+
+     function parseAllCourses(user_data) {
+         var all_courses = $("#all_courses");
+
+         $.each(user_data["courses"], function (i, e) {
+             var course_term = getTerm(e["start_at"]);
+             var course_name = e["name"];
+             var course_url = "https://udel.instructure.com/courses/"+e["course_id"];
+
+             console.log(course_name);
+             var li = document.createElement('li');
+             var a = document.createElement('a');
+             li.setAttribute("class", "list-group-item");
+             a.setAttribute("style", "color: rgb(0, 0, 0);");
+             a.setAttribute("href", course_url);
+             a.innerHTML = course_name;
+
+             li.appendChild(a);
+             all_courses.append(li);
+         });
+     }
+
+     function parseActiveCourses(user_data) {
+         var active_courses = $("#active_courses");
+         var today = getTerm(Date.now());
+
+         $.each(user_data["courses"], function (i, course) {
+             var course_term = getTerm(course["start_at"]);
+             var course_name = course["name"];
+             var course_url = "https://udel.instructure.com/courses/"+course["course_id"];
+
+             console.log(course_term["year"], today["year"])
+
+             if ((today["year"] === course_term["year"]) || (course_name.includes(today["term"]))) {
+                 console.log(course_name);
+                 var li = document.createElement('li');
+                 var a = document.createElement('a');
+                 li.setAttribute("class", "list-group-item");
+                 a.setAttribute("style", "color: rgb(0, 0, 0);");
+                 a.setAttribute("href", course_url);
+                 a.innerHTML = course_name;
+
+                 li.appendChild(a);
+                 active_courses.append(li);
+
+                 if (course["assignments"]) {
+                     parseAssignments(course["assignments"]);
+                 }
+             }
+         });
+     }
+
+     function parseAssignments(assignments) {
+         var assignments_div = $("#assignments");
+
+         $.each(assignments, function(i, assignment) {
+             var assignment_name = assignment["name"];
+             var assignment_url = assignment["html_url"];
+
+             console.log(assignment);
+
+             var li = document.createElement('li');
+             var a = document.createElement('a');
+
+             li.setAttribute("class", "list-group-item");
+             a.setAttribute("style", "color: rgb(0, 0, 0);");
+             a.setAttribute("href", assignment_url);
+             a.innerHTML = assignment_name;
+
+             li.appendChild(a);
+             assignments_div.append(li);
+         });
+     }
+
+
+
+
 
     </script>
-  </body>
+
+    <!-- TEDDY EDIT  -->
+    <!-- + Logged In User Data from Firebase DB -->
+    <!-- + Refresh Button Snippet -->
+    <script src="/js/userData.js"></script>
+    <script src="/js/refreshButton.js"></script>
+
+</body>
+  
 </html>
