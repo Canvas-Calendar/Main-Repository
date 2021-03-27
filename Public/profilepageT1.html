@@ -378,7 +378,28 @@
             </select><br><br>
             <input type="submit">
         </form>
-
+        <div>
+        <!--Push data test-->
+            <script>
+                 $(function() { 
+                    function upload_prefernces() {
+                        var preferences = "submitted preference";
+                        datbase.ref('users/' + userId + 'preferences').update({
+                            preferences: preferences
+                        })
+                        /*var courses = udcanvas.getCourses();
+                    user_data.db_ref.update({
+                    courses: courses
+                    }).then(function() {
+                        console.log('Testing preference upload');
+                //$(spinner).buttonLoader('stop');
+                 }); */
+            };
+        //CAN PROBABLY DELETE window.setTimeout(upload_courses, DELAY); // 5 seconds
+        });
+            </script>
+        <!--Push data test END-->    
+        </div>
         </div>
         <!--PreferncesTEST END-->
 
