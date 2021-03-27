@@ -1,12 +1,11 @@
 <!--
-    Title: ECE Senior Design Project Code - blank page
-    Description: This file is used for copying and pasting purposes only when we are creating a new page and want
-    to start from a blank page
+    Title: ECE Senior Design Project Code - About Page
+    Description: About page - will display info about our project and its authors
     Authors: Chris Varriano
              Will Van Luven
              Sean McNamara
              Arai Singleton
-    Date created: 9/28/20
+    Date created: 11/23/20
 -->
 
 <!DOCTYPE html>
@@ -14,7 +13,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <title>View Your Course</title>
+    <link rel="stylesheet" type="text/css" href="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/blueTable.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <script>
+      var access_token="25~LDtz4FPmgvVumQULtrkjOUrdQvKnniad2r56u33mCOqZHNjnnB2wIkScp8c56F8E";
+   </script>
+   <!--
+   <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script>
+   -->
+
+   <script src="/js/UDCanvasAPI.js"></script>
     
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
@@ -30,15 +42,323 @@
     <script defer src="/__/firebase/init.js"></script>
 
     <style>
+
+a {
+  color: rgb(0, 0, 0);
+}
+
+    * {
+    padding:0;
+    margin:0;
+    }
+
+
+/* header */
+
+.header {
+  background-color: #00539f;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #00539f;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+}
+
+.message{
+  padding-top: 1in;
+  text-align: center;
+  color: black;
+}
+
+h2 {
+  padding: .25in;
+}
+
+.tab{
+font-size: 20px;
+}
+
+.paragraph{
+    margin-right: 3in;
+    margin-left: 3in;
+}
+
+h3{
+  white-space: pre;
+  font-size: 20px;
+}
+
+h4{
+  white-space: pre;
+  font-size: 20px;
+  color: black;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: #00539f;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 600px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 50px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button_center{
+  text-align: center;
+}
+
+.emailLink{
+  color: black;
+}
+.topMessage{
+  font-size: 40px;
+  padding: 20px;
+  font-weight: bold;
+}
+a:link {
+  color: rgb(0, 0, 0); 
+}
     </style>
   </head>
+
   <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Blank page for Canvas Calendar!</h1>
+
+
+    <header class="header">
+        <a style="color: white;" href="" class="logo">Course:</a>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu">
+          <li><a style="color: white;" href="javascript:history.go(-1)">Back</a></li>
+        </ul>
+    </header>
+
+
+    <div class="message">
+        <div class="topMessage" id="topMessage"></div>
+        <div id="results" style="width:1200px;margin: 0 auto; display: none;">
+          <table class="blueTable">
+              <thead>
+                  <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th><th>Time to Finish</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    <select id="timeForm" name="timeToFinish" required>
+                      <option value=""  selected="selected" ></option>
+                      <option value="oneHour"  >1 Hour</option>
+                      <option value="twoHours"  >2 Hours</option>
+                      <option value="threeHours"  >3 Hours</option>
+                      <option value="fourHours"  >4 Hours</option>
+                      <option value="fiveHours"  >5 Hours</option>
+                      <option value="sixHours"  >6 Hours</option>
+                      <option value="sevenHours"  >7 Hours</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+      </div>
+      <div id="timeForm" style="display: none;">
+      <select id="timeForm" name="timeToFinish" required>
+        <option value=""  selected="selected" ></option>
+        <option value="oneHour"  >1 Hour</option>
+        <option value="twoHours"  >2 Hours</option>
+        <option value="threeHours"  >3 Hours</option>
+        <option value="fourHours"  >4 Hours</option>
+        <option value="fiveHours"  >5 Hours</option>
+        <option value="sixHours"  >6 Hours</option>
+        <option value="sevenHours"  >7 Hours</option>
+      </select>
     </div>
+    </div>
+      
 
     <script>
+    document.getElementById("topMessage").innerHTML = "Loading Assignment Information...";
+    setTimeout(function() { showCourses(); }, 5000);
+    function showCourses(){
+      document.getElementById("topMessage").innerHTML = "Assignments for: ELEG 491";
+      document.getElementById("results").style.display="block"
+      var dropDownMenu = document.getElementById("timeForm").style.display="block";
+      var assignments = udcanvas.getAssignments(course_id = 1565469);
+      console.table(assignments, ['assignment_id', 'due_at', 'grading_type', 'name', 'html_url']);
+      $.each(assignments, function(index, assignment) {
+        var assignment_id   = assignment['assignment_id'];
+        var due_at          = assignment['due_at'];
+        var grading_type    = assignment['grading_type'];
+        var name            = assignment['name'];
+        var html_url        = assignment['html_url'];
+        var newLink = html_url.link(html_url);
+        $("tbody").append(`<tr><td>${assignment_id}</td> <td>${due_at}</td> <td>${grading_type}</td> <td>${name}</td> <td>${newLink}</td><td>${dropDownMenu}</td></tr>`)
+    });
+  }
     </script>
   </body>
 </html>
