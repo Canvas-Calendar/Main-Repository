@@ -26,21 +26,43 @@
    <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script>
    -->
 
-   <script src="/js/UDCanvasAPI.js"></script>
+    <!-- TEDDY EDIT  -->
+        <!-- + Button Loader Plugin -->
+        <!-- + adding locally sourced UDCanvasAPI here... -->
+        <script src="/js/jquery.buttonLoader2.js"></script>
+        <script src="/js/UDCanvasAPI.js"></script>
+        <!-- <script src="/js/parseAllCourses.js"></script> -->
+        <!-- <script src="/js/getTerm.js"></script> -->
+        <script src="/js/testFile.js"></script>
     
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
-    <script defer src="/__/firebase/7.21.1/firebase-database.js"></script>
-    <script defer src="/__/firebase/7.21.1/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/7.21.1/firebase-storage.js"></script>
-    <script defer src="/__/firebase/7.21.1/firebase-analytics.js"></script>
-    <script defer src="/__/firebase/7.21.1/firebase-remote-config.js"></script>
-    <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
+    <!-- TEDDY EDIT - Multiple firebase init() and declarations?? -->
+        <!-- initialize the SDK after all desired features are loaded -->
+        <!-- <script defer src="/__/firebase/init.js"></script> -->
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
 
+
+        <!-- update the version number as needed -->
+        <!-- <script defer src="/__/firebase/7.21.1/firebase-app.js"></script> -->
+        <!-- include only the Firebase features as you need -->
+        <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-database.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-messaging.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-storage.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-analytics.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-remote-config.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
+        <!-- initialize the SDK after all desired features are loaded -->
+        <!-- <script defer src="/__/firebase/init.js"></script> -->
+        <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.css' rel='stylesheet' />
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel='stylesheet' /> 
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.js'></script>
     <style>
 
 a {
@@ -269,6 +291,18 @@ h4{
 a:link {
   color: rgb(0, 0, 0); 
 }
+
+.topPage{
+  padding-top: 1in;
+  text-align: center;
+}
+
+.tableHeader{
+  font-size: large;
+  padding-top: .5in;
+  padding-bottom: .5in;
+}
+
     </style>
   </head>
 
@@ -283,97 +317,88 @@ a:link {
           <li><a style="color: white;" href="javascript:history.go(-1)">Back</a></li>
         </ul>
     </header>
-
-
-    <div class="message">
-        <div class="topMessage" id="topMessage"></div>
-        <div id="results" style="width:1200px;margin: 0 auto; display: none;">
-          <table class="blueTable">
-              <thead>
-                  <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th><th>Time to Finish</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <select id="timeForm" name="timeToFinish" required>
-                      <option value=""  selected="selected" ></option>
-                      <option value="oneHour"  >1 Hour</option>
-                      <option value="twoHours"  >2 Hours</option>
-                      <option value="threeHours"  >3 Hours</option>
-                      <option value="fourHours"  >4 Hours</option>
-                      <option value="fiveHours"  >5 Hours</option>
-                      <option value="sixHours"  >6 Hours</option>
-                      <option value="sevenHours"  >7 Hours</option>
-                    </select>
-                  </td>
-                </tr>
-              </tbody>
-          </table>
-          <table class="blueTable">
+  
+  <div class="topPage">
+    <h1>Current Course Information:</h1> 
+    <div class="tableHeader" id="courseName1"></div>
+    <div id="results1" style="width:1200px;margin: 0 auto;display: block;">
+        <table class="blueTable">
             <thead>
-                <tr><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th><th>Time to Finish</th></tr>
+              <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th></tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-                  <select id="timeForm" name="timeToFinish" required>
-                    <option value=""  selected="selected" ></option>
-                    <option value="oneHour"  >1 Hour</option>
-                    <option value="twoHours"  >2 Hours</option>
-                    <option value="threeHours"  >3 Hours</option>
-                    <option value="fourHours"  >4 Hours</option>
-                    <option value="fiveHours"  >5 Hours</option>
-                    <option value="sixHours"  >6 Hours</option>
-                    <option value="sevenHours"  >7 Hours</option>
-                  </select>
-                </td>
-              </tr>
-            </tbody>
+            <tbody></tbody>
         </table>
-      </div>
-      <div id="timeForm" style="display: none;">
-      <select id="timeForm" name="timeToFinish" required>
-        <option value=""  selected="selected" ></option>
-        <option value="oneHour"  >1 Hour</option>
-        <option value="twoHours"  >2 Hours</option>
-        <option value="threeHours"  >3 Hours</option>
-        <option value="fourHours"  >4 Hours</option>
-        <option value="fiveHours"  >5 Hours</option>
-        <option value="sixHours"  >6 Hours</option>
-        <option value="sevenHours"  >7 Hours</option>
-      </select>
     </div>
+    <div class="tableHeader" id="courseName2"></div>
+    <div id="results2" style="width:1200px;margin: 0 auto;display: block;">
+        <table class="blueTable">
+            <thead>
+              <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
-      
+    <div class="tableHeader" id="courseName3"></div>
+    <div id="results3" style="width:1200px;margin: 0 auto;display: block;">
+        <table class="blueTable">
+            <thead>
+              <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="tableHeader" id="courseName4"></div>
+    <div id="results4" style="width:1200px;margin: 0 auto;display: block;">
+        <table class="blueTable">
+            <thead>
+              <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="tableHeader" id="courseName5"></div>
+    <div id="results5" style="width:1200px;margin: 0 auto;display: block;">
+        <table class="blueTable">
+            <thead>
+              <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="tableHeader" id="courseName6"></div>
+    <div id="results6" style="width:1200px;margin: 0 auto;display: block;">
+        <table class="blueTable">
+            <thead>
+              <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+  </div>
 
-    <script>
+
+
+    
+
+ <script>
+
+   // Your web app's Firebase configuration
+         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+         var firebaseConfig = {
+             apiKey: "AIzaSyAWlmVBGiPNaZ8q6wIW8qj4MHhRCdEnzfw",
+             authDomain: "canvas-calendar-4ea54.firebaseapp.com",
+             databaseURL: "https://canvas-calendar-4ea54.firebaseio.com",
+             projectId: "canvas-calendar-4ea54",
+             storageBucket: "canvas-calendar-4ea54.appspot.com",
+             messagingSenderId: "967496995343",
+             appId: "1:967496995343:web:87bdb9b3571033cfce897a",
+             measurementId: "G-2GBWCBTD5W"
+         };
+         // Initialize Firebase
+         firebase.initializeApp(firebaseConfig);
+         firebase.analytics();
+
+   /*
     document.getElementById("topMessage").innerHTML = "Loading Assignment Information...";
     setTimeout(function() { showCourses(); }, 5000);
     function showCourses(){
@@ -392,72 +417,154 @@ a:link {
         $("tbody").append(`<tr><td>${assignment_id}</td> <td>${due_at}</td> <td>${grading_type}</td> <td>${name}</td> <td>${newLink}</td><td>${dropDownMenu}</td></tr>`)
     });
   }
+  */
+  //login code______________________________________________
 
-  // New Stuff after Teddy Added in his Code
-  //________________________________________________________________________________________
-            function getTerm(datetime) {
-             /* Determine the academic term using the courses datetime.
-              *
-              *  Args:
-              *      Required - datetime (str) - the datetime string when the course started
-              *  Returns:
-              *      JSON Object - {term: "21F", year: 2021}
-              */
-             var d = new Date(datetime);
-             var y = d.getFullYear();
-             var yy = JSON.stringify(d.getFullYear()).slice(2,4);
-             var term;
+  // Logout Code _________________________________________________
 
-             if ((d.getMonth() > 0) && (d.getMonth() < 6)) {
-                 term = yy+"S";
-             } else {
-                 term = yy+"F";
-             }
-             var data = {
-                 term: term,
-                 year: y,
-                 month: d.getMonth(),
-                 day: d.getDay()
-             };
-             return data;
-         }
 
-         function parseAllCourses(user_data) {
-             var all_courses = $("#all_courses");
-
-             $.each(user_data["courses"], function (i, e) {
-                 var course_term = getTerm(e["start_at"]);
-                 var course_name = e["name"];
-                 var course_url = "https://udel.instructure.com/courses/"+e["course_id"];
-
-                 console.log(course_name);
-                 var li = document.createElement('li');
-                 var a = document.createElement('a');
-                 li.setAttribute("class", "list-group-item");
-                 a.setAttribute("style", "color: rgb(0, 0, 0);");
-                 a.setAttribute("href", course_url);
-                 a.innerHTML = course_name;
-
-                 li.appendChild(a);
-                 all_courses.append(li);
+  $(document).ready(function () {
+             $("#registerForm").on("submit", function (event) {
+                 event.preventDefault();
+                 var fname = $("#registerFirstName").val();
+                 var lname = $("#registerLastName").val();
+                 var email = $("#registerEmail").val();
+                 var password = $("#registerPassword").val();
+                 firebase.auth().createUserWithEmailAndPassword(email, password)
+                         .then(function (user) {
+                             firebase.database().ref().child("users/" + user.user.uid).set({
+                                 firstname: fname,
+                                 lastname: lname,
+                                 email: user.user.email,
+                                 role: "user"
+                             })
+                             alert("Account successfuly created")
+                         })
+                         .catch(function (err) {
+                             console.log(err);
+                             alert(err);
+                         });
              });
-         }
 
-         function parseActiveCourses(user_data) {
+
+             $("#loginForm").on("submit", function (event) {
+                 event.preventDefault();
+                 var email = $("#loginEmail").val();
+                 var password = $("#loginPassword").val();
+                 firebase.auth().signInWithEmailAndPassword(email, password)
+                         .then(function (user) {
+                             console.log(user);
+                             location.reload();
+                             alert("Welcome Back!")
+                         })
+                         .catch(function (err) {
+                             console.log(err);
+                             alert(err);
+                         });
+             });
+
+             $("#logoutbtn").on("click", function () {
+                 firebase.auth().signOut().then(function () {
+                     alert("Goodbye!");
+                     location.reload();
+                 })
+                         .catch(function (error) {
+                             console.log(err);
+                             alert(err);
+                         });
+             });
+
+             firebase.auth().onAuthStateChanged(function (user) {
+                 if (user) {
+                     console.log(user);
+                     var email = user.email;
+                     //document.getElementById("headerlogo").innerHTML = "Welcome Back " + user.email;
+                     /* alert("Welcome " + email); */
+
+                     /* TEDDY EDIT - After verifying user is logged in, add the user's firebase data */
+                     user_data = getUserData();
+                     (async() => {
+                         console.log("waiting for variable");
+                         while(!user_data.hasOwnProperty("api_key")) // define the condition as you like
+                             await new Promise(resolve => setTimeout(resolve, 1000));
+                         console.log("variable is defined");
+                         /* testFunction(); */
+                         console.log(getTerm(Date.now()));
+                         //parseAllCourses(user_data);
+                         parseActiveCourses(user_data);
+                     })();
+                 } else {
+                     // No user is signed in.
+                     console.log("No user");
+                     //alert("Currently logged out");
+                 }
+             });
+         });
+
+
+
+
+
+
+
+
+    //New Courses Page code
+
+    var i = 0;
+    var numOfCourses = 0; // counts how many courses being taken currently
+    var coursesArray = new Array(6); // create array consisting ids for all courses currently taking
+    console.log(coursesArray.length) // 6
+    //document.getElementById("topMessage").innerHTML = "Loading Assignment Information...";
+    //setTimeout(function() { parseActiveCourses(); }, 3000);
+
+    function getTerm(datetime) {
+      var d = new Date(datetime);
+      var y = d.getFullYear();
+      var yy = JSON.stringify(d.getFullYear()).slice(2,4);
+      var term;
+      if ((d.getMonth() > 0) && (d.getMonth() < 6)) {
+          term = yy+"S";
+      } else {
+          term = yy+"F";
+      }
+      var data = {
+          term: term,
+          year: y,
+          month: d.getMonth(),
+          day: d.getDay()
+      };
+      return data;
+    }
+
+    function parseActiveCourses(user_data) {
+             console.log("testing function p1")
              var active_courses = $("#active_courses");
              var today = getTerm(Date.now());
 
              $.each(user_data["courses"], function (i, course) {
                  var course_term = getTerm(course["start_at"]);
                  var course_name = course["name"];
+
+                 var courseID = course["course_id"]; // new stuff
+                 console.log("testing function p2") // test
+
                  var course_url = "https://udel.instructure.com/courses/"+course["course_id"];
-
                  console.log(course_term["year"], today["year"])
-
                  if ((today["year"] === course_term["year"]) || (course_name.includes(today["term"]))) {
                      console.log(course_name);
+                     
+                     console.log(courseID); // test
+                     numOfCourses++; // adds to the counter
+                     document.getElementById("courseName"+numOfCourses).innerHTML = "Course: " + course_name; //print name of course before table
+
                      var li = document.createElement('li');
                      var a = document.createElement('a');
+                     
+                     coursesArray[i] = courseID;  //new stuff
+                     console.log(coursesArray); //print updated array
+                     i++; //new stuff
+                     console.log("testing function p3") // test
+
                      li.setAttribute("class", "list-group-item");
                      a.setAttribute("style", "color: rgb(0, 0, 0);");
                      a.setAttribute("href", course_url);
@@ -467,38 +574,47 @@ a:link {
                      active_courses.append(li);
 
                      if (course["assignments"]) {
-                         parseAssignments(course["assignments"]);
+                         //parseAssignments(course["assignments"]);
                      }
                  }
              });
+             console.log("Final Array");
+             console.log(coursesArray);
+             console.log(coursesArray[28]);
+             console.log(numOfCourses);
+             displayCourseData(user_data, coursesArray);
          }
-
-         function parseAssignments(assignments) {
-             var assignments_div = $("#assignments");
-
-             $.each(assignments, function(i, assignment) {
-                 var assignment_name = assignment["name"];
-                 var assignment_url = assignment["html_url"];
-
-                 console.log(assignment);
-
-                 var li = document.createElement('li');
-                 var a = document.createElement('a');
-
-                 li.setAttribute("class", "list-group-item");
-                 a.setAttribute("style", "color: rgb(0, 0, 0);");
-                 a.setAttribute("href", assignment_url);
-                 a.innerHTML = assignment_name;
-
-                 li.appendChild(a);
-                 assignments_div.append(li);
-             });
+    // to display data
+    function displayCourseData(user_data, coursesArray){
+        console.log(user_data);
+        console.log(coursesArray);
+        var currentCoursesArrayStartLocation = (coursesArray.length - numOfCourses);
+        var coursesArraylength = coursesArray.length;
+        for(var j=currentCoursesArrayStartLocation; j<=coursesArraylength; j++){
+         console.log("made it into loop");
+         //create table
+         $.each(user_data["courses"], function (i, course) {
+           if(course["course_id"]==coursesArray[j]){
+             console.log(course["course_id"]);
+            //var course = course[coursesArray[j]];
+              var assignments = course["assignments"];
+                //var assignments_div = $("#assignments");
+                $.each(assignments, function(i, assignment) {
+                  var assignment_id = assignment["assignment_id"];
+                  var due_at        = assignment["due_at"];
+                  var grading_type  = assignment["grading_type"]
+                  var name          = assignment["name"];
+                  var html_url      = assignment["html_url"];
+                  var newLink = html_url.link(html_url);
+                $("tbody").append(`<tr><td>${assignment_id}</td> <td>${due_at}</td> <td>${grading_type}</td> <td>${name}</td> <td>${newLink}</td></tr>`)
+              });
          }
+        });
+      }
+    }
+    
     </script>
-     <!-- TEDDY EDIT  -->
-        <!-- + Logged In User Data from Firebase DB -->
-        <!-- + Refresh Button Snippet -->
-        <script src="/js/userData.js"></script>
-        <script src="/js/refreshButton.js"></script>
+    <script src="/js/userData.js"></script>
+    <script src="/js/refreshButton.js"></script>
   </body>
 </html>

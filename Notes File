@@ -1,6 +1,15 @@
 This file is for notes/updates only only 
 If you update any code, please list the change below with the date
 
+3/29/21
+
+Algorithm for Courses page
+
+1. create array with all users current courses ID's
+2. cycle through array with for loop and print header ("Assignments for _______") and then table with relevant course data.
+
+
+
 3/1/21
 
 html += ' <label><input type="checkbox" ' + ((event.strikeout) ? 'checked' : '') + '> <span class="fc-time">' + event.start.format('ha') + '</span> ';
