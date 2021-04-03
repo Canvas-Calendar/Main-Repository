@@ -310,7 +310,7 @@ a:link {
 
 
     <header class="header">
-        <a style="color: white;" href="" class="logo">Course:</a>
+        <a style="color: white;" href="" class="logo">View Your Course Information:</a>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <ul class="menu">
@@ -594,22 +594,25 @@ a:link {
          console.log("made it into loop");
          //create table
          $.each(user_data["courses"], function (i, course) {
+           console.log("in loop part1")
            if(course["course_id"]==coursesArray[j]){
+             console.log("in if part1")
              console.log(course["course_id"]);
-            //var course = course[coursesArray[j]];
-              var assignments = course["assignments"];
-                //var assignments_div = $("#assignments");
-                $.each(assignments, function(i, assignment) {
+             var assignments = course["assignments"];
+             //var assignments_div = $("#assignments");
+             console.table(assignments, ['assignment_id', 'due_at', 'grading_type', 'name', 'html_url']);
+             $.each(assignments, function(i, assignment) {
                   var assignment_id = assignment["assignment_id"];
                   var due_at        = assignment["due_at"];
                   var grading_type  = assignment["grading_type"]
                   var name          = assignment["name"];
                   var html_url      = assignment["html_url"];
                   var newLink = html_url.link(html_url);
-                $("tbody").append(`<tr><td>${assignment_id}</td> <td>${due_at}</td> <td>${grading_type}</td> <td>${name}</td> <td>${newLink}</td></tr>`)
-              });
-         }
-        });
+                  console.log(assignment_id);
+                  $("tbody").append(`<tr><td>${assignment_id}</td> <td>${due_at}</td> <td>${grading_type}</td> <td>${name}</td> <td>${newLink}</td></tr>`)
+            });
+          }
+       });
       }
     }
     

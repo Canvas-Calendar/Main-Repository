@@ -29,6 +29,8 @@
     padding-bottom: 50px;
     float: left;
     margin-right: 7in;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .reccomendation-page{
@@ -36,6 +38,8 @@
     padding-bottom: 50px;
     float: right;
     margin-right: 7in;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .upcoming-page{
@@ -43,6 +47,8 @@
     padding-bottom: 50px;
     float: left;
     padding-left: 50px;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .topSection{
