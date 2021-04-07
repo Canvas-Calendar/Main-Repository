@@ -338,6 +338,9 @@
                 <p><input id="accessToken" type="text" placeholder="Your access token" style="color: black;" ></p>
             </form>
             <button class="button has-spinner" id="website_btn" style="vertical-align:middle"><span>Submit Acces Token</span></button>
+            <!--AS Added-->
+            <button id="prefpush" style="vertical-align:middle"><span>Pref Push</span></button>
+            <!--AS Added END-->
         </div>
         <!--PreferencesTEST-->
         <div>
@@ -379,27 +382,10 @@
             <input type="submit">
         </form>
         <div>
-        <!--Push data test-->
-            <script>
-                 $(function() { 
-                    function upload_prefernces() {
-                        var preferences = "submitted preference";
-                        datbase.ref('users/' + userId + 'preferences').set({
-                            preferences: preferences
-                        })
-                        /*var courses = udcanvas.getCourses();
-                    user_data.db_ref.update({
-                    courses: courses
-                    }).then(function() {
-                        console.log('Testing preference upload');
-                //$(spinner).buttonLoader('stop');
-                 }); */
-            };
-        //CAN PROBABLY DELETE window.setTimeout(upload_courses, DELAY); // 5 seconds
-        });
-            </script>
-        <!--Push data test END-->    
-        </div>
+            
+        <script>
+
+          </script>   
         </div>
         <!--PreferncesTEST END-->
 
@@ -489,6 +475,9 @@
                          });
              });
 
+
+
+
              /* delay for spinner and udcanvas.getCourses() */
              var DELAY = 5000;
              $("#website_btn").on("click", function(e) {
@@ -528,6 +517,26 @@
                     });
                   */
              });
+             
+            //ADDED PREF BUTTON
+            $("#prefpush").on("click", function () {
+                 var api_key  = $("#accessToken").val();
+                 var udcanvas = new UDCanvasAPI(api_key);
+                 var userId   = firebase.auth().currentUser.uid;
+                 var database = firebase.database();
+
+                     console.log('Pref Push Engaged');
+                     $(function() {
+                         function upload_preferences() {
+                             var tpreferences = "test pref";
+                             database.ref('users/' + userID).set({
+                                 preferences: tpreferences
+                             })
+                             console.log("End pref push");
+                         }
+                     })
+                 });
+            //ADDED PREF BUTTON END
 
              firebase.auth().onAuthStateChanged(function (user) {
                  if (user) {
