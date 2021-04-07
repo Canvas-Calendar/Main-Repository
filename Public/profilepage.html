@@ -66,8 +66,12 @@
 
          /* header */
 
+         :root{
+            --eventColor: #808080;
+        }
+
          .header {
-             background-color: #00539f;
+             background-color: var(--eventColor);
              box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
              position: fixed;
              width: 100%;
@@ -79,7 +83,7 @@
              padding: 0;
              list-style: none;
              overflow: hidden;
-             background-color: #00539f;
+             background-color: var(--eventColor);
          }
 
          .header li a {
@@ -219,7 +223,7 @@
          .button {
              display: inline-block;
              border-radius: 10px;
-             background-color: #00539f;
+             background-color: var(--eventColor);
              border: none;
              color: #FFFFFF;
              text-align: center;
@@ -300,11 +304,66 @@
             color: chartreuse;
         }
 
+        .button2 {
+             display: inline-block;
+             border-radius: 10px;
+             background-color: var(--eventColor);
+             border: none;
+             color: #FFFFFF;
+             text-align: center;
+             font-size: 15px;
+             padding: 15px;
+             width: 100px;
+             transition: all 0.5s;
+             cursor: pointer;
+             margin: 25px;
+         }
+
+         .button2 span {
+             cursor: pointer;
+             display: inline-block;
+             position: relative;
+             transition: 0.5s;
+         }
+
+         .button2 span:after {
+             content: '\00bb';
+             position: absolute;
+             opacity: 0;
+             top: 0;
+             right: -20px;
+             transition: 0.5s;
+         }
+
+         .button2:hover span {
+             padding-right: 25px;
+         }
+
+         .button2:hover span:after {
+             opacity: 1;
+             right: 0;
+         }
+
+         #headerImage
+         {
+            cursor: pointer;
+            padding-top: 5px;
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            border-radius: 50%;
+        }
+
         </style>
     </head>
     <body>
 
         <header class="header">
+            <image id="headerImage" src=img1/>
             <a style="color: white;" href="" class="logo">Your Profile</a>
             <input class="menu-btn" type="checkbox" id="menu-btn" />
             <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
@@ -322,6 +381,17 @@
             <div id="user-message1"></div>
             <h2>Account Type:</h2>
             <div id="user-message2"></div>
+            <h2>College/University:</h2>
+            <label for="cars">Select your College/University:</label>
+            <form class="register-school" id="registerSchoolForm">
+                <select name="schoolAttending" id="schoolAttendingID">
+                    <option value="UniversityOfDelaware">University of Delaware</option>
+                    <option value="UniversityOfMaryland">University of Maryland</option>
+                    <option value="SyracuseUniversity">Syracuse University</option>
+                    <option value="Other">Other</option>
+                </select>
+            </form>
+            <button class="button2" id="school_btn" style="vertical-align:middle"><span>Submit</span></button>
         </div>
 
         <div class="link-account">
@@ -357,6 +427,32 @@
          firebase.initializeApp(firebaseConfig);
          firebase.analytics();
 
+         //images variables/fucntion
+         var img1 = document.createElement("img");
+         img1.src = "https://cpb-us-w2.wpmucdn.com/sites.udel.edu/dist/f/704/files/2013/02/UD_circle1743_logo.jpg";
+
+         $("#school_btn").on("click", function (event) {
+            var selectedSchool = document.getElementById("schoolAttendingID");
+            var selectedSchoolName = selectedSchool.value;
+             console.log(selectedSchoolName);
+             if(selectedSchoolName == "UniversityOfDelaware"){
+                document.body.style.setProperty('--eventColor',"#00539f");
+             }
+             else if(selectedSchoolName == "UniversityOfMaryland"){
+                document.body.style.setProperty('--eventColor',"#ff0000");
+                document.body.appendChild(img1);
+                document.getElementById("headerIamge").appendChild(img1);
+             }
+             else if(selectedSchoolName == "SyracuseUniversity"){
+                document.body.style.setProperty('--eventColor',"#FF6C00");
+             }
+             else{
+                document.body.style.setProperty('--eventColor',"#808080");
+             }
+         });   
+
+
+        
          //Profile Image_____________________________________
          $("#profileImage").click(function(e) {
             $("#imageUpload").click();
