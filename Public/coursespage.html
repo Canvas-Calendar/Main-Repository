@@ -102,7 +102,7 @@ a {
 
 .header li a:hover,
 .header .menu-btn:hover {
-  background-color: #f4f4f4;
+  background-color: #30b0eb;
 }
 
 .header .logo {
@@ -595,13 +595,13 @@ a:link {
          //create table
          $.each(user_data["courses"], function (i, course) {
            console.log("in loop part1")
-           if(course["course_id"]==coursesArray[j]){
+           if(course["course_id"]===coursesArray[j]){
              console.log("in if part1")
              console.log(course["course_id"]);
              var assignments = course["assignments"];
              //var assignments_div = $("#assignments");
              console.table(assignments, ['assignment_id', 'due_at', 'grading_type', 'name', 'html_url']);
-             $.each(assignments, function(i, assignment) {
+             $.each(assignments, function(k, assignment) {
                   var assignment_id = assignment["assignment_id"];
                   var due_at        = assignment["due_at"];
                   var grading_type  = assignment["grading_type"]

@@ -1,6 +1,42 @@
 This file is for notes/updates only only 
 If you update any code, please list the change below with the date
 
+4/6/21
+
+select: function(start, end) {
+                 var eventType = prompt('Event Type (Please enter one of the following below: Holiday, School, Work, Home, Other):');
+                 if (eventType == "Holiday") {
+                     //alert("it worked holiday")
+                     document.body.style.setProperty('--eventColor',"#ff5733")
+                 }
+                 else if (eventType == "Work") {
+                     //alert("it worked work")
+                     document.body.style.setProperty('--eventColor',"#33ff42")
+                 }
+                 else if (eventType == "Home") {
+                     //alert("it worked home")
+                     document.body.style.setProperty('--eventColor',"#33fff6")
+                 }
+                 else if (eventType == "School") {
+                     //alert("it worked school")
+                     document.body.style.setProperty('--eventColor',"#FAC800")
+                 }
+                 else{
+                     //alert("it worked other")
+                     document.body.style.setProperty('--eventColor',"#000000")
+                 }
+                 var title = prompt('Event Title:');
+                 if (title) {
+                     $('#calendar').fullCalendar('renderEvent', {
+                         title: title, start: start, end: end
+                     }, true);
+                 }
+                 $('#calendar').fullCalendar('unselect');
+             },
+             editable: true,
+             //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
+         });
+
 3/29/21
 
 Algorithm for Courses page

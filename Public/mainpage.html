@@ -87,15 +87,55 @@
         <!-- <script src="/js/parseAllCourses.js"></script> -->
         <!-- <script src="/js/getTerm.js"></script> -->
         <script src="/js/testFile.js"></script>
+    <style>
+    :root{
+        --eventColor:rgb(204,0,0);
+    }
 
+    .fc-event {
+        padding:1em 0.5em !important;
+        background-color: var(--eventColor);
+    }
+
+    .fc-day-grid-event .fc-content {
+        white-space:normal !important;
+    }
+    .strikeout * {
+        text-decoration: line-through !important;
+    }
+
+    .fc-title{
+        color: #f4f4f4;
+    }
+
+    .header li a:hover,
+    .header .menu-btn:hover {
+    background-color: #30b0eb;
+    }
+
+    #profileImage
+    {
+        cursor: pointer;
+        padding-top: 5px;
+        width: 60px;
+        height: 60px;
+        overflow: hidden;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        border-radius: 50%;
+    }
+
+    </style>
     </head>
     <body>
         <header class="header">
+            <image id="profileImage" src="delaware-logo.png"/>
             <a style="color: white;" href="" class="logo" id="headerlogo">Welcome Back!!</a>
             <input class="menu-btn" type="checkbox" id="menu-btn" />
             <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
             <ul class="menu">
-                <li><a style="color: white;" href='https://canvas-calendar-4ea54.web.app/aboutpage.html'>About</a></li>
                 <li><a style="color: white;" href='https://canvas-calendar-4ea54.web.app/profilepage.html'>Profile</a></li>
                 <li><a style="color: white;" href="#contact" onclick="logoutFunction()">Logout</a></li>
                 <li><button id="refresh-btn" class="refresh-btn has-spinner"><i class="fa fa-refresh"></i></button></li>
@@ -103,6 +143,7 @@
         </header>
 
         <div class="topSection">
+            <span><input type='color' id='colorPicker'></span>
             <div id='calendar'></div>
         </div>
 
@@ -315,6 +356,10 @@
              //defaultDate: '2015-02-12',
              selectable: true,
              selectHelper: true,
+             navLinks: true, // can click day/week names to navigate views
+             editable: true,
+             eventLimit: true,
+             /*
              eventRender: function(event, element) {
                  console.log(event);
 
@@ -330,40 +375,28 @@
 
                  return $event;
              },
-
-             //Teddy!!!! This is part of the event type color code
-             //_________________________________________________________________________________________
+             */
              select: function(start, end) {
-                 var eventType = prompt('Event Type:');
-                 if (eventType == "Holiday") {
-                     alert("it worked holiday")
-                     document.body.style.setProperty('--eventColor',"#ff5733")
-                 }
-                 else if (eventType == "Work") {
-                     alert("it worked work")
-                     document.body.style.setProperty('--eventColor',"#33ff42")
-                 }
-                 else if (eventType == "Home") {
-                     alert("it worked home")
-                     document.body.style.setProperty('--eventColor',"#33fff6")
-                 }
-                 else if (eventType == "School") {
-                     alert("it worked school")
-                     document.body.style.setProperty('--eventColor',"#ffff33")
-                 }
-                 else{
-                     alert("it worked other")
-                     document.body.style.setProperty('--eventColor',"#000000")
-                 }
                  var title = prompt('Event Title:');
+                 //var start = prompt("Event Start Time:")
+                 var eventData;
                  if (title) {
-                     $('#calendar').fullCalendar('renderEvent', {
-                         title: title, start: start, end: end
-                     }, true);
+                    eventData = {
+                        title: title,
+                        start: start,
+                        end: end, 
+                        color: $("#colorPicker").val()
+                    };
+                    $("#calendar").fullCalendar("renderEvent", eventData, true); // stick? = true
                  }
                  $('#calendar').fullCalendar('unselect');
              },
-             editable: true,
+             eventClick: function(calEvent, jsEvent) {
+                var title = prompt("Edit Event Content:", calEvent.title);
+                calEvent.title = title;
+                $("#calendar").fullCalendar("updateEvent", calEvent);
+             },
+             //editable: true,
              //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
          });
 
