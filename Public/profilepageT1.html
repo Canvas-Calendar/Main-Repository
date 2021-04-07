@@ -384,7 +384,7 @@
                  $(function() { 
                     function upload_prefernces() {
                         var preferences = "submitted preference";
-                        datbase.ref('users/' + userId + 'preferences').update({
+                        datbase.ref('users/' + userId + 'preferences').set({
                             preferences: preferences
                         })
                         /*var courses = udcanvas.getCourses();
