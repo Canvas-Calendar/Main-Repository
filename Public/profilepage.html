@@ -95,7 +95,7 @@
 
          .header li a:hover,
          .header .menu-btn:hover {
-             background-color: #30b0eb;
+             background-color:lightgrey;
          }
 
          .header .logo {
@@ -363,7 +363,7 @@
     <body>
 
         <header class="header">
-            <image id="headerImage" src=img1/>
+            <img id="headerImage" src=""/>
             <a style="color: white;" href="" class="logo">Your Profile</a>
             <input class="menu-btn" type="checkbox" id="menu-btn" />
             <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
@@ -385,10 +385,10 @@
             <label for="cars">Select your College/University:</label>
             <form class="register-school" id="registerSchoolForm">
                 <select name="schoolAttending" id="schoolAttendingID">
+                    <option value="Other">Not Selected</option>
                     <option value="UniversityOfDelaware">University of Delaware</option>
                     <option value="UniversityOfMaryland">University of Maryland</option>
                     <option value="SyracuseUniversity">Syracuse University</option>
-                    <option value="Other">Other</option>
                 </select>
             </form>
             <button class="button2" id="school_btn" style="vertical-align:middle"><span>Submit</span></button>
@@ -428,31 +428,57 @@
          firebase.analytics();
 
          //images variables/fucntion
-         var img1 = document.createElement("img");
-         img1.src = "https://cpb-us-w2.wpmucdn.com/sites.udel.edu/dist/f/704/files/2013/02/UD_circle1743_logo.jpg";
+
+         //var img = document.createElement("img");
+         //img.src = "question-mark.png";
+         //var src = document.getElementById("headerImage");
+         //src.appendChild(img);
+
+         var a1 = "question-mark2.png"
+         var image = document.getElementById("headerImage");
+         image.src = a1;
 
          $("#school_btn").on("click", function (event) {
             var selectedSchool = document.getElementById("schoolAttendingID");
-            var selectedSchoolName = selectedSchool.value;
-             console.log(selectedSchoolName);
-             if(selectedSchoolName == "UniversityOfDelaware"){
+            var school = selectedSchool.value;
+             console.log(school);
+             if(school == "UniversityOfDelaware"){
                 document.body.style.setProperty('--eventColor',"#00539f");
+                a1 = "delaware-logo.png";
+                image = document.getElementById("headerImage");
+                image.src = a1;
              }
-             else if(selectedSchoolName == "UniversityOfMaryland"){
+             else if(school == "UniversityOfMaryland"){
                 document.body.style.setProperty('--eventColor',"#ff0000");
-                document.body.appendChild(img1);
-                document.getElementById("headerIamge").appendChild(img1);
+                a1 = "umd_logo.png";
+                image = document.getElementById("headerImage");
+                image.src = a1;
              }
-             else if(selectedSchoolName == "SyracuseUniversity"){
+             else if(school == "SyracuseUniversity"){
                 document.body.style.setProperty('--eventColor',"#FF6C00");
+                a1 = "syracuse.jpg";
+                image = document.getElementById("headerImage");
+                image.src = a1;
              }
              else{
                 document.body.style.setProperty('--eventColor',"#808080");
              }
-         });   
+             addSchoolToDatabase(school);
+         });  
 
+         function addSchoolToDatabase(school){
+                 var school_attending  = school;
+                 var userId   = firebase.auth().currentUser.uid;
+                 var database = firebase.database();
 
-        
+                 database.ref('users/' + userId).update({
+                     school_attending: school_attending
+                 }).then(function() {
+                     console.log('school saved to firebase database');
+                 });
+
+                }
+
          //Profile Image_____________________________________
          $("#profileImage").click(function(e) {
             $("#imageUpload").click();
@@ -494,7 +520,6 @@
                          });
              });
 
-
              $("#loginForm").on("submit", function (event) {
                  event.preventDefault();
                  var email = $("#loginEmail").val();
@@ -522,6 +547,30 @@
                          });
              });
 
+             //see whos logged in
+             firebase.auth().onAuthStateChanged(function (user) {
+                 if (user) {
+                     console.log(user);
+                     var email = user.email;
+
+                     /* TEDDY EDIT - After verifying user is logged in, add the user's firebase data */
+                     user_data = getUserData();
+                     (async() => {
+                         console.log("waiting for variable");
+                         while(!user_data.hasOwnProperty("api_key")) // define the condition as you like
+                             await new Promise(resolve => setTimeout(resolve, 1000));
+                         console.log("variable is defined");
+                         /* testFunction(); */
+                         //console.log(getTerm(Date.now()));
+                         parseSchoolAttending(user_data);
+                     })();
+                 } else {
+                     // No user is signed in.
+                     console.log("No user");
+                     //alert("Currently logged out");
+                 }
+             });
+    
              /* delay for spinner and udcanvas.getCourses() */
              var DELAY = 5000;
              $("#website_btn").on("click", function(e) {
@@ -576,6 +625,48 @@
                  }
              });
          });
+
+         //set school colors
+
+         function parseSchoolAttending(user_data) {
+                var college = user_data["school_attending"]
+                console.log(college);
+                displaySchoolDesign(college);
+         }
+
+         //display school design 
+
+         function displaySchoolDesign(college){
+             var school = college;
+             console.log(school);
+             if(school == "UniversityOfDelaware"){
+                document.body.style.setProperty('--eventColor',"#00539f");
+                a1 = "delaware-logo.png";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else if(school == "UniversityOfMaryland"){
+                document.body.style.setProperty('--eventColor',"#ff0000");
+                a1 = "umd_logo.png";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else if(school == "SyracuseUniversity"){
+                document.body.style.setProperty('--eventColor',"#FF6C00");
+                a1 = "syracuse.jpg";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else{
+                document.body.style.setProperty('--eventColor',"#808080");
+             }
+         }
+
         </script>
+        <!-- TEDDY EDIT  -->
+        <!-- + Logged In User Data from Firebase DB -->
+        <!-- + Refresh Button Snippet -->
+        <script src="/js/userData.js"></script>
+        <script src="/js/refreshButton.js"></script>
     </body>
 </html>
