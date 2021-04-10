@@ -375,7 +375,7 @@
 
         <div class="message">
             <h1>Profile</h1>
-            <image id="profileImage" src="blankprofile.jpg"/>
+            <image id="profileImage" src=""/>
             <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
             <h2>Email:</h2>
             <div id="user-message1"></div>
@@ -438,6 +438,10 @@
          var image = document.getElementById("headerImage");
          image.src = a1;
 
+         var a2 = "blankprofile.jpg"
+         var image = document.getElementById("profileImage");
+         image.src = a2;
+
          $("#school_btn").on("click", function (event) {
             var selectedSchool = document.getElementById("schoolAttendingID");
             var school = selectedSchool.value;
@@ -488,11 +492,56 @@
             if ( uploader.files && uploader.files[0] ){
                 $('#profileImage').attr('src', 
                     window.URL.createObjectURL(uploader.files[0]) );
+                    console.log(uploader.files[0]);
+
+                    var file = uploader.files[0];
+                    var user = firebase.auth().currentUser.uid;
+                    // Create a Storage Ref w/ username
+                    var storageRef = firebase.storage().ref(user + '/profilePicture/' + file.name);
+                    // Upload file
+                    var task = storageRef.put(file);
+                    var photoURL = task.snapshot.downloadURL;
+                    console.log("finished function");
+
+                    //console.log(user);
+                    //console.log(storageRef);
+                    //console.log(file);
+                    //document.querySelector('img').src = storageRef;
+                    
+                    storageRef.getDownloadURL().then(function(url){
+                        console.log(url); 
+                        addProfileImageToDatabase(url);
+                    })
+                    
             }
         }
+
+        function addProfileImageToDatabase(url){
+                 var profile_image_url  = url;
+                 var userId   = firebase.auth().currentUser.uid;
+                 var database = firebase.database();
+
+                 database.ref('users/' + userId).update({
+                     profile_image_url: profile_image_url
+                 }).then(function() {
+                     console.log('profile image url saved to firebase database');
+                 });
+
+                }
+
         $("#imageUpload").change(function(){
             fasterPreview( this );
         });
+
+        function showUserProfilePicture(user_data){
+            var profileImageURL = user_data["profile_image_url"]
+            console.log(profileImageURL);
+            a2 = profileImageURL;
+            image = document.getElementById("profileImage");
+            image.src = a2;
+        }
+
+
         //Login ___________________________________________________________
          var accountType = sessionStorage.getItem("accountType");
          document.getElementById("user-message2").innerHTML = accountType;
@@ -563,6 +612,7 @@
                          /* testFunction(); */
                          //console.log(getTerm(Date.now()));
                          parseSchoolAttending(user_data);
+                         showUserProfilePicture(user_data);
                      })();
                  } else {
                      // No user is signed in.
