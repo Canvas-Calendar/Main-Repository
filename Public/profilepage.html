@@ -209,6 +209,27 @@
              float: right;
          }
 
+         /*AS ADDED*/
+         .goodHWTimesC{
+             padding-top: 1in;
+             text-align: center;
+             padding-right: 2in;
+             float: right;
+         }
+        /*Might need a different way to implement this*/
+         .goodHWTimesC:after {
+            content: "";
+            background-color: #000;
+            position: absolute;
+            width: 2px;
+            height: 700px;
+            top: 100px;
+            padding-top: 50px;
+            left: 75%;
+            display: block;
+        }
+         /*AS ADDED END*/
+
          h1{
              margin-top: .25in;
          }
@@ -339,6 +360,20 @@
             </form>
             <button class="button has-spinner" id="website_btn" style="vertical-align:middle"><span>Submit Acces Token</span></button>
         </div>
+        <!--Added here-->
+        <div class="goodHWTimesC">
+            <form class="goodHWTimes" id="goodHWTimes">
+                <input type="checkbox" id="00:00AM" name="00:00AM" value="00:00">
+                    <label for="00:00AM"> 0:00AM-1:00AM </label><br>
+                <input type="checkbox" id="01:00AM" name="01:00AM" value="01:00">
+                    <label for="01:00AM"> 0:00AM-2:00AM </label><br>
+                <input type="checkbox" id="02:00AM" name="02:00AM" value="02:00">
+                    <label for="02:00AM"> 2:00AM-3:00AM </label><br>
+            </form>
+        </div>
+        <!--Added here--> 
+        
+
 
         <script>
          // Your web app's Firebase configuration
