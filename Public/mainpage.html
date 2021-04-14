@@ -87,22 +87,251 @@
         <!-- <script src="/js/parseAllCourses.js"></script> -->
         <!-- <script src="/js/getTerm.js"></script> -->
         <script src="/js/testFile.js"></script>
+    <style>
+     * {
+    padding:0;
+    margin:0;
+}
 
+:root{
+    --eventColor:#808080;
+}
+
+.fc-event {
+    padding:1em 0.5em !important;
+    background-color:red;
+}
+
+.fc-day-grid-event .fc-content {
+    white-space:normal !important;
+}
+.strikeout * {
+    text-decoration: line-through !important;
+}
+
+.fc-title{
+    color: #f4f4f4;
+}
+
+.courses-page{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    float: left;
+    margin-right: 7in;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.reccomendation-page{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    float: right;
+    margin-right: 7in;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.upcoming-page{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    float: left;
+    padding-left: 50px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.topSection{
+    margin-top: 1in;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+
+/* header _________________________________________*/
+
+a {
+    color: rgb(255, 255, 255);
+}
+
+.header {
+    background-color: var(--eventColor);
+    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+    position: fixed;
+    left:0;
+    right:0;
+    top:0;
+    width: 100%;
+    z-index: 3;
+}
+
+.header ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background-color: var(--eventColor);
+}
+
+.header li a {
+    display: block;
+    padding: 20px 20px;
+    border-right: 1px solid #f4f4f4;
+    text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+    background-color:lightgray;
+}
+
+.header .logo {
+    display: block;
+    float: left;
+    font-size: 2em;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+/* menu */
+
+.header .menu {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    padding: 28px 20px;
+    position: relative;
+    user-select: none;
+}
+
+.header .menu-icon .navicon {
+    background: #333;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+    background: #333;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+    top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+    top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+    display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+    max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+    background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+    transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+    transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+    top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+    .header li {
+        float: left;
+    }
+    .header li a {
+        padding: 20px 30px;
+    }
+    .header .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
+    .header .menu-icon {
+        display: none;
+    }
+}
+
+/*Button*/
+.refresh-btn {
+    background-color: var(--eventColor);
+    border: none;
+    color: white;
+    padding: 15px 15px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.refresh-btn:hover {
+    color: rgb(30, 192, 30);
+}   
+
+
+    #headerImage
+    {
+        cursor: pointer;
+        padding-top: 5px;
+        width: 60px;
+        height: 60px;
+        overflow: hidden;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        border-radius: 50%;
+    }
+
+    </style>
     </head>
     <body>
         <header class="header">
+            <image id="headerImage" src=""/>
             <a style="color: white;" href="" class="logo" id="headerlogo">Welcome Back!!</a>
             <input class="menu-btn" type="checkbox" id="menu-btn" />
             <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
             <ul class="menu">
-                <li><a href='https://canvas-calendar-4ea54.web.app/aboutpage.html'>About</a></li>
-                <li><a href='https://canvas-calendar-4ea54.web.app/profilepage.html'>Profile</a></li>
-                <li><a href="#contact" onclick="logoutFunction()">Logout</a></li>
+                <li><a style="color: white;" href='https://canvas-calendar-4ea54.web.app/profilepage.html'>Profile</a></li>
+                <li><a style="color: white;" href="#contact" onclick="logoutFunction()">Logout</a></li>
                 <li><button id="refresh-btn" class="refresh-btn has-spinner"><i class="fa fa-refresh"></i></button></li>
             </ul>
         </header>
 
         <div class="topSection">
+            <span><input type='color' id='colorPicker'></span>
             <div id='calendar'></div>
         </div>
 
@@ -147,7 +376,7 @@
             <div class="courses-page" style="float: left;">
                 <div class="card" style="width: 302px;"> 
                     <div class="card-header" style="width: 300px;">
-                        <h4>Active Courses</h4> 
+                        <h4><a style="color: black;" href="https://canvas-calendar-4ea54.web.app/coursespage.html">Active Courses</a></h4> 
                     </div>
                     <ul id="active_courses" class="list-group list-group-flush">
                         <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li> -->
@@ -193,6 +422,10 @@
          // Initialize Firebase
          firebase.initializeApp(firebaseConfig);
          firebase.analytics();
+
+         var a1 = "question-mark2.png"
+         var image = document.getElementById("headerImage");
+         image.src = a1;
 
          // Logout Code _________________________________________________
 
@@ -266,6 +499,7 @@
                          console.log(getTerm(Date.now()));
                          parseAllCourses(user_data);
                          parseActiveCourses(user_data);
+                         parseSchoolAttending(user_data);
                      })();
                  } else {
                      // No user is signed in.
@@ -276,7 +510,6 @@
          });
 
          var accountType = sessionStorage.getItem("accountType");
-
          function logoutFunction(){
              if(accountType == "Google"){
                  signOut();
@@ -316,6 +549,10 @@
              //defaultDate: '2015-02-12',
              selectable: true,
              selectHelper: true,
+             navLinks: true, // can click day/week names to navigate views
+             editable: true,
+             eventLimit: true,
+             /*
              eventRender: function(event, element) {
                  console.log(event);
 
@@ -331,40 +568,28 @@
 
                  return $event;
              },
-
-             //Teddy!!!! This is part of the event type color code
-             //_________________________________________________________________________________________
+             */
              select: function(start, end) {
-                 var eventType = prompt('Event Type:');
-                 if (eventType == "Holiday") {
-                     alert("it worked holiday")
-                     document.body.style.setProperty('--eventColor',"#ff5733")
-                 }
-                 else if (eventType == "Work") {
-                     alert("it worked work")
-                     document.body.style.setProperty('--eventColor',"#33ff42")
-                 }
-                 else if (eventType == "Home") {
-                     alert("it worked home")
-                     document.body.style.setProperty('--eventColor',"#33fff6")
-                 }
-                 else if (eventType == "School") {
-                     alert("it worked school")
-                     document.body.style.setProperty('--eventColor',"#ffff33")
-                 }
-                 else{
-                     alert("it worked other")
-                     document.body.style.setProperty('--eventColor',"#000000")
-                 }
                  var title = prompt('Event Title:');
+                 //var start = prompt("Event Start Time:")
+                 var eventData;
                  if (title) {
-                     $('#calendar').fullCalendar('renderEvent', {
-                         title: title, start: start, end: end
-                     }, true);
+                    eventData = {
+                        title: title,
+                        start: start,
+                        end: end, 
+                        color: $("#colorPicker").val()
+                    };
+                    $("#calendar").fullCalendar("renderEvent", eventData, true); // stick? = true
                  }
                  $('#calendar').fullCalendar('unselect');
              },
-             editable: true,
+             eventClick: function(calEvent, jsEvent) {
+                var title = prompt("Edit Event Content:", calEvent.title);
+                calEvent.title = title;
+                $("#calendar").fullCalendar("updateEvent", calEvent);
+             },
+             //editable: true,
              //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
          });
 
@@ -404,12 +629,41 @@
          });
 
 
+         //get school attending
 
+         function parseSchoolAttending(user_data) {
+                var college = user_data["school_attending"]
+                console.log(college);
+                displaySchoolDesign(college);
+         }
 
+         //display school design 
 
-
-
-
+         function displaySchoolDesign(college){
+            var school = college;
+             console.log(school);
+             if(school == "UniversityOfDelaware"){
+                document.body.style.setProperty('--eventColor',"#00539f");
+                a1 = "delaware-logo.png";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else if(school == "UniversityOfMaryland"){
+                document.body.style.setProperty('--eventColor',"#ff0000");
+                a1 = "umd_logo.png";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else if(school == "SyracuseUniversity"){
+                document.body.style.setProperty('--eventColor',"#FF6C00");
+                a1 = "syracuse.jpg";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else{
+                document.body.style.setProperty('--eventColor',"#808080");
+             }
+         }
 
          function getTerm(datetime) {
              /* Determine the academic term using the courses datetime.
@@ -508,6 +762,8 @@
 
                  li.appendChild(a);
                  assignments_div.append(li);
+
+                 
              });
          }
 

@@ -66,8 +66,12 @@
 
          /* header */
 
+         :root{
+            --eventColor: #808080;
+        }
+
          .header {
-             background-color: #00539f;
+             background-color: var(--eventColor);
              box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
              position: fixed;
              width: 100%;
@@ -79,7 +83,7 @@
              padding: 0;
              list-style: none;
              overflow: hidden;
-             background-color: #00539f;
+             background-color: var(--eventColor);
          }
 
          .header li a {
@@ -91,7 +95,7 @@
 
          .header li a:hover,
          .header .menu-btn:hover {
-             background-color: #f4f4f4;
+             background-color:lightgrey;
          }
 
          .header .logo {
@@ -240,7 +244,7 @@
          .button {
              display: inline-block;
              border-radius: 10px;
-             background-color: #00539f;
+             background-color: var(--eventColor);
              border: none;
              color: #FFFFFF;
              text-align: center;
@@ -321,28 +325,94 @@
             color: chartreuse;
         }
 
+        .button2 {
+             display: inline-block;
+             border-radius: 10px;
+             background-color: var(--eventColor);
+             border: none;
+             color: #FFFFFF;
+             text-align: center;
+             font-size: 15px;
+             padding: 15px;
+             width: 100px;
+             transition: all 0.5s;
+             cursor: pointer;
+             margin: 25px;
+         }
+
+         .button2 span {
+             cursor: pointer;
+             display: inline-block;
+             position: relative;
+             transition: 0.5s;
+         }
+
+         .button2 span:after {
+             content: '\00bb';
+             position: absolute;
+             opacity: 0;
+             top: 0;
+             right: -20px;
+             transition: 0.5s;
+         }
+
+         .button2:hover span {
+             padding-right: 25px;
+         }
+
+         .button2:hover span:after {
+             opacity: 1;
+             right: 0;
+         }
+
+         #headerImage
+         {
+            cursor: pointer;
+            padding-top: 5px;
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            border-radius: 50%;
+        }
+
         </style>
     </head>
     <body>
 
         <header class="header">
+            <img id="headerImage" src=""/>
             <a style="color: white;" href="" class="logo">Your Profile</a>
             <input class="menu-btn" type="checkbox" id="menu-btn" />
             <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
             <ul class="menu">
-                <li><a href="javascript:history.go(-1)">Back</a></li>
+                <li><a style="color: white;" href="javascript:history.go(-1)">Back</a></li>
             </ul>
         </header>
 
 
         <div class="message">
             <h1>Profile</h1>
-            <image id="profileImage" src="blankprofile.jpg"/>
+            <image id="profileImage" src=""/>
             <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
             <h2>Email:</h2>
             <div id="user-message1"></div>
             <h2>Account Type:</h2>
             <div id="user-message2"></div>
+            <h2>College/University:</h2>
+            <label for="cars">Select your College/University:</label>
+            <form class="register-school" id="registerSchoolForm">
+                <select name="schoolAttending" id="schoolAttendingID">
+                    <option value="Other">Not Selected</option>
+                    <option value="UniversityOfDelaware">University of Delaware</option>
+                    <option value="UniversityOfMaryland">University of Maryland</option>
+                    <option value="SyracuseUniversity">Syracuse University</option>
+                </select>
+            </form>
+            <button class="button2" id="school_btn" style="vertical-align:middle"><span>Submit</span></button>
         </div>
 
         <div class="link-account">
@@ -392,6 +462,62 @@
          firebase.initializeApp(firebaseConfig);
          firebase.analytics();
 
+         //images variables/fucntion
+
+         //var img = document.createElement("img");
+         //img.src = "question-mark.png";
+         //var src = document.getElementById("headerImage");
+         //src.appendChild(img);
+
+         var a1 = "question-mark2.png"
+         var image = document.getElementById("headerImage");
+         image.src = a1;
+
+         var a2 = "blankprofile.jpg"
+         var image = document.getElementById("profileImage");
+         image.src = a2;
+
+         $("#school_btn").on("click", function (event) {
+            var selectedSchool = document.getElementById("schoolAttendingID");
+            var school = selectedSchool.value;
+             console.log(school);
+             if(school == "UniversityOfDelaware"){
+                document.body.style.setProperty('--eventColor',"#00539f");
+                a1 = "delaware-logo.png";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else if(school == "UniversityOfMaryland"){
+                document.body.style.setProperty('--eventColor',"#ff0000");
+                a1 = "umd_logo.png";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else if(school == "SyracuseUniversity"){
+                document.body.style.setProperty('--eventColor',"#FF6C00");
+                a1 = "syracuse.jpg";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else{
+                document.body.style.setProperty('--eventColor',"#808080");
+             }
+             addSchoolToDatabase(school);
+         });  
+
+         function addSchoolToDatabase(school){
+                 var school_attending  = school;
+                 var userId   = firebase.auth().currentUser.uid;
+                 var database = firebase.database();
+
+                 database.ref('users/' + userId).update({
+                     school_attending: school_attending
+                 }).then(function() {
+                     console.log('school saved to firebase database');
+                 });
+
+                }
+
          //Profile Image_____________________________________
          $("#profileImage").click(function(e) {
             $("#imageUpload").click();
@@ -401,11 +527,56 @@
             if ( uploader.files && uploader.files[0] ){
                 $('#profileImage').attr('src', 
                     window.URL.createObjectURL(uploader.files[0]) );
+                    console.log(uploader.files[0]);
+
+                    var file = uploader.files[0];
+                    var user = firebase.auth().currentUser.uid;
+                    // Create a Storage Ref w/ username
+                    var storageRef = firebase.storage().ref(user + '/profilePicture/' + file.name);
+                    // Upload file
+                    var task = storageRef.put(file);
+                    var photoURL = task.snapshot.downloadURL;
+                    console.log("finished function");
+
+                    //console.log(user);
+                    //console.log(storageRef);
+                    //console.log(file);
+                    //document.querySelector('img').src = storageRef;
+                    
+                    storageRef.getDownloadURL().then(function(url){
+                        console.log(url); 
+                        addProfileImageToDatabase(url);
+                    })
+                    
             }
         }
+
+        function addProfileImageToDatabase(url){
+                 var profile_image_url  = url;
+                 var userId   = firebase.auth().currentUser.uid;
+                 var database = firebase.database();
+
+                 database.ref('users/' + userId).update({
+                     profile_image_url: profile_image_url
+                 }).then(function() {
+                     console.log('profile image url saved to firebase database');
+                 });
+
+                }
+
         $("#imageUpload").change(function(){
             fasterPreview( this );
         });
+
+        function showUserProfilePicture(user_data){
+            var profileImageURL = user_data["profile_image_url"]
+            console.log(profileImageURL);
+            a2 = profileImageURL;
+            image = document.getElementById("profileImage");
+            image.src = a2;
+        }
+
+
         //Login ___________________________________________________________
          var accountType = sessionStorage.getItem("accountType");
          document.getElementById("user-message2").innerHTML = accountType;
@@ -432,7 +603,6 @@
                              alert(err);
                          });
              });
-
 
              $("#loginForm").on("submit", function (event) {
                  event.preventDefault();
@@ -461,6 +631,31 @@
                          });
              });
 
+             //see whos logged in
+             firebase.auth().onAuthStateChanged(function (user) {
+                 if (user) {
+                     console.log(user);
+                     var email = user.email;
+
+                     /* TEDDY EDIT - After verifying user is logged in, add the user's firebase data */
+                     user_data = getUserData();
+                     (async() => {
+                         console.log("waiting for variable");
+                         while(!user_data.hasOwnProperty("api_key")) // define the condition as you like
+                             await new Promise(resolve => setTimeout(resolve, 1000));
+                         console.log("variable is defined");
+                         /* testFunction(); */
+                         //console.log(getTerm(Date.now()));
+                         parseSchoolAttending(user_data);
+                         showUserProfilePicture(user_data);
+                     })();
+                 } else {
+                     // No user is signed in.
+                     console.log("No user");
+                     //alert("Currently logged out");
+                 }
+             });
+    
              /* delay for spinner and udcanvas.getCourses() */
              var DELAY = 5000;
              $("#website_btn").on("click", function(e) {
@@ -515,6 +710,48 @@
                  }
              });
          });
+
+         //set school colors
+
+         function parseSchoolAttending(user_data) {
+                var college = user_data["school_attending"]
+                console.log(college);
+                displaySchoolDesign(college);
+         }
+
+         //display school design 
+
+         function displaySchoolDesign(college){
+             var school = college;
+             console.log(school);
+             if(school == "UniversityOfDelaware"){
+                document.body.style.setProperty('--eventColor',"#00539f");
+                a1 = "delaware-logo.png";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else if(school == "UniversityOfMaryland"){
+                document.body.style.setProperty('--eventColor',"#ff0000");
+                a1 = "umd_logo.png";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else if(school == "SyracuseUniversity"){
+                document.body.style.setProperty('--eventColor',"#FF6C00");
+                a1 = "syracuse.jpg";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else{
+                document.body.style.setProperty('--eventColor',"#808080");
+             }
+         }
+
         </script>
+        <!-- TEDDY EDIT  -->
+        <!-- + Logged In User Data from Firebase DB -->
+        <!-- + Refresh Button Snippet -->
+        <script src="/js/userData.js"></script>
+        <script src="/js/refreshButton.js"></script>
     </body>
 </html>
