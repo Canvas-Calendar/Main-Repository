@@ -113,38 +113,12 @@
     color: #f4f4f4;
 }
 
-.courses-page{
-    padding-top: 50px;
-    padding-bottom: 50px;
-    float: left;
-    margin-right: 7in;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
-.reccomendation-page{
-    padding-top: 50px;
-    padding-bottom: 50px;
-    float: right;
-    margin-right: 7in;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
-.upcoming-page{
-    padding-top: 50px;
-    padding-bottom: 50px;
-    float: left;
-    padding-left: 50px;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
 .topSection{
     margin-top: 1in;
     padding-left: 50px;
     padding-right: 50px;
 }
+
 
 
 /* header _________________________________________*/
@@ -314,6 +288,25 @@ a {
         -o-border-radius: 50%;
         border-radius: 50%;
     }
+ 
+ #bottomSection {
+  width:600px;
+  clear:both;
+  }
+ #first {
+  width:200px;
+  float:left;
+  padding-left: 50px;
+}
+#second { 
+  width:200px;
+  float:left;
+}
+#third { 
+  width:200px;
+  float:left;
+  padding-right: 50px;
+}
 
     </style>
     </head>
@@ -346,24 +339,21 @@ a {
             </ul>
         </div>
 
-
+        
         <div class="bottomSection">
+            <!--
             <div class="upcoming-page" style="float: left;">
                 <div class="card" style="width: 302px;"> 
                     <div class="card-header" style="width: 300px;">
                         <h4>Today's Schedule</h4> 
                     </div>
                     <ul id="today_schedule" class="list-group list-group-flush">
-                        <!-- <li class="list-group-item">CPEG 494 - Practical 5</li> -->
-                        <!-- <li class="list-group-item">CISC 361 - Lab 6 Phase 3</li> -->
-                        <!-- <li class="list-group-item">CPEG 496 - Mini Practical</li> -->
-                        <!-- <li class="list-group-item">CPEG 419 - HW 4a</li> -->
-                        <!-- <li class="list-group-item">CPEG 498 - Final Presentation</li> -->
+                        
                     </ul>
                 </div>
-            </div>
-
-            <div class="courses-page" style="float: left;">
+            </div> 
+         -->
+            <div class="all-courses-page" id="first">
                 <div class="card" style="width: 302px;"> 
                     <div class="card-header" style="width: 300px;">
                         <h4>All Courses</h4> 
@@ -373,7 +363,7 @@ a {
                 </div>
             </div>
 
-            <div class="courses-page" style="float: left;">
+            <div class="courses-page" id="second">
                 <div class="card" style="width: 302px;"> 
                     <div class="card-header" style="width: 300px;">
                         <h4><a style="color: black;" href="https://canvas-calendar-4ea54.web.app/coursespage.html">Active Courses</a></h4> 
@@ -387,8 +377,8 @@ a {
                     </ul>
                 </div>
             </div>
-
-            <div class="reccomendation-page" style="float: left;">
+         
+            <div class="assignments-page" id="third">
                 <div class="card" style="width: 302px;"> 
                     <div class="card-header" style="width: 300px;">
                         <h4>Assignments</h4> 
@@ -426,6 +416,9 @@ a {
          var a1 = "question-mark2.png"
          var image = document.getElementById("headerImage");
          image.src = a1;
+
+         // events array
+         var eventsArray = new Array();
 
          // Logout Code _________________________________________________
 
@@ -500,6 +493,8 @@ a {
                          parseAllCourses(user_data);
                          parseActiveCourses(user_data);
                          parseSchoolAttending(user_data);
+                         addEventsBackIntoArray(user_data);
+                         displayEvents(user_data);
                      })();
                  } else {
                      // No user is signed in.
@@ -540,6 +535,21 @@ a {
          }
 
          // calendar Code ________________________________________________________________________
+
+         function addEventsBackIntoArray(user_data){ 
+            var calendarDataToBeAdded = user_data["events"];
+            for(var i=0; i<=calendarDataToBeAdded.length; i++){
+                console.log(calendarDataToBeAdded.length);
+                console.log(calendarDataToBeAdded[i]);
+                if(calendarDataToBeAdded[i] != null){
+                    eventsArray.push(calendarDataToBeAdded[i]);
+                }
+                else{
+                    console.log("no events added");
+                }
+            }
+         }
+
          $('#calendar').fullCalendar({
              header: {
                  left: 'prev,next today',
@@ -583,6 +593,8 @@ a {
                     $("#calendar").fullCalendar("renderEvent", eventData, true); // stick? = true
                  }
                  $('#calendar').fullCalendar('unselect');
+                 eventsArray.push(eventData);
+                 addEventsToDatabase(eventsArray);
              },
              eventClick: function(calEvent, jsEvent) {
                 var title = prompt("Edit Event Content:", calEvent.title);
@@ -592,6 +604,51 @@ a {
              //editable: true,
              //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
          });
+         
+
+         /*
+         function addAssignmentEventsToDatbase(assignments){
+            $.each(assignments, function(i, assignment) {
+                var eventData;
+                var title = assignment["name"];
+                var start = assignment["due_at"]
+                console.log(assignment); 
+                if(name){
+                    eventData = {
+                        title: title,
+                        start: start,
+                        end: end,
+                        color: '#FF0000'
+                    }
+                } 
+                eventsArray.push(eventData);
+                addEventsToDatabase(eventsArray);
+             });
+         }
+         */
+
+         function addEventsToDatabase(eventsArray){
+                 //console.log(title);
+                 console.log(eventsArray);
+                 var events = eventsArray;
+                 //var event_data = eventData;
+                 var userId   = firebase.auth().currentUser.uid;
+                 var database = firebase.database();
+
+                 database.ref('users/' + userId).update({
+                     events: events
+                 }).then(function() {
+                     
+                });
+        } 
+
+        function displayEvents(user_data){
+            var calendarData = user_data["events"];
+            console.log(calendarData);
+            for(var i=0; i<=calendarData.length; i++){
+                $("#calendar").fullCalendar("renderEvent", calendarData[i], true); // render events
+            }
+        }
 
 
          /*
@@ -738,6 +795,7 @@ a {
 
                      if (course["assignments"]) {
                          parseAssignments(course["assignments"]);
+                         //addAssignmentEventsToDatbase(course["assignments"]);
                      }
                  }
              });

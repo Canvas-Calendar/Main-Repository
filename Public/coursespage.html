@@ -76,9 +76,12 @@ a {
 
 
 /* header */
+:root{
+    --eventColor:#808080;
+}
 
 .header {
-  background-color: #00539f;
+  background-color: var(--eventColor);
   box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
   position: fixed;
   width: 100%;
@@ -90,7 +93,7 @@ a {
   padding: 0;
   list-style: none;
   overflow: hidden;
-  background-color: #00539f;
+  background-color: var(--eventColor);
 }
 
 .header li a {
@@ -102,7 +105,7 @@ a {
 
 .header li a:hover,
 .header .menu-btn:hover {
-  background-color: #30b0eb;
+  background-color: lightgray;
 }
 
 .header .logo {
@@ -239,7 +242,7 @@ h4{
 .button {
   display: inline-block;
   border-radius: 10px;
-  background-color: #00539f;
+  background-color: var(--eventColor);
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -303,6 +306,20 @@ a:link {
   padding-bottom: .5in;
 }
 
+#headerImage
+    {
+        cursor: pointer;
+        padding-top: 5px;
+        width: 60px;
+        height: 60px;
+        overflow: hidden;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        border-radius: 50%;
+    }
+
     </style>
   </head>
 
@@ -310,6 +327,7 @@ a:link {
 
 
     <header class="header">
+        <image id="headerImage" src=""/>
         <a style="color: white;" href="" class="logo">View Your Course Information:</a>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
@@ -397,6 +415,11 @@ a:link {
          // Initialize Firebase
          firebase.initializeApp(firebaseConfig);
          firebase.analytics();
+
+         var a1 = "question-mark2.png"
+         var image = document.getElementById("headerImage");
+         image.src = a1;
+
 
    /*
     document.getElementById("topMessage").innerHTML = "Loading Assignment Information...";
@@ -492,6 +515,7 @@ a:link {
                          console.log(getTerm(Date.now()));
                          //parseAllCourses(user_data);
                          parseActiveCourses(user_data);
+                         parseSchoolAttending(user_data);
                      })();
                  } else {
                      // No user is signed in.
@@ -582,7 +606,7 @@ a:link {
              console.log(coursesArray);
              console.log(coursesArray[28]);
              console.log(numOfCourses);
-             displayCourseData(user_data, coursesArray);
+             //displayCourseData(user_data, coursesArray);
          }
     // to display data
     function displayCourseData(user_data, coursesArray){
@@ -615,6 +639,42 @@ a:link {
        });
       }
     }
+
+    //get school attending
+
+    function parseSchoolAttending(user_data) {
+                var college = user_data["school_attending"]
+                console.log(college);
+                displaySchoolDesign(college);
+         }
+
+         //display school design 
+
+         function displaySchoolDesign(college){
+            var school = college;
+             console.log(school);
+             if(school == "UniversityOfDelaware"){
+                document.body.style.setProperty('--eventColor',"#00539f");
+                a1 = "delaware-logo.png";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else if(school == "UniversityOfMaryland"){
+                document.body.style.setProperty('--eventColor',"#ff0000");
+                a1 = "umd_logo.png";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else if(school == "SyracuseUniversity"){
+                document.body.style.setProperty('--eventColor',"#FF6C00");
+                a1 = "syracuse.jpg";
+                image = document.getElementById("headerImage");
+                image.src = a1;
+             }
+             else{
+                document.body.style.setProperty('--eventColor',"#808080");
+             }
+         }
     
     </script>
     <script src="/js/userData.js"></script>
