@@ -155,7 +155,7 @@ a {
 
 .header li a:hover,
 .header .menu-btn:hover {
-    background-color:lightgray;
+    background-color:lightgrey;
 }
 
 .header .logo {
@@ -308,6 +308,83 @@ a {
   padding-right: 50px;
 }
 
+  /*Popup*/
+  /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 99 !important;
+  padding-top: 200px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 500px; /* Full width */
+  height: 750px; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color:lightgrey;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+
+/* The Close Button */
+.close {
+  color: #ff0000;
+  float: left;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.user-message-title{
+  font-weight: bold;
+  font-size: 50px;
+}
+
+
+.button {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: #c42700;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 5px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  margin-left: 75px;
+}
+
+
+.button:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+
+
+
     </style>
     </head>
     <body>
@@ -324,6 +401,24 @@ a {
         </header>
 
         <div class="topSection">
+
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <div id="user-message-title" style="font-size: 30px;"></div>
+                  <h1>Start:</h1>
+                  <div id="user-message-start"></div>
+                  <h1>End:</h1>
+                  <div id="user-message-end"></div>
+                  <h1>Description:</h1>
+                  <div id="user-message-description" style="padding-bottom: 20px;"></div>
+                  <button class="button" id="deleteEventBtn" style="vertical-align:middle"><span>Delete Event</span></button>
+                </div>
+              
+              </div>
+
             <span><input type='color' id='colorPicker'></span>
             <div id='calendar'></div>
         </div>
@@ -419,10 +514,17 @@ a {
 
          // events array
          var eventsArray = new Array();
+         var eventsAssignmentsArray = new Array();
+
+         //event click popup variables
+         // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
 
          // Logout Code _________________________________________________
-
-
          $(document).ready(function () {
              $("#registerForm").on("submit", function (event) {
                  event.preventDefault();
@@ -490,11 +592,14 @@ a {
                          console.log("variable is defined");
                          /* testFunction(); */
                          console.log(getTerm(Date.now()));
+                    
                          parseAllCourses(user_data);
                          parseActiveCourses(user_data);
                          parseSchoolAttending(user_data);
                          addEventsBackIntoArray(user_data);
                          displayEvents(user_data);
+                         displayAssignmentEvents(user_data)
+                         
                      })();
                  } else {
                      // No user is signed in.
@@ -538,15 +643,20 @@ a {
 
          function addEventsBackIntoArray(user_data){ 
             var calendarDataToBeAdded = user_data["events"];
-            for(var i=0; i<=calendarDataToBeAdded.length; i++){
-                console.log(calendarDataToBeAdded.length);
-                console.log(calendarDataToBeAdded[i]);
-                if(calendarDataToBeAdded[i] != null){
-                    eventsArray.push(calendarDataToBeAdded[i]);
+            if(calendarDataToBeAdded[0] != null){
+                for(var i=0; i<=calendarDataToBeAdded.length; i++){
+                    console.log(calendarDataToBeAdded.length);
+                    console.log(calendarDataToBeAdded[i]);
+                    if(calendarDataToBeAdded[i] != null){
+                        eventsArray.push(calendarDataToBeAdded[i]);
+                    }   
+                    else{
+                        console.log("no events added");
+                    }
                 }
-                else{
-                    console.log("no events added");
-                }
+            }
+            else{
+                console.log("no events exist");
             }
          }
 
@@ -581,6 +691,7 @@ a {
              */
              select: function(start, end) {
                  var title = prompt('Event Title:');
+                 var description = prompt('Event Description:');
                  //var start = prompt("Event Start Time:")
                  var eventData;
                  if (title) {
@@ -588,6 +699,7 @@ a {
                         title: title,
                         start: start,
                         end: end, 
+                        description: description,
                         color: $("#colorPicker").val()
                     };
                     $("#calendar").fullCalendar("renderEvent", eventData, true); // stick? = true
@@ -596,36 +708,66 @@ a {
                  eventsArray.push(eventData);
                  addEventsToDatabase(eventsArray);
              },
+             
+             eventClick: function(calEvent, jsEvent) {
+                modal.style.display = "block";
+                var displayTitle = calEvent.title;
+                var displayStart = calEvent.start;
+                var displayEnd = calEvent.end;
+                var displayDescription = calEvent.description;
+                displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription);
+             },
+             
+             /*
              eventClick: function(calEvent, jsEvent) {
                 var title = prompt("Edit Event Content:", calEvent.title);
                 calEvent.title = title;
                 $("#calendar").fullCalendar("updateEvent", calEvent);
              },
-             //editable: true,
+             */
              //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
          });
          
-
-         /*
-         function addAssignmentEventsToDatbase(assignments){
+         function createAssignmentEvents(assignments){
             $.each(assignments, function(i, assignment) {
                 var eventData;
                 var title = assignment["name"];
-                var start = assignment["due_at"]
-                console.log(assignment); 
-                if(name){
-                    eventData = {
-                        title: title,
-                        start: start,
-                        end: end,
-                        color: '#FF0000'
-                    }
-                } 
-                eventsArray.push(eventData);
-                addEventsToDatabase(eventsArray);
+                var start = assignment["due_at"];
+                var end = assignment["due_at"];
+                var description = assignment["description"];
+                if(start != null){
+                    console.log(title); 
+                    console.log(start);
+                    console.log(end);
+                    if(title){
+                        eventData = {
+                            title: title,
+                            start: start,
+                            end: end,
+                            description: description,
+                            color: '#FF0000'
+                        }
+                    } 
+                    eventsAssignmentsArray.push(eventData);
+                    addAssignmentEventsToDatabase(eventsAssignmentsArray);
+                }
+                else{
+                    console.log("function failed")
+                }
              });
          }
-         */
+         
+         function addAssignmentEventsToDatabase(eventsAssignmentsArray){
+            console.log(eventsAssignmentsArray);
+            var assignment_events = eventsAssignmentsArray;
+            var userId   = firebase.auth().currentUser.uid;
+            var database = firebase.database();
+            database.ref('users/' + userId).update({
+                assignment_events: assignment_events
+            }).then(function() {
+                     
+            });
+         }
 
          function addEventsToDatabase(eventsArray){
                  //console.log(title);
@@ -648,6 +790,27 @@ a {
             for(var i=0; i<=calendarData.length; i++){
                 $("#calendar").fullCalendar("renderEvent", calendarData[i], true); // render events
             }
+        }
+
+        function displayAssignmentEvents(user_data){
+            var assignmentEventData = user_data["assignment_events"];
+            console.log(assignmentEventData);
+            for(var i=0; i<=assignmentEventData.length; i++){
+                $("#calendar").fullCalendar("renderEvent", assignmentEventData[i], true); // render events
+            }
+        }
+
+        //when clicked
+        function displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription){
+            var showTitle = displayTitle;
+            var showStart = displayStart;
+            var showEnd = displayEnd;
+            var showDescription = displayDescription;
+            document.getElementById("user-message-title").innerHTML = showTitle;
+            document.getElementById("user-message-start").innerHTML = showStart;
+            document.getElementById("user-message-end").innerHTML = showEnd;
+            document.getElementById("user-message-description").innerHTML = showDescription;
+            
         }
 
 
@@ -685,6 +848,14 @@ a {
              $("#calendar").fullCalendar('renderEvent', event, true);
          });
 
+         $("#deleteEventBtn").on("click", function () {
+            modal.style.display = "none";
+            //deleteEventFromDatabase(user_data);
+         }); 
+
+         //function deleteEventFromDatabase(user_data){
+         //    console.log(calEvent.title);
+         //}
 
          //get school attending
 
@@ -795,7 +966,7 @@ a {
 
                      if (course["assignments"]) {
                          parseAssignments(course["assignments"]);
-                         //addAssignmentEventsToDatbase(course["assignments"]);
+                         createAssignmentEvents(course["assignments"]);
                      }
                  }
              });
@@ -825,10 +996,18 @@ a {
              });
          }
 
+         //pop up code
+         // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
 
-
-
-
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
         </script>
 
         <!-- TEDDY EDIT  -->
