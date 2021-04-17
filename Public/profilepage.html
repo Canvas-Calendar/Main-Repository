@@ -232,6 +232,59 @@
             left: 75%;
             display: block;
         }
+        .button3 {
+             display: inline-block;
+             border-radius: 10px;
+             background-color: var(--eventColor);
+             border: none;
+             color: #FFFFFF;
+             text-align: center;
+             font-size: 15px;
+             padding: 15px;
+             width: 100px;
+             transition: all 0.5s;
+             cursor: pointer;
+             margin: 25px;
+         }
+
+         .button3 span {
+             cursor: pointer;
+             display: inline-block;
+             position: relative;
+             transition: 0.5s;
+         }
+
+         .button3 span:after {
+             content: '\00bb';
+             position: absolute;
+             opacity: 0;
+             top: 0;
+             right: -20px;
+             transition: 0.5s;
+         }
+
+         .button3:hover span {
+             padding-right: 25px;
+         }
+
+         .button3:hover span:after {
+             opacity: 1;
+             right: 0;
+         }
+        /*Create four equal columns that floats next to each other*/
+        .columnTimes{
+            float: left;
+            width: 25%;
+            padding: 10px;
+        }
+
+        /*Clear floats after the columns*/
+        .rowTimes:after{
+            content: "";
+            display: table;
+            clear: both;
+        }
+
          /*AS ADDED END*/
 
          h1{
@@ -431,17 +484,71 @@
             <button class="button has-spinner" id="website_btn" style="vertical-align:middle"><span>Submit Acces Token</span></button>
         </div>
         <!--Added here-->
+        <!--Perhaps try regular row/column too, see how that looks-->
         <div class="goodHWTimesC">
-            <form class="goodHWTimes" id="goodHWTimes">
-                <input type="checkbox" id="00:00AM" name="00:00AM" value="00:00">
-                    <label for="00:00AM"> 0:00AM-1:00AM </label><br>
-                <input type="checkbox" id="01:00AM" name="01:00AM" value="01:00">
-                    <label for="01:00AM"> 0:00AM-2:00AM </label><br>
-                <input type="checkbox" id="02:00AM" name="02:00AM" value="02:00">
-                    <label for="02:00AM"> 2:00AM-3:00AM </label><br>
+            <h1>Preferences</h1>
+            <p>Select which times you are <strong>willing</strong> to study or do homework: </p>
+            <form class="goodHWTimes" id="goodHWTimesID">
+                <div class = "rowTimes">
+                    <div class="columnTimes">
+                        <input type="checkbox" id="08:00AM" name="08:00AM" value="08:00">
+                            <label for="08:00AM"> 8:00AM-9:00AM </label><br>
+                        <input type="checkbox" id="09:00AM" name="09:00AM" value="09:00">
+                            <label for="09:00AM"> 9:00AM-10:00AM </label><br>
+                        <input type="checkbox" id="10:00AM" name="10:00AM" value="10:00">
+                            <label for="10:00AM"> 10:00AM-11:00AM </label><br>
+                        <input type="checkbox" id="11:00AM" name="11:00AM" value="11:00">
+                            <label for="11:00AM"> 11:00AM-12:00PM </label><br>
+                        <input type="checkbox" id="12:00PM" name="12:00PM" value="12:00">
+                            <label for="12:00PM"> 12:00PM-1:00PM </label><br>
+                        <input type="checkbox" id="01:00PM" name="01:00PM" value="13:00">
+                            <label for="01:00PM"> 1:00PM-2:00PM </label><br>
+                        <input type="checkbox" id="02:00PM" name="02:00PM" value="14:00">
+                            <label for="02:00PM"> 2:00PM-3:00PM </label><br>
+                        <input type="checkbox" id="03:00PM" name="03:00PM" value="15:00">
+                            <label for="03:00PM"> 3:00PM-4:00PM </label><br>
+                        <input type="checkbox" id="04:00PM" name="04:00PM" value="16:00">
+                            <label for="04:00PM"> 4:00PM-5:00PM </label><br>
+                        <input type="checkbox" id="05:00PM" name="05:00PM" value="17:00">
+                            <label for="05:00PM"> 5:00PM-6:00PM </label><br>
+                        <input type="checkbox" id="06:00PM" name="06:00PM" value="18:00">
+                            <label for="06:00PM"> 6:00PM-7:00PM </label><br>
+                        <input type="checkbox" id="07:00PM" name="07:00PM" value="19:00">
+                            <label for="07:00PM"> 7:00PM-8:00PM </label><br>
+                       
+                    </div>
+                    <div class="columnTimes">
+                    <input type="checkbox" id="08:00PM" name="08:00PM" value="20:00">
+                        <label for="08:00PM"> 8:00PM-9:00PM </label><br>
+                        <input type="checkbox" id="09:00PM" name="09:00PM" value="21:00">
+                            <label for="09:00PM"> 9:00PM-10:00PM </label><br>
+                        <input type="checkbox" id="10:00PM" name="10:00PM" value="22:00">
+                            <label for="10:00PM"> 10:00PM-11:00PM </label><br>
+                        <input type="checkbox" id="11:00PM" name="11:00PM" value="23:00">
+                            <label for="11:00PM"> 11:00PM-12:00AM </label><br>
+                        <input type="checkbox" id="00:00AM" name="00:00AM" value="00:00">
+                            <label for="00:00AM"> 12:00AM-1:00AM </label><br>
+                        <input type="checkbox" id="01:00AM" name="01:00AM" value="01:00">
+                            <label for="01:00AM"> 1:00AM-2:00AM </label><br>
+                        <input type="checkbox" id="02:00AM" name="02:00AM" value="02:00">
+                            <label for="02:00AM"> 2:00AM-3:00AM </label><br>
+                        <input type="checkbox" id="03:00AM" name="03:00AM" value="03:00">
+                            <label for="03:00AM"> 3:00AM-4:00AM </label><br>
+                        <input type="checkbox" id="04:00AM" name="04:00AM" value="04:00">
+                            <label for="04:00AM"> 4:00AM-5:00AM </label><br>
+                        <input type="checkbox" id="05:00AM" name="05:00AM" value="05:00">
+                            <label for="05:00AM"> 5:00AM-6:00AM </label><br>
+                        <input type="checkbox" id="06:00AM" name="06:00AM" value="06:00">
+                            <label for="06:00AM"> 6:00AM-7:00AM </label><br>
+                        <input type="checkbox" id="07:00AM" name="07:00AM" value="07:00">
+                            <label for="07:00AM"> 7:00AM-8:00AM </label><br>   
+                    </div>
+                </div>
+
             </form>
+            <button class="button3" id="goodHWbutton" style="vertical-align:middle"><span>Submit</span></button>
         </div>
-        <!--Added here--> 
+        <!--Added here end--> 
         
 
 
@@ -504,6 +611,15 @@
              }
              addSchoolToDatabase(school);
          });  
+         //AS Added 
+         $("goodHWbutton").on("click", function(event) {
+             var selectedGoodHWTimes=document.getElementById("goodHWTimesID");
+             var goodTimes = selectedGoodHWTimes.value;
+             //add some function that pushes goodTimes
+             console.log(goodTimes);
+         });
+
+         //AS Added End
 
          function addSchoolToDatabase(school){
                  var school_attending  = school;
