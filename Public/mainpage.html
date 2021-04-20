@@ -382,7 +382,9 @@ h1 {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-
+.past div.fc-time, .past div.fc-title {
+    text-decoration: line-through;
+}
 
 
     </style>
@@ -414,7 +416,8 @@ h1 {
                   <div id="user-message-end"></div>
                   <h1>Description:</h1>
                   <div id="user-message-description" style="padding-bottom: 20px;"></div>
-                  <button class="button" id="deleteEventBtn" style="vertical-align:middle"><span>Delete Event</span></button>
+                  <button class="button" id=deleteBtn style="vertical-align:middle"><span>Delete Event </span></button>
+                  
                 </div>
               
               </div>
@@ -715,8 +718,25 @@ h1 {
                 var displayStart = calEvent.start;
                 var displayEnd = calEvent.end;
                 var displayDescription = calEvent.description;
+                //var displayColor = calEvent.color;
                 displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription);
+                //deleteEventsFromDatabase(displayTitle, displayStart, displayEnd, displayDescription, displayColor);
              },
+
+             eventRender: function(event, element) {
+                element.append( "<span class='closeon'>X</span>" );
+                element.find(".closeon").click(function(calEvent, jsEvent) {
+                    $('#calendar').fullCalendar('removeEvents',event._id);
+                    //console.log(calEvent.description);
+                    //var userId   = firebase.auth().currentUser.uid;
+                    //var database = firebase.database();
+                    //database.ref('users/' + userId).update({
+                    //    assignment_events: assignment_events
+                    //}).then(function() {
+                });
+             //});
+            },
+        
              
              /*
              eventClick: function(calEvent, jsEvent) {
@@ -848,15 +868,43 @@ h1 {
              $("#calendar").fullCalendar('renderEvent', event, true);
          });
 
-         $("#deleteEventBtn").on("click", function () {
-            modal.style.display = "none";
-            //deleteEventFromDatabase(user_data);
-         }); 
-
-         //function deleteEventFromDatabase(user_data){
-         //    console.log(calEvent.title);
-         //}
-
+         //$("#deleteBtn").on("click", function () {
+         //   modal.style.display = "none";
+         //});
+         
+         /*   
+         function deleteEventsFromDatabase(displayTitle, displayStart, displayEnd, displayDescription, displayColor){
+             console.log("in delete function");
+             var eventToDelete 
+             var title = displayTitle;
+             var start = displayStart;
+             var end = displayEnd;
+             var description = displayDescription;
+             var color = displayColor;
+             $("#deleteBtn").on("click", function () {
+                modal.style.display = "none";
+                if(title){
+                    eventToDelete = {
+                        title: title,
+                        start: start,
+                        end: end,
+                        description: description,
+                        color: color
+                    }
+                    for(var i=0; i<=eventsArray.length; i++){
+                        for(var j=0; j<=eventsAssignmentsArray.length; j++){
+                            if(eventToDelete == eventsArray[i] || eventsAssignmentsArray[j]){
+                                database.ref('users/' + userId).update({
+                                    events: events
+                                }).then(function() {
+                                });
+                            }
+                        }
+                    }
+                }
+             });
+         }
+         */
          //get school attending
 
          function parseSchoolAttending(user_data) {
