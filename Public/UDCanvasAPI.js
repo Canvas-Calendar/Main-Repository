@@ -1,3 +1,9 @@
+/*
+ *  TO BE USED ONLY FOR TESTING ...
+ *  ACCESS TOKEN HARD CODED ...
+*/
+
+
 var access_token = "25~LDtz4FPmgvVumQULtrkjOUrdQvKnniad2r56u33mCOqZHNjnnB2wIkScp8c56F8E";
 var udcanvas = new UDCanvasAPI(access_token).load();
 
