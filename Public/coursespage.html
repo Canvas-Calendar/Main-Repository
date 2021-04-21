@@ -563,6 +563,7 @@
 
                              var id = assignment.assignment_id;
                              var hour_options = [0,1,2,3,4,5,8,13,18,24,30,45,50];
+                             var saved_task_hours = [];
                              $.each(hour_options, function(idx, hours) {
                                  var option = document.createElement('option');
 
@@ -574,8 +575,7 @@
                                  /* Select the last saved "task_hours" on final iteration */
                                  if (hour_options.length === idx+1) {
                                      var hours_saved = assignment.task_hours;
-                                     console.log(id+"_"+hours_saved);
-                                     document.getElementById(id+"_"+hours_saved).selected = "true";
+                                     saved_task_hours.push(hours_saved);
                                  }
                              });
 
@@ -598,6 +598,9 @@
                              div_assignments.appendChild(table);
                          });
                          current_courses.append(div_assignments);
+                         $.each(saved_task_hours, funtion(j, saved_task_hour) {
+                             document.getElementById(id+"_"+saved_task_hour).selected = "true";
+                         });
                      }
                  }
              });
