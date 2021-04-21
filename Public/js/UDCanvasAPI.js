@@ -47,7 +47,7 @@ function UDCanvasAPI(access_token) {
                             'course_id': e['id'],
                             'name': e['name'],
                             'course_code': e['course_code'],
-                            'start_at': new Date(e['start_at']).toLocaleString,
+                            'start_at': new Date(e['start_at']).toLocaleString(),
                             'uuid': e['uuid'],
                             'enrollments': e['enrollments'],
                             'calendar': e['calendar'],
