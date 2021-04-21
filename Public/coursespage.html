@@ -1,32 +1,32 @@
 <!--
-    Title: ECE Senior Design Project Code - About Page
-    Description: About page - will display info about our project and its authors
-    Authors: Chris Varriano
-             Will Van Luven
-             Sean McNamara
-             Arai Singleton
-    Date created: 11/23/20
+     Title: ECE Senior Design Project Code - About Page
+     Description: About page - will display info about our project and its authors
+     Authors: Chris Varriano
+     Will Van Luven
+     Sean McNamara
+     Arai Singleton
+     Date created: 11/23/20
 -->
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>View Your Course</title>
-    <link rel="stylesheet" type="text/css" href="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/blueTable.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>View Your Course</title>
+        <link rel="stylesheet" type="text/css" href="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/blueTable.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
-    <script>
-      var access_token="25~LDtz4FPmgvVumQULtrkjOUrdQvKnniad2r56u33mCOqZHNjnnB2wIkScp8c56F8E";
-   </script>
-   <!--
-   <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script>
-   -->
+        <script>
+         var access_token="25~LDtz4FPmgvVumQULtrkjOUrdQvKnniad2r56u33mCOqZHNjnnB2wIkScp8c56F8E";
+        </script>
+        <!--
+             <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script>
+        -->
 
-    <!-- TEDDY EDIT  -->
+        <!-- TEDDY EDIT  -->
         <!-- + Button Loader Plugin -->
         <!-- + adding locally sourced UDCanvasAPI here... -->
         <script src="/js/jquery.buttonLoader2.js"></script>
@@ -34,8 +34,8 @@
         <!-- <script src="/js/parseAllCourses.js"></script> -->
         <!-- <script src="/js/getTerm.js"></script> -->
         <script src="/js/testFile.js"></script>
-    
-    <!-- TEDDY EDIT - Multiple firebase init() and declarations?? -->
+
+        <!-- TEDDY EDIT - Multiple firebase init() and declarations?? -->
         <!-- initialize the SDK after all desired features are loaded -->
         <!-- <script defer src="/__/firebase/init.js"></script> -->
         <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -63,344 +63,292 @@
         <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js'></script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.js'></script>
-    <style>
+        <style>
 
-a {
-  color: rgb(0, 0, 0);
-}
+         a {
+             color: rgb(0, 0, 0);
+         }
 
-    * {
-    padding:0;
-    margin:0;
-    }
-
-
-/* header */
-:root{
-    --eventColor:#808080;
-}
-
-.header {
-  background-color: var(--eventColor);
-  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
-  position: fixed;
-  width: 100%;
-  z-index: 3;
-}
-
-.header ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  overflow: hidden;
-  background-color: var(--eventColor);
-}
-
-.header li a {
-  display: block;
-  padding: 20px 20px;
-  border-right: 1px solid #f4f4f4;
-  text-decoration: none;
-}
-
-.header li a:hover,
-.header .menu-btn:hover {
-  background-color: lightgray;
-}
-
-.header .logo {
-  display: block;
-  float: left;
-  font-size: 2em;
-  padding: 10px 20px;
-  text-decoration: none;
-}
-
-/* menu */
-
-.header .menu {
-  clear: both;
-  max-height: 0;
-  transition: max-height .2s ease-out;
-}
-
-/* menu icon */
-
-.header .menu-icon {
-  cursor: pointer;
-  display: inline-block;
-  float: right;
-  padding: 28px 20px;
-  position: relative;
-  user-select: none;
-}
-
-.header .menu-icon .navicon {
-  background: #333;
-  display: block;
-  height: 2px;
-  position: relative;
-  transition: background .2s ease-out;
-  width: 18px;
-}
-
-.header .menu-icon .navicon:before,
-.header .menu-icon .navicon:after {
-  background: #333;
-  content: '';
-  display: block;
-  height: 100%;
-  position: absolute;
-  transition: all .2s ease-out;
-  width: 100%;
-}
-
-.header .menu-icon .navicon:before {
-  top: 5px;
-}
-
-.header .menu-icon .navicon:after {
-  top: -5px;
-}
-
-/* menu btn */
-
-.header .menu-btn {
-  display: none;
-}
-
-.header .menu-btn:checked ~ .menu {
-  max-height: 240px;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon {
-  background: transparent;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:before {
-  transform: rotate(-45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:after {
-  transform: rotate(45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-  top: 0;
-}
-
-/* 48em = 768px */
-
-@media (min-width: 48em) {
-  .header li {
-    float: left;
-  }
-  .header li a {
-    padding: 20px 30px;
-  }
-  .header .menu {
-    clear: none;
-    float: right;
-    max-height: none;
-  }
-  .header .menu-icon {
-    display: none;
-  }
-}
-
-.message{
-  padding-top: 1in;
-  text-align: center;
-  color: black;
-}
-
-h2 {
-  padding: .25in;
-}
-
-.tab{
-font-size: 20px;
-}
-
-.paragraph{
-    margin-right: 3in;
-    margin-left: 3in;
-}
-
-h3{
-  white-space: pre;
-  font-size: 20px;
-}
-
-h4{
-  white-space: pre;
-  font-size: 20px;
-  color: black;
-}
-
-.button {
-  display: inline-block;
-  border-radius: 10px;
-  background-color: var(--eventColor);
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 28px;
-  padding: 20px;
-  width: 600px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 50px;
-}
-
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.button:hover span {
-  padding-right: 25px;
-}
-
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
-.button_center{
-  text-align: center;
-}
-
-.emailLink{
-  color: black;
-}
-.topMessage{
-  font-size: 40px;
-  padding: 20px;
-  font-weight: bold;
-}
-a:link {
-  color: rgb(0, 0, 0); 
-}
-
-.topPage{
-  padding-top: 1in;
-  text-align: center;
-}
-
-.tableHeader{
-  font-size: large;
-  padding-top: .5in;
-  padding-bottom: .5in;
-}
-
-#headerImage
-    {
-        cursor: pointer;
-        padding-top: 5px;
-        width: 60px;
-        height: 60px;
-        overflow: hidden;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms-border-radius: 50%;
-        -o-border-radius: 50%;
-        border-radius: 50%;
-    }
-
-    </style>
-  </head>
-
-  <body>
+         * {
+             padding:0;
+             margin:0;
+         }
 
 
-    <header class="header">
-        <image id="headerImage" src=""/>
-        <a style="color: white;" href="" class="logo">View Your Course Information:</a>
-        <input class="menu-btn" type="checkbox" id="menu-btn" />
-        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-        <ul class="menu">
-          <li><a style="color: white;" href="javascript:history.go(-1)">Back</a></li>
-        </ul>
-    </header>
-  
-  <div class="topPage">
-    <h1>Current Course Information:</h1> 
-    <div class="tableHeader" id="courseName1"></div>
-    <div id="results1" style="width:1200px;margin: 0 auto;display: block;">
-        <table class="blueTable">
-            <thead>
-              <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div class="tableHeader" id="courseName2"></div>
-    <div id="results2" style="width:1200px;margin: 0 auto;display: block;">
-        <table class="blueTable">
-            <thead>
-              <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div class="tableHeader" id="courseName3"></div>
-    <div id="results3" style="width:1200px;margin: 0 auto;display: block;">
-        <table class="blueTable">
-            <thead>
-              <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div class="tableHeader" id="courseName4"></div>
-    <div id="results4" style="width:1200px;margin: 0 auto;display: block;">
-        <table class="blueTable">
-            <thead>
-              <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div class="tableHeader" id="courseName5"></div>
-    <div id="results5" style="width:1200px;margin: 0 auto;display: block;">
-        <table class="blueTable">
-            <thead>
-              <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-    <div class="tableHeader" id="courseName6"></div>
-    <div id="results6" style="width:1200px;margin: 0 auto;display: block;">
-        <table class="blueTable">
-            <thead>
-              <tr><th>Assignment ID</th><th>Due Date</th><th>Grading Type</th><th>Name</th><th>URL</th></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-  </div>
+         /* header */
+         :root{
+             --eventColor:#808080;
+         }
+
+         .header {
+             background-color: var(--eventColor);
+             box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+             position: fixed;
+             width: 100%;
+             z-index: 3;
+         }
+
+         .header ul {
+             margin: 0;
+             padding: 0;
+             list-style: none;
+             overflow: hidden;
+             background-color: var(--eventColor);
+         }
+
+         .header li a {
+             display: block;
+             padding: 20px 20px;
+             border-right: 1px solid #f4f4f4;
+             text-decoration: none;
+         }
+
+         .header li a:hover,
+         .header .menu-btn:hover {
+             background-color: lightgray;
+         }
+
+         .header .logo {
+             display: block;
+             float: left;
+             font-size: 2em;
+             padding: 10px 20px;
+             text-decoration: none;
+         }
+
+         /* menu */
+
+         .header .menu {
+             clear: both;
+             max-height: 0;
+             transition: max-height .2s ease-out;
+         }
+
+         /* menu icon */
+
+         .header .menu-icon {
+             cursor: pointer;
+             display: inline-block;
+             float: right;
+             padding: 28px 20px;
+             position: relative;
+             user-select: none;
+         }
+
+         .header .menu-icon .navicon {
+             background: #333;
+             display: block;
+             height: 2px;
+             position: relative;
+             transition: background .2s ease-out;
+             width: 18px;
+         }
+
+         .header .menu-icon .navicon:before,
+         .header .menu-icon .navicon:after {
+             background: #333;
+             content: '';
+             display: block;
+             height: 100%;
+             position: absolute;
+             transition: all .2s ease-out;
+             width: 100%;
+         }
+
+         .header .menu-icon .navicon:before {
+             top: 5px;
+         }
+
+         .header .menu-icon .navicon:after {
+             top: -5px;
+         }
+
+         /* menu btn */
+
+         .header .menu-btn {
+             display: none;
+         }
+
+         .header .menu-btn:checked ~ .menu {
+             max-height: 240px;
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon {
+             background: transparent;
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon:before {
+             transform: rotate(-45deg);
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon:after {
+             transform: rotate(45deg);
+         }
+
+         .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+         .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+             top: 0;
+         }
+
+         /* 48em = 768px */
+
+         @media (min-width: 48em) {
+             .header li {
+                 float: left;
+             }
+             .header li a {
+                 padding: 20px 30px;
+             }
+             .header .menu {
+                 clear: none;
+                 float: right;
+                 max-height: none;
+             }
+             .header .menu-icon {
+                 display: none;
+             }
+         }
+
+         .message{
+             padding-top: 1in;
+             text-align: center;
+             color: black;
+         }
+
+         h2 {
+             padding: .25in;
+         }
+
+         .tab{
+             font-size: 20px;
+         }
+
+         .paragraph{
+             margin-right: 3in;
+             margin-left: 3in;
+         }
+
+         h3{
+             white-space: pre;
+             font-size: 20px;
+         }
+
+         h4{
+             white-space: pre;
+             font-size: 20px;
+             color: black;
+         }
+
+         .button {
+             display: inline-block;
+             border-radius: 10px;
+             background-color: var(--eventColor);
+             border: none;
+             color: #FFFFFF;
+             text-align: center;
+             font-size: 28px;
+             padding: 20px;
+             width: 600px;
+             transition: all 0.5s;
+             cursor: pointer;
+             margin: 50px;
+         }
+
+         .button span {
+             cursor: pointer;
+             display: inline-block;
+             position: relative;
+             transition: 0.5s;
+         }
+
+         .button span:after {
+             content: '\00bb';
+             position: absolute;
+             opacity: 0;
+             top: 0;
+             right: -20px;
+             transition: 0.5s;
+         }
+
+         .button:hover span {
+             padding-right: 25px;
+         }
+
+         .button:hover span:after {
+             opacity: 1;
+             right: 0;
+         }
+
+         .button_center{
+             text-align: center;
+         }
+
+         .emailLink{
+             color: black;
+         }
+         .topMessage{
+             font-size: 40px;
+             padding: 20px;
+             font-weight: bold;
+         }
+         a:link {
+             color: rgb(0, 0, 0); 
+         }
+
+         .topPage{
+             padding-top: 1in;
+             text-align: center;
+         }
+
+         .tableHeader{
+             font-size: large;
+             padding-top: .5in;
+             padding-bottom: .5in;
+         }
+
+         #headerImage
+         {
+             cursor: pointer;
+             padding-top: 5px;
+             width: 60px;
+             height: 60px;
+             overflow: hidden;
+             -webkit-border-radius: 50%;
+             -moz-border-radius: 50%;
+             -ms-border-radius: 50%;
+             -o-border-radius: 50%;
+             border-radius: 50%;
+         }
+
+        </style>
+    </head>
+
+    <body>
+
+
+        <header class="header">
+            <image id="headerImage" src=""/>
+            <a style="color: white;" href="" class="logo">View Your Course Information:</a>
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+            <ul class="menu">
+                <li><a style="color: white;" href="javascript:history.go(-1)">Back</a></li>
+            </ul>
+        </header>
+        <div class="topPage">
+            <h1>Current Course Information:</h1>
+            <div id="current_courses">
+                
+            </div>
+        </div>
 
 
 
-    
+        
 
- <script>
+        <script>
 
-   // Your web app's Firebase configuration
+         // Your web app's Firebase configuration
          // For Firebase JS SDK v7.20.0 and later, measurementId is optional
          var firebaseConfig = {
              apiKey: "AIzaSyAWlmVBGiPNaZ8q6wIW8qj4MHhRCdEnzfw",
@@ -421,32 +369,32 @@ a:link {
          image.src = a1;
 
 
-   /*
-    document.getElementById("topMessage").innerHTML = "Loading Assignment Information...";
-    setTimeout(function() { showCourses(); }, 5000);
-    function showCourses(){
-      document.getElementById("topMessage").innerHTML = "Assignments for: ELEG 491";
-      document.getElementById("results").style.display="block"
-      var dropDownMenu = document.getElementById("timeForm").style.display="block";
-      var assignments = udcanvas.getAssignments(course_id = 1565469);
-      console.table(assignments, ['assignment_id', 'due_at', 'grading_type', 'name', 'html_url']);
-      $.each(assignments, function(index, assignment) {
-        var assignment_id   = assignment['assignment_id'];
-        var due_at          = assignment['due_at'];
-        var grading_type    = assignment['grading_type'];
-        var name            = assignment['name'];
-        var html_url        = assignment['html_url'];
-        var newLink = html_url.link(html_url);
-        $("tbody").append(`<tr><td>${assignment_id}</td> <td>${due_at}</td> <td>${grading_type}</td> <td>${name}</td> <td>${newLink}</td><td>${dropDownMenu}</td></tr>`)
-    });
-  }
-  */
-  //login code______________________________________________
+         /*
+            document.getElementById("topMessage").innerHTML = "Loading Assignment Information...";
+            setTimeout(function() { showCourses(); }, 5000);
+            function showCourses(){
+            document.getElementById("topMessage").innerHTML = "Assignments for: ELEG 491";
+            document.getElementById("results").style.display="block"
+            var dropDownMenu = document.getElementById("timeForm").style.display="block";
+            var assignments = udcanvas.getAssignments(course_id = 1565469);
+            console.table(assignments, ['assignment_id', 'due_at', 'grading_type', 'name', 'html_url']);
+            $.each(assignments, function(index, assignment) {
+            var assignment_id   = assignment['assignment_id'];
+            var due_at          = assignment['due_at'];
+            var grading_type    = assignment['grading_type'];
+            var name            = assignment['name'];
+            var html_url        = assignment['html_url'];
+            var newLink = html_url.link(html_url);
+            $("tbody").append(`<tr><td>${assignment_id}</td> <td>${due_at}</td> <td>${grading_type}</td> <td>${name}</td> <td>${newLink}</td><td>${dropDownMenu}</td></tr>`)
+            });
+            }
+          */
+         //login code______________________________________________
 
-  // Logout Code _________________________________________________
+         // Logout Code _________________________________________________
 
 
-  $(document).ready(function () {
+         $(document).ready(function () {
              $("#registerForm").on("submit", function (event) {
                  event.preventDefault();
                  var fname = $("#registerFirstName").val();
@@ -514,7 +462,7 @@ a:link {
                          /* testFunction(); */
                          console.log(getTerm(Date.now()));
                          //parseAllCourses(user_data);
-                         parseActiveCourses(user_data);
+                         parseCurrentCourses(user_data);
                          parseSchoolAttending(user_data);
                      })();
                  } else {
@@ -526,158 +474,239 @@ a:link {
          });
 
 
+         function getTerm(datetime) {
+             var d = new Date(datetime);
+             var y = d.getFullYear();
+             var yy = JSON.stringify(d.getFullYear()).slice(2,4);
+             var term;
+             if ((d.getMonth() > 0) && (d.getMonth() < 6)) {
+                 term = yy+"S";
+             } else {
+                 term = yy+"F";
+             }
+             var data = {
+                 term: term,
+                 year: y,
+                 month: d.getMonth(),
+                 day: d.getDay()
+             };
+             return data;
+         }
+
+         function parseCurrentCourses(user_data) {
+             var current_courses = $("#current_courses");          // refrence to <div id="current_courses">
+             var today = getTerm(Date.now());
+             $.each(user_data.courses, function(index, course) {
+                 var course_term = getTerm(course["start_at"]);
+                 var course_url = "https://udel.instructure.com/courses/"+course["course_id"];
+                 if ((today["year"] === course_term["year"]) || (course["name"].includes(today["term"]))) {
+                     /* Only courses in current term will be displayed */
+                     /* Display Course Name */
+                     var div_header = document.createElement('div');
+                     var a_header   = document.createElement('a');
+
+                     div_header.setAttribute("class", "tableHeader");
+                     a_header.setAttribute("href", course_url);
+                     a_header.innerHTML = course["name"];
+                     div_header.appendChild(a_header);
+                     current_courses.append(div_header);
+
+                     /* Check if course has assignments, and if so, display them  */
+                     if (course.assignments) {
+                         /* Display the column labels first */
+                         var div_assignments = document.createElement('div');
+                         var table = document.createElement('table');
+                         var thead = document.createElement('thead');
+                         var tbody = document.createElement('tbody');
+                         var tr    = document.createElement('tr');
+                         var th_id    = document.createElement('th');
+                         var th_date  = document.createElement('th');
+                         var th_grade = document.createElement('th');
+                         var th_name  = document.createElement('th');
+                         var th_url   = document.createElement('th');
+                         var th_task_hours = document.createElement('th');
+
+                         div_assignments.setAttribute("style", "width:1200px;margin: 0 auto;display: block;");
+                         table.setAttribute("class", "blueTable");
+                         th_id.innerHTML    = "Assignment ID";
+                         th_date.innerHTML  = "Due Date";
+                         th_grade.innerHTML = "Grading Type";
+                         th_name.innerHTML  = "Name";
+                         th_url.innerHTML   = "URL";
+                         th_task_hours.innerHTML = "Task Hours";
+
+                         tr.appendChild(th_id);
+                         tr.appendChild(th_date);
+                         tr.appendChild(th_grade);
+                         tr.appendChild(th_name);
+                         tr.appendChild(th_url);
+                         tr.appendChild(th_task_hours);
+                         thead.appendChild(tr);
+                         table.appendChild(thead);
+                         table.appendChild(tbody);
+                         div_assignments.appendChild(table);
+
+                         /* Now add assignments :)  */
+                         $.each(course.assignments, function(index, assignment) {
+                             var tr    = document.createElement('tr');
+                             var th_id    = document.createElement('th');
+                             var th_date  = document.createElement('th');
+                             var th_grade = document.createElement('th');
+                             var th_name  = document.createElement('th');
+                             var th_url   = document.createElement('th');
+                             var th_task_hours = document.createElement('th');
+
+                             var select   = document.createElement('select');
+                             select.setAttribute("name", assignment.assignment_id);
+                             select.setAttribute("id", assignment.assignment_id);
+                             $.each([0,1,2,3,4,5,10,15,20,25,30,35,40,45,50], function(idx, hours) { 
+                                 var option = document.createElement('option');
+                                 option.setAttribute("value", hours);
+                                 option.innerHTML = hours;
+                                 select.appendChild(option);
+                             });
+
+                             th_id.innerHTML    = assignment.assignment_id;
+                             th_date.innerHTML  = assignment.due_at;
+                             th_grade.innerHTML = assignment.grading_type;
+                             th_name.innerHTML  = assignment.name;
+                             th_url.innerHTML   = assignment.html_url;
+                             th_task_hours.appendChild(select);
+
+                             tr.appendChild(th_id);
+                             tr.appendChild(th_date);
+                             tr.appendChild(th_grade);
+                             tr.appendChild(th_name);
+                             tr.appendChild(th_url);
+                             tr.appendChild(th_task_hours);
+
+                             tbody.appendChild(tr);
+                             table.appendChild(tbody);
+                             div_assignments.appendChild(table);
+                         });
+                         current_courses.append(div_assignments);
+                     }
+                 }
+             });
+         }
 
 
-
-
-
-
-    //New Courses Page code
-
-    var i = 0;
-    var numOfCourses = 0; // counts how many courses being taken currently
-    var coursesArray = new Array(6); // create array consisting ids for all courses currently taking
-    console.log(coursesArray.length) // 6
-    //document.getElementById("topMessage").innerHTML = "Loading Assignment Information...";
-    //setTimeout(function() { parseActiveCourses(); }, 3000);
-
-    function getTerm(datetime) {
-      var d = new Date(datetime);
-      var y = d.getFullYear();
-      var yy = JSON.stringify(d.getFullYear()).slice(2,4);
-      var term;
-      if ((d.getMonth() > 0) && (d.getMonth() < 6)) {
-          term = yy+"S";
-      } else {
-          term = yy+"F";
-      }
-      var data = {
-          term: term,
-          year: y,
-          month: d.getMonth(),
-          day: d.getDay()
-      };
-      return data;
-    }
-
-    function parseActiveCourses(user_data) {
-             console.log("testing function p1")
+         function parseActiveCourses(user_data) {
+             /* console.log("testing function p1") */
              var active_courses = $("#active_courses");
              var today = getTerm(Date.now());
 
              $.each(user_data["courses"], function (i, course) {
                  var course_term = getTerm(course["start_at"]);
                  var course_name = course["name"];
-
                  var courseID = course["course_id"]; // new stuff
-                 console.log("testing function p2") // test
+                 var course_url = "https://udel.instructure.com/courses/"+courseID;
 
-                 var course_url = "https://udel.instructure.com/courses/"+course["course_id"];
-                 console.log(course_term["year"], today["year"])
+                                             console.log(course_term["year"], today["year"])
                  if ((today["year"] === course_term["year"]) || (course_name.includes(today["term"]))) {
                      console.log(course_name);
-                     
                      console.log(courseID); // test
-                     numOfCourses++; // adds to the counter
-                     document.getElementById("courseName"+numOfCourses).innerHTML = "Course: " + course_name; //print name of course before table
+                     /* numOfCourses++; // adds to the counter */
+                     /* document.getElementById("courseName"+numOfCourses).innerHTML = "Course: " + course_name; //print name of course before table */
+
+                     /* coursesArray[i] = courseID;  //new stuff
+                      * console.log(coursesArray); //print updated array
+                      * i++; //new stuff
+                      * console.log("testing function p3") // test
+                      */
 
                      var li = document.createElement('li');
                      var a = document.createElement('a');
-                     
-                     coursesArray[i] = courseID;  //new stuff
-                     console.log(coursesArray); //print updated array
-                     i++; //new stuff
-                     console.log("testing function p3") // test
-
                      li.setAttribute("class", "list-group-item");
                      a.setAttribute("style", "color: rgb(0, 0, 0);");
                      a.setAttribute("href", course_url);
                      a.innerHTML = course_name;
-
                      li.appendChild(a);
                      active_courses.append(li);
 
-                     if (course["assignments"]) {
-                         //parseAssignments(course["assignments"]);
-                     }
+                     /* if (course["assignments"]) {
+                      *     //parseAssignments(course["assignments"]);
+                      * }
+                      */
                  }
              });
-             console.log("Final Array");
-             console.log(coursesArray);
-             console.log(coursesArray[28]);
-             console.log(numOfCourses);
+             /* console.log("Final Array");
+              * console.log(coursesArray);
+              * console.log(coursesArray[28]);
+              * console.log(numOfCourses);
+              */
              //displayCourseData(user_data, coursesArray);
          }
-    // to display data
-    function displayCourseData(user_data, coursesArray){
-        console.log(user_data);
-        console.log(coursesArray);
-        var currentCoursesArrayStartLocation = (coursesArray.length - numOfCourses);
-        var coursesArraylength = coursesArray.length;
-        for(var j=currentCoursesArrayStartLocation; j<=coursesArraylength; j++){
-         console.log("made it into loop");
-         //create table
-         $.each(user_data["courses"], function (i, course) {
-           console.log("in loop part1")
-           if(course["course_id"]===coursesArray[j]){
-             console.log("in if part1")
-             console.log(course["course_id"]);
-             var assignments = course["assignments"];
-             //var assignments_div = $("#assignments");
-             console.table(assignments, ['assignment_id', 'due_at', 'grading_type', 'name', 'html_url']);
-             $.each(assignments, function(k, assignment) {
-                  var assignment_id = assignment["assignment_id"];
-                  var due_at        = assignment["due_at"];
-                  var grading_type  = assignment["grading_type"]
-                  var name          = assignment["name"];
-                  var html_url      = assignment["html_url"];
-                  var newLink = html_url.link(html_url);
-                  console.log(assignment_id);
-                  $("tbody").append(`<tr><td>${assignment_id}</td> <td>${due_at}</td> <td>${grading_type}</td> <td>${name}</td> <td>${newLink}</td></tr>`)
-            });
-          }
-       });
-      }
-    }
+         // to display data
+         function displayCourseData(user_data, coursesArray){
+             console.log(user_data);
+             console.log(coursesArray);
+             var currentCoursesArrayStartLocation = (coursesArray.length - numOfCourses);
+             var coursesArraylength = coursesArray.length;
+             for(var j=currentCoursesArrayStartLocation; j<=coursesArraylength; j++){
+                 console.log("made it into loop");
+                 //create table
+                 $.each(user_data["courses"], function (i, course) {
+                     console.log("in loop part1")
+                     if(course["course_id"]===coursesArray[j]){
+                         console.log("in if part1")
+                         console.log(course["course_id"]);
+                         var assignments = course["assignments"];
+                         //var assignments_div = $("#assignments");
+                         console.table(assignments, ['assignment_id', 'due_at', 'grading_type', 'name', 'html_url']);
+                         $.each(assignments, function(k, assignment) {
+                             var assignment_id = assignment["assignment_id"];
+                             var due_at        = assignment["due_at"];
+                             var grading_type  = assignment["grading_type"]
+                             var name          = assignment["name"];
+                             var html_url      = assignment["html_url"];
+                             var newLink = html_url.link(html_url);
+                             console.log(assignment_id);
+                             $("tbody").append(`<tr><td>${assignment_id}</td> <td>${due_at}</td> <td>${grading_type}</td> <td>${name}</td> <td>${newLink}</td></tr>`)
+                         });
+                     }
+                 });
+             }
+         }
 
-    //get school attending
+         //get school attending
 
-    function parseSchoolAttending(user_data) {
-                var college = user_data["school_attending"]
-                console.log(college);
-                displaySchoolDesign(college);
+         function parseSchoolAttending(user_data) {
+             var college = user_data["school_attending"]
+             console.log(college);
+             displaySchoolDesign(college);
          }
 
          //display school design 
 
          function displaySchoolDesign(college){
-            var school = college;
+             var school = college;
              console.log(school);
              if(school == "UniversityOfDelaware"){
-                document.body.style.setProperty('--eventColor',"#00539f");
-                a1 = "delaware-logo.png";
-                image = document.getElementById("headerImage");
-                image.src = a1;
+                 document.body.style.setProperty('--eventColor',"#00539f");
+                 a1 = "delaware-logo.png";
+                 image = document.getElementById("headerImage");
+                 image.src = a1;
              }
              else if(school == "UniversityOfMaryland"){
-                document.body.style.setProperty('--eventColor',"#ff0000");
-                a1 = "umd_logo.png";
-                image = document.getElementById("headerImage");
-                image.src = a1;
+                 document.body.style.setProperty('--eventColor',"#ff0000");
+                 a1 = "umd_logo.png";
+                 image = document.getElementById("headerImage");
+                 image.src = a1;
              }
              else if(school == "SyracuseUniversity"){
-                document.body.style.setProperty('--eventColor',"#FF6C00");
-                a1 = "syracuse.jpg";
-                image = document.getElementById("headerImage");
-                image.src = a1;
+                 document.body.style.setProperty('--eventColor',"#FF6C00");
+                 a1 = "syracuse.jpg";
+                 image = document.getElementById("headerImage");
+                 image.src = a1;
              }
              else{
-                document.body.style.setProperty('--eventColor',"#808080");
+                 document.body.style.setProperty('--eventColor',"#808080");
              }
          }
-    
-    </script>
-    <script src="/js/userData.js"></script>
-    <script src="/js/refreshButton.js"></script>
-  </body>
+         
+        </script>
+        <script src="/js/userData.js"></script>
+        <script src="/js/refreshButton.js"></script>
+    </body>
 </html>
