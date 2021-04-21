@@ -560,12 +560,18 @@
                              select.setAttribute("name", assignment.assignment_id);
                              select.setAttribute("id", assignment.assignment_id);
                              select.setAttribute("style", "padding: 8%;width: 100%;text-align-last:center;")
-                             $.each([0,1,2,3,4,5,10,15,20,25,30,35,40,45,50], function(idx, hours) { 
+
+                             var id = assignment.assignment_id;
+                             $.each([0,1,2,3,4,5,8,13,18,24,30,45,50], function(idx, hours) {
                                  var option = document.createElement('option');
                                  option.setAttribute("value", hours);
-                                 option.innerHTML = hours;
+                                 option.setAttribute("id", id+"_"+hours);    /* ex: "8946831_24"  */
+                                 option.innerTEXT = hours;
                                  select.appendChild(option);
                              });
+                             /* Select the last saved "task_hours" */
+                             var hours_saved = assignment.task_hours;
+                             document.getElementById(id+"_"+hours_saved).selected = true;
 
                              th_id.innerHTML    = assignment.assignment_id;
                              th_date.innerHTML  = assignment.due_at;
