@@ -575,6 +575,7 @@
                                  /* Select the last saved "task_hours" on final iteration */
                                  if (hour_options.length === idx+1) {
                                      var hours_saved = assignment.task_hours;
+                                     console.log(hours_saved);
                                      saved_task_hours.push(hours_saved);
                                  }
                              });
@@ -598,8 +599,8 @@
                              div_assignments.appendChild(table);
                          });
                          current_courses.append(div_assignments);
-                         $.each(saved_task_hours, funtion(j, saved_task_hour) {
-                             document.getElementById(id+"_"+saved_task_hour).selected = "true";
+                         $.each(saved_task_hours, function(j, saved_task_hour) {
+                             document.getElementById(saved_task_hour).selected = "true";
                          });
                      }
                  }
