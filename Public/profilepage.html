@@ -221,6 +221,7 @@
              float: right;
          }
         /*Might need a different way to implement this*/
+        /*
          .goodHWTimesC:after {
             content: "";
             background-color: #000;
@@ -232,6 +233,7 @@
             left: 75%;
             display: block;
         }
+        */
         .button3 {
              display: inline-block;
              border-radius: 10px;
@@ -613,11 +615,26 @@
          });  
          //AS Added 
          $("goodHWbutton").on("click", function(event) {
-             var selectedGoodHWTimes=document.getElementById("goodHWTimesID");
+             var selectedGoodHWTimes = document.getElementById("goodHWTimesID");
              var goodTimes = selectedGoodHWTimes.value;
-             //add some function that pushes goodTimes
              console.log(goodTimes);
+             addGoodHWTimesDatabase(goodTimes);
+             //console.log("Pushed goodHWTimes");
          });
+
+         function addGoodHWTimesDatabase(goodTimes){
+                 var goodTimes="test";
+                 var good_HW_times  = goodTimes;
+                 var userId   = firebase.auth().currentUser.uid;
+                 var database = firebase.database();
+
+                 database.ref('users/' + userId).update({
+                     good_HW_times: good_HW_times
+                 }).then(function() {
+                     console.log('good HW times saved to firebase database');
+                 });
+
+                }
 
          //AS Added End
 
