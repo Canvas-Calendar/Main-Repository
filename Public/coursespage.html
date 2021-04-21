@@ -513,6 +513,8 @@
 
                      /* Check if course has assignments, and if so, display them  */
                      if (course.assignments) {
+                         var saved_task_hours = [];
+
                          /* Display the column labels first */
                          var div_assignments = document.createElement('div');
                          var table = document.createElement('table');
@@ -563,7 +565,6 @@
 
                              var id = assignment.assignment_id;
                              var hour_options = [0,1,2,3,4,5,8,13,18,24,30,45,50];
-                             var saved_task_hours = [];
                              $.each(hour_options, function(idx, hours) {
                                  var option = document.createElement('option');
 
@@ -574,7 +575,7 @@
 
                                  /* Select the last saved "task_hours" on final iteration */
                                  if (hour_options.length === idx+1) {
-                                     var hours_saved = assignment.task_hours;
+                                     var hours_saved = id+"_"+assignment.task_hours;
                                      console.log(hours_saved);
                                      saved_task_hours.push(hours_saved);
                                  }
