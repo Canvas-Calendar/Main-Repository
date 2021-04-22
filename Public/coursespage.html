@@ -211,6 +211,10 @@
              color: black;
          }
 
+         h1 {
+             font-size: 350%;
+         }
+
          h2 {
              padding: .25in;
          }
@@ -297,9 +301,9 @@
          }
 
          .tableHeader{
-             font-size: large;
+             font-size: 250%;
              padding-top: .5in;
-             padding-bottom: .5in;
+             padding-bottom: .25in;
          }
 
          #headerImage
@@ -314,6 +318,12 @@
              -ms-border-radius: 50%;
              -o-border-radius: 50%;
              border-radius: 50%;
+         }
+
+         .courseHeader {
+             margin: 0 auto;
+             display: block;
+             width: 1200px;
          }
 
          .divCenter {
@@ -524,6 +534,7 @@
                      var a_header   = document.createElement('a');
 
                      div_header.setAttribute("class", "tableHeader");
+                     div_header.setAttribute("id", course.course_id);
                      a_header.setAttribute("href", course_url);
                      a_header.innerHTML = course["name"];
                      div_header.appendChild(a_header);
@@ -546,7 +557,7 @@
                          var th_url   = document.createElement('th');
                          var th_task_hours = document.createElement('th');
 
-                         div_assignments.setAttribute("style", "width:1200px;margin: 0 auto;display: block;");
+                         div_assignments.setAttribute("class", "courseHeader");
                          table.setAttribute("class", "blueTable");
                          th_id.innerHTML    = "Assignment ID";
                          th_date.innerHTML  = "Due Date";
@@ -561,6 +572,7 @@
                          tr.appendChild(th_name);
                          tr.appendChild(th_url);
                          tr.appendChild(th_task_hours);
+
                          thead.appendChild(tr);
                          table.appendChild(thead);
                          table.appendChild(tbody);
@@ -603,7 +615,8 @@
                              th_id.innerHTML    = assignment.assignment_id;
                              th_date.innerHTML  = assignment.due_at;
                              th_grade.innerHTML = assignment.grading_type;
-                             a_url.innerHTML = assignment.html_url;
+                             th_name.innerHTML  = assignment.name;
+                             a_url.innerHTML    = assignment.html_url;
 
                              a_url.setAttribute("href", assignment.html_url);
                              th_url.appendChild(a_url);
@@ -642,7 +655,7 @@
                  var course_url = "https://udel.instructure.com/courses/"+courseID;
 
                                              console.log(course_term["year"], today["year"])
-                 if ((today["year"] === course_term["year"]) || (course_name.includes(today["term"]))) {
+                 19if ((today["year"] === course_term["year"]) || (course_name.includes(today["term"]))) {
                      console.log(course_name);
                      console.log(courseID); // test
                      /* numOfCourses++; // adds to the counter */
@@ -744,12 +757,13 @@
              }
          }
 
+         
          $("#btnCenter").on("click", function(e) {
              e.preventDefault();
              var DELAY = 2000;
              var spinner = $(this);
 
-             /* $.each() */
+             
          });
 
         </script>
