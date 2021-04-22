@@ -31,7 +31,7 @@
         <script src="/js/UDCanvasAPI.js"></script>
         <!-- <script src="/js/parseAllCourses.js"></script> -->
         <!-- <script src="/js/getTerm.js"></script> -->
-        <!-- <script src="/js/testFile.js"></script> -->
+        <script src="/js/testFile.js"></script>
 
         <!-- TEDDY EDIT - Multiple firebase init() and declarations?? -->
         <!-- initialize the SDK after all desired features are loaded -->
@@ -371,7 +371,7 @@
             </div>
         </div>
         <div id="divCenter" class="divCenter">
-            <button id="btnCenter" class="btnCenter button has-spinner">Save Settings</button>
+            <button id="btnCenter" class="btnCenter refresh-btn has-spinner">Save Settings<i class=""fa fa-refresh></button>
         </div>
 
 
@@ -765,7 +765,7 @@
              var DELAY = 2000;
              var spinner = $(this);
 
-             $(spinner).buttonLoader('start');
+             $('.btnCenter').buttonLoader('start');
              $(function() {
                  function save_settings() {
                      var active_course_ids = $(".courseHeader").map(function(i, e){ return parseInt(e.id); }).get();
@@ -794,7 +794,7 @@
                          courses: user_data.courses
                      }).then(function() {
                          console.log('Settings Saved to firebase DB');
-                         $(spinner).buttonLoader('stop');
+                         $('.btnCenter').buttonLoader('stop');
                      });
                  }
                  window.setTimeout(save_settings, DELAY);
@@ -804,6 +804,6 @@
 
         </script>
         <script src="/js/userData.js"></script>
-        <script src="/js/refreshButton.js"></script>
+        <!-- <script src="/js/refreshButton.js"></script> -->
     </body>
 </html>
