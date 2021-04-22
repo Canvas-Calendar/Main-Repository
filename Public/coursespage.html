@@ -300,7 +300,7 @@
              text-align: center;
          }
 
-         .tableHeader{
+         .courseHeader{
              font-size: 250%;
              padding-top: .5in;
              padding-bottom: .25in;
@@ -320,7 +320,7 @@
              border-radius: 50%;
          }
 
-         .courseHeader {
+         .assignmentsHeader {
              margin: 0 auto;
              display: block;
              width: 1200px;
@@ -328,6 +328,7 @@
 
          .divCenter {
          	   margin: 0 auto;
+             padding-top: 3%;
              width: 45%;
          }
 
@@ -533,7 +534,7 @@
                      var div_header = document.createElement('div');
                      var a_header   = document.createElement('a');
 
-                     div_header.setAttribute("class", "tableHeader");
+                     div_header.setAttribute("class", "courseHeader");
                      div_header.setAttribute("id", course.course_id);
                      a_header.setAttribute("href", course_url);
                      a_header.innerHTML = course["name"];
@@ -557,7 +558,7 @@
                          var th_url   = document.createElement('th');
                          var th_task_hours = document.createElement('th');
 
-                         div_assignments.setAttribute("class", "courseHeader");
+                         div_assignments.setAttribute("class", "assignmentsHeader");
                          table.setAttribute("class", "blueTable");
                          th_id.innerHTML    = "Assignment ID";
                          th_date.innerHTML  = "Due Date";
