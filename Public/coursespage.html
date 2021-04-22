@@ -19,12 +19,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
               integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
-        <script>
-         var access_token="25~LDtz4FPmgvVumQULtrkjOUrdQvKnniad2r56u33mCOqZHNjnnB2wIkScp8c56F8E";
-        </script>
-        <!--
-             <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script>
-        -->
+        <!-- <script> var access_token="25~LDtz4FPmgvVumQULtrkjOUrdQvKnniad2r56u33mCOqZHNjnnB2wIkScp8c56F8E"; </script> -->
+        <!-- <script src="https://rawcdn.githack.com/kkatayama/UDCanvasAPI/main/public/UDCanvasAPI.js"></script> -->
 
         <!-- TEDDY EDIT  -->
         <!-- + Button Loader Plugin -->
@@ -33,7 +29,7 @@
         <script src="/js/UDCanvasAPI.js"></script>
         <!-- <script src="/js/parseAllCourses.js"></script> -->
         <!-- <script src="/js/getTerm.js"></script> -->
-        <script src="/js/testFile.js"></script>
+        <!-- <script src="/js/testFile.js"></script> -->
 
         <!-- TEDDY EDIT - Multiple firebase init() and declarations?? -->
         <!-- initialize the SDK after all desired features are loaded -->
@@ -320,6 +316,27 @@
              border-radius: 50%;
          }
 
+         .divCenter {
+         	   margin: 0 auto;
+             width: 45%;
+         }
+
+         .btnCenter {
+             padding: 2%;
+             width: 100%;
+             font-weight: 700;
+         	   font-size: 300%;
+             color: #fff;
+		  	        background: #559bc5;
+             border: 3px solid #d0e4f5;
+             border-radius: 10px;
+         }
+
+         .btnCenter:hover {
+         	   background-color: #1c6ea4;
+         }
+
+
         </style>
     </head>
 
@@ -338,13 +355,14 @@
         <div class="topPage">
             <h1>Current Course Information:</h1>
             <div id="current_courses">
-                
             </div>
+        </div>
+        <div id="divCenter" class="divCenter">
+            <button id="btnCenter" class="btnCenter">Save Settings</button>
         </div>
 
 
 
-        
 
         <script>
 
@@ -556,6 +574,7 @@
                              var th_grade = document.createElement('th');
                              var th_name  = document.createElement('th');
                              var th_url   = document.createElement('th');
+                             var a_url    = document.createElement('a');
                              var th_task_hours = document.createElement('th');
 
                              var select   = document.createElement('select');
@@ -584,8 +603,10 @@
                              th_id.innerHTML    = assignment.assignment_id;
                              th_date.innerHTML  = assignment.due_at;
                              th_grade.innerHTML = assignment.grading_type;
-                             th_name.innerHTML  = assignment.name;
-                             th_url.innerHTML   = assignment.html_url;
+                             a_url.innerHTML = assignment.html_url;
+
+                             a_url.setAttribute("href", assignment.html_url);
+                             th_url.appendChild(a_url);
                              th_task_hours.appendChild(select);
 
                              tr.appendChild(th_id);
@@ -722,7 +743,15 @@
                  document.body.style.setProperty('--eventColor',"#808080");
              }
          }
-         
+
+         $("#btnCenter").on("click", function(e) {
+             e.preventDefault();
+             var DELAY = 2000;
+             var spinner = $(this);
+
+             /* $.each() */
+         }
+
         </script>
         <script src="/js/userData.js"></script>
         <script src="/js/refreshButton.js"></script>

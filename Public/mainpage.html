@@ -87,307 +87,307 @@
         <!-- <script src="/js/parseAllCourses.js"></script> -->
         <!-- <script src="/js/getTerm.js"></script> -->
         <script src="/js/testFile.js"></script>
-    <style>
-     * {
-    padding:0;
-    margin:0;
-}
+        <style>
+         * {
+             padding:0;
+             margin:0;
+         }
 
-:root{
-    --eventColor:#808080;
-}
+         :root{
+             --eventColor:#808080;
+         }
 
-.fc-event {
-    padding:1em 0.5em !important;
-    background-color:red;
-}
+         .fc-event {
+             padding:1em 0.5em !important;
+             background-color:red;
+         }
 
-.fc-day-grid-event .fc-content {
-    white-space:normal !important;
-}
-.strikeout * {
-    text-decoration: line-through !important;
-}
+         .fc-day-grid-event .fc-content {
+             white-space:normal !important;
+         }
+         .strikeout * {
+             text-decoration: line-through !important;
+         }
 
-.fc-title{
-    color: #f4f4f4;
-}
+         .fc-title{
+             color: #f4f4f4;
+         }
 
-.topSection{
-    margin-top: 1in;
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
-
-
-/* header _________________________________________*/
-
-a {
-    color: rgb(255, 255, 255);
-}
-
-.header {
-    background-color: var(--eventColor);
-    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
-    position: fixed;
-    left:0;
-    right:0;
-    top:0;
-    width: 100%;
-    z-index: 3;
-}
-
-.header ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    overflow: hidden;
-    background-color: var(--eventColor);
-}
-
-.header li a {
-    display: block;
-    padding: 20px 20px;
-    border-right: 1px solid #f4f4f4;
-    text-decoration: none;
-}
-
-.header li a:hover,
-.header .menu-btn:hover {
-    background-color:lightgrey;
-}
-
-.header .logo {
-    display: block;
-    float: left;
-    font-size: 2em;
-    padding: 10px 20px;
-    text-decoration: none;
-}
-
-/* menu */
-
-.header .menu {
-    clear: both;
-    max-height: 0;
-    transition: max-height .2s ease-out;
-}
-
-/* menu icon */
-
-.header .menu-icon {
-    cursor: pointer;
-    display: inline-block;
-    float: right;
-    padding: 28px 20px;
-    position: relative;
-    user-select: none;
-}
-
-.header .menu-icon .navicon {
-    background: #333;
-    display: block;
-    height: 2px;
-    position: relative;
-    transition: background .2s ease-out;
-    width: 18px;
-}
-
-.header .menu-icon .navicon:before,
-.header .menu-icon .navicon:after {
-    background: #333;
-    content: '';
-    display: block;
-    height: 100%;
-    position: absolute;
-    transition: all .2s ease-out;
-    width: 100%;
-}
-
-.header .menu-icon .navicon:before {
-    top: 5px;
-}
-
-.header .menu-icon .navicon:after {
-    top: -5px;
-}
-
-/* menu btn */
-
-.header .menu-btn {
-    display: none;
-}
-
-.header .menu-btn:checked ~ .menu {
-    max-height: 240px;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon {
-    background: transparent;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:before {
-    transform: rotate(-45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:after {
-    transform: rotate(45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-    top: 0;
-}
-
-/* 48em = 768px */
-
-@media (min-width: 48em) {
-    .header li {
-        float: left;
-    }
-    .header li a {
-        padding: 20px 30px;
-    }
-    .header .menu {
-        clear: none;
-        float: right;
-        max-height: none;
-    }
-    .header .menu-icon {
-        display: none;
-    }
-}
-
-/*Button*/
-.refresh-btn {
-    background-color: var(--eventColor);
-    border: none;
-    color: white;
-    padding: 15px 15px;
-    font-size: 25px;
-    cursor: pointer;
-}
-
-/* Darker background on mouse-over */
-.refresh-btn:hover {
-    color: rgb(30, 192, 30);
-}   
+         .topSection{
+             margin-top: 1in;
+             padding-left: 50px;
+             padding-right: 50px;
+         }
 
 
-    #headerImage
-    {
-        cursor: pointer;
-        padding-top: 5px;
-        width: 60px;
-        height: 60px;
-        overflow: hidden;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms-border-radius: 50%;
-        -o-border-radius: 50%;
-        border-radius: 50%;
-    }
- 
- #bottomSection {
-  width:600px;
-  clear:both;
-  }
- #first {
-  width:200px;
-  float:left;
-  padding-left: 50px;
-}
-#second { 
-  width:200px;
-  float:left;
-}
-#third { 
-  width:200px;
-  float:left;
-  padding-right: 50px;
-}
 
-  /*Popup*/
-  /* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 99 !important;
-  padding-top: 200px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 500px; /* Full width */
-  height: 750px; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-}
+         /* header _________________________________________*/
 
-/* Modal Content */
-.modal-content {
-  background-color:lightgrey;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  display: flex;
-  justify-content: center;
-}
+         a {
+             color: rgb(255, 255, 255);
+         }
 
-/* The Close Button */
-.close {
-  color: #ff0000;
-  float: left;
-  font-size: 28px;
-  font-weight: bold;
-}
+         .header {
+             background-color: var(--eventColor);
+             box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+             position: fixed;
+             left:0;
+             right:0;
+             top:0;
+             width: 100%;
+             z-index: 3;
+         }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
+         .header ul {
+             margin: 0;
+             padding: 0;
+             list-style: none;
+             overflow: hidden;
+             background-color: var(--eventColor);
+         }
 
-h1 {
-  font-weight: bold;
-  font-size: 15px;
-}
+         .header li a {
+             display: block;
+             padding: 20px 20px;
+             border-right: 1px solid #f4f4f4;
+             text-decoration: none;
+         }
 
-.user-message-title{
-  font-weight: bold;
-  font-size: 50px;
-}
+         .header li a:hover,
+         .header .menu-btn:hover {
+             background-color:lightgrey;
+         }
+
+         .header .logo {
+             display: block;
+             float: left;
+             font-size: 2em;
+             padding: 10px 20px;
+             text-decoration: none;
+         }
+
+         /* menu */
+
+         .header .menu {
+             clear: both;
+             max-height: 0;
+             transition: max-height .2s ease-out;
+         }
+
+         /* menu icon */
+
+         .header .menu-icon {
+             cursor: pointer;
+             display: inline-block;
+             float: right;
+             padding: 28px 20px;
+             position: relative;
+             user-select: none;
+         }
+
+         .header .menu-icon .navicon {
+             background: #333;
+             display: block;
+             height: 2px;
+             position: relative;
+             transition: background .2s ease-out;
+             width: 18px;
+         }
+
+         .header .menu-icon .navicon:before,
+         .header .menu-icon .navicon:after {
+             background: #333;
+             content: '';
+             display: block;
+             height: 100%;
+             position: absolute;
+             transition: all .2s ease-out;
+             width: 100%;
+         }
+
+         .header .menu-icon .navicon:before {
+             top: 5px;
+         }
+
+         .header .menu-icon .navicon:after {
+             top: -5px;
+         }
+
+         /* menu btn */
+
+         .header .menu-btn {
+             display: none;
+         }
+
+         .header .menu-btn:checked ~ .menu {
+             max-height: 240px;
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon {
+             background: transparent;
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon:before {
+             transform: rotate(-45deg);
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon:after {
+             transform: rotate(45deg);
+         }
+
+         .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+         .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+             top: 0;
+         }
+
+         /* 48em = 768px */
+
+         @media (min-width: 48em) {
+             .header li {
+                 float: left;
+             }
+             .header li a {
+                 padding: 20px 30px;
+             }
+             .header .menu {
+                 clear: none;
+                 float: right;
+                 max-height: none;
+             }
+             .header .menu-icon {
+                 display: none;
+             }
+         }
+
+         /*Button*/
+         .refresh-btn {
+             background-color: var(--eventColor);
+             border: none;
+             color: white;
+             padding: 15px 15px;
+             font-size: 25px;
+             cursor: pointer;
+         }
+
+         /* Darker background on mouse-over */
+         .refresh-btn:hover {
+             color: rgb(30, 192, 30);
+         }   
 
 
-.button {
-  display: inline-block;
-  border-radius: 10px;
-  background-color: #c42700;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 15px;
-  padding: 5px;
-  width: 200px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
-  margin-left: 75px;
-}
+         #headerImage
+         {
+             cursor: pointer;
+             padding-top: 5px;
+             width: 60px;
+             height: 60px;
+             overflow: hidden;
+             -webkit-border-radius: 50%;
+             -moz-border-radius: 50%;
+             -ms-border-radius: 50%;
+             -o-border-radius: 50%;
+             border-radius: 50%;
+         }
+         
+         #bottomSection {
+             width:600px;
+             clear:both;
+         }
+         #first {
+             width:200px;
+             float:left;
+             padding-left: 50px;
+         }
+         #second { 
+             width:200px;
+             float:left;
+         }
+         #third { 
+             width:200px;
+             float:left;
+             padding-right: 50px;
+         }
+
+         /*Popup*/
+         /* The Modal (background) */
+         .modal {
+             display: none; /* Hidden by default */
+             position: fixed; /* Stay in place */
+             margin-left: auto;
+             margin-right: auto;
+             z-index: 99 !important;
+             padding-top: 200px; /* Location of the box */
+             left: 0;
+             top: 0;
+             width: 500px; /* Full width */
+             height: 750px; /* Full height */
+             overflow: auto; /* Enable scroll if needed */
+         }
+
+         /* Modal Content */
+         .modal-content {
+             background-color:lightgrey;
+             margin: auto;
+             padding: 20px;
+             border: 1px solid #888;
+             width: 80%;
+             display: flex;
+             justify-content: center;
+         }
+
+         /* The Close Button */
+         .close {
+             color: #ff0000;
+             float: left;
+             font-size: 28px;
+             font-weight: bold;
+         }
+
+         .close:hover,
+         .close:focus {
+             color: #000;
+             text-decoration: none;
+             cursor: pointer;
+         }
+
+         h1 {
+             font-weight: bold;
+             font-size: 15px;
+         }
+
+         .user-message-title{
+             font-weight: bold;
+             font-size: 50px;
+         }
 
 
-.button:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
+         .button {
+             display: inline-block;
+             border-radius: 10px;
+             background-color: #c42700;
+             border: none;
+             color: #FFFFFF;
+             text-align: center;
+             font-size: 15px;
+             padding: 5px;
+             width: 200px;
+             transition: all 0.5s;
+             cursor: pointer;
+             margin: 5px;
+             margin-left: 75px;
+         }
 
-.past div.fc-time, .past div.fc-title {
-    text-decoration: line-through;
-}
+
+         .button:hover {
+             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+         }
+
+         .past div.fc-time, .past div.fc-title {
+             text-decoration: line-through;
+         }
 
 
-    </style>
+        </style>
     </head>
     <body>
         <header class="header">
@@ -408,19 +408,17 @@ h1 {
 
                 <!-- Modal content -->
                 <div class="modal-content">
-                  <span class="close">&times;</span>
-                  <div id="user-message-title" style="font-size: 30px;"></div>
-                  <h1>Start:</h1>
-                  <div id="user-message-start"></div>
-                  <h1>End:</h1>
-                  <div id="user-message-end"></div>
-                  <h1>Description:</h1>
-                  <div id="user-message-description" style="padding-bottom: 20px;"></div>
-                  <button class="button" id=deleteBtn style="vertical-align:middle"><span>Delete Event </span></button>
-                  
+                    <span class="close">&times;</span>
+                    <div id="user-message-title" style="font-size: 30px;"></div>
+                    <h1>Start:</h1>
+                    <div id="user-message-start"></div>
+                    <h1>End:</h1>
+                    <div id="user-message-end"></div>
+                    <h1>Description:</h1>
+                    <div id="user-message-description" style="padding-bottom: 20px;"></div>
+                    <button class="button" id=deleteBtn style="vertical-align:middle"><span>Delete Event </span></button>
                 </div>
-              
-              </div>
+            </div>
 
             <span><input type='color' id='colorPicker'></span>
             <div id='calendar'></div>
@@ -437,20 +435,18 @@ h1 {
             </ul>
         </div>
 
-        
         <div class="bottomSection">
             <!--
-            <div class="upcoming-page" style="float: left;">
-                <div class="card" style="width: 302px;"> 
-                    <div class="card-header" style="width: 300px;">
-                        <h4>Today's Schedule</h4> 
-                    </div>
-                    <ul id="today_schedule" class="list-group list-group-flush">
-                        
-                    </ul>
-                </div>
-            </div> 
-         -->
+                 <div class="upcoming-page" style="float: left;">
+                 <div class="card" style="width: 302px;"> 
+                 <div class="card-header" style="width: 300px;">
+                 <h4>Today's Schedule</h4> 
+                 </div>
+                 <ul id="today_schedule" class="list-group list-group-flush">
+                 </ul>
+                 </div>
+                 </div> 
+            -->
             <div class="all-courses-page" id="first">
                 <div class="card" style="width: 302px;"> 
                     <div class="card-header" style="width: 300px;">
@@ -475,7 +471,7 @@ h1 {
                     </ul>
                 </div>
             </div>
-         
+            
             <div class="assignments-page" id="third">
                 <div class="card" style="width: 302px;"> 
                     <div class="card-header" style="width: 300px;">
@@ -521,10 +517,10 @@ h1 {
 
          //event click popup variables
          // Get the modal
-        var modal = document.getElementById("myModal");
+         var modal = document.getElementById("myModal");
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+         // Get the <span> element that closes the modal
+         var span = document.getElementsByClassName("close")[0];
 
 
          // Logout Code _________________________________________________
@@ -595,7 +591,7 @@ h1 {
                          console.log("variable is defined");
                          /* testFunction(); */
                          console.log(getTerm(Date.now()));
-                    
+                         
                          parseAllCourses(user_data);
                          parseActiveCourses(user_data);
                          parseSchoolAttending(user_data);
@@ -645,22 +641,22 @@ h1 {
          // calendar Code ________________________________________________________________________
 
          function addEventsBackIntoArray(user_data){ 
-            var calendarDataToBeAdded = user_data["events"];
-            if(calendarDataToBeAdded[0] != null){
-                for(var i=0; i<=calendarDataToBeAdded.length; i++){
-                    console.log(calendarDataToBeAdded.length);
-                    console.log(calendarDataToBeAdded[i]);
-                    if(calendarDataToBeAdded[i] != null){
-                        eventsArray.push(calendarDataToBeAdded[i]);
-                    }   
-                    else{
-                        console.log("no events added");
-                    }
-                }
-            }
-            else{
-                console.log("no events exist");
-            }
+             var calendarDataToBeAdded = user_data["events"];
+             if(calendarDataToBeAdded[0] != null){
+                 for(var i=0; i<=calendarDataToBeAdded.length; i++){
+                     console.log(calendarDataToBeAdded.length);
+                     console.log(calendarDataToBeAdded[i]);
+                     if(calendarDataToBeAdded[i] != null){
+                         eventsArray.push(calendarDataToBeAdded[i]);
+                     }   
+                     else{
+                         console.log("no events added");
+                     }
+                 }
+             }
+             else{
+                 console.log("no events exist");
+             }
          }
 
          $('#calendar').fullCalendar({
@@ -676,36 +672,36 @@ h1 {
              editable: true,
              eventLimit: true,
              /*
-             eventRender: function(event, element) {
-                 console.log(event);
+                eventRender: function(event, element) {
+                console.log(event);
 
-                 var html = '<a data-event-id="' + event.id + '" class="' + ((event.strikeout) ? 'strikeout' : '') + ' fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable">';
-                 html += '<div class="fc-content">';
-                 html += ' <label><input type="checkbox" ' + ((event.strikeout) ? 'checked' : '') + '> <span class="fc-time">'  + '</span> ';
-                 html += ' <span class="fc-title">' + event.title + '</span>';
-                 html += '</label></div></a>';
+                var html = '<a data-event-id="' + event.id + '" class="' + ((event.strikeout) ? 'strikeout' : '') + ' fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable">';
+                html += '<div class="fc-content">';
+                html += ' <label><input type="checkbox" ' + ((event.strikeout) ? 'checked' : '') + '> <span class="fc-time">'  + '</span> ';
+                html += ' <span class="fc-title">' + event.title + '</span>';
+                html += '</label></div></a>';
 
-                 var $event = $(html);
+                var $event = $(html);
 
-                 addRightClickMenu($event);
+                addRightClickMenu($event);
 
-                 return $event;
-             },
-             */
+                return $event;
+                },
+              */
              select: function(start, end) {
                  var title = prompt('Event Title:');
                  var description = prompt('Event Description:');
                  //var start = prompt("Event Start Time:")
                  var eventData;
                  if (title) {
-                    eventData = {
-                        title: title,
-                        start: start,
-                        end: end, 
-                        description: description,
-                        color: $("#colorPicker").val()
-                    };
-                    $("#calendar").fullCalendar("renderEvent", eventData, true); // stick? = true
+                     eventData = {
+                         title: title,
+                         start: start,
+                         end: end, 
+                         description: description,
+                         color: $("#colorPicker").val()
+                     };
+                     $("#calendar").fullCalendar("renderEvent", eventData, true); // stick? = true
                  }
                  $('#calendar').fullCalendar('unselect');
                  eventsArray.push(eventData);
@@ -713,125 +709,125 @@ h1 {
              },
              
              eventClick: function(calEvent, jsEvent) {
-                modal.style.display = "block";
-                var displayTitle = calEvent.title;
-                var displayStart = calEvent.start;
-                var displayEnd = calEvent.end;
-                var displayDescription = calEvent.description;
-                //var displayColor = calEvent.color;
-                displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription);
-                //deleteEventsFromDatabase(displayTitle, displayStart, displayEnd, displayDescription, displayColor);
+                 modal.style.display = "block";
+                 var displayTitle = calEvent.title;
+                 var displayStart = calEvent.start;
+                 var displayEnd = calEvent.end;
+                 var displayDescription = calEvent.description;
+                 //var displayColor = calEvent.color;
+                 displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription);
+                 //deleteEventsFromDatabase(displayTitle, displayStart, displayEnd, displayDescription, displayColor);
              },
 
              eventRender: function(event, element) {
-                element.append( "<span class='closeon'>X</span>" );
-                element.find(".closeon").click(function(calEvent, jsEvent) {
-                    $('#calendar').fullCalendar('removeEvents',event._id);
-                    //console.log(calEvent.description);
-                    //var userId   = firebase.auth().currentUser.uid;
-                    //var database = firebase.database();
-                    //database.ref('users/' + userId).update({
-                    //    assignment_events: assignment_events
-                    //}).then(function() {
-                });
-             //});
-            },
-        
+                 element.append( "<span class='closeon'>X</span>" );
+                 element.find(".closeon").click(function(calEvent, jsEvent) {
+                     $('#calendar').fullCalendar('removeEvents',event._id);
+                     //console.log(calEvent.description);
+                     //var userId   = firebase.auth().currentUser.uid;
+                     //var database = firebase.database();
+                     //database.ref('users/' + userId).update({
+                     //    assignment_events: assignment_events
+                     //}).then(function() {
+                 });
+                 //});
+             },
+             
              
              /*
-             eventClick: function(calEvent, jsEvent) {
+                eventClick: function(calEvent, jsEvent) {
                 var title = prompt("Edit Event Content:", calEvent.title);
                 calEvent.title = title;
                 $("#calendar").fullCalendar("updateEvent", calEvent);
-             },
-             */
+                },
+              */
              //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
          });
          
          function createAssignmentEvents(assignments){
-            $.each(assignments, function(i, assignment) {
-                var eventData;
-                var title = assignment["name"];
-                var start = assignment["due_at"];
-                var end = assignment["due_at"];
-                var description = assignment["description"];
-                if(start != null){
-                    console.log(title); 
-                    console.log(start);
-                    console.log(end);
-                    if(title){
-                        eventData = {
-                            title: title,
-                            start: start,
-                            end: end,
-                            description: description,
-                            color: '#FF0000'
-                        }
-                    } 
-                    eventsAssignmentsArray.push(eventData);
-                    addAssignmentEventsToDatabase(eventsAssignmentsArray);
-                }
-                else{
-                    console.log("function failed")
-                }
+             $.each(assignments, function(i, assignment) {
+                 var eventData;
+                 var title = assignment["name"];
+                 var start = assignment["due_at"];
+                 var end = assignment["due_at"];
+                 var description = assignment["description"];
+                 if(start != null){
+                     console.log(title); 
+                     console.log(start);
+                     console.log(end);
+                     if(title){
+                         eventData = {
+                             title: title,
+                             start: start,
+                             end: end,
+                             description: description,
+                             color: '#FF0000'
+                         }
+                     } 
+                     eventsAssignmentsArray.push(eventData);
+                     addAssignmentEventsToDatabase(eventsAssignmentsArray);
+                 }
+                 else{
+                     console.log("function failed")
+                 }
              });
          }
          
          function addAssignmentEventsToDatabase(eventsAssignmentsArray){
-            console.log(eventsAssignmentsArray);
-            var assignment_events = eventsAssignmentsArray;
-            var userId   = firebase.auth().currentUser.uid;
-            var database = firebase.database();
-            database.ref('users/' + userId).update({
-                assignment_events: assignment_events
-            }).then(function() {
-                     
-            });
+             console.log(eventsAssignmentsArray);
+             var assignment_events = eventsAssignmentsArray;
+             var userId   = firebase.auth().currentUser.uid;
+             var database = firebase.database();
+             database.ref('users/' + userId).update({
+                 assignment_events: assignment_events
+             }).then(function() {
+                 
+             });
          }
 
          function addEventsToDatabase(eventsArray){
-                 //console.log(title);
-                 console.log(eventsArray);
-                 var events = eventsArray;
-                 //var event_data = eventData;
-                 var userId   = firebase.auth().currentUser.uid;
-                 var database = firebase.database();
+             //console.log(title);
+             console.log(eventsArray);
+             var events = eventsArray;
+             //var event_data = eventData;
+             var userId   = firebase.auth().currentUser.uid;
+             var database = firebase.database();
 
-                 database.ref('users/' + userId).update({
-                     events: events
-                 }).then(function() {
-                     
-                });
-        } 
+             database.ref('users/' + userId).update({
+                 events: events
+             }).then(function() {
+                 
+             });
+         } 
 
-        function displayEvents(user_data){
-            var calendarData = user_data["events"];
-            console.log(calendarData);
-            for(var i=0; i<=calendarData.length; i++){
-                $("#calendar").fullCalendar("renderEvent", calendarData[i], true); // render events
-            }
-        }
+         function displayEvents(user_data){
+             var calendarData = user_data["events"];
+             console.log(calendarData);
+             for(var i=0; i<=calendarData.length; i++){
+                 $("#calendar").fullCalendar("renderEvent", calendarData[i], true); // render events
+             }
+         }
 
-        function displayAssignmentEvents(user_data){
-            var assignmentEventData = user_data["assignment_events"];
-            console.log(assignmentEventData);
-            for(var i=0; i<=assignmentEventData.length; i++){
-                $("#calendar").fullCalendar("renderEvent", assignmentEventData[i], true); // render events
-            }
-        }
+         function displayAssignmentEvents(user_data){
+             var assignmentEventData = user_data["assignment_events"];
+             console.log(assignmentEventData);
+             for(var i=0; i<=assignmentEventData.length; i++){
+                 $("#calendar").fullCalendar("renderEvent", assignmentEventData[i], true); // render events
+             }
+         }
 
-        //when clicked
-        function displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription){
-            var showTitle = displayTitle;
-            var showStart = displayStart;
-            var showEnd = displayEnd;
-            var showDescription = displayDescription;
-            document.getElementById("user-message-title").innerHTML = showTitle;
-            document.getElementById("user-message-start").innerHTML = showStart;
-            document.getElementById("user-message-end").innerHTML = showEnd;
-            document.getElementById("user-message-description").innerHTML = showDescription;
-            
-        }
+         //when clicked
+         function displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription){
+             var showTitle = displayTitle;
+             var showStart = displayStart;
+             var showEnd = displayEnd;
+             var showDescription = displayDescription;
+             document.getElementById("user-message-title").innerHTML = showTitle;
+             document.getElementById("user-message-start").innerHTML = showStart;
+             document.getElementById("user-message-end").innerHTML = showEnd;
+             document.getElementById("user-message-description").innerHTML = showDescription;
+             
+         }
 
 
          /*
@@ -873,71 +869,71 @@ h1 {
          //});
          
          /*   
-         function deleteEventsFromDatabase(displayTitle, displayStart, displayEnd, displayDescription, displayColor){
-             console.log("in delete function");
-             var eventToDelete 
-             var title = displayTitle;
-             var start = displayStart;
-             var end = displayEnd;
-             var description = displayDescription;
-             var color = displayColor;
-             $("#deleteBtn").on("click", function () {
-                modal.style.display = "none";
-                if(title){
-                    eventToDelete = {
-                        title: title,
-                        start: start,
-                        end: end,
-                        description: description,
-                        color: color
-                    }
-                    for(var i=0; i<=eventsArray.length; i++){
-                        for(var j=0; j<=eventsAssignmentsArray.length; j++){
-                            if(eventToDelete == eventsArray[i] || eventsAssignmentsArray[j]){
-                                database.ref('users/' + userId).update({
-                                    events: events
-                                }).then(function() {
-                                });
-                            }
-                        }
-                    }
-                }
-             });
-         }
-         */
+            function deleteEventsFromDatabase(displayTitle, displayStart, displayEnd, displayDescription, displayColor){
+            console.log("in delete function");
+            var eventToDelete 
+            var title = displayTitle;
+            var start = displayStart;
+            var end = displayEnd;
+            var description = displayDescription;
+            var color = displayColor;
+            $("#deleteBtn").on("click", function () {
+            modal.style.display = "none";
+            if(title){
+            eventToDelete = {
+            title: title,
+            start: start,
+            end: end,
+            description: description,
+            color: color
+            }
+            for(var i=0; i<=eventsArray.length; i++){
+            for(var j=0; j<=eventsAssignmentsArray.length; j++){
+            if(eventToDelete == eventsArray[i] || eventsAssignmentsArray[j]){
+            database.ref('users/' + userId).update({
+            events: events
+            }).then(function() {
+            });
+            }
+            }
+            }
+            }
+            });
+            }
+          */
          //get school attending
 
          function parseSchoolAttending(user_data) {
-                var college = user_data["school_attending"]
-                console.log(college);
-                displaySchoolDesign(college);
+             var college = user_data["school_attending"]
+             console.log(college);
+             displaySchoolDesign(college);
          }
 
          //display school design 
 
          function displaySchoolDesign(college){
-            var school = college;
+             var school = college;
              console.log(school);
              if(school == "UniversityOfDelaware"){
-                document.body.style.setProperty('--eventColor',"#00539f");
-                a1 = "delaware-logo.png";
-                image = document.getElementById("headerImage");
-                image.src = a1;
+                 document.body.style.setProperty('--eventColor',"#00539f");
+                 a1 = "delaware-logo.png";
+                 image = document.getElementById("headerImage");
+                 image.src = a1;
              }
              else if(school == "UniversityOfMaryland"){
-                document.body.style.setProperty('--eventColor',"#ff0000");
-                a1 = "umd_logo.png";
-                image = document.getElementById("headerImage");
-                image.src = a1;
+                 document.body.style.setProperty('--eventColor',"#ff0000");
+                 a1 = "umd_logo.png";
+                 image = document.getElementById("headerImage");
+                 image.src = a1;
              }
              else if(school == "SyracuseUniversity"){
-                document.body.style.setProperty('--eventColor',"#FF6C00");
-                a1 = "syracuse.jpg";
-                image = document.getElementById("headerImage");
-                image.src = a1;
+                 document.body.style.setProperty('--eventColor',"#FF6C00");
+                 a1 = "syracuse.jpg";
+                 image = document.getElementById("headerImage");
+                 image.src = a1;
              }
              else{
-                document.body.style.setProperty('--eventColor',"#808080");
+                 document.body.style.setProperty('--eventColor',"#808080");
              }
          }
 
@@ -1046,16 +1042,16 @@ h1 {
 
          //pop up code
          // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
+         span.onclick = function() {
+             modal.style.display = "none";
+         }
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+         // When the user clicks anywhere outside of the modal, close it
+         window.onclick = function(event) {
+             if (event.target == modal) {
+                 modal.style.display = "none";
+             }
+         }
         </script>
 
         <!-- TEDDY EDIT  -->
