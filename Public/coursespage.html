@@ -758,13 +758,46 @@
              }
          }
 
-         
          $("#btnCenter").on("click", function(e) {
              e.preventDefault();
              var DELAY = 2000;
              var spinner = $(this);
 
-             
+             $(spinner).buttonLoader('start');
+             $(function() {
+                 function save_settings() {
+                     var active_course_ids = $(".courseHeader").map(function(i, e){ return parseInt(e.id); }).get();
+                     var all_course_ids = $(user_data.courses).map(function(i,e) { return e.course_id; }).get();
+
+                     $.each(active_course_ids, function(key, value) {
+	                        var course_index = all_course_ids.indexOf(value);
+                         console.log('course_index: ' + course_index);
+
+                         var all_assignment_ids = $(user_data.courses[course_index].assignments).map(function(i,e) { return e.assignment_id; }).get(); 
+                         $.each(user_data.courses[course_index].assignments, function(i, assignment) {
+                             var assignment_id = assignment.assignment_id;
+                             console.log(assignment_id);
+
+                             var query = 'select[id="' + assignment_id.toString() + '"]';
+                             var task_hours = $(query).val();
+                             console.log(task_hours);
+
+                             var assignment_index = all_assignment_ids.indexOf(assignment_id);
+                             console.log(assignment_id, assignment_index);
+
+		                           user_data["courses"][course_index]["assignments"][assignment_index]['task_hours'] = task_hours;
+                         });
+                     });
+                     user_data.db_ref.update({
+                         courses: user_data.courses
+                     }).then(function() {
+                         console.log('Settings Saved to firebase DB');
+                         $(spinner).buttonLoader('stop');
+                     });
+                 }
+                 window.setTimeout(save_settings, DELAY);
+             })
+
          });
 
         </script>
