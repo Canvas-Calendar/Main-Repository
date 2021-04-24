@@ -202,16 +202,94 @@
          .message{
              padding-top: 1in;
              text-align: center;
-             padding-left: 2in;
+             padding-left: 1in;
              float: left;
          }
 
          .link-account{
              padding-top: 1in;
              text-align: center;
-             padding-right: 2in;
-             float: right;
+             /*padding-right: 2in; trying from left instead*/
+             padding-left: 1in;
+             float: left;
          }
+
+         /*AS ADDED*/
+         .goodHWTimesC{
+             padding-top: 1in;
+             text-align: center;
+             /*padding-right: 2in; trying from left instead*/
+             padding-left: 1in;
+             float: left;
+         }
+        /*Might need a different way to implement this*/
+        /*
+         .goodHWTimesC:after {
+            content: "";
+            background-color: #000;
+            position: absolute;
+            width: 2px;
+            height: 700px;
+            top: 100px;
+            padding-top: 50px;
+            left: 75%;
+            display: block;
+        }
+        */
+        .button3 {
+             display: inline-block;
+             border-radius: 10px;
+             background-color: var(--eventColor);
+             border: none;
+             color: #FFFFFF;
+             text-align: center;
+             font-size: 15px;
+             padding: 15px;
+             width: 100px;
+             transition: all 0.5s;
+             cursor: pointer;
+             margin: 25px;
+         }
+
+         .button3 span {
+             cursor: pointer;
+             display: inline-block;
+             position: relative;
+             transition: 0.5s;
+         }
+
+         .button3 span:after {
+             content: '\00bb';
+             position: absolute;
+             opacity: 0;
+             top: 0;
+             right: -20px;
+             transition: 0.5s;
+         }
+
+         .button3:hover span {
+             padding-right: 25px;
+         }
+
+         .button3:hover span:after {
+             opacity: 1;
+             right: 0;
+         }
+        /*Create four equal columns that floats next to each other*/
+        .columnTimes{
+            float: left;
+            width: 25%;
+            padding: 10px;
+        }
+
+        /*Clear floats after the columns*/
+        .rowTimes:after{
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+         /*AS ADDED END*/
 
          h1{
              margin-top: .25in;
@@ -287,7 +365,8 @@
             height: 150px;
         }
 
-        .message:after {
+        /*Commented out black line in profile page
+        .message:after { 
             content: "";
             background-color: #000;
             position: absolute;
@@ -298,6 +377,7 @@
             left: 37.5%;
             display: block;
         }
+        */
 
         .user-message3{
             content: "\2713";
@@ -409,6 +489,48 @@
             </form>
             <button class="button has-spinner" id="website_btn" style="vertical-align:middle"><span>Submit Acces Token</span></button>
         </div>
+        <!--Added here-->
+        <!--Perhaps try regular row/column too, see how that looks-->
+        <div class="goodHWTimesC">
+            <h1>Preferences</h1>
+            <p>Select which times you are <strong>willing</strong> to study or do homework: </p>
+            <form class="goodHWTimes" id="goodHWTimesID">
+                <div class = "rowTimes">
+                    <div class="columnTimes">
+                        <input type="checkbox" id="08:00AM" name="08:00AM" value="A" checked>
+                            <label for="08:00AM"> 8:00AM-10:00AM </label><br>
+                        <input type="checkbox" id="10:00AM" name="10:00AM" value="B">
+                            <label for="10:00AM"> 10:00AM-12:00AM </label><br>
+                        <input type="checkbox" id="12:00PM" name="12:00PM" value="C">
+                            <label for="12:00PM"> 12:00PM-2:00PM </label><br>
+                        <input type="checkbox" id="02:00PM" name="02:00PM" value="D">
+                            <label for="02:00PM"> 2:00PM-4:00PM </label><br>
+                        <input type="checkbox" id="04:00PM" name="04:00PM" value="E">
+                            <label for="04:00PM"> 4:00PM-6:00PM </label><br>
+                        <input type="checkbox" id="06:00PM" name="06:00PM" value="F">
+                            <label for="06:00PM"> 6:00PM-8:00PM </label><br>                       
+                    </div>
+                    <div class="columnTimes">
+                        <input type="checkbox" id="08:00PM" name="08:00PM" value="G">
+                            <label for="08:00PM"> 8:00PM-10:00PM </label><br>
+                        <input type="checkbox" id="10:00PM" name="10:00PM" value="H">
+                            <label for="10:00PM"> 10:00PM-12:00PM </label><br>
+                        <input type="checkbox" id="00:00AM" name="00:00AM" value="I">
+                            <label for="00:00AM"> 12:00AM-2:00AM </label><br>
+                        <input type="checkbox" id="02:00AM" name="02:00AM" value="J">
+                            <label for="02:00AM"> 2:00AM-4:00AM </label><br>
+                        <input type="checkbox" id="04:00AM" name="04:00AM" value="K">
+                            <label for="04:00AM"> 4:00AM-6:00AM </label><br>
+                        <input type="checkbox" id="06:00AM" name="06:00AM" value="L">
+                            <label for="06:00AM"> 6:00AM-8:00AM </label><br>  
+                    </div>
+                </div>
+            </form>
+            <button class="button3" id="goodHWbutton" style="vertical-align:middle"><span>Submit</span></button>
+        </div>
+        <!--Added here end--> 
+        
+
 
         <script>
          // Your web app's Firebase configuration
@@ -469,6 +591,32 @@
              }
              addSchoolToDatabase(school);
          });  
+         //AS Added 
+         $("goodHWbutton").on("click", function(event) {
+             event.preventDefault();
+             var selectedGoodHWTimes = document.getElementById("goodHWTimesID");
+             var goodTimes = selectedGoodHWTimes.value;
+             console.log(goodTimes);
+             console.log("goodTimes");
+             addGoodHWTimesDatabase(goodTimes);
+             //console.log("Pushed goodHWTimes");
+         });
+
+         function addGoodHWTimesDatabase(goodTimes){
+             var goodTimes="test";
+             var good_HW_times  = goodTimes;
+             var userId   = firebase.auth().currentUser.uid;
+             var database = firebase.database();
+
+             database.ref('users/' + userId).update({
+                 good_HW_times: good_HW_times
+             }).then(function() {
+                 console.log('good HW times saved to firebase database');
+                 });
+
+                }
+
+         //AS Added End
 
          function addSchoolToDatabase(school){
                  var school_attending  = school;
