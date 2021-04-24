@@ -1,658 +1,1077 @@
- <!--
-    Title: ECE Senior Design Project Code - Test page
-    Description: This file is used for copying and pasting purposes only when we are creating a new page and want
-    to start from a blank page
-    Authors: Chris Varriano
-             Will Van Luven
-             Sean McNamara
-             Arai Singleton
-    Date created: 9/28/20
+<!--
+     Title: ECE Senior Design Project Code - blank page
+     Description: This file is used for copying and pasting purposes only when we are creating a new page and want
+     to start from a blank page
+     Authors: Chris Varriano
+     Will Van Luven
+     Sean McNamara
+     Arai Singleton
+     Date created: 9/28/20
 -->
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Canvas Calendar</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-      $( function() {
-        $( "#datepicker" ).datepicker();
-        var eventdate = $("#datepicker").datepicker("getDate");
-        alert($.datepicker.formatDate("dd-mm-yy", eventdate));
-      } );
-      </script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Welcome to Canvas Calendar</title>
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
-    <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
+        <!-- Add icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-    
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/7.21.1/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
-    <script defer src="/__/firebase/7.21.1/firebase-database.js"></script>
-    <script defer src="/__/firebase/7.21.1/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/7.21.1/firebase-storage.js"></script>
-    <script defer src="/__/firebase/7.21.1/firebase-analytics.js"></script>
-    <script defer src="/__/firebase/7.21.1/firebase-remote-config.js"></script>
-    <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
+        <!-- TEDDY EDIT - mainpage stylesheet -->
+        <link rel="stylesheet" href="/css/mainpage.css">
+
+        <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
+
+        <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+        <!-- TEDDY EDIT - Multiple firebase init() and declarations?? -->
+        <!-- initialize the SDK after all desired features are loaded -->
+        <!-- <script defer src="/__/firebase/init.js"></script> -->
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
 
 
-<style>
-      .card {
-      float: right;
-      clear: both;
-      }
-
-      .card input {
-      width: 100%;
-      float: right;
-      clear: both;
-      }
-
-      .upcoming-page{
-        margin-top: 1in;
-        margin-left: .50in;
-      }
-
-      .courses-page{
-        float: left;
-        margin-top: .5in;
-        margin-left: .50in;
-        clear:left;
-      }
-
-      .Calendar-page{
-        float: right;
-        margin-top: .50in;
-        margin-right: -2.5in;
-        display: inline;
-      }
-
-      table {
-      table-layout: fixed;
-      }
-      
-      th {
-      width: 125px;
-      height: 50px;
-      }
-
-      td {
-      width: 125px;
-      height: 100px;
-      }
-     
-      #message h4 {color: rgb(0, 0, 0); font-weight: bold; font-size: 20px; margin: 16px 0 12px; margin-top: 1in; margin-left: 200px;} 
-      #message h1 {color: rgb(253, 250, 250)} 
-      a {
-      color: #f4f4f4;
-      }
-
-/* header */
-
-.header {
-  background-color: #00539f;
-  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
-  position: fixed;
-  width: 100%;
-  z-index: 3;
-}
-
-.header ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  overflow: hidden;
-  background-color: #00539f;
-}
-
-.header li a {
-  display: block;
-  padding: 20px 20px;
-  border-right: 1px solid #f4f4f4;
-  text-decoration: none;
-}
-
-.header li a:hover,
-.header .menu-btn:hover {
-  background-color: #f4f4f4;
-}
-
-.header .logo {
-  display: block;
-  float: left;
-  font-size: 2em;
-  padding: 10px 20px;
-  text-decoration: none;
-}
-
-/* menu */
-
-.header .menu {
-  clear: both;
-  max-height: 0;
-  transition: max-height .2s ease-out;
-}
-
-/* menu icon */
-
-.header .menu-icon {
-  cursor: pointer;
-  display: inline-block;
-  float: right;
-  padding: 28px 20px;
-  position: relative;
-  user-select: none;
-}
-
-.header .menu-icon .navicon {
-  background: #333;
-  display: block;
-  height: 2px;
-  position: relative;
-  transition: background .2s ease-out;
-  width: 18px;
-}
-
-.header .menu-icon .navicon:before,
-.header .menu-icon .navicon:after {
-  background: #333;
-  content: '';
-  display: block;
-  height: 100%;
-  position: absolute;
-  transition: all .2s ease-out;
-  width: 100%;
-}
-
-.header .menu-icon .navicon:before {
-  top: 5px;
-}
-
-.header .menu-icon .navicon:after {
-  top: -5px;
-}
-
-/* menu btn */
-
-.header .menu-btn {
-  display: none;
-}
-
-.header .menu-btn:checked ~ .menu {
-  max-height: 240px;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon {
-  background: transparent;
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:before {
-  transform: rotate(-45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon .navicon:after {
-  transform: rotate(45deg);
-}
-
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
-  top: 0;
-}
-
-/* 48em = 768px */
-
-@media (min-width: 48em) {
-  .header li {
-    float: left;
-  }
-  .header li a {
-    padding: 20px 30px;
-  }
-  .header .menu {
-    clear: none;
-    float: right;
-    max-height: none;
-  }
-  .header .menu-icon {
-    display: none;
-  }
-}
-
-/* pop up window */
-
-/* Popup container - can be anything you want */
-.popup{
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* The actual popup */
-.popup .popuptext {
-  visibility: hidden;
-  width: 500px;
-  height: 500px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -250px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-/* Toggle this class - hide and show the popup */
-.popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn .5s;
-  animation: fadeIn .5s;
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
-}
-
-.form-control{
- width: fit-content;
-}
-
-.box-border{
-  border: 20px solid red;
-}
-
-/* Test for new popup*/
-/*___________________________________________________________*/
-/* The popup form - hidden by default */
-.form-popup {
-  border-radius: 25px;
-  display: none;
-  position: absolute;
-  top: 200px;
-  left: 100px;
-  width: 300px;
-  height: 300px;
-  z-index: 9;
-  right: 50;
-
-}
-
-/* Add styles to the form container */
-.form-container {
-  border-radius: 25px;
-  max-width: 300px;
-  padding: 10px;
-  background-color:#00539f;
-}
-
-/* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for the submit/login button */
-.form-container .btn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: red;
-}
-
-/* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
-}
-
-</style>
-  </head>
-  <body>
-
-    <header class="header">
-      <a style="color: white;" href="" class="logo" id="headerlogo">Welcome Back!!</a>
-      <input class="menu-btn" type="checkbox" id="menu-btn" />
-      <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-      <ul class="menu">
-        <li><a href='https://canvas-calendar-4ea54.web.app/aboutpage.html'>About</a></li>
-        <li><a href='https://canvas-calendar-4ea54.web.app/profilepage.html'>Profile</a></li>
-        <li><a href="#contact" onclick="logoutFunction()">Logout</a></li>
-      </ul>
-    </header>
+        <!-- update the version number as needed -->
+        <!-- <script defer src="/__/firebase/7.21.1/firebase-app.js"></script> -->
+        <!-- include only the Firebase features as you need -->
+        <script defer src="/__/firebase/7.21.1/firebase-auth.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-database.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-messaging.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-storage.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-analytics.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-remote-config.js"></script>
+        <script defer src="/__/firebase/7.21.1/firebase-performance.js"></script>
+        <!-- initialize the SDK after all desired features are loaded -->
+        <!-- <script defer src="/__/firebase/init.js"></script> -->
+        <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.css' rel='stylesheet' />
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' rel='stylesheet' /> 
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.1/fullcalendar.min.js'></script>
 
 
-<div class="top-page">
- <div class="Calendar" style="vertical-align:middle" >
-  <div class="Calendar-page" style="float: right;">
-    <div class="container col-sm-4 col-md-7 col-lg-4 mt-5">
-      <div class="card" style="width: 1052px;">
-          <h3 class="card-header" id="monthAndYear" style="width: 1050px;"></h3>
-          <table class="table table-bordered table-responsive-sm" id="calendar">
-              <thead>
-              <tr>
-                  <th>Sun</th>
-                  <th>Mon</th>
-                  <th>Tue</th>
-                  <th>Wed</th>
-                  <th>Thu</th>
-                  <th>Fri</th>
-                  <th>Sat</th>
-              </tr>
-              </thead>
-  
-              <tbody id="calendar-body">
-  
-              </tbody>
-          </table>
-  
-          <div class="form-inline">
-  
-              <button class="btn btn-outline-primary col-sm-6" id="previous" onclick="previous()">Previous Month</button>
-  
-              <button class="btn btn-outline-primary col-sm-6" id="next" onclick="next()">Next Month</button>
-              
-              <button class="popup btn btn-outline-primary col-sm-6" onclick="openForm()">Add New Event</button>
-                <div class="form-popup" id="myForm">
-                  <form action="/action_page.php" class="form-container">
-                    <h1>Add Event</h1>
-                
-                    <p>Date: <input type="text" class="date-popup" id="datepicker"></p>
+        <!-- Be Very Careful When Sourcing Raw Files From Github!
+             Even though it is the raw file, the content-type is sent as "text/plain" and not "application/javascript" so sourcing from github will load a text file and not javascript.
+             However, you can paste the "raw.github" link at "https://raw.githack.com/" and that website will host the raw file for you and send the file with the correct type.
 
-                    <p>Description: <input type="text"></p>
-                
-                
-                    <button type="button" class="btn btn" onclick="closeForm()">Add Event</button>
-                    <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
-                  </form>
+             Example : To do a quick check to see a file's content-type in web transit, run a "curl -I {}" request
+
+             $ curl -sI "https://raw.githubusercontent.com/sydcanem/bootstrap-contextmenu/master/bootstrap-contextmenu.js" | grep -i "content-type:"
+             response : content-type: text/plain; charset=utf-8
+
+             $curl -sI "https://rawcdn.githack.com/sydcanem/bootstrap-contextmenu/ac9f6a035b97dbe8958f8f2925fe4bdaa8a192c2/bootstrap-contextmenu.js" | grep -i "content-type:"
+             response : content-type: application/javascript; charset=utf-8 -->
+
+        <!-- <script src='https://raw.githubusercontent.com/sydcanem/bootstrap-contextmenu/master/bootstrap-contextmenu.js'></script> -->
+        <script src='https://rawcdn.githack.com/sydcanem/bootstrap-contextmenu/ac9f6a035b97dbe8958f8f2925fe4bdaa8a192c2/bootstrap-contextmenu.js'></script>
+
+
+        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+
+
+
+        <!-- TEDDY EDIT  -->
+        <!-- + Button Loader Plugin -->
+        <!-- + adding locally sourced UDCanvasAPI here... -->
+        <script src="/js/jquery.buttonLoader2.js"></script>
+        <script src="/js/UDCanvasAPI.js"></script>
+        <!-- <script src="/js/parseAllCourses.js"></script> -->
+        <!-- <script src="/js/getTerm.js"></script> -->
+        <script src="/js/testFile.js"></script>
+        <style>
+         * {
+             padding:0;
+             margin:0;
+         }
+
+         :root{
+             --eventColor:#808080;
+         }
+
+         .fc-event {
+             padding:1em 0.5em !important;
+             background-color:red;
+         }
+
+         .fc-day-grid-event .fc-content {
+             white-space:normal !important;
+         }
+         .strikeout * {
+             text-decoration: line-through !important;
+         }
+
+         .fc-title{
+             color: #f4f4f4;
+         }
+
+         .topSection{
+             margin-top: 1in;
+             padding-left: 50px;
+             padding-right: 50px;
+         }
+
+
+
+         /* header _________________________________________*/
+
+         a {
+             color: rgb(255, 255, 255);
+         }
+
+         .header {
+             background-color: var(--eventColor);
+             box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+             position: fixed;
+             left:0;
+             right:0;
+             top:0;
+             width: 100%;
+             z-index: 3;
+         }
+
+         .header ul {
+             margin: 0;
+             padding: 0;
+             list-style: none;
+             overflow: hidden;
+             background-color: var(--eventColor);
+         }
+
+         .header li a {
+             display: block;
+             padding: 20px 20px;
+             border-right: 1px solid #f4f4f4;
+             text-decoration: none;
+         }
+
+         .header li a:hover,
+         .header .menu-btn:hover {
+             background-color:lightgrey;
+         }
+
+         .header .logo {
+             display: block;
+             float: left;
+             font-size: 2em;
+             padding: 10px 20px;
+             text-decoration: none;
+         }
+
+         /* menu */
+
+         .header .menu {
+             clear: both;
+             max-height: 0;
+             transition: max-height .2s ease-out;
+         }
+
+         /* menu icon */
+
+         .header .menu-icon {
+             cursor: pointer;
+             display: inline-block;
+             float: right;
+             padding: 28px 20px;
+             position: relative;
+             user-select: none;
+         }
+
+         .header .menu-icon .navicon {
+             background: #333;
+             display: block;
+             height: 2px;
+             position: relative;
+             transition: background .2s ease-out;
+             width: 18px;
+         }
+
+         .header .menu-icon .navicon:before,
+         .header .menu-icon .navicon:after {
+             background: #333;
+             content: '';
+             display: block;
+             height: 100%;
+             position: absolute;
+             transition: all .2s ease-out;
+             width: 100%;
+         }
+
+         .header .menu-icon .navicon:before {
+             top: 5px;
+         }
+
+         .header .menu-icon .navicon:after {
+             top: -5px;
+         }
+
+         /* menu btn */
+
+         .header .menu-btn {
+             display: none;
+         }
+
+         .header .menu-btn:checked ~ .menu {
+             max-height: 240px;
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon {
+             background: transparent;
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon:before {
+             transform: rotate(-45deg);
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon:after {
+             transform: rotate(45deg);
+         }
+
+         .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+         .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+             top: 0;
+         }
+
+         /* 48em = 768px */
+
+         @media (min-width: 48em) {
+             .header li {
+                 float: left;
+             }
+             .header li a {
+                 padding: 20px 30px;
+             }
+             .header .menu {
+                 clear: none;
+                 float: right;
+                 max-height: none;
+             }
+             .header .menu-icon {
+                 display: none;
+             }
+         }
+
+         /*Button*/
+         .refresh-btn {
+             background-color: var(--eventColor);
+             border: none;
+             color: white;
+             padding: 15px 15px;
+             font-size: 25px;
+             cursor: pointer;
+         }
+
+         /* Darker background on mouse-over */
+         .refresh-btn:hover {
+             color: rgb(30, 192, 30);
+         }   
+
+
+         #headerImage
+         {
+             cursor: pointer;
+             padding-top: 5px;
+             width: 60px;
+             height: 60px;
+             overflow: hidden;
+             -webkit-border-radius: 50%;
+             -moz-border-radius: 50%;
+             -ms-border-radius: 50%;
+             -o-border-radius: 50%;
+             border-radius: 50%;
+         }
+         
+         #bottomSection {
+             width:600px;
+             clear:both;
+         }
+         #first {
+             width:200px;
+             float:left;
+             padding-left: 50px;
+         }
+         #second { 
+             width:200px;
+             float:left;
+         }
+         #third { 
+             width:200px;
+             float:left;
+             padding-right: 50px;
+         }
+
+         /*Popup*/
+         /* The Modal (background) */
+         .modal {
+             display: none; /* Hidden by default */
+             position: fixed; /* Stay in place */
+             margin-left: auto;
+             margin-right: auto;
+             z-index: 99 !important;
+             padding-top: 200px; /* Location of the box */
+             left: 0;
+             top: 0;
+             width: 500px; /* Full width */
+             height: 750px; /* Full height */
+             overflow: auto; /* Enable scroll if needed */
+         }
+
+         /* Modal Content */
+         .modal-content {
+             background-color:lightgrey;
+             margin: auto;
+             padding: 20px;
+             border: 1px solid #888;
+             width: 80%;
+             display: flex;
+             justify-content: center;
+         }
+
+         /* The Close Button */
+         .close {
+             color: #ff0000;
+             float: left;
+             font-size: 28px;
+             font-weight: bold;
+         }
+
+         .close:hover,
+         .close:focus {
+             color: #000;
+             text-decoration: none;
+             cursor: pointer;
+         }
+
+         h1 {
+             font-weight: bold;
+             font-size: 15px;
+         }
+
+         .user-message-title{
+             font-weight: bold;
+             font-size: 50px;
+         }
+
+
+         .button {
+             display: inline-block;
+             border-radius: 10px;
+             background-color: #c42700;
+             border: none;
+             color: #FFFFFF;
+             text-align: center;
+             font-size: 15px;
+             padding: 5px;
+             width: 200px;
+             transition: all 0.5s;
+             cursor: pointer;
+             margin: 5px;
+             margin-left: 75px;
+         }
+
+
+         .button:hover {
+             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+         }
+
+         .past div.fc-time, .past div.fc-title {
+             text-decoration: line-through;
+         }
+
+
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <image id="headerImage" src=""/>
+            <a style="color: white;" href="" class="logo" id="headerlogo">Welcome Back!!</a>
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+            <ul class="menu">
+                <li><a style="color: white;" href='https://canvas-calendar-4ea54.web.app/profilepage.html'>Profile</a></li>
+                <li><a style="color: white;" href="#contact" onclick="logoutFunction()">Logout</a></li>
+                <li><button id="refresh-btn" class="refresh-btn has-spinner"><i class="fa fa-refresh"></i></button></li>
+            </ul>
+        </header>
+
+        <div class="topSection">
+
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div id="user-message-title" style="font-size: 30px;"></div>
+                    <h1>Start:</h1>
+                    <div id="user-message-start"></div>
+                    <h1>End:</h1>
+                    <div id="user-message-end"></div>
+                    <h1>Description:</h1>
+                    <div id="user-message-description" style="padding-bottom: 20px;"></div>
+                    <button class="button" id=deleteBtn style="vertical-align:middle"><span>Delete Event </span></button>
                 </div>
-   
+            </div>
 
-              <div class="popup btn btn-outline-primary col-sm-6" onclick="viewSelectedEvent()">View Event
-                <span class="popuptext" id="myPopup2"></span>
-              </div>
+            <span><input type='color' id='colorPicker'></span>
+            <div id='calendar'></div>
+        </div>
 
-          </div>
-          <br/>
-          <form class="form-inline">
-              <label class="lead mr-2 ml-2" for="month">Jump To: </label>
-              <select class="form-control col-sm-3" name="month" id="month" onchange="jump()">
-                  <option value=0>January</option>
-                  <option value=1>Febuary</option>
-                  <option value=2>March</option>
-                  <option value=3>April</option>
-                  <option value=4>May</option>
-                  <option value=5>June</option>
-                  <option value=6>July</option>
-                  <option value=7>August</option>
-                  <option value=8>September</option>
-                  <option value=9>October</option>
-                  <option value=10>November</option>
-                  <option value=11>December</option>
-              </select>
+        <!-- Your custom menu with dropdown-menu as default styling -->
+        <div id="context-menu">
+            <ul class="dropdown-menu" role="menu">
+                <li><a tabindex="-1">Action</a></li>
+                <li><a tabindex="-1">Another action</a></li>
+                <li><a tabindex="-1">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1">Separated link</a></li>
+            </ul>
+        </div>
 
-              <label for="day"></label><select class="form-control col-sm-3" name="day" id="day" onchange="jump()">
+        <div class="bottomSection">
+            <!--
 
-                <option value=1>1</option>
-                <option value=2>2</option>
-                <option value=3>3</option>
-                <option value=4>4</option>
-                <option value=5>5</option>
-                <option value=6>6</option>
-                <option value=7>7</option>
-                <option value=8>8</option>
-                <option value=9>9</option>
-                <option value=10>10</option>
-                <option value=11>11</option>
-                <option value=12>12</option>
-                <option value=13>13</option>
-                <option value=14>14</option>
-                <option value=15>15</option>
-                <option value=16>16</option>
-                <option value=17>17</option>
-                <option value=18>18</option>
-                <option value=19>19</option>
-                <option value=20>20</option>
-                <option value=21>21</option>
-                <option value=22>22</option>
-                <option value=23>23</option>
-                <option value=24>24</option>
-                <option value=25>25</option>
-                <option value=26>26</option>
-                <option value=27>27</option>
-                <option value=28>28</option>
-                <option value=29>29</option>
-                <option value=30>30</option>
-                <option value=31>31</option>
-                              
-              </select>
-              
-              <label for="year"></label><select class="form-control col-sm-3" name="year" id="year" onchange="jump()">
-              
-              <option value=2010>2010</option>
-              <option value=2011>2011</option>
-              <option value=2012>2012</option>
-              <option value=2013>2013</option>
-              <option value=2014>2014</option>
-              <option value=2015>2015</option>
-              <option value=2016>2016</option>
-              <option value=2017>2017</option>
-              <option value=2018>2018</option>
-              <option value=2019>2019</option>
-              <option value=2020>2020</option>
-              <option value=2021>2021</option>
-              <option value=2022>2022</option>
-              <option value=2023>2023</option>
-              <option value=2024>2024</option>
-              <option value=2025>2025</option>
-              <option value=2026>2026</option>
-              <option value=2027>2027</option>
-              <option value=2028>2028</option>
-              <option value=2029>2029</option>
-              <option value=2030>2030</option>
-          </select></form>
-      </div>
-    </div>
-   </div>
-  </div>
-  <div class="Calendar" style="vertical-align:middle">
-  <div class="upcoming-page" style="float: left;">
-    <div class="card" style="width: 302px;"> 
-     <div class="card-header" style="width: 300px;">
-      <h4>Upcoming Today</h4> 
-     </div>
-     <ul class="list-group list-group-flush">
-      <li class="list-group-item">CPEG 494 - Practical 5</li>
-      <li class="list-group-item">CISC 361 - Lab 6 Phase 3</li>
-      <li class="list-group-item">CPEG 496 - Mini Practical</li>
-      <li class="list-group-item">CPEG 419 - HW 4a</li>
-      <li class="list-group-item">CPEG 498 - Final Presentation</li>
-    </ul>
-     </div>
-   </div>
-  
-   <div class="courses-page" style="float: left;">
-   <div class="card" style="width: 302px;"> 
-    <div class="card-header" style="width: 300px;">
-     <h4>Current Courses</h4> 
-    </div>
-    <ul class="list-group list-group-flush">
-     <li class="list-group-item">CISC 361</li>
-     <li class="list-group-item">CPEG 419</li>
-     <li class="list-group-item">CPEG 494</li>
-     <li class="list-group-item">CPEG 496</li>
-     <li class="list-group-item">CPEG 498</li>
-   </ul>
-    </div>
-  </div>
- </div>
-</div>
+                 <div class="upcoming-page" style="float: left;">
+                 <div class="card" style="width: 302px;"> 
+                 <div class="card-header" style="width: 300px;">
+                 <h4>Today's Schedule</h4> 
+                 </div>
+                 <ul id="today_schedule" class="list-group list-group-flush">
+                 </ul>
+                 </div>
+                 </div> 
+            -->
+
+            <div class="upcoming-page" style="float: left;">
+                <div class="card" style="width: 302px;"> 
+                    <div class="card-header" style="width: 300px;">
+                        <h4>Today's Schedule</h4> 
+                    </div>
+                    <ul id="today_schedule" class="list-group list-group-flush">
+                        
+                    </ul>
+                </div>
+            </div> 
+        
+            <div class="all-courses-page" id="first">
+                <div class="card" style="width: 302px;"> 
+                    <div class="card-header" style="width: 300px;">
+                        <h4>All Courses</h4> 
+                    </div>
+                    <ul id="all_courses" class="list-group list-group-flush">
+                    </ul>
+                </div>
+            </div>
+             -->
+            <div class="courses-page" id="second">
+                <div class="card" style="width: 302px;"> 
+                    <div class="card-header" style="width: 300px;">
+                        <h4><a style="color: black;" href="https://canvas-calendar-4ea54.web.app/coursespage.html">Active Courses</a></h4> 
+                    </div>
+                    <ul id="active_courses" class="list-group list-group-flush">
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li> -->
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li> -->
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li> -->
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li> -->
+                        <!-- <li class="list-group-item"></li> -->
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="assignments-page" id="third">
+                <div class="card" style="width: 302px;"> 
+                    <div class="card-header" style="width: 300px;">
+                        <h4>Assignments</h4> 
+                    </div>
+                    <ul id="assignments" class="list-group list-group-flush">
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li> -->
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li> -->
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li> -->
+                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li> -->
+                        <!-- <li class="list-group-item"></li> -->
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+
+         // Your web app's Firebase configuration
+         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+         var firebaseConfig = {
+             apiKey: "AIzaSyAWlmVBGiPNaZ8q6wIW8qj4MHhRCdEnzfw",
+             authDomain: "canvas-calendar-4ea54.firebaseapp.com",
+             databaseURL: "https://canvas-calendar-4ea54.firebaseio.com",
+             projectId: "canvas-calendar-4ea54",
+             storageBucket: "canvas-calendar-4ea54.appspot.com",
+             messagingSenderId: "967496995343",
+             appId: "1:967496995343:web:87bdb9b3571033cfce897a",
+             measurementId: "G-2GBWCBTD5W"
+         };
+         // Initialize Firebase
+         firebase.initializeApp(firebaseConfig);
+         firebase.analytics();
+
+         var a1 = "question-mark2.png"
+         var image = document.getElementById("headerImage");
+         image.src = a1;
+
+         // events array
+         var eventsArray = new Array();
+         var eventsAssignmentsArray = new Array();
+
+         //event click popup variables
+         // Get the modal
+         var modal = document.getElementById("myModal");
+
+         // Get the <span> element that closes the modal
+         var span = document.getElementsByClassName("close")[0];
 
 
-
-  </div>
- </div>
-</div>  
-
-
-<!-- Try looking into making the items into a list using ol and li -->
-<script src="scripts.js"></script>
-
-<!-- Optional JavaScript for bootstrap -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
-        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
-        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-        crossorigin="anonymous"></script>
-
-    <script>
-      // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-      apiKey: "AIzaSyAWlmVBGiPNaZ8q6wIW8qj4MHhRCdEnzfw",
-      authDomain: "canvas-calendar-4ea54.firebaseapp.com",
-      databaseURL: "https://canvas-calendar-4ea54.firebaseio.com",
-      projectId: "canvas-calendar-4ea54",
-      storageBucket: "canvas-calendar-4ea54.appspot.com",
-      messagingSenderId: "967496995343",
-      appId: "1:967496995343:web:87bdb9b3571033cfce897a",
-      measurementId: "G-2GBWCBTD5W"
-    };
-    // Initialize Firebase/Canvas API
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
+         // Logout Code _________________________________________________
+         $(document).ready(function () {
+             $("#registerForm").on("submit", function (event) {
+                 event.preventDefault();
+                 var fname = $("#registerFirstName").val();
+                 var lname = $("#registerLastName").val();
+                 var email = $("#registerEmail").val();
+                 var password = $("#registerPassword").val();
+                 firebase.auth().createUserWithEmailAndPassword(email, password)
+                         .then(function (user) {
+                             firebase.database().ref().child("users/" + user.user.uid).set({
+                                 firstname: fname,
+                                 lastname: lname,
+                                 email: user.user.email,
+                                 role: "user"
+                             })
+                             alert("Account successfuly created")
+                         })
+                         .catch(function (err) {
+                             console.log(err);
+                             alert(err);
+                         });
+             });
 
 
-    $(document).ready(function () {
-        $("#registerForm").on("submit", function (event) {
-          event.preventDefault();
-          var fname = $("#registerFirstName").val();
-          var lname = $("#registerLastName").val();
-          var email = $("#registerEmail").val();
-          var password = $("#registerPassword").val();
-          firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(function (user) {
-              firebase.database().ref().child("users/" + user.user.uid).set({
-                firstname: fname,
-                lastname: lname,
-                email: user.user.email,
-                role: "user"
-              })
-              alert("Account successfuly created")
-            })
-            .catch(function (err) {
-              console.log(err);
-              alert(err);
+             $("#loginForm").on("submit", function (event) {
+                 event.preventDefault();
+                 var email = $("#loginEmail").val();
+                 var password = $("#loginPassword").val();
+                 firebase.auth().signInWithEmailAndPassword(email, password)
+                         .then(function (user) {
+                             console.log(user);
+                             location.reload();
+                             alert("Welcome Back!")
+                         })
+                         .catch(function (err) {
+                             console.log(err);
+                             alert(err);
+                         });
+             });
+
+             $("#logoutbtn").on("click", function () {
+                 firebase.auth().signOut().then(function () {
+                     alert("Goodbye!");
+                     location.reload();
+                 })
+                         .catch(function (error) {
+                             console.log(err);
+                             alert(err);
+                         });
+             });
+
+             firebase.auth().onAuthStateChanged(function (user) {
+                 if (user) {
+                     console.log(user);
+                     var email = user.email;
+                     document.getElementById("headerlogo").innerHTML = "Welcome Back " + user.email;
+                     /* alert("Welcome " + email); */
+
+                     /* TEDDY EDIT - After verifying user is logged in, add the user's firebase data */
+                     user_data = getUserData();
+                     (async() => {
+                         console.log("waiting for variable");
+                         while(!user_data.hasOwnProperty("api_key")) // define the condition as you like
+                             await new Promise(resolve => setTimeout(resolve, 1000));
+                         console.log("variable is defined");
+                         /* testFunction(); */
+                         console.log(getTerm(Date.now()));
+                         
+                         parseAllCourses(user_data);
+                         parseActiveCourses(user_data);
+                         parseSchoolAttending(user_data);
+                         addEventsBackIntoArray(user_data);
+                         displayEvents(user_data);
+                         displayAssignmentEvents(user_data)
+                         
+                     })();
+                 } else {
+                     // No user is signed in.
+                     console.log("No user");
+                     //alert("Currently logged out");
+                 }
+             });
+         });
+
+         var accountType = sessionStorage.getItem("accountType");
+         function logoutFunction(){
+             if(accountType == "Google"){
+                 signOut();
+             }
+             else{
+                 firebase.auth().signOut().then(function () {
+                     location.reload();
+                     window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
+                 })
+                         .catch(function (error) {
+                             console.log(err);
+                             alert(err);
+                         });
+             }
+         }
+
+         function signOut() { //Sign Out Function
+             gapi.auth2.getAuthInstance().signOut().then(function() {
+                 console.log('User signed out')
+                 window.location.href = 'https://canvas-calendar-4ea54.web.app/index.html'//put url here
+             })
+         }
+
+         function onLoad() {
+             gapi.load('auth2', function() {
+                 gapi.auth2.init();
+             });
+         }
+
+         // calendar Code ________________________________________________________________________
+
+         function addEventsBackIntoArray(user_data){ 
+             var calendarDataToBeAdded = user_data["events"];
+             if(calendarDataToBeAdded[0] != null){
+                 for(var i=0; i<=calendarDataToBeAdded.length; i++){
+                     console.log(calendarDataToBeAdded.length);
+                     console.log(calendarDataToBeAdded[i]);
+                     if(calendarDataToBeAdded[i] != null){
+                         eventsArray.push(calendarDataToBeAdded[i]);
+                     }   
+                     else{
+                         console.log("no events added");
+                     }
+                 }
+             }
+             else{
+                 console.log("no events exist");
+             }
+         }
+
+         $('#calendar').fullCalendar({
+             header: {
+                 left: 'prev,next today',
+                 center: 'title',
+                 right: 'month,agendaWeek,agendaDay'
+             },
+             //defaultDate: '2015-02-12',
+             selectable: true,
+             selectHelper: true,
+             navLinks: true, // can click day/week names to navigate views
+             editable: true,
+             eventLimit: true,
+             /*
+                eventRender: function(event, element) {
+                console.log(event);
+
+                var html = '<a data-event-id="' + event.id + '" class="' + ((event.strikeout) ? 'strikeout' : '') + ' fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable">';
+                html += '<div class="fc-content">';
+                html += ' <label><input type="checkbox" ' + ((event.strikeout) ? 'checked' : '') + '> <span class="fc-time">'  + '</span> ';
+                html += ' <span class="fc-title">' + event.title + '</span>';
+                html += '</label></div></a>';
+
+                var $event = $(html);
+
+                addRightClickMenu($event);
+
+                return $event;
+                },
+              */
+             select: function(start, end) {
+                 var title = prompt('Event Title:');
+                 var description = prompt('Event Description:');
+                 //var start = prompt("Event Start Time:")
+                 var eventData;
+                 if (title) {
+                     eventData = {
+                         title: title,
+                         start: start,
+                         end: end, 
+                         description: description,
+                         color: $("#colorPicker").val()
+                     };
+                     $("#calendar").fullCalendar("renderEvent", eventData, true); // stick? = true
+                 }
+                 $('#calendar').fullCalendar('unselect');
+                 eventsArray.push(eventData);
+                 addEventsToDatabase(eventsArray);
+             },
+             
+             eventClick: function(calEvent, jsEvent) {
+                 modal.style.display = "block";
+                 var displayTitle = calEvent.title;
+                 var displayStart = calEvent.start;
+                 var displayEnd = calEvent.end;
+                 var displayDescription = calEvent.description;
+                 //var displayColor = calEvent.color;
+                 displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription);
+                 //deleteEventsFromDatabase(displayTitle, displayStart, displayEnd, displayDescription, displayColor);
+             },
+
+             eventRender: function(event, element) {
+                 element.append( "<span class='closeon'>X</span>" );
+                 element.find(".closeon").click(function(calEvent, jsEvent) {
+                     $('#calendar').fullCalendar('removeEvents',event._id);
+                     //console.log(calEvent.description);
+                     //var userId   = firebase.auth().currentUser.uid;
+                     //var database = firebase.database();
+                     //database.ref('users/' + userId).update({
+                     //    assignment_events: assignment_events
+                     //}).then(function() {
+                 });
+                 //});
+             },
+             
+             
+             /*
+                eventClick: function(calEvent, jsEvent) {
+                var title = prompt("Edit Event Content:", calEvent.title);
+                calEvent.title = title;
+                $("#calendar").fullCalendar("updateEvent", calEvent);
+                },
+              */
+             //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
+         });
+         
+         function createAssignmentEvents(assignments){
+             $.each(assignments, function(i, assignment) {
+                 var eventData;
+                 var title = assignment["name"];
+                 var start = assignment["due_at"];
+                 var end = assignment["due_at"];
+                 var description = assignment["description"];
+                 if(start != null){
+                     console.log(title); 
+                     console.log(start);
+                     console.log(end);
+                     if(title){
+                         eventData = {
+                             title: title,
+                             start: start,
+                             end: end,
+                             description: description,
+                             color: '#FF0000'
+                         }
+                     } 
+                     eventsAssignmentsArray.push(eventData);
+                     addAssignmentEventsToDatabase(eventsAssignmentsArray);
+                 }
+                 else{
+                     console.log("function failed")
+                 }
+             });
+         }
+         
+         function addAssignmentEventsToDatabase(eventsAssignmentsArray){
+             console.log(eventsAssignmentsArray);
+             var assignment_events = eventsAssignmentsArray;
+             var userId   = firebase.auth().currentUser.uid;
+             var database = firebase.database();
+             database.ref('users/' + userId).update({
+                 assignment_events: assignment_events
+             }).then(function() {
+                 
+             });
+         }
+
+         function addEventsToDatabase(eventsArray){
+             //console.log(title);
+             console.log(eventsArray);
+             var events = eventsArray;
+             //var event_data = eventData;
+             var userId   = firebase.auth().currentUser.uid;
+             var database = firebase.database();
+
+             database.ref('users/' + userId).update({
+                 events: events
+             }).then(function() {
+                 
+             });
+         } 
+
+         function displayEvents(user_data){
+             var calendarData = user_data["events"];
+             console.log(calendarData);
+             for(var i=0; i<=calendarData.length; i++){
+                 $("#calendar").fullCalendar("renderEvent", calendarData[i], true); // render events
+             }
+         }
+
+         function displayAssignmentEvents(user_data){
+             var assignmentEventData = user_data["assignment_events"];
+             console.log(assignmentEventData);
+             for(var i=0; i<=assignmentEventData.length; i++){
+                 $("#calendar").fullCalendar("renderEvent", assignmentEventData[i], true); // render events
+             }
+         }
+
+         //when clicked
+         function displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription){
+             var showTitle = displayTitle;
+             var showStart = displayStart;
+             var showEnd = displayEnd;
+             var showDescription = displayDescription;
+             document.getElementById("user-message-title").innerHTML = showTitle;
+             document.getElementById("user-message-start").innerHTML = showStart;
+             document.getElementById("user-message-end").innerHTML = showEnd;
+             document.getElementById("user-message-description").innerHTML = showDescription;
+             
+         }
+
+
+         /*
+            select: function(start, end) {
+            var title = prompt('Event Title:');
+            if (title) {
+            $('#calendar').fullCalendar('renderEvent', {
+            title: title, start: start, end: end
+            }, true);
+            }
+            $('#calendar').fullCalendar('unselect');
+            },
+            editable: true,*/
+         //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
+
+
+         function addRightClickMenu($event){
+             $event.contextmenu({
+                 target: '#context-menu',
+                 onItem: function (context, e) {
+                     console.log(context);
+
+                     var event = $("#calendar").fullCalendar( 'clientEvents', [context.data('event-id')])[0];
+
+                     alert($(e.target).text() + ' for event "' + event.title + '"');
+                 }
+             });
+         }
+
+
+         $('#calendar').on('change', ':checkbox', function(){
+             var event = $("#calendar").fullCalendar( 'clientEvents', [$(this).parents('.fc-event:first').data('event-id')])[0];
+             event.strikeout = $(this).is(':checked');
+             $("#calendar").fullCalendar('renderEvent', event, true);
+         });
+
+         //$("#deleteBtn").on("click", function () {
+         //   modal.style.display = "none";
+         //});
+         
+         /*   
+            function deleteEventsFromDatabase(displayTitle, displayStart, displayEnd, displayDescription, displayColor){
+            console.log("in delete function");
+            var eventToDelete 
+            var title = displayTitle;
+            var start = displayStart;
+            var end = displayEnd;
+            var description = displayDescription;
+            var color = displayColor;
+            $("#deleteBtn").on("click", function () {
+            modal.style.display = "none";
+            if(title){
+            eventToDelete = {
+            title: title,
+            start: start,
+            end: end,
+            description: description,
+            color: color
+            }
+            for(var i=0; i<=eventsArray.length; i++){
+            for(var j=0; j<=eventsAssignmentsArray.length; j++){
+            if(eventToDelete == eventsArray[i] || eventsAssignmentsArray[j]){
+            database.ref('users/' + userId).update({
+            events: events
+            }).then(function() {
             });
-        });
-
-
-        $("#loginForm").on("submit", function (event) {
-          event.preventDefault();
-          var email = $("#loginEmail").val();
-          var password = $("#loginPassword").val();
-          firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(function (user) {
-              console.log(user);
-              location.reload();
-              alert("Welcome Back!")
-            })
-            .catch(function (err) {
-              console.log(err);
-              alert(err);
+            }
+            }
+            }
+            }
             });
-        });
+            }
+          */
+         //get school attending
 
-        $("#logoutbtn").on("click", function () {
-          firebase.auth().signOut().then(function () {
-            alert("Goodbye!");
-            location.reload();
-          })
-          .catch(function (error) {
-            console.log(err);
-            alert(err);
-          });
-        });
+         function parseSchoolAttending(user_data) {
+             var college = user_data["school_attending"]
+             console.log(college);
+             displaySchoolDesign(college);
+         }
 
-        firebase.auth().onAuthStateChanged(function (user) {
-          if (user) {
-            console.log(user);
-            var email = user.email;
-            document.getElementById("headerlogo").innerHTML = "Welcome Back " + user.email;
-            //alert("Welcome " + email);
-          } else {
-            // No user is signed in.
-            console.log("No user");
-            //alert("Currently logged out");
-          }
-        });
+         //display school design 
 
+         function displaySchoolDesign(college){
+             var school = college;
+             console.log(school);
+             if(school == "UniversityOfDelaware"){
+                 document.body.style.setProperty('--eventColor',"#00539f");
+                 a1 = "delaware-logo.png";
+                 image = document.getElementById("headerImage");
+                 image.src = a1;
+             }
+             else if(school == "UniversityOfMaryland"){
+                 document.body.style.setProperty('--eventColor',"#ff0000");
+                 a1 = "umd_logo.png";
+                 image = document.getElementById("headerImage");
+                 image.src = a1;
+             }
+             else if(school == "SyracuseUniversity"){
+                 document.body.style.setProperty('--eventColor',"#FF6C00");
+                 a1 = "syracuse.jpg";
+                 image = document.getElementById("headerImage");
+                 image.src = a1;
+             }
+             else{
+                 document.body.style.setProperty('--eventColor',"#808080");
+             }
+         }
 
-      });
+         function getTerm(datetime) {
+             /* Determine the academic term using the courses datetime.
+              *
+              *  Args:
+              *      Required - datetime (str) - the datetime string when the course started
+              *  Returns:
+              *      JSON Object - {term: "21F", year: 2021}
+              */
+             var d = new Date(datetime);
+             var y = d.getFullYear();
+             var yy = JSON.stringify(d.getFullYear()).slice(2,4);
+             var term;
 
-    </script>
-  </body>
+             if ((d.getMonth() > 0) && (d.getMonth() < 6)) {
+                 term = yy+"S";
+             } else {
+                 term = yy+"F";
+             }
+             var data = {
+                 term: term,
+                 year: y,
+                 month: d.getMonth(),
+                 day: d.getDay()
+             };
+             return data;
+         }
+
+         function parseAllCourses(user_data) {
+             var all_courses = $("#all_courses");
+
+             $.each(user_data["courses"], function (i, e) {
+                 var course_term = getTerm(e["start_at"]);
+                 var course_name = e["name"];
+                 var course_url = "https://udel.instructure.com/courses/"+e["course_id"];
+
+                 console.log(course_name);
+                 var li = document.createElement('li');
+                 var a = document.createElement('a');
+                 li.setAttribute("class", "list-group-item");
+                 a.setAttribute("style", "color: rgb(0, 0, 0);");
+                 a.setAttribute("href", course_url);
+                 a.innerHTML = course_name;
+
+                 li.appendChild(a);
+                 all_courses.append(li);
+             });
+         }
+
+         function parseActiveCourses(user_data) {
+             var active_courses = $("#active_courses");
+             var today = getTerm(Date.now());
+
+             $.each(user_data["courses"], function (i, course) {
+                 var course_term = getTerm(course["start_at"]);
+                 var course_name = course["name"];
+                 var course_url = "https://udel.instructure.com/courses/"+course["course_id"];
+
+                 console.log(course_term["year"], today["year"])
+
+                 if ((today["year"] === course_term["year"]) || (course_name.includes(today["term"]))) {
+                     console.log(course_name);
+                     var li = document.createElement('li');
+                     var a = document.createElement('a');
+                     li.setAttribute("class", "list-group-item");
+                     a.setAttribute("style", "color: rgb(0, 0, 0);");
+                     a.setAttribute("href", course_url);
+                     a.innerHTML = course_name;
+
+                     li.appendChild(a);
+                     active_courses.append(li);
+
+                     if (course["assignments"]) {
+                         parseAssignments(course["assignments"]);
+                         createAssignmentEvents(course["assignments"]);
+                     }
+                 }
+             });
+         }
+
+         function parseAssignments(assignments) {
+             var assignments_div = $("#assignments");
+
+             $.each(assignments, function(i, assignment) {
+                 var assignment_name = assignment["name"];
+                 var assignment_url = assignment["html_url"];
+
+                 console.log(assignment);
+
+                 var li = document.createElement('li');
+                 var a = document.createElement('a');
+
+                 li.setAttribute("class", "list-group-item");
+                 a.setAttribute("style", "color: rgb(0, 0, 0);");
+                 a.setAttribute("href", assignment_url);
+                 a.innerHTML = assignment_name;
+
+                 li.appendChild(a);
+                 assignments_div.append(li);
+
+                 
+             });
+         }
+
+         //pop up code
+         // When the user clicks on <span> (x), close the modal
+         span.onclick = function() {
+             modal.style.display = "none";
+         }
+
+         // When the user clicks anywhere outside of the modal, close it
+         window.onclick = function(event) {
+             if (event.target == modal) {
+                 modal.style.display = "none";
+             }
+         }
+        </script>
+
+        <!-- TEDDY EDIT  -->
+        <!-- + Logged In User Data from Firebase DB -->
+        <!-- + Refresh Button Snippet -->
+        <script src="/js/userData.js"></script>
+        <script src="/js/refreshButton.js"></script>
+
+    </body>
 </html>
-
-      
