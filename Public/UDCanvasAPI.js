@@ -1,3 +1,9 @@
+/*
+ *  TO BE USED ONLY FOR TESTING ...
+ *  ACCESS TOKEN HARD CODED ...
+*/
+
+
 var access_token = "25~LDtz4FPmgvVumQULtrkjOUrdQvKnniad2r56u33mCOqZHNjnnB2wIkScp8c56F8E";
 var udcanvas = new UDCanvasAPI(access_token).load();
 
@@ -36,7 +42,7 @@ function UDCanvasAPI(access_token) {
                                 'assignment_id': element['id'],
                                 'course_id': element['course_id'],
                                 'name': element['name'],
-                                'due_at': element['due_at'],
+                                'due_at': new Date(element['due_at']).toLocaleString(),
                                 'description': element['description'],
                                 'html_url': element['html_url'],
                                 'submissions_download_url': element['submissions_download_url'],
@@ -48,7 +54,7 @@ function UDCanvasAPI(access_token) {
                             'course_id': e['id'],
                             'name': e['name'],
                             'course_code': e['course_code'],
-                            'start_at': e['start_at'],
+                            'start_at': new Date(e['start_at']).toLocaleString(),
                             'uuid': e['uuid'],
                             'enrollments': e['enrollments'],
                             'calendar': e['calendar'],
