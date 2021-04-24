@@ -134,9 +134,7 @@ function closeForm() {
     document.getElementById("myForm").style.display = "none";
   }
 
-  function addEvent(){
-    var eventdate = $("#datepicker").datepicker("getDate");
-    addEventBtn.onclick() = function(){
-       
-    }
-  }
+function addEvent() {
+    
+}
+
