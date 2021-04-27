@@ -1,6 +1,44 @@
 This file is for notes/updates only only 
 If you update any code, please list the change below with the date
 
+4/24/21
+
+<!--
+
+                 <div class="upcoming-page" style="float: left;">
+                 <div class="card" style="width: 302px;"> 
+                 <div class="card-header" style="width: 300px;">
+                 <h4>Today's Schedule</h4> 
+                 </div>
+                 <ul id="today_schedule" class="list-group list-group-flush">
+                 </ul>
+                 </div>
+                 </div> 
+            
+
+            <div class="upcoming-page" style="float: left;">
+                <div class="card" style="width: 302px;"> 
+                    <div class="card-header" style="width: 300px;">
+                        <h4>Today's Schedule</h4> 
+                    </div>
+                    <ul id="today_schedule" class="list-group list-group-flush">
+                        
+                    </ul>
+                </div>
+            </div> 
+            -->
+            <!--
+            <div class="all-courses-page" id="first">
+                <div class="card" style="width: 302px;"> 
+                    <div class="card-header" style="width: 300px;">
+                        <h4>All Courses</h4> 
+                    </div>
+                    <ul id="all_courses" class="list-group list-group-flush">
+                    </ul>
+                </div>
+            </div>
+            -->
+
 4/14/21
 .courses-page{
     padding-top: 50px;

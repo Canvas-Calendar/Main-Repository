@@ -250,35 +250,10 @@
              text-align: center;
              font-size: 28px;
              padding: 20px;
-             width: 600px;
+             width: 200px;
              transition: all 0.5s;
              cursor: pointer;
              margin: 50px;
-         }
-
-         .button span {
-             cursor: pointer;
-             display: inline-block;
-             position: relative;
-             transition: 0.5s;
-         }
-
-         .button span:after {
-             content: '\00bb';
-             position: absolute;
-             opacity: 0;
-             top: 0;
-             right: -20px;
-             transition: 0.5s;
-         }
-
-         .button:hover span {
-             padding-right: 25px;
-         }
-
-         .button:hover span:after {
-             opacity: 1;
-             right: 0;
          }
 
          .button_center{
@@ -345,7 +320,7 @@
              border-radius: 10px;
          }
 
-         .btnCenter:hover {
+         .button:hover {
          	   background-color: #1c6ea4;
          }
 
@@ -371,7 +346,7 @@
             </div>
         </div>
         <div id="divCenter" class="divCenter">
-            <button id="btnCenter" class="btnCenter refresh-btn has-spinner">Save Settings<i class=""fa fa-refresh></button>
+            <button id="button" class="button refresh-btn has-spinner">Save Settings<i class=""fa fa-refresh></button>
         </div>
 
 
@@ -760,12 +735,12 @@
              }
          }
 
-         $("#btnCenter").on("click", function(e) {
+         $("#button").on("click", function(e) {
              e.preventDefault();
              var DELAY = 2000;
              var spinner = $(this);
 
-             $('.btnCenter').buttonLoader('start');
+             $('.button').buttonLoader('start');
              $(function() {
                  function save_settings() {
                      var active_course_ids = $(".courseHeader").map(function(i, e){ return parseInt(e.id); }).get();
@@ -794,7 +769,7 @@
                          courses: user_data.courses
                      }).then(function() {
                          console.log('Settings Saved to firebase DB');
-                         $('.btnCenter').buttonLoader('stop');
+                         $('.button').buttonLoader('stop');
                      });
                  }
                  window.setTimeout(save_settings, DELAY);

@@ -16,8 +16,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Welcome to Canvas Calendar</title>
         
+        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
               integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        
 
         <!-- Add icon library -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -289,25 +291,7 @@
              border-radius: 50%;
          }
          
-         #bottomSection {
-             width:600px;
-             clear:both;
-         }
-         #first {
-             width:200px;
-             float:left;
-             padding-left: 50px;
-         }
-         #second { 
-             width:200px;
-             float:left;
-         }
-         #third { 
-             width:200px;
-             float:left;
-             padding-right: 50px;
-         }
-
+         
          /*Popup*/
          /* The Modal (background) */
          .modal {
@@ -386,7 +370,67 @@
              text-decoration: line-through;
          }
 
+        /*Table*/
+         table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        /*Table spacing
+        .container {
+            display: flex;
+            float: left;
+            padding-left: 50px;
+            width: 100%;
+            height: 100%;
+        }
+        .container > div {
+            flex: 1; 
+        }
+        .time-management-table{
+            padding-top: 50px;
+        }
+        */
+.container {
+  width: 100%;
+  height: 100%;
+  float: left;
+  
+}
+
+.col-container {
+  widows: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  padding-left: 33px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+ 
+}
+.col-1 {
+  flex: 1 1 50%;
+}
+
+.col-2 {
+  flex: 1 1 20%;
+  padding-left: 925px;
+}
+.table3 {
+    padding-right: 50px;
+    float: right;
+}
         </style>
     </head>
     <body>
@@ -435,44 +479,99 @@
             </ul>
         </div>
 
-        <div class="bottomSection">
-            <!--
-
-                 <div class="upcoming-page" style="float: left;">
-                 <div class="card" style="width: 302px;"> 
-                 <div class="card-header" style="width: 300px;">
-                 <h4>Today's Schedule</h4> 
-                 </div>
-                 <ul id="today_schedule" class="list-group list-group-flush">
-                 </ul>
-                 </div>
-                 </div> 
-            -->
-
-            <div class="upcoming-page" style="float: left;">
-                <div class="card" style="width: 302px;"> 
-                    <div class="card-header" style="width: 300px;">
-                        <h4>Today's Schedule</h4> 
-                    </div>
-                    <ul id="today_schedule" class="list-group list-group-flush">
-                        
-                    </ul>
-                </div>
-            </div> 
+        <div class="col-container">
         
-            <div class="all-courses-page" id="first">
-                <div class="card" style="width: 302px;"> 
-                    <div class="card-header" style="width: 300px;">
-                        <h4>All Courses</h4> 
+            <div class="col-1" float="left">
+                <div class="card" style="width: 1000px;"> 
+                    <div class="card-header" style="width: 1000px;">
+                        <h4>Time Management Assistant</h4> 
                     </div>
-                    <ul id="all_courses" class="list-group list-group-flush">
-                    </ul>
+                        <table>
+                            <tr>
+                                <th>Assignment</th>
+                                <th>Status</th>
+                                <th>Due Date</th>
+                                <th>Recommended Start Time</th>
+                                <th>Time Set</th>
+                            </tr>
+                            <tr>
+                                <td id="assignment1">test1</td>
+                                <td id="status1">test1</td>
+                                <td id="duedate1">test2</td>
+                                <td id="start1">test3</td>
+                                <td id="timeset1">test4</td>
+                            </tr>
+                            <tr>
+                                <td id="assignment2">test1</td>
+                                <td id="status2">test1</td>
+                                <td id="duedate2">test2</td>
+                                <td id="start2">test3</td>
+                                <td id="timeset2">test4</td>
+                            </tr>
+                            <tr>
+                                <td id="assignment3">test1</td>
+                                <td id="status3">test1</td>
+                                <td id="duedate3">test2</td>
+                                <td id="start3">test3</td>
+                                <td id="timeset3">test4</td>
+                            </tr>
+                            <tr>
+                                <td id="assignment4">test1</td>
+                                <td id="status4">test1</td>
+                                <td id="duedate4">test2</td>
+                                <td id="start4">test3</td>
+                                <td id="timeset4">test4</td>
+                            </tr>
+                            <tr>
+                                <td id="assignment5">test1</td>
+                                <td id="status5">test1</td>
+                                <td id="duedate5">test2</td>
+                                <td id="start5">test3</td>
+                                <td id="timeset5">test4</td>
+                            </tr>
+                            <tr>
+                                <td id="assignment6">test1</td>
+                                <td id="status6">test1</td>
+                                <td id="duedate6">test2</td>
+                                <td id="start6">test3</td>
+                                <td id="timeset6">test4</td>
+                            </tr>
+                            <tr>
+                                <td id="assignment7">test1</td>
+                                <td id="status7">test1</td>
+                                <td id="duedate7">test2</td>
+                                <td id="start7">test3</td>
+                                <td id="timeset7">test4</td>
+                            </tr>
+                            <tr>
+                                <td id="assignment8">test1</td>
+                                <td id="status8">test1</td>
+                                <td id="duedate8">test2</td>
+                                <td id="start8">test3</td>
+                                <td id="timeset8">test4</td>
+                            </tr>
+                            <tr>
+                                <td id="assignment9">test1</td>
+                                <td id="status9">test1</td>
+                                <td id="duedate9">test2</td>
+                                <td id="start9">test3</td>
+                                <td id="timeset9">test4</td>
+                            </tr>
+                            <tr>
+                                <td id="assignment10">test1</td>
+                                <td id="status10">test1</td>
+                                <td id="duedate10">test2</td>
+                                <td id="start10">test3</td>
+                                <td id="timeset10">test4</td>
+                            </tr>
+                        
+                        </table>
                 </div>
             </div>
-             -->
-            <div class="courses-page" id="second">
-                <div class="card" style="width: 302px;"> 
-                    <div class="card-header" style="width: 300px;">
+             
+            <div class="col-2" float="left">
+                <div class="card" style="width: 260px;"> 
+                    <div class="card-header" style="width: 260px;">
                         <h4><a style="color: black;" href="https://canvas-calendar-4ea54.web.app/coursespage.html">Active Courses</a></h4> 
                     </div>
                     <ul id="active_courses" class="list-group list-group-flush">
@@ -484,23 +583,20 @@
                     </ul>
                 </div>
             </div>
-            
-            <div class="assignments-page" id="third">
-                <div class="card" style="width: 302px;"> 
-                    <div class="card-header" style="width: 300px;">
+        </div>  
+
+        <!--
+            <div class="table3" float="right"> 
+                <div class="card" style="width: 260px;"> 
+                    <div class="card-header" style="width: 260px;">
                         <h4>Assignments</h4> 
                     </div>
                     <ul id="assignments" class="list-group list-group-flush">
-                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li> -->
-                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li> -->
-                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li> -->
-                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li> -->
-                        <!-- <li class="list-group-item"></li> -->
+                        
                     </ul>
                 </div>
-
             </div>
-        </div>
+        -->
 
         <script>
 
@@ -534,7 +630,6 @@
 
          // Get the <span> element that closes the modal
          var span = document.getElementsByClassName("close")[0];
-
 
          // Logout Code _________________________________________________
          $(document).ready(function () {
@@ -609,8 +704,8 @@
                          parseActiveCourses(user_data);
                          parseSchoolAttending(user_data);
                          addEventsBackIntoArray(user_data);
-                         displayEvents(user_data);
                          displayAssignmentEvents(user_data)
+                         displayEvents(user_data);
                          
                      })();
                  } else {
@@ -812,11 +907,12 @@
                  
              });
          } 
-
+        
+        
          function displayEvents(user_data){
              var calendarData = user_data["events"];
              console.log(calendarData);
-             for(var i=0; i<=calendarData.length; i++){
+             for(var i=0; i<=(calendarData.length-1); i++){
                  $("#calendar").fullCalendar("renderEvent", calendarData[i], true); // render events
              }
          }
@@ -824,10 +920,24 @@
          function displayAssignmentEvents(user_data){
              var assignmentEventData = user_data["assignment_events"];
              console.log(assignmentEventData);
-             for(var i=0; i<=assignmentEventData.length; i++){
+             for(var i=0; i<=(assignmentEventData.length-1); i++){
                  $("#calendar").fullCalendar("renderEvent", assignmentEventData[i], true); // render events
              }
          }
+         
+
+         /*   
+         function displayEvents(user_data){
+             var calendarData = user_data["events"];
+             var assignmentEventData = user_data["assignment_events"];
+             for(var i=0; i<=assignmentEventData.length; i++){
+                 $("#calendar").fullCalendar("renderEvent", assignmentEventData[i], true); // render events
+             }
+             for(var j=0; j<=calendarData.length; j++){
+                 $("#calendar").fullCalendar("renderEvent", calendarData[j], true); // render events
+             }
+         }
+         */
 
          //when clicked
          function displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription){
@@ -1024,6 +1134,7 @@
                      if (course["assignments"]) {
                          parseAssignments(course["assignments"]);
                          createAssignmentEvents(course["assignments"]);
+                         setTimeManagementSystem(course["assignments"]);
                      }
                  }
              });
@@ -1050,6 +1161,70 @@
                  assignments_div.append(li);
 
                  
+             });
+         }
+
+         //time management system______________________________
+
+        function setTimeManagementSystem(assignments){
+             var j = 1;
+             $.each(assignments, function(i, assignment) {
+               if(j<=10){
+                var name = assignment["name"];
+                var duedate = assignment["due_at"];
+                var start = assignment["due_at"];
+                var time = assignment["task_hours"];
+                
+                //date stuff
+                var currentdate = new Date().toJSON().slice(0, 10);
+                var dueDateDay = duedate.slice(2,4);
+                dueDateDay = dueDateDay.replace('/', '');
+                dueDateDay = parseInt(dueDateDay);
+                var dueDateMonth = "0"+duedate.slice(0,1);
+                var todayMonth = currentdate.slice(5,7);
+                var todayDay = currentdate.slice(8);
+                todayDay = parseInt(todayDay);
+                
+                //tests
+                console.log(name);
+                console.log(dueDateMonth);
+                console.log(dueDateDay);
+                console.log(todayMonth);
+                console.log(todayDay);
+
+
+        
+                var setAssignmentCell = "assignment"+j
+                var setDueDateCell = "duedate"+j
+                var setStartCell = "start"+j
+                var setTimeCell = "timeset"+j
+                var setStatusCell = "status"+j;
+                
+                if(duedate != null){
+                    console.log("displaying in website")
+                    console.log(dueDateDay);
+                    console.log(todayDay);
+                    document.getElementById(setAssignmentCell).innerHTML = name;
+                    document.getElementById(setDueDateCell).innerHTML = duedate;
+                    document.getElementById(setStartCell).innerHTML = start;
+                    document.getElementById(setTimeCell).innerHTML = time + " Hours";
+                    
+                    if(dueDateMonth<todayMonth){
+                        document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Finished!</span>";
+                    }
+                    else if(dueDateMonth==todayMonth && dueDateDay<todayDay){
+                        document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Finished!</span>";
+                    }
+                    else{
+                        document.getElementById(setStatusCell).innerHTML = "<span style='color: red;' style='font-size: bold'>In Progress</span>";
+                    }
+                    
+                }
+                else{
+                    console.log("no due date");
+                } 
+                j++;
+               }
              });
          }
 
