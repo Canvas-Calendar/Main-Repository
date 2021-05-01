@@ -215,7 +215,7 @@
          }
 
          /*AS ADDED*/
-         .goodHWTimesC{
+         .availableTimesC{
              padding-top: 1in;
              text-align: center;
              /*padding-right: 2in; trying from left instead*/
@@ -224,7 +224,7 @@
          }
         /*Might need a different way to implement this*/
         /*
-         .goodHWTimesC:after {
+         .availableTimesC:after {
             content: "";
             background-color: #000;
             position: absolute;
@@ -491,64 +491,25 @@
         </div>
         <!--Added here-->
         <!--Perhaps try regular row/column too, see how that looks-->
-        <div class="goodHWTimesC">
+        <div class="availableTimesC">
             <h1>Preferences</h1>
             <p>Select which times you are <strong>willing</strong> to study or do homework: </p>
+            <p>(Hold the CTRL key to select multiple times)</p>
+            <label for="cars2">Select your available times:</label>
             <form class="availableTimes" id="availableTimesID"> 
-                <select name="selectAvailableTimes" id="selectAvailableTimesID"></select>
-                    <option value="noneSelected">Teddy Style</option>
-                    <option value=""
+                <select name="selectAvailableTimes" id="selectAvailableTimesID" multiple>
+                    <option value="08:00"> 8:00AM-10:00AM</option>
+                    <option value="10:00">10:00AM-12:00PM</option>
+                    <option value="12:00">12:00PM-2:00PM</option>
+                    <option value="14:00"> 2:00PM-4:00PM</option>
+                    <option value="16:00"> 4:00PM-6:00PM</option>
+                    <option value="18:00"> 6:00PM-8:00PM</option>
+                    <option value="20:00"> 8:00PM-10:00PM</option>
+                    <option value="22:00"> 10:00PM-12:00AM</option>
+
+                </select>
             </form>
-            
-            <!---
-            <form class="goodHWTimes" id="goodHWTimesID">
-                <div class = "rowTimes">
-                    <div class="columnTimes">
-                        <input type="checkbox" id="goodHWTimesID" name="08:00AM" value="8:00AM-10:00AM">
-                            <label for="08:00AM"> 8:00AM-10:00AM </label><br>
-                        <input type="checkbox" id="goodHWTimesID" name="10:00AM" value="10:00AM-12:00AM">
-                            <label for="10:00AM"> 10:00AM-12:00AM </label><br>
-                        <input type="checkbox" id="goodHWTimesID" name="12:00PM" value="12:00PM-2:00PM">
-                            <label for="12:00PM"> 12:00PM-2:00PM </label><br>
-                        <input type="checkbox" id="goodHWTimesID" name="02:00PM" value="2:00PM-4:00PM">
-                            <label for="02:00PM"> 2:00PM-4:00PM </label><br>
-                        <input type="checkbox" id="goodHWTimesID" name="04:00PM" value="4:00PM-6:00PM">
-                            <label for="04:00PM"> 4:00PM-6:00PM </label><br>
-                        <input type="checkbox" id="goodHWTimesID" name="06:00PM" value="6:00PM-8:00PM">
-                            <label for="06:00PM"> 6:00PM-8:00PM </label><br>                       
-                    </div>
-                    <div class="columnTimes">
-                        <input type="checkbox" id="goodHWTimesID" name="08:00PM" value="8:00PM-10:00PM">
-                            <label for="08:00PM"> 8:00PM-10:00PM </label><br>
-                        <input type="checkbox" id="goodHWTimesID" name="10:00PM" value="10:00PM-12:00PM">
-                            <label for="10:00PM"> 10:00PM-12:00PM </label><br>
-                        <input type="checkbox" id="goodHWTimesID" name="00:00AM" value="12:00AM-2:00AM">
-                            <label for="00:00AM"> 12:00AM-2:00AM </label><br>
-                        <input type="checkbox" id="goodHWTimesID" name="02:00AM" value="2:00AM-4:00AM">
-                            <label for="02:00AM"> 2:00AM-4:00AM </label><br>
-                        <input type="checkbox" id="goodHWTimesID" name="04:00AM" value="4:00AM-6:00AM">
-                            <label for="04:00AM"> 4:00AM-6:00AM </label><br>
-                        <input type="checkbox" id="goodHWTimesID" name="06:00AM" value="6:00AM-8:00AM">
-                            <label for="06:00AM"> 6:00AM-8:00AM </label><br>  
-                    </div>
-                </div>
-            </form>
-        -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <button type="submit" value="Submit" class="button3" onclick="setTimePreference()">Submit</button>
-            <!--<button type="submit" class="button3" id="goodHWbutton" style="vertical-align:middle" value="Submit"><span>Submit</span></button>-->
+            <button class="button3" id="availableTimesButton" style="vertical-align:middle"><span>Submit</span></button>
         </div>
         <!--Added here end--> 
         
@@ -614,40 +575,30 @@
              addSchoolToDatabase(school);
          });  
          //AS Added 
-         /*
-         $("goodHWbutton").on("click", function(event) {
-             //event.preventDefault();
-             console.log("button works");
-             var selectedGoodHWTimes = document.getElementById("goodHWTimesID");
-             var good_HW_Times = selectedGoodHWTimes.value;
-             var userId   = firebase.auth().currentUser.uid;
-             var database = firebase.database();
-             console.log(good_HW_Times);
-             console.log(" = goodTimes");
-             database.ref('users/' + userId).update({
-                 good_HW_times: good_HW_times
-             }).then(function() {
-                 console.log('good HW times saved to firebase database');
-                 });
-             //addGoodHWTimesDatabase(goodTimes);
-             //console.log("Pushed goodHWTimes");
-         });
-         */
+         const btn = document.querySelector('#availableTimesButton');
+         const sb = document.querySelector('#selectAvailableTimesID');
 
-        function setTimePreference(){
-            console.log("button works");
-             var selectedGoodHWTimes = document.getElementById("goodHWTimesID");
-             console.log(selectedGoodHWTimes);
-             var good_HW_Times = selectedGoodHWTimes.value;
-             var userId   = firebase.auth().currentUser.uid;
-             var database = firebase.database();
-             console.log(good_HW_Times);
-             console.log(" = goodTimes");
-             database.ref('users/' + userId).update({
-                 good_HW_times: good_HW_times
-             }).then(function() {
-                 console.log('good HW times saved to firebase database');
-             });
+         btn.onclick = (e) => {
+            e.preventDefault();
+            const selectedValues = [].filter
+                .call(sb.options, option => option.selected)
+                .map(option => option.text);
+            //alert(selectedValues);
+            console.log(selectedValues);
+            var available = selectedValues;
+            pushAvailableTimes(available);
+         };
+        
+        function pushAvailableTimes(available){
+            console.log("Now pushing available data");
+            var available_times = available;
+            var userId   = firebase.auth().currentUser.uid;
+            var database = firebase.database();
+            database.ref('users/' + userId).update({
+                available_times: available_times
+            }).then(function() {
+                console.log('Available times saved to firebase database');
+            });
         }
          //AS Added End
 

@@ -599,83 +599,7 @@
                                 <td id="start15"></td>
                                 <td id="timeset15"></td>
                             </tr>
-                            <tr>
-                                <td id="assignment16"></td>
-                                <td id="status16"></td>
-                                <td id="duedate16"></td>
-                                <td id="start16"></td>
-                                <td id="timeset16"></td>
-                            </tr>
-                            <tr>
-                                <td id="assignment17"></td>
-                                <td id="status17"></td>
-                                <td id="duedate17"></td>
-                                <td id="start17"></td>
-                                <td id="timeset17"></td>
-                            </tr>
-                            <tr>
-                                <td id="assignment18"></td>
-                                <td id="status18"></td>
-                                <td id="duedate18"></td>
-                                <td id="start18"></td>
-                                <td id="timeset18"></td>
-                            </tr>
-                            <tr>
-                                <td id="assignment19"></td>
-                                <td id="status19"></td>
-                                <td id="duedate19"></td>
-                                <td id="start19"></td>
-                                <td id="timeset19"></td>
-                            </tr>
-                            <tr>
-                                <td id="assignment20"></td>
-                                <td id="status20"></td>
-                                <td id="duedate20"></td>
-                                <td id="start20"></td>
-                                <td id="timeset20"></td>
-                            </tr>
-                            <tr>
-                                <td id="assignment21"></td>
-                                <td id="status21"></td>
-                                <td id="duedate21"></td>
-                                <td id="start21"></td>
-                                <td id="timeset21"></td>
-                            </tr>
-                            <tr>
-                                <td id="assignment22"></td>
-                                <td id="status22"></td>
-                                <td id="duedate22"></td>
-                                <td id="start22"></td>
-                                <td id="timeset22"></td>
-                            </tr>
-                            <tr>
-                                <td id="assignment23"></td>
-                                <td id="status23"></td>
-                                <td id="duedate23"></td>
-                                <td id="start23"></td>
-                                <td id="timeset23"></td>
-                            </tr>
-                            <tr>
-                                <td id="assignment24"></td>
-                                <td id="status24"></td>
-                                <td id="duedate24"></td>
-                                <td id="start24"></td>
-                                <td id="timeset24"></td>
-                            </tr>
-                            <tr>
-                                <td id="assignment25"></td>
-                                <td id="status25"></td>
-                                <td id="duedate25"></td>
-                                <td id="start25"></td>
-                                <td id="timeset25"></td>
-                            </tr>
-                            <tr>
-                                <td id="assignment26"></td>
-                                <td id="status26"></td>
-                                <td id="duedate26"></td>
-                                <td id="start26"></td>
-                                <td id="timeset26"></td>
-                            </tr>
+                            
                         
                         </table>
                 </div>
@@ -817,6 +741,7 @@
                          parseSchoolAttending(user_data);
                          addEventsBackIntoArray(user_data);
                          displayAssignmentEvents(user_data)
+                         //addEventsBackIntoArray(user_data);
                          displayEvents(user_data);
                          
                      })();
@@ -863,19 +788,19 @@
          function addEventsBackIntoArray(user_data){ 
              var calendarDataToBeAdded = user_data["events"];
              if(calendarDataToBeAdded[0] != null){
-                 for(var i=0; i<=calendarDataToBeAdded.length; i++){
+                 for(var i=0; i<=(calendarDataToBeAdded.length-1); i++){
                      console.log(calendarDataToBeAdded.length);
                      console.log(calendarDataToBeAdded[i]);
                      if(calendarDataToBeAdded[i] != null){
                          eventsArray.push(calendarDataToBeAdded[i]);
                      }   
                      else{
-                         console.log("no events added");
+                         console.log("no events exist");
                      }
                  }
              }
              else{
-                 console.log("no events exist");
+               console.log("no events exist");
              }
          }
 
@@ -1341,15 +1266,13 @@
                         else if(dueDateMonth==todayMonth && dueDateDay<todayDay){
                             document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Finished!</span>";
                         }
-                        else{
-                            if(dueDateMonth==todayMonth &&(todayDay<=dueDateDay<=(todayDay+7))){
-                                document.getElementById(setStatusCell).innerHTML = "<span style='color: red;' style='font-size: bold'>Due Date Approcahing Soon</span>";
-                            }
-                            else{
-                                document.getElementById(setStatusCell).innerHTML = "<span style='color: #d5b60a;' style='font-size: bold'>In Progress</span>";
-                            }
-                            
+                        /*(todayDay<=dueDateDay<(todayDay+7))*/
+                        else if(dueDateMonth==todayMonth && dueDateDay<(todayDay+7) && todayDay<dueDateDay){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: red;' style='font-size: bold'>Due Date Approcahing Soon</span>";
                         }
+                        else{
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: #d5b60a;' style='font-size: bold'>In Progress</span>";
+                        }       
                     
                     }
                     
