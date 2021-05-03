@@ -493,20 +493,30 @@
         <!--Perhaps try regular row/column too, see how that looks-->
         <div class="availableTimesC">
             <h1>Preferences</h1>
-            <p>Select which times you are <strong>willing</strong> to study or do homework: </p>
+            <p>Select which times you are <strong>AVAILABLE</strong> to study or do homework:</p>
             <p>(Hold the CTRL key to select multiple times)</p>
-            <label for="cars2">Select your available times:</label>
+            <!--<label for="cars2">Select your available times:</label>-->
             <form class="availableTimes" id="availableTimesID"> 
                 <select name="selectAvailableTimes" id="selectAvailableTimesID" multiple>
-                    <option value="08:00"> 8:00AM-10:00AM</option>
-                    <option value="10:00">10:00AM-12:00PM</option>
-                    <option value="12:00">12:00PM-2:00PM</option>
-                    <option value="14:00"> 2:00PM-4:00PM</option>
-                    <option value="16:00"> 4:00PM-6:00PM</option>
-                    <option value="18:00"> 6:00PM-8:00PM</option>
-                    <option value="20:00"> 8:00PM-10:00PM</option>
-                    <option value="22:00"> 10:00PM-12:00AM</option>
-
+                    <option value="">NONE</option>"
+                    <option value="6:00AM"> 6:00AM-7:00AM</option>
+                    <option value="7:00AM"> 7:00AM-8:00AM</option>
+                    <option value="8:00AM"> 8:00AM-9:00AM</option>
+                    <option value="9:00AM"> 9:00AM-10:00AM</option>
+                    <option value="10:00AM">10:00AM-11:00AM</option>
+                    <option value="11:00AM">11:00AM-12:00PM</option>
+                    <option value="12:00PM">12:00PM-1:00PM</option>
+                    <option value="1:00PM"> 1:00PM-2:00PM</option>
+                    <option value="2:00PM"> 2:00PM-3:00PM</option>
+                    <option value="3:00PM"> 3:00PM-4:00PM</option>
+                    <option value="4:00PM"> 4:00PM-5:00PM</option>
+                    <option value="5:00PM"> 5:00PM-6:00PM</option>
+                    <option value="6:00PM"> 6:00PM-7:00PM</option>
+                    <option value="7:00PM"> 7:00PM-8:00PM</option>
+                    <option value="8:00PM"> 8:00PM-9:00PM</option>
+                    <option value="9:00PM"> 9:00PM-10:00PM</option>
+                    <option value="10:00PM">10:00PM-11:00PM</option>
+                    <option value="11:00PM">11:00PM-12:00PM</option>
                 </select>
             </form>
             <button class="button3" id="availableTimesButton" style="vertical-align:middle"><span>Submit</span></button>
@@ -574,7 +584,7 @@
              }
              addSchoolToDatabase(school);
          });  
-         //AS Added 
+    
          const btn = document.querySelector('#availableTimesButton');
          const sb = document.querySelector('#selectAvailableTimesID');
 
@@ -582,13 +592,15 @@
             e.preventDefault();
             const selectedValues = [].filter
                 .call(sb.options, option => option.selected)
-                .map(option => option.text);
+                .map(option => option.value);
             //alert(selectedValues);
             console.log(selectedValues);
             var available = selectedValues;
             pushAvailableTimes(available);
+            generateSuggestedTimes(available);
          };
         
+        //pushes user selected available times to database
         function pushAvailableTimes(available){
             console.log("Now pushing available data");
             var available_times = available;
@@ -600,7 +612,18 @@
                 console.log('Available times saved to firebase database');
             });
         }
-         //AS Added End
+
+        /* Don't think this is needed anymore, testing before deleting
+        //uses user selected available times and assigns them randomly to all assignments
+        function generateSuggestedTimes(available){
+            console.log("Now pushing suggestion");
+            var userID = firebase.auth().currentUser.uid;
+            var database = firebase.database();
+            //var suggestion = firebase.database().ref("courses/suggested_time/");
+            var newSuggestion = available[Math.floor(Math.random()*available.length)];
+            
+        } */
+     
 
          function addSchoolToDatabase(school){
                  var school_attending  = school;

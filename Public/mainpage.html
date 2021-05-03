@@ -740,7 +740,7 @@
                          parseActiveCourses(user_data);
                          parseSchoolAttending(user_data);
                          addEventsBackIntoArray(user_data);
-                         displayAssignmentEvents(user_data)
+                         displayAssignmentEvents(user_data);
                          //addEventsBackIntoArray(user_data);
                          displayEvents(user_data);
                          
@@ -961,8 +961,6 @@
                  $("#calendar").fullCalendar("renderEvent", assignmentEventData[i], true); // render events
              }
          }
-         
-
          /*   
          function displayEvents(user_data){
              var calendarData = user_data["events"];
@@ -1200,7 +1198,7 @@
                  
              });
          }
-
+         
          //time management system______________________________
          var k = 0; // table position count variable
 
@@ -1210,6 +1208,7 @@
                 var duedate = assignment["due_at"];
                 var start = assignment["due_at"];
                 var time = assignment["task_hours"];
+                var suggestion = assignment["suggested_time"];
                 
                 //date stuff
                 var currentdate = new Date().toJSON().slice(0, 10);
@@ -1223,6 +1222,9 @@
                 var todayDay = currentdate.slice(8);
                 todayDay = parseInt(todayDay);
                 
+                var availableTimes = user_data["available_times"];
+
+
                 //tests
                 //console.log(name);
                 //console.log(dueDateMonth);
@@ -1236,15 +1238,16 @@
                     console.log("due date current - displaying on table spot"+k)
                     console.log("______________________________________________")
                     //set time to start
-                    
                     if((dueDateDay-time)>=1){
                         var startDay = dueDateDay-time;
-                        start = dueDateMonth + "/" + startDay + "/" + "2021, 11:59 PM";
+                        //start = dueDateMonth + "/" + startDay + "/" + "2021, 11:59 PM";
+                        start = dueDateMonth + "/" + startDay + "/" + "2021, " + suggestion;
                     }
                     else{
                         var x = Math.abs(dueDateDay-time);
                         startDay = 30-x;
-                        start = (dueDateMonth-1) + "/" + startDay + "/" + "2021, 11:59 PM";
+                        //start = (dueDateMonth-1) + "/" + startDay + "/" + "2021, 11:59 PM";
+                        start = (dueDateMonth-1) + "/" + startDay + "/" + "2021, " + suggestion;
                     }
                     
 

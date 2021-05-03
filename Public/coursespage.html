@@ -763,6 +763,11 @@
                              console.log(assignment_id, assignment_index);
 
 		                           user_data["courses"][course_index]["assignments"][assignment_index]['task_hours'] = task_hours;
+                            
+                             //also add suggested times
+                             var available = user_data["available_times"];
+                             var newSuggestion = available[Math.floor(Math.random()*available.length)];
+                                   user_data["courses"][course_index]["assignments"][assignment_index]['suggested_time'] = newSuggestion;
                          });
                      });
                      user_data.db_ref.update({
@@ -776,7 +781,7 @@
              })
 
          });
-
+         
          (function ($) {
              $('.has-spinner').attr("disabled", false);
              $.fn.buttonLoader = function (action) {
