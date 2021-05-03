@@ -1241,13 +1241,13 @@
                     if((dueDateDay-time)>=1){
                         var startDay = dueDateDay-time;
                         //start = dueDateMonth + "/" + startDay + "/" + "2021, 11:59 PM";
-                        start = dueDateMonth + "/" + startDay + "/" + "2021, " + suggestion;
+                        start = dueDateMonth + "/" + startDay + "/" + "2021 " + suggestion;
                     }
                     else{
                         var x = Math.abs(dueDateDay-time);
                         startDay = 30-x;
                         //start = (dueDateMonth-1) + "/" + startDay + "/" + "2021, 11:59 PM";
-                        start = (dueDateMonth-1) + "/" + startDay + "/" + "2021, " + suggestion;
+                        start = (dueDateMonth-1) + "/" + startDay + "/" + "2021 " + suggestion;
                     }
                     
 
