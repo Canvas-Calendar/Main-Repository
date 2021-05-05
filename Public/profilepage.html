@@ -221,21 +221,12 @@
              /*padding-right: 2in; trying from left instead*/
              padding-left: 1in;
              float: left;
+             height: 500px;
          }
-        /*Might need a different way to implement this*/
-        /*
-         .availableTimesC:after {
-            content: "";
-            background-color: #000;
-            position: absolute;
-            width: 2px;
-            height: 700px;
-            top: 100px;
-            padding-top: 50px;
-            left: 75%;
-            display: block;
-        }
-        */
+         .availableTimeForm{
+             height: 405px;
+         }
+ 
         .button3 {
              display: inline-block;
              border-radius: 10px;
@@ -497,7 +488,7 @@
             <p>(Hold the CTRL key to select multiple times)</p>
             <!--<label for="cars2">Select your available times:</label>-->
             <form class="availableTimes" id="availableTimesID"> 
-                <select name="selectAvailableTimes" id="selectAvailableTimesID" multiple>
+                <select class="availableTimeForm" name="selectAvailableTimes" id="selectAvailableTimesID" multiple>
                     <option value="">NONE</option>"
                     <option value="6:00AM"> 6:00AM-7:00AM</option>
                     <option value="7:00AM"> 7:00AM-8:00AM</option>

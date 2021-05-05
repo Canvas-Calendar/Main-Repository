@@ -739,9 +739,9 @@
                          parseAllCourses(user_data);
                          parseActiveCourses(user_data);
                          parseSchoolAttending(user_data);
-                         addEventsBackIntoArray(user_data);
-                         displayAssignmentEvents(user_data);
                          //addEventsBackIntoArray(user_data);
+                         displayAssignmentEvents(user_data);
+                         addEventsBackIntoArray(user_data);
                          displayEvents(user_data);
                          
                      })();
@@ -1271,6 +1271,9 @@
                         }
                         /*(todayDay<=dueDateDay<(todayDay+7))*/
                         else if(dueDateMonth==todayMonth && dueDateDay<(todayDay+7) && todayDay<dueDateDay){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: red;' style='font-size: bold'>Due Date Approcahing Soon</span>";
+                        }
+                        else if(dueDateMonth==todayMonth && dueDateDay==todayDay){
                             document.getElementById(setStatusCell).innerHTML = "<span style='color: red;' style='font-size: bold'>Due Date Approcahing Soon</span>";
                         }
                         else{

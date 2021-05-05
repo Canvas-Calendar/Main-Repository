@@ -41,7 +41,7 @@ function UDCanvasAPI(access_token) {
                                 'submissions_download_url': element['submissions_download_url'],
                                 'grading_type': element['grading_type'],
                                 'task_hours': 24,
-                                'suggested_time' : 0
+                                'suggested_time' : "N/A"
                             });
                         });
                         assignments.sort(function(a,b) { return a.assignment_id - b.assignment_id });
