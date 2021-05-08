@@ -723,7 +723,8 @@
                  if (user) {
                      console.log(user);
                      var email = user.email;
-                     document.getElementById("headerlogo").innerHTML = "Welcome Back, " + user.email;
+                     
+                     document.getElementById("headerlogo").innerHTML = "Welcome Back " + user.email + "!";
                      /* alert("Welcome " + email); */
 
                      /* TEDDY EDIT - After verifying user is logged in, add the user's firebase data */
@@ -743,7 +744,6 @@
                          displayAssignmentEvents(user_data);
                          addEventsBackIntoArray(user_data);
                          displayEvents(user_data);
-                         
                      })();
                  } else {
                      // No user is signed in.
