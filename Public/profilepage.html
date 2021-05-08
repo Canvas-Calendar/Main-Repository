@@ -201,24 +201,22 @@
 
          .message{
              padding-top: 1in;
-             text-align: center;
+             text-align: left;
              padding-left: 1in;
              float: left;
          }
 
          .link-account{
              padding-top: 1in;
-             text-align: center;
+             text-align: left;
              /*padding-right: 2in; trying from left instead*/
              padding-left: 1in;
              float: left;
          }
 
-         /*AS ADDED*/
          .availableTimesC{
              padding-top: 1in;
-             text-align: center;
-             /*padding-right: 2in; trying from left instead*/
+             /*text-align: left;*/
              padding-left: 1in;
              float: left;
              height: 500px;
@@ -266,28 +264,27 @@
              opacity: 1;
              right: 0;
          }
-        /*Create four equal columns that floats next to each other*/
+        /*Create four equal columns that floats next to each other
+        
         .columnTimes{
             float: left;
             width: 25%;
             padding: 10px;
-        }
+        } */
 
-        /*Clear floats after the columns*/
+        /*Clear floats after the columns
         .rowTimes:after{
             content: "";
             display: table;
             clear: both;
-        }
-
-         /*AS ADDED END*/
+        } */
 
          h1{
              margin-top: .25in;
          }
 
          h2{
-             padding: .25in;
+             /*padding: .25in;*/
          }
          .button {
              display: inline-block;
@@ -448,11 +445,14 @@
             <h1>Profile</h1>
             <image id="profileImage" src=""/>
             <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
-            <h2>Email:</h2>
+            <p></p><!--Spacing-->
+            <h4>Email:</h4>
             <div id="user-message1"></div>
-            <h2>Account Type:</h2>
+            <p></p><!--Spacing-->
+            <h4>Account Type:</h4>
             <div id="user-message2"></div>
-            <h2>College/University:</h2>
+            <p></p><!--Spacing-->
+            <h4>College/University:</h4>
             <label for="cars">Select your College/University:</label>
             <form class="register-school" id="registerSchoolForm">
                 <select name="schoolAttending" id="schoolAttendingID">
@@ -467,14 +467,16 @@
 
         <div class="link-account">
             <h1>How To Link Your Canvas Account</h1>
-            <h2>Step 1: Retrieve your canvas access token</h2>
-            <p>1.1: In Global Navigation, click the Account, then click the Settings.</p>
-            <p>1.2: To manually add an access token, click the Add New Access Token button.</p>
-            <p>1.3: Enter a description for your access token in the Purpose field.</p> 
-            <p>1.4: You can also select an expiration date by clicking the Calendar icon. </p>
-            <p>1.5: To generate a token with no expiration, leave the Expires field empty.</p>
-            <p>1.6: To generate a new access token, click the Generate Token button.</p>
-            <h2>Step 2: Input your token below</h2>
+            <h4>Step 1: Create your access token for Canvas</h4>
+            <p>   - On your main Canvas page, click <strong>Account</strong>, then click <strong>Settings</strong></p>
+            <p>   - Under <i>Approved Integrations</i>, click <strong>New Access Token</strong></p>
+            <p>   - Enter a description for your access token in the Purpose field</p> 
+            <p>   - Select an expiration date if desired</p>
+            <p>   - Click <strong>Generate Token</strong> to create the token</p>
+            <h4>Step 2: Enter your access token</h4>
+            <p>   - Copy the token that was generated from Canvas</p>
+            <p>   - Paste the token below, then submit</p>
+            <p></p><!--Spacing-->
             <form class="login-container" id="loginForm">
                 <p><input id="accessToken" type="text" placeholder="Your access token" style="color: black;" ></p>
             </form>
@@ -485,7 +487,7 @@
         <div class="availableTimesC">
             <h1>Preferences</h1>
             <p>Select which times you are <strong>AVAILABLE</strong> to study or do homework:</p>
-            <p>(Hold the CTRL key to select multiple times)</p>
+            <p>(Hold the CTRL/Control key to select multiple times)</p>
             <!--<label for="cars2">Select your available times:</label>-->
             <form class="availableTimes" id="availableTimesID"> 
                 <select class="availableTimeForm" name="selectAvailableTimes" id="selectAvailableTimesID" multiple>
