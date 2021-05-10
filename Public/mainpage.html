@@ -433,7 +433,7 @@
 }
         </style>
     </head>
-    <body>
+    <body onload="notifyMe()">
         <header class="header">
             <image id="headerImage" src=""/>
             <a style="color: white;" href="" class="logo" id="headerlogo">Welcome Back!!</a>
@@ -1201,7 +1201,7 @@
          
          //time management system______________________________
          var k = 0; // table position count variable
-
+         var sendNotification;
         function setTimeManagementSystem(assignments){
              $.each(assignments, function(i, assignment) {
                 var name = assignment["name"];
@@ -1272,9 +1272,17 @@
                         /*(todayDay<=dueDateDay<(todayDay+7))*/
                         else if(dueDateMonth==todayMonth && dueDateDay<(todayDay+7) && todayDay<dueDateDay){
                             document.getElementById(setStatusCell).innerHTML = "<span style='color: red;' style='font-size: bold'>Due Date Approcahing Soon</span>";
+                            if(dueDateMonth==todayMonth && dueDateDay<(todayDay+3) && todayDay<dueDateDay){
+                                sendNotification = new Notification('You have an assignment due soon:', {
+                                    body: name + " is due on: " + duedate,
+                                });
+                            }
                         }
                         else if(dueDateMonth==todayMonth && dueDateDay==todayDay){
                             document.getElementById(setStatusCell).innerHTML = "<span style='color: red;' style='font-size: bold'>Due Date Approcahing Soon</span>";
+                            sendNotification = new Notification('You have an assignment due soon:', {
+                                body: name+ " is due on: " + duedate,
+                            });
                         }
                         else{
                             document.getElementById(setStatusCell).innerHTML = "<span style='color: #d5b60a;' style='font-size: bold'>In Progress</span>";
@@ -1290,6 +1298,38 @@
                 }        
           });
         }
+
+    //notifications
+    function notifyMe() {
+    if (!window.Notification) {
+        console.log('Browser does not support notifications.');
+    } else {
+        // check if permission is already granted
+        if (Notification.permission === 'granted') {
+            // show notification here
+            console.log("permission granted");
+            //var notify = new Notification('Welcome Back!', {
+            //    body: 'How are you doing?',
+                //icon: 'https://bit.ly/2DYqRrh',
+            //});
+        } else {
+            // request permission from user
+            Notification.requestPermission().then(function (p) {
+                if (p === 'granted') {
+                    // show notification here
+                    var notify = new Notification('Welcome Back!', {
+                        body: 'How are you doing?',
+                        //icon: 'https://bit.ly/2DYqRrh',
+                    });
+                } else {
+                    console.log('User blocked notifications.');
+                }
+            }).catch(function (err) {
+                console.error(err);
+            });
+        }
+    }
+}
 
          //pop up code
          // When the user clicks on <span> (x), close the modal
