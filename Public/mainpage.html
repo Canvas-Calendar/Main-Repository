@@ -1209,7 +1209,6 @@
                 var start = assignment["due_at"];
                 var time = assignment["task_hours"];
                 var suggestion = assignment["suggested_time"];
-                
                 //date stuff
                 var currentdate = new Date().toJSON().slice(0, 10);
                 var dueDateDay = duedate.slice(2,4);
@@ -1231,23 +1230,49 @@
                 //console.log(dueDateDay);
                 //console.log(todayMonth);
                 //console.log(todayDay);
-
+                //var newTime = time + 1;
                 if((dueDateMonth==todayMonth)||(dueDateMonth==(todayMonth+1))){
                     k++; // next spot on table
                     console.log(name)
                     console.log("due date current - displaying on table spot"+k)
                     console.log("______________________________________________")
                     //set time to start
+                    
+                    var setBack = 7; //number of days in advance by default
                     if((dueDateDay-time)>=1){
-                        var startDay = dueDateDay-time;
-                        //start = dueDateMonth + "/" + startDay + "/" + "2021, 11:59 PM";
-                        start = dueDateMonth + "/" + startDay + "/" + "2021, " + suggestion;
+                        var startDay = dueDateDay-(Number(time)+setBack);
+                        //var newStartDay = dueDateDay-(time);
+                        // 8 = 19-(1+1)
+                        //console.log("dueDateady = " + dueDateDay)
+                        //console.log("time = " + time)
+                        //console.log("startDay = " + startDay)
+                        //console.log("newStartDay = " + newStartDay)
+                        //if assignment is passed due, set startDay as todayDay
+                        if (((startDay)-(todayDay-1)) < 1) {
+                            startDay = (todayDay-1);
+                            start = dueDateMonth + "/" + startDay + "/" + "2021, " + suggestion;
+                         }
+                        else if (dueDateMonth==todayMonth && dueDateDay<todayDay && time=="Done"){
+                            //start = "Hurry up and finish or mark as 'Done'!";
+                            //if (time=="Done") {start = "Assignment Completed!" };
+                            start = "Assignment Completed!";
+                        }
+                        else { start = dueDateMonth + "/" + startDay + "/" + "2021, " + suggestion; }
+                        //start = dueDateMonth + "/" + startDay + "/" + "2021s, " + suggestion; 
                     }
+                    //else if (dueDateMonth==todayMonth && dueDateDay<todayDay && time=="Done"){
+                    //    start = "Assignment Completed!";
+                    //}
+                    //else if(dueDateMonth==todayMonth && dueDateDay<todayDay){
+                    //    start = "Hurry up and finish or mark as 'Done'!";
+                    //    if (time=="Done") {start = "Assignment Completed!" };
+                    //}                  
                     else{
                         var x = Math.abs(dueDateDay-time);
                         startDay = 30-x;
-                        //start = (dueDateMonth-1) + "/" + startDay + "/" + "2021, 11:59 PM";
-                        start = (dueDateMonth-1) + "/" + startDay + "/" + "2021, " + suggestion;
+                        //start = (dueDateMonth-1) + "/" + startDay + "/" + "2021, " + suggestion;
+                        start = (todayMonth) + "/" + (todayDay - 1) + "/" + "2021, " + suggestion;
+                        if (time=="Done") { start = "Assignment Completed!"};
                     }
                     
 
@@ -1261,13 +1286,25 @@
                         document.getElementById(setAssignmentCell).innerHTML = name;
                         document.getElementById(setDueDateCell).innerHTML = duedate;
                         document.getElementById(setStartCell).innerHTML = start;
-                        document.getElementById(setTimeCell).innerHTML = time + " Hours";
+                        if(time!= "Done") {document.getElementById(setTimeCell).innerHTML = time + " Hours";}
                     
                         if(dueDateMonth<todayMonth){
-                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Finished!</span>";
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: blue;' style='font-size: bold'>Due Date Passed!</span>";
+                        }
+                        else if (dueDateMonth<todayMonth && time=="Done"){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
+                        }
+                        else if (dueDateMonth==todayMonth && dueDateDay<todayDay && time=="Done"){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
+                        }
+                        else if(dueDateMonth==todayMonth && dueDateDay<(todayDay+7) && todayDay<dueDateDay && time=="Done"){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
+                        }
+                        else if(dueDateMonth==todayMonth && dueDateDay==todayDay && time=="Done"){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
                         }
                         else if(dueDateMonth==todayMonth && dueDateDay<todayDay){
-                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Finished!</span>";
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: blue;' style='font-size: bold'>Due Date Passed!</span>";
                         }
                         /*(todayDay<=dueDateDay<(todayDay+7))*/
                         else if(dueDateMonth==todayMonth && dueDateDay<(todayDay+7) && todayDay<dueDateDay){
