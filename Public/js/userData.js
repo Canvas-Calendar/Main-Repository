@@ -1,11 +1,5 @@
-/*
- * TEDDY EDIT - Mission 1 - Let's get this Refresh Button working!
- * [tasks]
- * 1. Get Firebase related "User Details" for the currently logged in user
- * 2. Use those details to query the Firebase DB for user data
- * 3. Initialize the "UDCanvasAPI {udcanvas}" object
- * 4. Query the UDCanvasAPI and update the results in the Firebase DB
- */
+//userData js page - get user data
+
 function getUserData() {
     /* TASK 1 */
     var data = {};

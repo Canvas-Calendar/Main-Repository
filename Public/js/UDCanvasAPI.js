@@ -1,4 +1,4 @@
-// var udcanvas = new UDCanvasAPI(access_token);
+// UDcanvasAPI js page
 
 function UDCanvasAPI(access_token) {
     this.token  = access_token;

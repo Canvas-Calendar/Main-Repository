@@ -1,9 +1,5 @@
-/*
-* Source: "https://github.com/Minoli/button-loader""
-* A jQuery plugin which add loading indicators into buttons
-* By Minoli Perera
-* MIT Licensed.
-*/
+//button loader 1 js page
+
 (function ($) {
     $('.has-spinner').attr("disabled", false);
     $.fn.buttonLoader = function (action) {

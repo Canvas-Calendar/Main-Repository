@@ -1,9 +1,4 @@
-/*
- * TEDDY EDIT - Mission 2 - Populate Courses and Assignments from Firebase DB!
- * [tasks]
- * 1. Query Firebase DB for the current user's courses and assignments
- * 2. Parse courses and embed data into html elements
- */
+//upcoming courses js page
 
 function parseCourseData(user_data) {
     var active_courses = $("#active_courses");

@@ -209,7 +209,6 @@
          .link-account{
              padding-top: 1in;
              text-align: left;
-             /*padding-right: 2in; trying from left instead*/
              padding-left: 1in;
              float: left;
          }
@@ -264,20 +263,6 @@
              opacity: 1;
              right: 0;
          }
-        /*Create four equal columns that floats next to each other
-        
-        .columnTimes{
-            float: left;
-            width: 25%;
-            padding: 10px;
-        } */
-
-        /*Clear floats after the columns
-        .rowTimes:after{
-            content: "";
-            display: table;
-            clear: both;
-        } */
 
          h1{
              margin-top: .25in;
@@ -482,13 +467,10 @@
             </form>
             <button class="button has-spinner" id="website_btn" style="vertical-align:middle"><span>Submit Acces Token</span></button>
         </div>
-        <!--Added here-->
-        <!--Perhaps try regular row/column too, see how that looks-->
         <div class="availableTimesC">
             <h1>Preferences</h1>
             <p>Select which times you are <strong>AVAILABLE</strong> to study or do homework:</p>
             <p>(Hold the CTRL/Control key to select multiple times)</p>
-            <!--<label for="cars2">Select your available times:</label>-->
             <form class="availableTimes" id="availableTimesID"> 
                 <select class="availableTimeForm" name="selectAvailableTimes" id="selectAvailableTimesID" multiple>
                     <option value="">NONE</option>"
@@ -514,9 +496,6 @@
             </form>
             <button class="button3" id="availableTimesButton" style="vertical-align:middle"><span>Submit</span></button>
         </div>
-        <!--Added here end--> 
-        
-
 
         <script>
          // Your web app's Firebase configuration
@@ -605,18 +584,6 @@
                 console.log('Available times saved to firebase database');
             });
         }
-
-        /* Don't think this is needed anymore, testing before deleting
-        //uses user selected available times and assigns them randomly to all assignments
-        function generateSuggestedTimes(available){
-            console.log("Now pushing suggestion");
-            var userID = firebase.auth().currentUser.uid;
-            var database = firebase.database();
-            //var suggestion = firebase.database().ref("courses/suggested_time/");
-            var newSuggestion = available[Math.floor(Math.random()*available.length)];
-            
-        } */
-     
 
          function addSchoolToDatabase(school){
                  var school_attending  = school;
@@ -750,7 +717,7 @@
                      console.log(user);
                      var email = user.email;
 
-                     /* TEDDY EDIT - After verifying user is logged in, add the user's firebase data */
+                     /*After verifying user is logged in, add the user's firebase data */
                      user_data = getUserData();
                      (async() => {
                          console.log("waiting for variable");
@@ -825,7 +792,6 @@
          });
 
          //set school colors
-
          function parseSchoolAttending(user_data) {
                 var college = user_data["school_attending"]
                 console.log(college);
@@ -833,7 +799,6 @@
          }
 
          //display school design 
-
          function displaySchoolDesign(college){
              var school = college;
              console.log(school);
@@ -861,7 +826,6 @@
          }
 
         </script>
-        <!-- TEDDY EDIT  -->
         <!-- + Logged In User Data from Firebase DB -->
         <!-- + Refresh Button Snippet -->
         <script src="/js/userData.js"></script>

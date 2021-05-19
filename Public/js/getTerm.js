@@ -1,9 +1,4 @@
-/*
- * TEDDY EDIT - Mission 2 - Populate Courses and Assignments from Firebase DB!
- * [tasks]
- * 1. Query Firebase DB for the current user's courses and assignments
- * 2. Parse courses and embed data into html elements
- */
+// get Term js page
 
 function getTerm(datetime) {
    /* Determine the academic term using the courses datetime.

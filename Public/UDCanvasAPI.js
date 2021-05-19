@@ -1,6 +1,5 @@
 /*
- *  TO BE USED ONLY FOR TESTING ...
- *  ACCESS TOKEN HARD CODED ...
+ *  for testing Canvas API only
 */
 
 

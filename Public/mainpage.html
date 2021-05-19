@@ -24,14 +24,14 @@
         <!-- Add icon library -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <!-- TEDDY EDIT - mainpage stylesheet -->
+        <!--mainpage stylesheet -->
         <link rel="stylesheet" href="/css/mainpage.css">
 
         <meta name="google-signin-client_id" content="967496995343-hbeqhlnlithe3prp8nh2sv2bj8f836p7.apps.googleusercontent.com">
 
         <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 
-        <!-- TEDDY EDIT - Multiple firebase init() and declarations?? -->
+        <!-- Multiple firebase init() and declarations?? -->
         <!-- initialize the SDK after all desired features are loaded -->
         <!-- <script defer src="/__/firebase/init.js"></script> -->
         <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -81,7 +81,6 @@
 
 
 
-        <!-- TEDDY EDIT  -->
         <!-- + Button Loader Plugin -->
         <!-- + adding locally sourced UDCanvasAPI here... -->
         <script src="/js/jquery.buttonLoader2.js"></script>
@@ -387,21 +386,7 @@
             background-color: #dddddd;
         }
 
-        /*Table spacing
-        .container {
-            display: flex;
-            float: left;
-            padding-left: 50px;
-            width: 100%;
-            height: 100%;
-        }
-        .container > div {
-            flex: 1; 
-        }
-        .time-management-table{
-            padding-top: 50px;
-        }
-        */
+
 .container {
   width: 100%;
   height: 100%;
@@ -727,7 +712,7 @@
                      document.getElementById("headerlogo").innerHTML = "Welcome Back " + user.email + "!";
                      /* alert("Welcome " + email); */
 
-                     /* TEDDY EDIT - After verifying user is logged in, add the user's firebase data */
+                     /* After verifying user is logged in, add the user's firebase data */
                      user_data = getUserData();
                      (async() => {
                          console.log("waiting for variable");
@@ -816,23 +801,7 @@
              navLinks: true, // can click day/week names to navigate views
              editable: true,
              eventLimit: true,
-             /*
-                eventRender: function(event, element) {
-                console.log(event);
-
-                var html = '<a data-event-id="' + event.id + '" class="' + ((event.strikeout) ? 'strikeout' : '') + ' fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable">';
-                html += '<div class="fc-content">';
-                html += ' <label><input type="checkbox" ' + ((event.strikeout) ? 'checked' : '') + '> <span class="fc-time">'  + '</span> ';
-                html += ' <span class="fc-title">' + event.title + '</span>';
-                html += '</label></div></a>';
-
-                var $event = $(html);
-
-                addRightClickMenu($event);
-
-                return $event;
-                },
-              */
+             
              select: function(start, end) {
                  var title = prompt('Event Title:');
                  var description = prompt('Event Description:');
@@ -868,25 +837,9 @@
                  element.append( "<span class='closeon'>X</span>" );
                  element.find(".closeon").click(function(calEvent, jsEvent) {
                      $('#calendar').fullCalendar('removeEvents',event._id);
-                     //console.log(calEvent.description);
-                     //var userId   = firebase.auth().currentUser.uid;
-                     //var database = firebase.database();
-                     //database.ref('users/' + userId).update({
-                     //    assignment_events: assignment_events
-                     //}).then(function() {
                  });
-                 //});
              },
              
-             
-             /*
-                eventClick: function(calEvent, jsEvent) {
-                var title = prompt("Edit Event Content:", calEvent.title);
-                calEvent.title = title;
-                $("#calendar").fullCalendar("updateEvent", calEvent);
-                },
-              */
-             //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
          });
          
          function createAssignmentEvents(assignments){
@@ -961,18 +914,6 @@
                  $("#calendar").fullCalendar("renderEvent", assignmentEventData[i], true); // render events
              }
          }
-         /*   
-         function displayEvents(user_data){
-             var calendarData = user_data["events"];
-             var assignmentEventData = user_data["assignment_events"];
-             for(var i=0; i<=assignmentEventData.length; i++){
-                 $("#calendar").fullCalendar("renderEvent", assignmentEventData[i], true); // render events
-             }
-             for(var j=0; j<=calendarData.length; j++){
-                 $("#calendar").fullCalendar("renderEvent", calendarData[j], true); // render events
-             }
-         }
-         */
 
          //when clicked
          function displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription){
@@ -986,20 +927,6 @@
              document.getElementById("user-message-description").innerHTML = showDescription;
              
          }
-
-
-         /*
-            select: function(start, end) {
-            var title = prompt('Event Title:');
-            if (title) {
-            $('#calendar').fullCalendar('renderEvent', {
-            title: title, start: start, end: end
-            }, true);
-            }
-            $('#calendar').fullCalendar('unselect');
-            },
-            editable: true,*/
-         //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
 
 
          function addRightClickMenu($event){
@@ -1022,43 +949,8 @@
              $("#calendar").fullCalendar('renderEvent', event, true);
          });
 
-         //$("#deleteBtn").on("click", function () {
-         //   modal.style.display = "none";
-         //});
-         
-         /*   
-            function deleteEventsFromDatabase(displayTitle, displayStart, displayEnd, displayDescription, displayColor){
-            console.log("in delete function");
-            var eventToDelete 
-            var title = displayTitle;
-            var start = displayStart;
-            var end = displayEnd;
-            var description = displayDescription;
-            var color = displayColor;
-            $("#deleteBtn").on("click", function () {
-            modal.style.display = "none";
-            if(title){
-            eventToDelete = {
-            title: title,
-            start: start,
-            end: end,
-            description: description,
-            color: color
-            }
-            for(var i=0; i<=eventsArray.length; i++){
-            for(var j=0; j<=eventsAssignmentsArray.length; j++){
-            if(eventToDelete == eventsArray[i] || eventsAssignmentsArray[j]){
-            database.ref('users/' + userId).update({
-            events: events
-            }).then(function() {
-            });
-            }
-            }
-            }
-            }
-            });
-            }
-          */
+
+
          //get school attending
 
          function parseSchoolAttending(user_data) {
@@ -1236,37 +1128,23 @@
                     console.log(name)
                     console.log("due date current - displaying on table spot"+k)
                     console.log("______________________________________________")
-                    //set time to start
                     
+                    //set time to start
                     var setBack = 3; //number of days in advance by default
                     if((dueDateDay-time)>=1){
                         var startDay = dueDateDay-(Number(time)+setBack);
-                        //var newStartDay = dueDateDay-(time);
-                        // 8 = 19-(1+1)
-                        //console.log("dueDateady = " + dueDateDay)
-                        //console.log("time = " + time)
-                        //console.log("startDay = " + startDay)
-                        //console.log("newStartDay = " + newStartDay)
-                        //if assignment is passed due, set startDay as todayDay
                         if (((startDay)-(todayDay-1)) < 1) {
                             startDay = (todayDay-1);
                             start = dueDateMonth + "/" + startDay + "/" + "2021, " + suggestion;
                          }
-                        else if (/*dueDateMonth==todayMonth && dueDateDay<todayDay && */time=="Done"){
+                        else if (time=="Done"){
                             //start = "Hurry up and finish or mark as 'Done'!";
                             //if (time=="Done") {start = "Assignment Completed!" };
                             start = "Assignment Completed!";
                         }
                         else { start = dueDateMonth + "/" + startDay + "/" + "2021, " + suggestion; }
                         //start = dueDateMonth + "/" + startDay + "/" + "2021s, " + suggestion; 
-                    }
-                    //else if (dueDateMonth==todayMonth && dueDateDay<todayDay && time=="Done"){
-                    //    start = "Assignment Completed!";
-                    //}
-                    //else if(dueDateMonth==todayMonth && dueDateDay<todayDay){
-                    //    start = "Hurry up and finish or mark as 'Done'!";
-                    //    if (time=="Done") {start = "Assignment Completed!" };
-                    //}                  
+                    }              
                     else{
                         var x = Math.abs(dueDateDay-time);
                         startDay = 30-x;
@@ -1294,19 +1172,7 @@
                         else if (time=="Done"){
                             document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
                         }
-                        /*
-                        else if (dueDateMonth<todayMonth && time=="Done"){
-                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
-                        }
-                        else if (dueDateMonth==todayMonth && dueDateDay<todayDay && time=="Done"){
-                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
-                        }
-                        else if(dueDateMonth==todayMonth && dueDateDay<(todayDay+7) && todayDay<dueDateDay && time=="Done"){
-                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
-                        }
-                        else if(dueDateMonth==todayMonth && dueDateDay==todayDay && time=="Done"){
-                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
-                        }*/
+                        
                         else if(dueDateMonth==todayMonth && dueDateDay<todayDay){
                             document.getElementById(setStatusCell).innerHTML = "<span style='color: blue;' style='font-size: bold'>Due Date Passed!</span>";
                         }
@@ -1386,7 +1252,7 @@
          }
         </script>
 
-        <!-- TEDDY EDIT  -->
+        
         <!-- + Logged In User Data from Firebase DB -->
         <!-- + Refresh Button Snippet -->
         <script src="/js/userData.js"></script>
