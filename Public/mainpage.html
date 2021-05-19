@@ -1238,7 +1238,7 @@
                     console.log("______________________________________________")
                     //set time to start
                     
-                    var setBack = 7; //number of days in advance by default
+                    var setBack = 3; //number of days in advance by default
                     if((dueDateDay-time)>=1){
                         var startDay = dueDateDay-(Number(time)+setBack);
                         //var newStartDay = dueDateDay-(time);
@@ -1252,7 +1252,7 @@
                             startDay = (todayDay-1);
                             start = dueDateMonth + "/" + startDay + "/" + "2021, " + suggestion;
                          }
-                        else if (dueDateMonth==todayMonth && dueDateDay<todayDay && time=="Done"){
+                        else if (/*dueDateMonth==todayMonth && dueDateDay<todayDay && */time=="Done"){
                             //start = "Hurry up and finish or mark as 'Done'!";
                             //if (time=="Done") {start = "Assignment Completed!" };
                             start = "Assignment Completed!";
@@ -1291,6 +1291,10 @@
                         if(dueDateMonth<todayMonth){
                             document.getElementById(setStatusCell).innerHTML = "<span style='color: blue;' style='font-size: bold'>Due Date Passed!</span>";
                         }
+                        else if (time=="Done"){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
+                        }
+                        /*
                         else if (dueDateMonth<todayMonth && time=="Done"){
                             document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
                         }
@@ -1302,7 +1306,7 @@
                         }
                         else if(dueDateMonth==todayMonth && dueDateDay==todayDay && time=="Done"){
                             document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
-                        }
+                        }*/
                         else if(dueDateMonth==todayMonth && dueDateDay<todayDay){
                             document.getElementById(setStatusCell).innerHTML = "<span style='color: blue;' style='font-size: bold'>Due Date Passed!</span>";
                         }
