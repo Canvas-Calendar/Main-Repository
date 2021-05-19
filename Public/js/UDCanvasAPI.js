@@ -35,11 +35,13 @@ function UDCanvasAPI(access_token) {
                                 'assignment_id': element['id'],
                                 'course_id': element['course_id'],
                                 'name': element['name'],
-                                'due_at': element['due_at'],
+                                'due_at': new Date(element['due_at']).toLocaleString(),
                                 'description': element['description'],
                                 'html_url': element['html_url'],
                                 'submissions_download_url': element['submissions_download_url'],
-                                'grading_type': element['grading_type']
+                                'grading_type': element['grading_type'],
+                                'task_hours': 24,
+                                'suggested_time' : "N/A"
                             });
                         });
                         assignments.sort(function(a,b) { return a.assignment_id - b.assignment_id });
@@ -47,7 +49,7 @@ function UDCanvasAPI(access_token) {
                             'course_id': e['id'],
                             'name': e['name'],
                             'course_code': e['course_code'],
-                            'start_at': e['start_at'],
+                            'start_at': new Date(e['start_at']).toLocaleString(),
                             'uuid': e['uuid'],
                             'enrollments': e['enrollments'],
                             'calendar': e['calendar'],

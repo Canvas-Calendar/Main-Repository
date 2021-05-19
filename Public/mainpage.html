@@ -16,8 +16,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Welcome to Canvas Calendar</title>
         
+        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
               integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        
 
         <!-- Add icon library -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -87,22 +89,382 @@
         <!-- <script src="/js/parseAllCourses.js"></script> -->
         <!-- <script src="/js/getTerm.js"></script> -->
         <script src="/js/testFile.js"></script>
+        <style>
+         * {
+             padding:0;
+             margin:0;
+         }
 
+         :root{
+             --eventColor:#808080;
+         }
+
+         .fc-event {
+             padding:1em 0.5em !important;
+             background-color:red;
+         }
+
+         .fc-day-grid-event .fc-content {
+             white-space:normal !important;
+         }
+         .strikeout * {
+             text-decoration: line-through !important;
+         }
+
+         .fc-title{
+             color: #f4f4f4;
+         }
+
+         .topSection{
+             margin-top: 1in;
+             padding-left: 50px;
+             padding-right: 50px;
+         }
+
+
+
+         /* header _________________________________________*/
+
+         a {
+             color: rgb(255, 255, 255);
+         }
+
+         .header {
+             background-color: var(--eventColor);
+             box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+             position: fixed;
+             left:0;
+             right:0;
+             top:0;
+             width: 100%;
+             z-index: 3;
+         }
+
+         .header ul {
+             margin: 0;
+             padding: 0;
+             list-style: none;
+             overflow: hidden;
+             background-color: var(--eventColor);
+         }
+
+         .header li a {
+             display: block;
+             padding: 20px 20px;
+             border-right: 1px solid #f4f4f4;
+             text-decoration: none;
+         }
+
+         .header li a:hover,
+         .header .menu-btn:hover {
+             background-color:lightgrey;
+         }
+
+         .header .logo {
+             display: block;
+             float: left;
+             font-size: 2em;
+             padding: 10px 20px;
+             text-decoration: none;
+         }
+
+         /* menu */
+
+         .header .menu {
+             clear: both;
+             max-height: 0;
+             transition: max-height .2s ease-out;
+         }
+
+         /* menu icon */
+
+         .header .menu-icon {
+             cursor: pointer;
+             display: inline-block;
+             float: right;
+             padding: 28px 20px;
+             position: relative;
+             user-select: none;
+         }
+
+         .header .menu-icon .navicon {
+             background: #333;
+             display: block;
+             height: 2px;
+             position: relative;
+             transition: background .2s ease-out;
+             width: 18px;
+         }
+
+         .header .menu-icon .navicon:before,
+         .header .menu-icon .navicon:after {
+             background: #333;
+             content: '';
+             display: block;
+             height: 100%;
+             position: absolute;
+             transition: all .2s ease-out;
+             width: 100%;
+         }
+
+         .header .menu-icon .navicon:before {
+             top: 5px;
+         }
+
+         .header .menu-icon .navicon:after {
+             top: -5px;
+         }
+
+         /* menu btn */
+
+         .header .menu-btn {
+             display: none;
+         }
+
+         .header .menu-btn:checked ~ .menu {
+             max-height: 240px;
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon {
+             background: transparent;
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon:before {
+             transform: rotate(-45deg);
+         }
+
+         .header .menu-btn:checked ~ .menu-icon .navicon:after {
+             transform: rotate(45deg);
+         }
+
+         .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+         .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+             top: 0;
+         }
+
+         /* 48em = 768px */
+
+         @media (min-width: 48em) {
+             .header li {
+                 float: left;
+             }
+             .header li a {
+                 padding: 20px 30px;
+             }
+             .header .menu {
+                 clear: none;
+                 float: right;
+                 max-height: none;
+             }
+             .header .menu-icon {
+                 display: none;
+             }
+         }
+
+         /*Button*/
+         .refresh-btn {
+             background-color: var(--eventColor);
+             border: none;
+             color: white;
+             padding: 15px 15px;
+             font-size: 25px;
+             cursor: pointer;
+         }
+
+         /* Darker background on mouse-over */
+         .refresh-btn:hover {
+             color: rgb(30, 192, 30);
+         }   
+
+
+         #headerImage
+         {
+             cursor: pointer;
+             padding-top: 5px;
+             width: 60px;
+             height: 60px;
+             overflow: hidden;
+             -webkit-border-radius: 50%;
+             -moz-border-radius: 50%;
+             -ms-border-radius: 50%;
+             -o-border-radius: 50%;
+             border-radius: 50%;
+         }
+         
+         
+         /*Popup*/
+         /* The Modal (background) */
+         .modal {
+             display: none; /* Hidden by default */
+             position: fixed; /* Stay in place */
+             margin-left: auto;
+             margin-right: auto;
+             z-index: 99 !important;
+             padding-top: 200px; /* Location of the box */
+             left: 0;
+             top: 0;
+             width: 500px; /* Full width */
+             height: 750px; /* Full height */
+             overflow: auto; /* Enable scroll if needed */
+         }
+
+         /* Modal Content */
+         .modal-content {
+             background-color:lightgrey;
+             margin: auto;
+             padding: 20px;
+             border: 1px solid #888;
+             width: 80%;
+             display: flex;
+             justify-content: center;
+         }
+
+         /* The Close Button */
+         .close {
+             color: #ff0000;
+             float: left;
+             font-size: 28px;
+             font-weight: bold;
+         }
+
+         .close:hover,
+         .close:focus {
+             color: #000;
+             text-decoration: none;
+             cursor: pointer;
+         }
+
+         h1 {
+             font-weight: bold;
+             font-size: 15px;
+         }
+
+         .user-message-title{
+             font-weight: bold;
+             font-size: 50px;
+         }
+
+
+         .button {
+             display: inline-block;
+             border-radius: 10px;
+             background-color: #c42700;
+             border: none;
+             color: #FFFFFF;
+             text-align: center;
+             font-size: 15px;
+             padding: 5px;
+             width: 200px;
+             transition: all 0.5s;
+             cursor: pointer;
+             margin: 5px;
+             margin-left: 75px;
+         }
+
+
+         .button:hover {
+             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+         }
+
+         .past div.fc-time, .past div.fc-title {
+             text-decoration: line-through;
+         }
+
+        /*Table*/
+         table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        /*Table spacing
+        .container {
+            display: flex;
+            float: left;
+            padding-left: 50px;
+            width: 100%;
+            height: 100%;
+        }
+        .container > div {
+            flex: 1; 
+        }
+        .time-management-table{
+            padding-top: 50px;
+        }
+        */
+.container {
+  width: 100%;
+  height: 100%;
+  float: left;
+  
+}
+
+.col-container {
+  widows: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  padding-left: 33px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+ 
+}
+.col-1 {
+  flex: 1 1 50%;
+}
+
+.col-2 {
+  flex: 1 1 20%;
+  padding-left: 925px;
+}
+.table3 {
+    padding-right: 50px;
+    float: right;
+}
+        </style>
     </head>
-    <body>
+    <body onload="notifyMe()">
         <header class="header">
+            <image id="headerImage" src=""/>
             <a style="color: white;" href="" class="logo" id="headerlogo">Welcome Back!!</a>
             <input class="menu-btn" type="checkbox" id="menu-btn" />
             <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
             <ul class="menu">
-                <li><a href='https://canvas-calendar-4ea54.web.app/aboutpage.html'>About</a></li>
-                <li><a href='https://canvas-calendar-4ea54.web.app/profilepage.html'>Profile</a></li>
-                <li><a href="#contact" onclick="logoutFunction()">Logout</a></li>
+                <li><a style="color: white;" href='https://canvas-calendar-4ea54.web.app/profilepage.html'>Profile</a></li>
+                <li><a style="color: white;" href="#contact" onclick="logoutFunction()">Logout</a></li>
                 <li><button id="refresh-btn" class="refresh-btn has-spinner"><i class="fa fa-refresh"></i></button></li>
             </ul>
         </header>
 
         <div class="topSection">
+
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div id="user-message-title" style="font-size: 30px;"></div>
+                    <h1>Start:</h1>
+                    <div id="user-message-start"></div>
+                    <h1>End:</h1>
+                    <div id="user-message-end"></div>
+                    <h1>Description:</h1>
+                    <div id="user-message-description" style="padding-bottom: 20px;"></div>
+                    <button class="button" id=deleteBtn style="vertical-align:middle"><span>Delete Event </span></button>
+                </div>
+            </div>
+
+            <span><input type='color' id='colorPicker'></span>
             <div id='calendar'></div>
         </div>
 
@@ -117,37 +479,136 @@
             </ul>
         </div>
 
-
-        <div class="bottomSection">
-            <div class="upcoming-page" style="float: left;">
-                <div class="card" style="width: 302px;"> 
-                    <div class="card-header" style="width: 300px;">
-                        <h4>Today's Schedule</h4> 
+        <div class="col-container">
+        
+            <div class="col-1" float="left">
+                <div class="card" style="width: 1000px;"> 
+                    <div class="card-header" style="width: 1000px;">
+                        <h4>Manage Your Assignments</h4> 
                     </div>
-                    <ul id="today_schedule" class="list-group list-group-flush">
-                        <!-- <li class="list-group-item">CPEG 494 - Practical 5</li> -->
-                        <!-- <li class="list-group-item">CISC 361 - Lab 6 Phase 3</li> -->
-                        <!-- <li class="list-group-item">CPEG 496 - Mini Practical</li> -->
-                        <!-- <li class="list-group-item">CPEG 419 - HW 4a</li> -->
-                        <!-- <li class="list-group-item">CPEG 498 - Final Presentation</li> -->
-                    </ul>
+                        <table>
+                            <tr>
+                                <th>Assignment</th>
+                                <th>Status</th>
+                                <th>Due Date</th>
+                                <th>Recommended Start Time</th>
+                                <th>Time Set</th>
+                            </tr>
+                            <tr>
+                                <td id="assignment1"></td>
+                                <td id="status1"></td>
+                                <td id="duedate1"></td>
+                                <td id="start1"></td>
+                                <td id="timeset1"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment2"></td>
+                                <td id="status2"></td>
+                                <td id="duedate2"></td>
+                                <td id="start2"></td>
+                                <td id="timeset2"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment3"></td>
+                                <td id="status3"></td>
+                                <td id="duedate3"></td>
+                                <td id="start3"></td>
+                                <td id="timeset3"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment4"></td>
+                                <td id="status4"></td>
+                                <td id="duedate4"></td>
+                                <td id="start4"></td>
+                                <td id="timeset4"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment5"></td>
+                                <td id="status5"></td>
+                                <td id="duedate5"></td>
+                                <td id="start5"></td>
+                                <td id="timeset5"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment6"></td>
+                                <td id="status6"></td>
+                                <td id="duedate6"></td>
+                                <td id="start6"></td>
+                                <td id="timeset6"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment7"></td>
+                                <td id="status7"></td>
+                                <td id="duedate7"></td>
+                                <td id="start7"></td>
+                                <td id="timeset7"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment8"></td>
+                                <td id="status8"></td>
+                                <td id="duedate8"></td>
+                                <td id="start8"></td>
+                                <td id="timeset8"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment9"></td>
+                                <td id="status9"></td>
+                                <td id="duedate9"></td>
+                                <td id="start9"></td>
+                                <td id="timeset9"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment10"></td>
+                                <td id="status10"></td>
+                                <td id="duedate10"></td>
+                                <td id="start10"></td>
+                                <td id="timeset10"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment11"></td>
+                                <td id="status11"></td>
+                                <td id="duedate11"></td>
+                                <td id="start11"></td>
+                                <td id="timeset11"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment12"></td>
+                                <td id="status12"></td>
+                                <td id="duedate12"></td>
+                                <td id="start12"></td>
+                                <td id="timeset12"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment13"></td>
+                                <td id="status13"></td>
+                                <td id="duedate13"></td>
+                                <td id="start13"></td>
+                                <td id="timeset13"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment14"></td>
+                                <td id="status14"></td>
+                                <td id="duedate14"></td>
+                                <td id="start14"></td>
+                                <td id="timeset14"></td>
+                            </tr>
+                            <tr>
+                                <td id="assignment15"></td>
+                                <td id="status15"></td>
+                                <td id="duedate15"></td>
+                                <td id="start15"></td>
+                                <td id="timeset15"></td>
+                            </tr>
+                            
+                        
+                        </table>
                 </div>
             </div>
-
-            <div class="courses-page" style="float: left;">
-                <div class="card" style="width: 302px;"> 
-                    <div class="card-header" style="width: 300px;">
-                        <h4>All Courses</h4> 
-                    </div>
-                    <ul id="all_courses" class="list-group list-group-flush">
-                    </ul>
-                </div>
-            </div>
-
-            <div class="courses-page" style="float: left;">
-                <div class="card" style="width: 302px;"> 
-                    <div class="card-header" style="width: 300px;">
-                        <h4>Active Courses</h4> 
+             
+            <div class="col-2" float="left">
+                <div class="card" style="width: 260px;"> 
+                    <div class="card-header" style="width: 260px;">
+                        <h4><a style="color: black;" href="https://canvas-calendar-4ea54.web.app/coursespage.html">Active Courses</a></h4> 
                     </div>
                     <ul id="active_courses" class="list-group list-group-flush">
                         <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li> -->
@@ -158,23 +619,20 @@
                     </ul>
                 </div>
             </div>
+        </div>  
 
-            <div class="reccomendation-page" style="float: left;">
-                <div class="card" style="width: 302px;"> 
-                    <div class="card-header" style="width: 300px;">
+        <!--
+            <div class="table3" float="right"> 
+                <div class="card" style="width: 260px;"> 
+                    <div class="card-header" style="width: 260px;">
                         <h4>Assignments</h4> 
                     </div>
                     <ul id="assignments" class="list-group list-group-flush">
-                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 499</a></li> -->
-                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">CPEG 495</a></li> -->
-                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">ELEG 491</a></li> -->
-                        <!-- <li class="list-group-item"><a style="color: rgb(0, 0, 0);" href="https://canvas-calendar-4ea54.web.app/coursespage.html">LEAD 158</a></li> -->
-                        <!-- <li class="list-group-item"></li> -->
+                        
                     </ul>
                 </div>
-
             </div>
-        </div>
+        -->
 
         <script>
 
@@ -194,9 +652,22 @@
          firebase.initializeApp(firebaseConfig);
          firebase.analytics();
 
+         var a1 = "question-mark2.png"
+         var image = document.getElementById("headerImage");
+         image.src = a1;
+
+         // events array
+         var eventsArray = new Array();
+         var eventsAssignmentsArray = new Array();
+
+         //event click popup variables
+         // Get the modal
+         var modal = document.getElementById("myModal");
+
+         // Get the <span> element that closes the modal
+         var span = document.getElementsByClassName("close")[0];
+
          // Logout Code _________________________________________________
-
-
          $(document).ready(function () {
              $("#registerForm").on("submit", function (event) {
                  event.preventDefault();
@@ -252,7 +723,8 @@
                  if (user) {
                      console.log(user);
                      var email = user.email;
-                     document.getElementById("headerlogo").innerHTML = "Welcome Back " + user.email;
+                     
+                     document.getElementById("headerlogo").innerHTML = "Welcome Back " + user.email + "!";
                      /* alert("Welcome " + email); */
 
                      /* TEDDY EDIT - After verifying user is logged in, add the user's firebase data */
@@ -264,8 +736,14 @@
                          console.log("variable is defined");
                          /* testFunction(); */
                          console.log(getTerm(Date.now()));
+                         
                          parseAllCourses(user_data);
                          parseActiveCourses(user_data);
+                         parseSchoolAttending(user_data);
+                         //addEventsBackIntoArray(user_data);
+                         displayAssignmentEvents(user_data);
+                         addEventsBackIntoArray(user_data);
+                         displayEvents(user_data);
                      })();
                  } else {
                      // No user is signed in.
@@ -276,7 +754,6 @@
          });
 
          var accountType = sessionStorage.getItem("accountType");
-
          function logoutFunction(){
              if(accountType == "Google"){
                  signOut();
@@ -307,6 +784,26 @@
          }
 
          // calendar Code ________________________________________________________________________
+
+         function addEventsBackIntoArray(user_data){ 
+             var calendarDataToBeAdded = user_data["events"];
+             if(calendarDataToBeAdded[0] != null){
+                 for(var i=0; i<=(calendarDataToBeAdded.length-1); i++){
+                     console.log(calendarDataToBeAdded.length);
+                     console.log(calendarDataToBeAdded[i]);
+                     if(calendarDataToBeAdded[i] != null){
+                         eventsArray.push(calendarDataToBeAdded[i]);
+                     }   
+                     else{
+                         console.log("no events exist");
+                     }
+                 }
+             }
+             else{
+               console.log("no events exist");
+             }
+         }
+
          $('#calendar').fullCalendar({
              header: {
                  left: 'prev,next today',
@@ -316,57 +813,179 @@
              //defaultDate: '2015-02-12',
              selectable: true,
              selectHelper: true,
-             eventRender: function(event, element) {
-                 console.log(event);
+             navLinks: true, // can click day/week names to navigate views
+             editable: true,
+             eventLimit: true,
+             /*
+                eventRender: function(event, element) {
+                console.log(event);
 
-                 var html = '<a data-event-id="' + event.id + '" class="' + ((event.strikeout) ? 'strikeout' : '') + ' fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable">';
-                 html += '<div class="fc-content">';
-                 html += ' <label><input type="checkbox" ' + ((event.strikeout) ? 'checked' : '') + '> <span class="fc-time">'  + '</span> ';
-                 html += ' <span class="fc-title">' + event.title + '</span>';
-                 html += '</label></div></a>';
+                var html = '<a data-event-id="' + event.id + '" class="' + ((event.strikeout) ? 'strikeout' : '') + ' fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable">';
+                html += '<div class="fc-content">';
+                html += ' <label><input type="checkbox" ' + ((event.strikeout) ? 'checked' : '') + '> <span class="fc-time">'  + '</span> ';
+                html += ' <span class="fc-title">' + event.title + '</span>';
+                html += '</label></div></a>';
 
-                 var $event = $(html);
+                var $event = $(html);
 
-                 addRightClickMenu($event);
+                addRightClickMenu($event);
 
-                 return $event;
-             },
-
-             //Teddy!!!! This is part of the event type color code
-             //_________________________________________________________________________________________
+                return $event;
+                },
+              */
              select: function(start, end) {
-                 var eventType = prompt('Event Type:');
-                 if (eventType == "Holiday") {
-                     alert("it worked holiday")
-                     document.body.style.setProperty('--eventColor',"#ff5733")
-                 }
-                 else if (eventType == "Work") {
-                     alert("it worked work")
-                     document.body.style.setProperty('--eventColor',"#33ff42")
-                 }
-                 else if (eventType == "Home") {
-                     alert("it worked home")
-                     document.body.style.setProperty('--eventColor',"#33fff6")
-                 }
-                 else if (eventType == "School") {
-                     alert("it worked school")
-                     document.body.style.setProperty('--eventColor',"#ffff33")
-                 }
-                 else{
-                     alert("it worked other")
-                     document.body.style.setProperty('--eventColor',"#000000")
-                 }
                  var title = prompt('Event Title:');
+                 var description = prompt('Event Description:');
+                 //var start = prompt("Event Start Time:")
+                 var eventData;
                  if (title) {
-                     $('#calendar').fullCalendar('renderEvent', {
-                         title: title, start: start, end: end
-                     }, true);
+                     eventData = {
+                         title: title,
+                         start: start,
+                         end: end, 
+                         description: description,
+                         color: $("#colorPicker").val()
+                     };
+                     $("#calendar").fullCalendar("renderEvent", eventData, true); // stick? = true
                  }
                  $('#calendar').fullCalendar('unselect');
+                 eventsArray.push(eventData);
+                 addEventsToDatabase(eventsArray);
              },
-             editable: true,
+             
+             eventClick: function(calEvent, jsEvent) {
+                 modal.style.display = "block";
+                 var displayTitle = calEvent.title;
+                 var displayStart = calEvent.start;
+                 var displayEnd = calEvent.end;
+                 var displayDescription = calEvent.description;
+                 //var displayColor = calEvent.color;
+                 displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription);
+                 //deleteEventsFromDatabase(displayTitle, displayStart, displayEnd, displayDescription, displayColor);
+             },
+
+             eventRender: function(event, element) {
+                 element.append( "<span class='closeon'>X</span>" );
+                 element.find(".closeon").click(function(calEvent, jsEvent) {
+                     $('#calendar').fullCalendar('removeEvents',event._id);
+                     //console.log(calEvent.description);
+                     //var userId   = firebase.auth().currentUser.uid;
+                     //var database = firebase.database();
+                     //database.ref('users/' + userId).update({
+                     //    assignment_events: assignment_events
+                     //}).then(function() {
+                 });
+                 //});
+             },
+             
+             
+             /*
+                eventClick: function(calEvent, jsEvent) {
+                var title = prompt("Edit Event Content:", calEvent.title);
+                calEvent.title = title;
+                $("#calendar").fullCalendar("updateEvent", calEvent);
+                },
+              */
              //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
          });
+         
+         function createAssignmentEvents(assignments){
+             $.each(assignments, function(i, assignment) {
+                 var eventData;
+                 var title = assignment["name"];
+                 var start = assignment["due_at"];
+                 var end = assignment["due_at"];
+                 var description = assignment["description"];
+                 if(start != null){
+                     console.log(title); 
+                     console.log(start);
+                     console.log(end);
+                     if(title){
+                         eventData = {
+                             title: title,
+                             start: start,
+                             end: end,
+                             description: description,
+                             color: '#FF0000'
+                         }
+                     } 
+                     eventsAssignmentsArray.push(eventData);
+                     addAssignmentEventsToDatabase(eventsAssignmentsArray);
+                 }
+                 else{
+                     console.log("function failed")
+                 }
+             });
+         }
+         
+         function addAssignmentEventsToDatabase(eventsAssignmentsArray){
+             console.log(eventsAssignmentsArray);
+             var assignment_events = eventsAssignmentsArray;
+             var userId   = firebase.auth().currentUser.uid;
+             var database = firebase.database();
+             database.ref('users/' + userId).update({
+                 assignment_events: assignment_events
+             }).then(function() {
+                 
+             });
+         }
+
+         function addEventsToDatabase(eventsArray){
+             //console.log(title);
+             console.log(eventsArray);
+             var events = eventsArray;
+             //var event_data = eventData;
+             var userId   = firebase.auth().currentUser.uid;
+             var database = firebase.database();
+
+             database.ref('users/' + userId).update({
+                 events: events
+             }).then(function() {
+                 
+             });
+         } 
+        
+        
+         function displayEvents(user_data){
+             var calendarData = user_data["events"];
+             console.log(calendarData);
+             for(var i=0; i<=(calendarData.length-1); i++){
+                 $("#calendar").fullCalendar("renderEvent", calendarData[i], true); // render events
+             }
+         }
+
+         function displayAssignmentEvents(user_data){
+             var assignmentEventData = user_data["assignment_events"];
+             console.log(assignmentEventData);
+             for(var i=0; i<=(assignmentEventData.length-1); i++){
+                 $("#calendar").fullCalendar("renderEvent", assignmentEventData[i], true); // render events
+             }
+         }
+         /*   
+         function displayEvents(user_data){
+             var calendarData = user_data["events"];
+             var assignmentEventData = user_data["assignment_events"];
+             for(var i=0; i<=assignmentEventData.length; i++){
+                 $("#calendar").fullCalendar("renderEvent", assignmentEventData[i], true); // render events
+             }
+             for(var j=0; j<=calendarData.length; j++){
+                 $("#calendar").fullCalendar("renderEvent", calendarData[j], true); // render events
+             }
+         }
+         */
+
+         //when clicked
+         function displayEventDataInPopup(displayTitle, displayStart, displayEnd, displayDescription){
+             var showTitle = displayTitle;
+             var showStart = displayStart;
+             var showEnd = displayEnd;
+             var showDescription = displayDescription;
+             document.getElementById("user-message-title").innerHTML = showTitle;
+             document.getElementById("user-message-start").innerHTML = showStart;
+             document.getElementById("user-message-end").innerHTML = showEnd;
+             document.getElementById("user-message-description").innerHTML = showDescription;
+             
+         }
 
 
          /*
@@ -402,6 +1021,79 @@
              event.strikeout = $(this).is(':checked');
              $("#calendar").fullCalendar('renderEvent', event, true);
          });
+
+         //$("#deleteBtn").on("click", function () {
+         //   modal.style.display = "none";
+         //});
+         
+         /*   
+            function deleteEventsFromDatabase(displayTitle, displayStart, displayEnd, displayDescription, displayColor){
+            console.log("in delete function");
+            var eventToDelete 
+            var title = displayTitle;
+            var start = displayStart;
+            var end = displayEnd;
+            var description = displayDescription;
+            var color = displayColor;
+            $("#deleteBtn").on("click", function () {
+            modal.style.display = "none";
+            if(title){
+            eventToDelete = {
+            title: title,
+            start: start,
+            end: end,
+            description: description,
+            color: color
+            }
+            for(var i=0; i<=eventsArray.length; i++){
+            for(var j=0; j<=eventsAssignmentsArray.length; j++){
+            if(eventToDelete == eventsArray[i] || eventsAssignmentsArray[j]){
+            database.ref('users/' + userId).update({
+            events: events
+            }).then(function() {
+            });
+            }
+            }
+            }
+            }
+            });
+            }
+          */
+         //get school attending
+
+         function parseSchoolAttending(user_data) {
+             var college = user_data["school_attending"]
+             console.log(college);
+             displaySchoolDesign(college);
+         }
+
+         //display school design 
+
+         function displaySchoolDesign(college){
+             var school = college;
+             console.log(school);
+             if(school == "UniversityOfDelaware"){
+                 document.body.style.setProperty('--eventColor',"#00539f");
+                 a1 = "delaware-logo.png";
+                 image = document.getElementById("headerImage");
+                 image.src = a1;
+             }
+             else if(school == "UniversityOfMaryland"){
+                 document.body.style.setProperty('--eventColor',"#ff0000");
+                 a1 = "umd_logo.png";
+                 image = document.getElementById("headerImage");
+                 image.src = a1;
+             }
+             else if(school == "SyracuseUniversity"){
+                 document.body.style.setProperty('--eventColor',"#FF6C00");
+                 a1 = "syracuse.jpg";
+                 image = document.getElementById("headerImage");
+                 image.src = a1;
+             }
+             else{
+                 document.body.style.setProperty('--eventColor',"#808080");
+             }
+         }
 
          function getTerm(datetime) {
              /* Determine the academic term using the courses datetime.
@@ -476,6 +1168,8 @@
 
                      if (course["assignments"]) {
                          parseAssignments(course["assignments"]);
+                         createAssignmentEvents(course["assignments"]);
+                         setTimeManagementSystem(course["assignments"]);
                      }
                  }
              });
@@ -500,13 +1194,196 @@
 
                  li.appendChild(a);
                  assignments_div.append(li);
+
+                 
              });
          }
+         
+         //time management system______________________________
+         var k = 0; // table position count variable
+         var sendNotification;
+        function setTimeManagementSystem(assignments){
+             $.each(assignments, function(i, assignment) {
+                var name = assignment["name"];
+                var duedate = assignment["due_at"];
+                var start = assignment["due_at"];
+                var time = assignment["task_hours"];
+                var suggestion = assignment["suggested_time"];
+                //date stuff
+                var currentdate = new Date().toJSON().slice(0, 10);
+                var dueDateDay = duedate.slice(2,4);
+                dueDateDay = dueDateDay.replace('/', '');
+                dueDateDay = parseInt(dueDateDay);
+                var dueDateMonth = "0"+duedate.slice(0,1);
+                dueDateMonth = parseInt(dueDateMonth);
+                var todayMonth = currentdate.slice(5,7);
+                todayMonth = parseInt(todayMonth);
+                var todayDay = currentdate.slice(8);
+                todayDay = parseInt(todayDay);
+                
+                var availableTimes = user_data["available_times"];
 
 
+                //tests
+                //console.log(name);
+                //console.log(dueDateMonth);
+                //console.log(dueDateDay);
+                //console.log(todayMonth);
+                //console.log(todayDay);
+                //var newTime = time + 1;
+                if((dueDateMonth==todayMonth)||(dueDateMonth==(todayMonth+1))){
+                    k++; // next spot on table
+                    console.log(name)
+                    console.log("due date current - displaying on table spot"+k)
+                    console.log("______________________________________________")
+                    //set time to start
+                    
+                    var setBack = 3; //number of days in advance by default
+                    if((dueDateDay-time)>=1){
+                        var startDay = dueDateDay-(Number(time)+setBack);
+                        //var newStartDay = dueDateDay-(time);
+                        // 8 = 19-(1+1)
+                        //console.log("dueDateady = " + dueDateDay)
+                        //console.log("time = " + time)
+                        //console.log("startDay = " + startDay)
+                        //console.log("newStartDay = " + newStartDay)
+                        //if assignment is passed due, set startDay as todayDay
+                        if (((startDay)-(todayDay-1)) < 1) {
+                            startDay = (todayDay-1);
+                            start = dueDateMonth + "/" + startDay + "/" + "2021, " + suggestion;
+                         }
+                        else if (/*dueDateMonth==todayMonth && dueDateDay<todayDay && */time=="Done"){
+                            //start = "Hurry up and finish or mark as 'Done'!";
+                            //if (time=="Done") {start = "Assignment Completed!" };
+                            start = "Assignment Completed!";
+                        }
+                        else { start = dueDateMonth + "/" + startDay + "/" + "2021, " + suggestion; }
+                        //start = dueDateMonth + "/" + startDay + "/" + "2021s, " + suggestion; 
+                    }
+                    //else if (dueDateMonth==todayMonth && dueDateDay<todayDay && time=="Done"){
+                    //    start = "Assignment Completed!";
+                    //}
+                    //else if(dueDateMonth==todayMonth && dueDateDay<todayDay){
+                    //    start = "Hurry up and finish or mark as 'Done'!";
+                    //    if (time=="Done") {start = "Assignment Completed!" };
+                    //}                  
+                    else{
+                        var x = Math.abs(dueDateDay-time);
+                        startDay = 30-x;
+                        //start = (dueDateMonth-1) + "/" + startDay + "/" + "2021, " + suggestion;
+                        start = (todayMonth) + "/" + (todayDay - 1) + "/" + "2021, " + suggestion;
+                        if (time=="Done") { start = "Assignment Completed!"};
+                    }
+                    
 
+                    var setAssignmentCell = "assignment"+k;
+                    var setDueDateCell = "duedate"+k;
+                    var setStartCell = "start"+k;
+                    var setTimeCell = "timeset"+k;
+                    var setStatusCell = "status"+k;
+                
+                    if(duedate != null){
+                        document.getElementById(setAssignmentCell).innerHTML = name;
+                        document.getElementById(setDueDateCell).innerHTML = duedate;
+                        document.getElementById(setStartCell).innerHTML = start;
+                        if(time!= "Done") {document.getElementById(setTimeCell).innerHTML = time + " Hours";}
+                    
+                        if(dueDateMonth<todayMonth){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: blue;' style='font-size: bold'>Due Date Passed!</span>";
+                        }
+                        else if (time=="Done"){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
+                        }
+                        /*
+                        else if (dueDateMonth<todayMonth && time=="Done"){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
+                        }
+                        else if (dueDateMonth==todayMonth && dueDateDay<todayDay && time=="Done"){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
+                        }
+                        else if(dueDateMonth==todayMonth && dueDateDay<(todayDay+7) && todayDay<dueDateDay && time=="Done"){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
+                        }
+                        else if(dueDateMonth==todayMonth && dueDateDay==todayDay && time=="Done"){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: green;' style='font-size: bold'>Assignment Completed!</span>";
+                        }*/
+                        else if(dueDateMonth==todayMonth && dueDateDay<todayDay){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: blue;' style='font-size: bold'>Due Date Passed!</span>";
+                        }
+                        /*(todayDay<=dueDateDay<(todayDay+7))*/
+                        else if(dueDateMonth==todayMonth && dueDateDay<(todayDay+7) && todayDay<dueDateDay){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: red;' style='font-size: bold'>Due Date Approcahing Soon</span>";
+                            if(dueDateMonth==todayMonth && dueDateDay<(todayDay+3) && todayDay<dueDateDay){
+                                sendNotification = new Notification('You have an assignment due soon:', {
+                                    body: name + " is due on: " + duedate,
+                                });
+                            }
+                        }
+                        else if(dueDateMonth==todayMonth && dueDateDay==todayDay){
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: red;' style='font-size: bold'>Due Date Approcahing Soon</span>";
+                            sendNotification = new Notification('You have an assignment due soon:', {
+                                body: name+ " is due on: " + duedate,
+                            });
+                        }
+                        else{
+                            document.getElementById(setStatusCell).innerHTML = "<span style='color: #d5b60a;' style='font-size: bold'>In Progress</span>";
+                        }       
+                    
+                    }
+                    
+                }
+                else{
+                    console.log(name)
+                    console.log("nothing to display - assignments past")
+                    console.log("________________________________________")
+                }        
+          });
+        }
 
+    //notifications
+    function notifyMe() {
+    if (!window.Notification) {
+        console.log('Browser does not support notifications.');
+    } else {
+        // check if permission is already granted
+        if (Notification.permission === 'granted') {
+            // show notification here
+            console.log("permission granted");
+            //var notify = new Notification('Welcome Back!', {
+            //    body: 'How are you doing?',
+                //icon: 'https://bit.ly/2DYqRrh',
+            //});
+        } else {
+            // request permission from user
+            Notification.requestPermission().then(function (p) {
+                if (p === 'granted') {
+                    // show notification here
+                    var notify = new Notification('Welcome Back!', {
+                        body: 'How are you doing?',
+                        //icon: 'https://bit.ly/2DYqRrh',
+                    });
+                } else {
+                    console.log('User blocked notifications.');
+                }
+            }).catch(function (err) {
+                console.error(err);
+            });
+        }
+    }
+}
 
+         //pop up code
+         // When the user clicks on <span> (x), close the modal
+         span.onclick = function() {
+             modal.style.display = "none";
+         }
+
+         // When the user clicks anywhere outside of the modal, close it
+         window.onclick = function(event) {
+             if (event.target == modal) {
+                 modal.style.display = "none";
+             }
+         }
         </script>
 
         <!-- TEDDY EDIT  -->

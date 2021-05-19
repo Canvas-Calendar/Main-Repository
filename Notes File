@@ -1,6 +1,128 @@
 This file is for notes/updates only only 
 If you update any code, please list the change below with the date
 
+4/24/21
+
+<!--
+
+                 <div class="upcoming-page" style="float: left;">
+                 <div class="card" style="width: 302px;"> 
+                 <div class="card-header" style="width: 300px;">
+                 <h4>Today's Schedule</h4> 
+                 </div>
+                 <ul id="today_schedule" class="list-group list-group-flush">
+                 </ul>
+                 </div>
+                 </div> 
+            
+
+            <div class="upcoming-page" style="float: left;">
+                <div class="card" style="width: 302px;"> 
+                    <div class="card-header" style="width: 300px;">
+                        <h4>Today's Schedule</h4> 
+                    </div>
+                    <ul id="today_schedule" class="list-group list-group-flush">
+                        
+                    </ul>
+                </div>
+            </div> 
+            -->
+            <!--
+            <div class="all-courses-page" id="first">
+                <div class="card" style="width: 302px;"> 
+                    <div class="card-header" style="width: 300px;">
+                        <h4>All Courses</h4> 
+                    </div>
+                    <ul id="all_courses" class="list-group list-group-flush">
+                    </ul>
+                </div>
+            </div>
+            -->
+
+4/14/21
+.courses-page{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    float: right;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.all-courses-page{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    float: left;
+    margin-right: 7in;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.assignments-page{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    float: right;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+4/13/21
+
+console.log('event title saved to firebase database');
+                     $(function(){
+                         function upload_eventData(){
+                             console.log("test upload event data function")
+                             database.ref('users/' + userId).update({
+                                 event_data: event_data
+                             }).then(function() {
+                                 console.log('event data saved to firebase database');
+                             });
+                         };
+                         upload_eventData();
+
+4/6/21
+
+select: function(start, end) {
+                 var eventType = prompt('Event Type (Please enter one of the following below: Holiday, School, Work, Home, Other):');
+                 if (eventType == "Holiday") {
+                     //alert("it worked holiday")
+                     document.body.style.setProperty('--eventColor',"#ff5733")
+                 }
+                 else if (eventType == "Work") {
+                     //alert("it worked work")
+                     document.body.style.setProperty('--eventColor',"#33ff42")
+                 }
+                 else if (eventType == "Home") {
+                     //alert("it worked home")
+                     document.body.style.setProperty('--eventColor',"#33fff6")
+                 }
+                 else if (eventType == "School") {
+                     //alert("it worked school")
+                     document.body.style.setProperty('--eventColor',"#FAC800")
+                 }
+                 else{
+                     //alert("it worked other")
+                     document.body.style.setProperty('--eventColor',"#000000")
+                 }
+                 var title = prompt('Event Title:');
+                 if (title) {
+                     $('#calendar').fullCalendar('renderEvent', {
+                         title: title, start: start, end: end
+                     }, true);
+                 }
+                 $('#calendar').fullCalendar('unselect');
+             },
+             editable: true,
+             //events: [{id:1, strikeout:false, title: 'Event #1', start: '2015-02-05T12:00:00'}, {id: 2, strikeout:false, title: 'Event #2', start: '2015-02-07'}]
+         });
+
+3/29/21
+
+Algorithm for Courses page
+
+1. create array with all users current courses ID's
+2. cycle through array with for loop and print header ("Assignments for _______") and then table with relevant course data.
+
+
+
 3/1/21
 
 html += ' <label><input type="checkbox" ' + ((event.strikeout) ? 'checked' : '') + '> <span class="fc-time">' + event.start.format('ha') + '</span> ';
